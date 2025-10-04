@@ -1,4 +1,4 @@
-import type { Paper } from "../types/index";
+import type { Paper } from "@/types";
 
 export const samplePapers: Paper[] = [
   {
