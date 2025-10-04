@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS paper (
     score FLOAT,
     cited_by TEXT[], -- link of list of paper (string) that cite this paper
     html_context TEXT,
+    topic TEXT,
+    md_content TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
