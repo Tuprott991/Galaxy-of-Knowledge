@@ -2,3 +2,4 @@ service_account.json
 __pycache__/
 .env
 /database/PMC_txt/*
+/database/PMC_md/*
