@@ -379,3 +379,47 @@ class PaperSearch:
         except Exception as e:
             logger.error(f"Error getting papers by cluster: {e}")
             raise
+
+
+# ======================
+# Convenience Functions
+# ======================
+
+def semantic_search(query: str, limit: int = 10) -> List[Dict[str, Any]]:
+    """
+    Convenience function for semantic search that handles connection lifecycle
+    
+    Args:
+        query: Search query text
+        limit: Maximum number of results to return
+        
+    Returns:
+        List of paper dictionaries with relevance scores
+    """
+    search_instance = PaperSearch()
+    try:
+        search_instance.initialize()
+        results = search_instance.search(query, top_k=limit)
+        return results
+    finally:
+        search_instance.close()
+
+
+def find_similar_papers(paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
+    """
+    Convenience function to find similar papers
+    
+    Args:
+        paper_id: ID of the reference paper
+        limit: Maximum number of similar papers to return
+        
+    Returns:
+        List of similar paper dictionaries
+    """
+    search_instance = PaperSearch()
+    try:
+        search_instance.initialize()
+        results = search_instance.search_similar_papers(paper_id, top_k=limit)
+        return results
+    finally:
+        search_instance.close()
