@@ -113,9 +113,6 @@ async def get_document_content(id: str) -> str:
             return f"Paper with '{id}' not found."
     except Exception as e:
         return f"Error retrieving document: {str(e)}"
-    
-# Tool 3: Get list of 
-
 
 # --------------------------------------------------------------------------------------
 # STEP 2: Create the Starlette app to expose the tools via HTTP (using SSE)

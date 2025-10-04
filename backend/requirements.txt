@@ -45,3 +45,6 @@ lightrag-hku
 bs4
 
 openai
+
+google-adk  
+rich
