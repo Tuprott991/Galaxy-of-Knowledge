@@ -2,6 +2,10 @@
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
 
+# Web Framework (Alternative)
+flask>=2.3.0
+flask-cors>=4.0.0
+
 # Database
 psycopg[binary,pool]>=3.1.0
 psycopg2-binary>=2.9.0

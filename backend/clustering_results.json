@@ -1,0 +1,21 @@
+{
+  "clustered_papers": [
+    {
+      "paper_id": "PMC4136787",
+      "cluster_uuid": -1,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ],
+  "cluster_info": {
+    "-1": {
+      "cluster_uuid": -1,
+      "count": 1,
+      "type": "noise"
+    }
+  },
+  "cluster_uuid_map": {
+    

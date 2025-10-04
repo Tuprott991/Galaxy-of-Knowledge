@@ -61,6 +61,19 @@ class PaperDatabase:
                     elif isinstance(reference, str):
                         references.append(reference)
 
+            # full_text - extract from sections and get first 6 items
+            sections_data = paper_data.get("sections", {})
+            section_contents = []
+            
+            if isinstance(sections_data, dict):
+                # Get first 6 sections from the sections dictionary
+                section_items = list(sections_data.items())[:6]
+                for section_name, section_content in section_items:
+                    if isinstance(section_content, dict) and "_content" in section_content:
+                        section_contents.append(section_content["_content"])
+            
+            full_text = "\n\n".join(filter(None, section_contents))
+
             # Insert paper - let paper_id auto-increment
             insert_query = """
             INSERT INTO paper (
@@ -69,10 +82,11 @@ class PaperDatabase:
                 abstract,
                 paper_id,
                 cited_by,
-                references,
+                _references,
+                full_text,
                 json_data,
                 updated_at
-            ) VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING paper_id
             """
             
@@ -83,6 +97,7 @@ class PaperDatabase:
                 paper_id,       # paper_id column
                 cited_list,     # cited_by column
                 references,     # references column
+                full_text,      # full_text column
                 Json(paper_data)  # json_data column
             ))
 
