@@ -1,0 +1,4 @@
+vertexai
+fastapi
+uvicorn
+psycopg2[binary,pool]
