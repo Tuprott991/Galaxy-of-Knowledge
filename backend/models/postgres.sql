@@ -18,16 +18,15 @@ CREATE TABLE IF NOT EXISTS paper (
     plot_visualize_z FLOAT,
     cluster TEXT, 
     -- relatedby: list of paper IDs (string) that write about this paper in their related works
-    related_by TEXT[],
     cited_by TEXT[],
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 CREATE INDEX idx_paper_embeddings ON paper USING ivfflat (embeddings vector_cosine_ops);
 CREATE INDEX idx_paper_json ON paper USING gin(json_data);
 CREATE INDEX idx_paper_cluster ON paper(cluster);
-CREATE INDEX idx_paper_related_by ON paper USING gin(related_by);
 
 
 -- ========================================
@@ -35,7 +34,7 @@ CREATE INDEX idx_paper_related_by ON paper USING gin(related_by);
 -- ========================================
 CREATE TABLE IF NOT EXISTS key_knowledge ( -- Single keyword 
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    paper_id INTEGER NOT NULL REFERENCES paper(paper_id) ON DELETE CASCADE,
+    paper_id INTEGER NOT NULL REFERENCES paper(id) ON DELETE CASCADE,
     context TEXT[],
     embedding vector(768), -- Adjust dimension as needed
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -106,9 +105,6 @@ END;
 $$ language 'plpgsql';
 
 -- Apply triggers
-CREATE TRIGGER update_authors_updated_at BEFORE UPDATE ON authors
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-
 CREATE TRIGGER update_author_updated_at BEFORE UPDATE ON author
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
@@ -122,33 +118,38 @@ CREATE TRIGGER update_key_knowledge_updated_at BEFORE UPDATE ON key_knowledge
 -- Helpful Views
 -- ========================================
 
--- View: Papers with their authors
+-- View: Papers with their authors (using author_list array)
 CREATE OR REPLACE VIEW paper_with_authors AS
 SELECT 
+    p.id,
     p.paper_id,
+    p.title,
+    p.abstract,
     p.full_text,
     p.json_data,
     p.plot_visualize_x,
     p.plot_visualize_y,
     p.plot_visualize_z,
-    json_agg(
-        json_build_object(
-            'author_id', a.id,
-            'author_name', a.name,
-            'is_first_author', pa.is_first_author,
-            'is_corresponding_author', pa.is_corresponding_author,
-            'author_order', pa.author_order
-        ) ORDER BY pa.author_order
-    ) as authors
-FROM paper p
-LEFT JOIN paper_authors pa ON p.paper_id = pa.paper_id
-LEFT JOIN authors a ON pa.author_id = a.id
-GROUP BY p.paper_id;
+    p.cluster,
+    p.author_list,
+    (
+        SELECT json_agg(
+            json_build_object(
+                'author_id', a.id,
+                'author_name', a.author_name
+            )
+        )
+        FROM unnest(p.author_list) AS author_name_item
+        JOIN author a ON a.author_name = author_name_item
+    ) as authors_details
+FROM paper p;
 
 -- View: Papers with their key knowledge
 CREATE OR REPLACE VIEW paper_with_key_knowledge AS
 SELECT 
+    p.id,
     p.paper_id,
+    p.title,
     p.full_text,
     json_agg(
         json_build_object(
@@ -157,15 +158,15 @@ SELECT
         )
     ) as key_knowledge
 FROM paper p
-LEFT JOIN key_knowledge kk ON p.paper_id = kk.paper_id
-GROUP BY p.paper_id;
+LEFT JOIN key_knowledge kk ON p.id = kk.paper_id
+GROUP BY p.id, p.paper_id, p.title, p.full_text;
 
 -- ========================================
 -- Sample queries (commented out)
 -- ========================================
 
 -- Find similar papers by embedding
--- SELECT paper_id, embeddings <=> '[0.1, 0.2, ...]'::vector AS distance
+-- SELECT id, paper_id, title, embeddings <=> '[0.1, 0.2, ...]'::vector AS distance
 -- FROM paper
 -- ORDER BY distance
 -- LIMIT 10;
@@ -173,9 +174,17 @@ GROUP BY p.paper_id;
 -- Get paper with all relations
 -- SELECT 
 --     p.*,
---     (SELECT json_agg(a.name) FROM paper_authors pa JOIN authors a ON pa.author_id = a.id WHERE pa.paper_id = p.paper_id) as authors,
---     (SELECT json_agg(kk.context) FROM key_knowledge kk WHERE kk.paper_id = p.paper_id) as key_knowledge,
---     (SELECT related FROM paper_pointer WHERE paper_id = p.paper_id) as related_papers,
---     (SELECT refer FROM paper_pointer WHERE paper_id = p.paper_id) as references
+--     (SELECT json_agg(a.author_name) FROM unnest(p.author_list) AS author_name_item JOIN author a ON a.author_name = author_name_item) as authors,
+--     (SELECT json_agg(kk.context) FROM key_knowledge kk WHERE kk.paper_id = p.id) as key_knowledge
 -- FROM paper p
--- WHERE p.paper_id = 1;
+-- WHERE p.paper_id = 'PMC123456';
+
+-- Find papers by author
+-- SELECT p.* 
+-- FROM paper p
+-- WHERE 'Author Name' = ANY(p.author_list);
+
+-- Get all papers an author wrote
+-- SELECT a.author_name, a.writing_of
+-- FROM author a
+-- WHERE a.author_name = 'Author Name';
