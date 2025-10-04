@@ -37,10 +37,6 @@ export default function Home() {
           <div className="fixed bottom-4 right-4 z-10">
             <HelpButton />
           </div>
-
-          <div className="z-5">
-            <TestComponent />
-          </div>
         </>
       ) : (
         <>
@@ -58,6 +54,9 @@ export default function Home() {
         </>
       )
       }
+      <div className="z-5">
+        <TestComponent />
+      </div>
     </div >
   );
 }

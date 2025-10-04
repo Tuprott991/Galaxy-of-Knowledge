@@ -9,6 +9,7 @@ import { axiosClient } from "@/api/axiosClient";
 import * as THREE from "three";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useRef } from "react";
+import { useGlobal } from "@/context/GlobalContext";
 
 
 type PaperPointProps = {
@@ -181,6 +182,8 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     fetchData();
   }, []);
 
+  const { setHtmlContent, setSelectedPaperId, setChatView } = useGlobal();
+
   useEffect(() => {
     const handleSpace = async (e: KeyboardEvent) => {
       if (e.code === "Space" && selectedId !== null) {
@@ -192,6 +195,9 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
           console.log(res);
+          setHtmlContent?.(res.data.html_context);
+          setSelectedPaperId?.(selectedId);
+          setChatView?.(true);
         } catch (err) {
           console.error("Failed to fetch paper info:", err);
         }
@@ -200,7 +206,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
     window.addEventListener("keydown", handleSpace);
     return () => window.removeEventListener("keydown", handleSpace);
-  }, [selectedId, papers]);
+  }, [selectedId, papers, setHtmlContent, setSelectedPaperId, setChatView]);
 
   // bắt phím WASD + Shift
   useEffect(() => {
@@ -327,7 +333,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 const PaperScatter3D: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
   const [hoveredPaper, setHoveredPaper] = useState<Paper | null>(null);
-
+  const { chatView } = useGlobal();
   const handleClick = () => {
     if (!isActive) {
       setIsActive(true);
@@ -350,17 +356,19 @@ const PaperScatter3D: React.FC = () => {
         <MainScene isActive={isActive} onHover={setHoveredPaper} />
       </Canvas>
 
-      {!isActive ? (
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
-          Click the screen to start!
-        </div>
-      ) : (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
-          +
-        </div>
+      {!chatView && (
+        !isActive ? (
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
+            Click the screen to start!
+          </div>
+        ) : (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
+            +
+          </div>
+        )
       )}
 
-      {hoveredPaper && <ShortDetail paper={hoveredPaper} />}
+      {hoveredPaper && !chatView && <ShortDetail paper={hoveredPaper} />}
     </div>
   );
 };
