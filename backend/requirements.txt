@@ -43,3 +43,5 @@ flake8>=6.0.0
 mcp 
 lightrag-hku
 bs4
+
+openai

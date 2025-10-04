@@ -1,0 +1,133 @@
+{
+  "PMC10020673": {
+    "status": "processing",
+    "chunks_count": 9,
+    "chunks_list": [
+      "chunk-591cfb4ff1e813c5b013b4b5313baa7d",
+      "chunk-afb377435dd5731f6946f6565bc7cded",
+      "chunk-70d222003111a398bec624e14defeeaf",
+      "chunk-69bb0bcb9d5b6b79adfa2392116e207f",
+      "chunk-5f8397093321f8d0307fe23050b72a8a",
+      "chunk-16031fa210bf36ad98594963abcc77fe",
+      "chunk-8f7c6d546c77be25074217e63050121f",
+      "chunk-7d90edd0bfc5507ef5b6e8c54eeba7f9",
+      "chunk-4d3c6c923517914d6423920e1bea266e"
+    ],
+    "content_summary": "# 1. Introduction\n\n**Keywords:** Spaceflight, Biofilms, Environmental microbiology, International space station, Pangenome\n\n## Abstract\n\nUrine, humidity condensate, and other sources of non-potable water are processed onboard the International Space ...",
+    "content_length": 30040,
+    "created_at": "2025-10-04T22:21:35.093946+00:00",
+    "updated_at": "2025-10-04T22:31:01.471606+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_b8a25aad",
+    "metadata": {
+      "processing_start_time": 1759617061
+    }
+  },
+  "PMC10025027": {
+    "status": "processing",
+    "chunks_count": 12,
+    "chunks_list": [
+      "chunk-05181ff6913e5aca2bf119a48ae6a2d6",
+      "chunk-c830591c9831259635d0b51495fc2428",
+      "chunk-e5152c4b3f7e0553bb323935dbfc7934",
+      "chunk-b0a6b40fcb31660c9d900e1ff10b3927",
+      "chunk-b7cc838e9a561b7c6d611fd550734c3b",
+      "chunk-e2e2656e6c03e4663b95c30f940f22e2",
+      "chunk-c8cd71a1d731abcaa62bdc20e7a74c7d",
+      "chunk-fcd8b97b4e4e070742aad1b3b5e06731",
+      "chunk-364b66fa58c77ef37dd28e132928bb9d",
+      "chunk-1eb2fe2c31ffb375f67b527d92bbfd76",
+      "chunk-5f407bd63c609e84e76bf9ec991bcd42",
+      "chunk-6d02e404f38b267e250e6dea4b70ff11"
+    ],
+    "content_summary": "# 1. Introduction\n\n**Keywords:** Brassica oleraceaL. var. botrytis, Priming agents, Seed priming, Salt stress responses, Germination emergence\n\n## Abstract\n\nThe significant horticultural crop, cauliflower (Brassica oleracea L. var. botrytis) is vulne...",
+    "content_length": 37924,
+    "created_at": "2025-10-04T22:21:35.113770+00:00",
+    "updated_at": "2025-10-04T22:31:01.499804+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_0fbddb97",
+    "metadata": {
+      "processing_start_time": 1759617061
+    }
+  },
+  "PMC10027818": {
+    "status": "pending",
+    "content_summary": "# Introduction\n\n**Keywords:** Brassica oleraceaL. var. botrytis, Priming agents, Seed priming, Salt stress responses, Germination emergence\n\n## Abstract\n\nSpaceflight presents a multifaceted environment for plants, combining the effects on growth of m...",
+    "content_length": 28822,
+    "created_at": "2025-10-04T22:21:35.121503+00:00",
+    "updated_at": "2025-10-04T22:21:35.121503+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_4738069c",
+    "chunks_list": []
+  },
+  "PMC10030976": {
+    "status": "pending",
+    "content_summary": "# Introduction\n\n**Keywords:** Brassica oleraceaL. var. botrytis, Priming agents, Seed priming, Salt stress responses, Germination emergence\n\n## Abstract\n\nFinding sustainable approaches to achieve independence from terrestrial resources is of pivotal ...",
+    "content_length": 24971,
+    "created_at": "2025-10-04T22:21:35.133646+00:00",
+    "updated_at": "2025-10-04T22:21:35.133646+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_6ffa5470",
+    "chunks_list": []
+  },
+  "PMC10058394": {
+    "status": "pending",
+    "content_summary": "# 1. Introduction\n\n**Keywords:** Brachypodium distachyon, Bd21, Bd21-3, Gaz8, microgravity, International Space Station, APEX Growth Unit, VEGGIE, adaptation, seedling growth, transcriptomics\n\n## Abstract\n\nPlants have been recognized as key component...",
+    "content_length": 33067,
+    "created_at": "2025-10-04T22:21:35.141590+00:00",
+    "updated_at": "2025-10-04T22:21:35.141590+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_a00db895",
+    "chunks_list": []
+  },
+  "PMC10063413": {
+    "status": "pending",
+    "content_summary": "# 1. Introduction\n\n**Keywords:** Cold stress, Premature bone loss, Ucp1 expression, Microgravity\n\n## Abstract\n\nMice are typically housed at temperatures well below their thermoneutral zone. When individually housed at room temperature (~22 °C) mice e...",
+    "content_length": 12941,
+    "created_at": "2025-10-04T22:21:35.151987+00:00",
+    "updated_at": "2025-10-04T22:21:35.151987+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_6ba5205c",
+    "chunks_list": []
+  },
+  "PMC10138634": {
+    "status": "pending",
+    "content_summary": "# 1. Introduction\n\n**Keywords:** spaceflight, retina, photoreceptor, oxidative stress, antioxidant\n\n## Abstract\n\nThe goal of the present study was to characterize acute oxidative damage in ocular structure and retinal function after exposure to space...",
+    "content_length": 24941,
+    "created_at": "2025-10-04T22:21:35.165793+00:00",
+    "updated_at": "2025-10-04T22:21:35.165793+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_0a7c783d",
+    "chunks_list": []
+  },
+  "PMC10142442": {
+    "status": "pending",
+    "content_summary": "# 1. Introduction\n\n**Keywords:** herpesviruses, marine sulfated glycans, virus entry\n\n## Abstract\n\nMany viruses attach to host cells by first interacting with cell surface proteoglycans containing heparan sulfate (HS) glycosaminoglycan chains and the...",
+    "content_length": 18804,
+    "created_at": "2025-10-04T22:21:35.174048+00:00",
+    "updated_at": "2025-10-04T22:21:35.174048+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_b89a2653",
+    "chunks_list": []
+  },
+  "PMC10144393": {
+    "status": "pending",
+    "content_summary": "# 1. Introduction\n\n**Keywords:** microgravity, Penicillium chrysogenum, fungal biofilm, International Space Station, microscopy, spacecraft\n\n## Abstract\n\nFungi biofilms have been found growing on spacecraft surfaces such as windows, piping, cables, e...",
+    "content_length": 23471,
+    "created_at": "2025-10-04T22:21:35.190644+00:00",
+    "updated_at": "2025-10-04T22:21:35.190644+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_bcab169c",
+    "chunks_list": []
+  },
+  "PMC10233975": {
+    "status": "pending",
+    "content_summary": "# Abstract\n\n**Keywords:** Metagenome-assembled genomes, Genome-inferred phenotype, Microgravity, ISS\n\n## Abstract\n\nSeveral investigations on the microbial diversity and functional properties of the International Space Station (ISS) environment were c...",
+    "content_length": 28434,
+    "created_at": "2025-10-04T22:21:35.209118+00:00",
+    "updated_at": "2025-10-04T22:21:35.209118+00:00",
+    "file_path": "unknown_source",
+    "track_id": "insert_20251005_052135_0158af34",
+    "chunks_list": []
+  }
+}

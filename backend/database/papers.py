@@ -265,6 +265,52 @@ def get_html_context_by_paper_id(paper_id: str) -> Optional[str]:
     except Exception as e:
         logger.error(f"Error retrieving html_context for paper_id {paper_id}: {e}")
         return None
+    
+def get_md_content_by_paper_id(paper_id: str) -> Optional[str]:
+    """Get the md_context field from the database based on the paper_id"""
+    try:
+        conn = connect()
+        cursor = conn.cursor()
+        
+        query = "SELECT md_context FROM paper WHERE paper_id = %s"
+        cursor.execute(query, (paper_id,))
+        
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        
+        if result and result[0]:
+            return result[0]
+        else:
+            logger.info(f"No md_context found for paper_id: {paper_id}")
+            return None
+    except Exception as e:
+        logger.error(f"Error retrieving md_context for paper_id {paper_id}: {e}")
+        return None
+
+def get_all_paper_ids() -> List[str]:
+    """Get all paper_ids from the database"""
+    paper_ids = []
+    try:
+        conn = connect()
+        cursor = conn.cursor()
+        
+        query = "SELECT paper_id FROM paper"
+        cursor.execute(query)
+        
+        results = cursor.fetchall()
+        paper_ids = [row[0] for row in results if row[0]]
+        
+        cursor.close()
+        conn.close()
+        
+        logger.info(f"Retrieved {len(paper_ids)} paper_ids from database")
+        return paper_ids
+    except Exception as e:
+        logger.error(f"Error retrieving paper_ids: {e}")
+        return paper_ids
+    
+
 
 def main():
     """Example usage"""
