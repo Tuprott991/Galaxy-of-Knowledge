@@ -23,7 +23,7 @@ export function ESCButton() {
             >
                 Esc
             </Button>
-            <small className="text-sm leading-none font-medium text-gray-500/20">to Quit</small>
+            <small className="text-sm leading-none font-medium text-white">to Quit</small>
         </div>
     );
 }

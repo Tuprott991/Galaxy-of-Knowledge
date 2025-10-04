@@ -1,4 +1,4 @@
-export const paperDetail = `
+export const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>

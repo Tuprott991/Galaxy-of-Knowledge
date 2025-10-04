@@ -1,76 +1,102 @@
+import { useState } from "react";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-} from "@/components/ui/card"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { agentModes } from "@/data/agent-modes";
 
 export function Chatbot() {
-    const [messages] = useState([
-        { id: 1, sender: "user", text: "Rephrase ‘This is an ai chatbot generated for better communication and simpler work flows’" },
-        { id: 2, sender: "bot", text: "This AI chatbot has been developed to optimize communication and simplify work processes, ultimately leading to smoother operations." },
-    ])
+    const [activeMode, setActiveMode] = useState("inquiry-agent");
+    const [messages, setMessages] = useState<{ text: string; sender: "user" | "bot" }[]>([]);
+    const [inputValue, setInputValue] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    // tab hiện tại
-    const [activeTab, setActiveTab] = useState("Chat")
+    const callApi = async (prompt: string) => {
+        setLoading(true);
+        return new Promise<string>((resolve) => {
+            setTimeout(() => {
+                resolve(`Bot response to: "${prompt}"`);
+            }, 1000 + Math.random() * 1000);
+        }).finally(() => setLoading(false));
+    };
 
-    const tabs = ["Chat", "Graph", "Hypo", "Inven"]
+    const handleSend = async () => {
+        if (!inputValue.trim()) return;
+
+        const userMessage = inputValue;
+        setMessages([...messages, { text: userMessage, sender: "user" }]);
+        setInputValue("");
+
+        const botResponse = await callApi(userMessage);
+        setMessages((prev) => [...prev, { text: botResponse, sender: "bot" }]);
+    };
 
     return (
-        <Card className="w-[400px] h-[600px] flex flex-col bg-black border border-white rounded-xl">
-            {/* Header với 4 nút */}
-            <CardHeader className="flex justify-center border-b border-white px-3 py-2">
-                <div className="flex gap-3">
-                    {tabs.map((tab) => (
-                        <Button
-                            key={tab}
-                            onClick={() => setActiveTab(tab)}
-                            variant="outline"
-                            size="sm"
-                            className={`w-18 h-10 rounded-md px-3 py-2 text-sm ${
-                                activeTab === tab
-                                    ? "bg-gray-500 text-white border-gray-500"
-                                    : "bg-transparent text-white border-white hover:bg-gray-700"
-                            }`}
-                        >
-                            {tab}
+        <Card className="w-[400px] h-[600px] flex flex-col bg-black border border-slate-600/50 rounded-lg overflow-hidden py-2">
+            <CardHeader className="flex justify-between items-center py-2 px-4 border-b border-slate-600/50">
+                <h2 className="text-sm font-semibold text-white">Choose the Agent Mode</h2>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="secondary" size="sm">
+                            {agentModes.find((m) => m.value === activeMode)?.label}
                         </Button>
-                    ))}
-                </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-50">
+                        <DropdownMenuLabel>Choose Mode</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuRadioGroup value={activeMode} onValueChange={setActiveMode}>
+                            {agentModes.map((mode) => (
+                                <DropdownMenuRadioItem key={mode.value} value={mode.value}>
+                                    {mode.label}
+                                </DropdownMenuRadioItem>
+                            ))}
+                        </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </CardHeader>
 
-            {/* Nội dung chat */}
-            <CardContent className="flex-1 overflow-y-auto space-y-3 p-3">
-                {messages.map((msg) => (
+            <div className="flex-1 px-4 py-1 overflow-y-auto text-white flex flex-col gap-2 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-900">
+                {messages.length === 0 && (
+                    <p className="text-gray-400 italic text-xs">Welcome to {activeMode}!</p>
+                )}
+                {messages.map((msg, index) => (
                     <div
-                        key={msg.id}
-                        className={`flex ${
-                            msg.sender === "user" ? "justify-end" : "justify-start"
-                        }`}
-                    >
-                        <div
-                            className={`rounded-xl px-3 py-2 max-w-[75%] text-sm ${
-                                msg.sender === "user"
-                                    ? "bg-gray-700 text-white"
-                                    : "bg-gray-200 text-black"
+                        key={index}
+                        className={`p-2 rounded-md max-w-[80%] text-xs ${msg.sender === "user"
+                            ? "self-end bg-blue-600 text-white"
+                            : "self-start bg-gray-700 text-white"
                             }`}
-                        >
-                            {msg.text}
-                        </div>
+                    >
+                        {msg.text}
                     </div>
                 ))}
-            </CardContent>
+                {loading && <p className="self-start text-gray-400 italic text-xs">Bot is thinking...</p>}
+            </div>
 
-            {/* Input */}
-            <CardFooter className="border-t border-white p-3 flex gap-2">
-                <input
+            <CardFooter className="border-t border-slate-600/50 p-3 flex gap-2">
+                <Input
                     type="text"
-                    placeholder="Type a message..."
-                    className="flex-1 rounded-md border border-gray-400 px-3 py-2 text-sm bg-black text-white placeholder-gray-400"
+                    id="chat-input"
+                    size={1}
+                    placeholder="Welcome to the GoK! Ask me anything..."
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    className="flex-1 rounded-md border border-gray-600 px-3 py-2 text-sm bg-black text-white placeholder-gray-400 focus:outline-none focus:border-gray-500"
+                    onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                    disabled={loading}
                 />
+                <Button variant="secondary" size="sm" onClick={handleSend} disabled={loading}>
+                    Send
+                </Button>
             </CardFooter>
         </Card>
-    )
+    );
 }
