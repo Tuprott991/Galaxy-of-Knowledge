@@ -25,29 +25,29 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
 
   const color = colorMap?.[paper.cluster] || "gray";
 
+  // Solar System Planets Data (excluding Earth)
+  const solarSystemPlanets = [
+    { name: "Mercury", color: "#8C7853", size: 0.015, distance: 0.25, emissive: "#8C7853", emissiveIntensity: 0.3 },
+    { name: "Venus", color: "#FFC649", size: 0.02, distance: 0.35, emissive: "#FFC649", emissiveIntensity: 0.5 },
+    { name: "Mars", color: "#CD5C5C", size: 0.018, distance: 0.45, emissive: "#CD5C5C", emissiveIntensity: 0.4 },
+    { name: "Jupiter", color: "#D8CA9D", size: 0.04, distance: 0.55, emissive: "#D8CA9D", emissiveIntensity: 0.3 },
+    { name: "Saturn", color: "#FAD5A5", size: 0.035, distance: 0.65, emissive: "#FAD5A5", emissiveIntensity: 0.3 },
+    { name: "Uranus", color: "#4FD0E7", size: 0.025, distance: 0.75, emissive: "#4FD0E7", emissiveIntensity: 0.4 },
+    { name: "Neptune", color: "#4B70DD", size: 0.025, distance: 0.85, emissive: "#4B70DD", emissiveIntensity: 0.4 }
+  ];
+
   // Animation bung ra + quay quanh
   useFrame((_, delta) => {
-    if (selected) {
-      setProgress((p) => Math.min(1, p + delta)); // bung dần ra
+    if (selected || hovered) {
+      setProgress((p) => Math.min(1, p + delta * 2)); // bung dần ra (faster on hover)
       if (orbitRef.current) {
-        orbitRef.current.rotation.y += delta * 0.8;
-        orbitRef.current.rotation.x += delta * 0.3;
+        orbitRef.current.rotation.y += delta * 0.5; // slower rotation for realism
+        orbitRef.current.rotation.x += delta * 0.2;
       }
     } else {
-      setProgress((p) => Math.max(0, p - delta)); // thu lại
+      setProgress((p) => Math.max(0, p - delta * 2)); // thu lại (faster retreat)
     }
   });
-
-  // Vị trí của hành tinh
-  const planetPositions = [
-    [0.8, 0, 0],
-    [-0.8, 0, 0],
-    [0, 0.8, 0],
-    [0, -0.8, 0],
-    [0, 0, 0.8],
-    [0, 0, -0.8],
-    [0.8, 0.8, 0.8],
-  ];
 
   return (
       <group
@@ -76,6 +76,7 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
         {/* Vòng sáng khi hover */}
         {(hovered || selected) && (
             <mesh>
+              
               <sphereGeometry args={[0.15 + progress * 0.1, 32, 32]} />
               <meshBasicMaterial
                   color={color}
@@ -86,27 +87,50 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
             </mesh>
         )}
 
-        {/* 🪐 Hành tinh bay quanh */}
+        {/* 🪐 Solar System Planets */}
         {progress > 0 && (
             <group ref={orbitRef}>
-              {planetPositions.map((pos, i) => {
-                const [tx, ty, tz] = pos;
+              {solarSystemPlanets.map((planet, i) => {
+                // Calculate orbital position (circular orbit)
+                const angle = (i / solarSystemPlanets.length) * Math.PI * 2;
+                const x = Math.cos(angle) * planet.distance * progress;
+                const y = Math.sin(angle) * planet.distance * progress * 0.3; // flatter orbit
+                const z = Math.sin(angle) * planet.distance * progress;
+                
                 return (
                     <mesh
-                        key={i}
-                        position={[tx * progress, ty * progress, tz * progress]} // bung ra dần
-                        scale={[progress, progress, progress]} // scale từ 0 -> 1
+                        key={planet.name}
+                        position={[x, y, z]}
+                        scale={[progress, progress, progress]}
                     >
-                      <sphereGeometry args={[0.05, 16, 16]} /> {/* hành tinh tròn */}
+                      <sphereGeometry args={[planet.size, 16, 16]} />
                       <meshStandardMaterial
-                          color="white"
-                          emissive="cyan"
-                          emissiveIntensity={2}
-                          metalness={0.5}
-                          roughness={0.3}
+                          color={planet.color}
+                          emissive={planet.emissive}
+                          emissiveIntensity={planet.emissiveIntensity * progress}
+                          metalness={planet.name === "Saturn" || planet.name === "Jupiter" ? 0.3 : 0.1}
+                          roughness={planet.name === "Venus" ? 0.1 : 0.4}
                       />
-                      {/* Thêm ánh sáng cho từng hành tinh */}
-                      <pointLight intensity={0.6} distance={2} color="cyan" />
+                      
+                      {/* Saturn's Rings */}
+                      {planet.name === "Saturn" && (
+                        <mesh rotation={[Math.PI / 2, 0, 0]}>
+                          <ringGeometry args={[planet.size * 1.5, planet.size * 2.2, 32]} />
+                          <meshBasicMaterial 
+                            color="#C4A484" 
+                            transparent 
+                            opacity={0.6 * progress}
+                            side={THREE.DoubleSide}
+                          />
+                        </mesh>
+                      )}
+                      
+                      {/* Subtle planet lighting */}
+                      <pointLight 
+                        intensity={0.2 * progress} 
+                        distance={1} 
+                        color={planet.color} 
+                      />
                     </mesh>
                 );
               })}
@@ -225,7 +249,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     }
 
     // Movement
-    let speed = keys["shift"] ? 0.3 : 0.1;
+    const speed = keys["shift"] ? 0.3 : 0.1;
 
     if (keys["w"]) {
       camera.getWorldDirection(direction);
