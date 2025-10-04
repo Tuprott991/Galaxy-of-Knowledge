@@ -1,13 +1,9 @@
 import os
 import json
-import psycopg2
 from psycopg2.extras import Json
-from dotenv import load_dotenv
 from typing import List, Dict, Any, Optional
 import logging
-
-# Load environment variables
-load_dotenv()
+from database.connect import connect, close_connection
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -15,38 +11,20 @@ logger = logging.getLogger(__name__)
 
 class PaperDatabase:
     def __init__(self):
-        self.conn = None
-        self.connect()
-    
-    def connect(self):
-        """Create database connection"""
-        try:
-            self.conn = psycopg2.connect(
-                host=os.getenv('DB_HOST'),
-                database=os.getenv('DB_NAME'),
-                user=os.getenv('DB_USER'),
-                password=os.getenv('DB_PASSWORD'),
-                port=os.getenv('DB_PORT', 5432)
-            )
-            logger.info("Connected to database successfully")
-        except Exception as e:
-            logger.error(f"Error connecting to database: {e}")
-            raise
+        self.conn = connect()
     
     def close(self):
         """Close database connection"""
-        if self.conn:
-            self.conn.close()
-            logger.info("Database connection closed")
+        close_connection(self.conn)
 
     def insert_paper(self, paper_data: Dict[str, Any]) -> Optional[int]:
         """Insert a paper into the database - only json_data, other fields will be filled later"""
         try:
             cursor = self.conn.cursor()
             
-            # Extract title
-            title = paper_data.get("title")
-            paper_id = paper_data.get("PMCID")
+            # Extract basic info
+            title = paper_data.get("title", "")
+            paper_id = paper_data.get("PMCID", "")
             
             # Extract abstract from nested structure
             abstract = None
@@ -55,32 +33,69 @@ class PaperDatabase:
                 if isinstance(sections["abstract"], dict) and "_content" in sections["abstract"]:
                     abstract = sections["abstract"]["_content"]
             
-            # Insert paper with only json_data, other fields left empty for later processing
+            # Extract author names from authors array
+            author_list = []
+            authors_data = paper_data.get("authors", [])
+            if isinstance(authors_data, list):
+                for author in authors_data:
+                    if isinstance(author, dict) and "name" in author:
+                        author_list.append(author["name"])
+                    elif isinstance(author, str):
+                        author_list.append(author)
+
+            cited_list = []
+            cite_data = paper_data.get("cited_by", [])
+            if isinstance(cite_data, list):
+                for citation in cite_data:
+                    if isinstance(citation, dict) and "title" in citation:
+                        cited_list.append(citation["title"])
+                    elif isinstance(citation, str):
+                        cited_list.append(citation)
+
+            references = []
+            references_data = paper_data.get("sections", {}).get("references", [])
+            if isinstance(references_data, list):
+                for reference in references_data:
+                    if isinstance(reference, dict) and "title" in reference:
+                        references.append(reference["title"])
+                    elif isinstance(reference, str):
+                        references.append(reference)
+
+            # Insert paper - let paper_id auto-increment
             insert_query = """
             INSERT INTO paper (
-                paper_id,
+                author_list,
                 title,
                 abstract,
+                paper_id,
+                cited_by,
+                references,
                 json_data,
                 updated_at
-            ) VALUES (%s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            ) VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING paper_id
             """
             
             cursor.execute(insert_query, (
-                paper_id,
-                title,
-                abstract,
-                Json(paper_data)  # Store entire JSON as json_data
+                author_list,    # author_list column
+                title,          # title column  
+                abstract,       # abstract column
+                paper_id,       # paper_id column
+                cited_list,     # cited_by column
+                references,     # references column
+                Json(paper_data)  # json_data column
             ))
-            
-            paper_id = cursor.fetchone()[0]
+
+            # Get the auto-generated paper_id
+            inserted_paper_id = cursor.fetchone()[0]
             self.conn.commit()
             cursor.close()
-            
-            logger.info(f"Inserted paper with ID: {paper_id} - Title: {title[:50]}...")
-            return paper_id
-            
+
+            # Safe title display
+            title_display = title[:50] + "..." if len(title) > 50 else title
+            logger.info(f"Inserted paper with ID: {inserted_paper_id} - Title: {title_display}")
+            return inserted_paper_id
+
         except Exception as e:
             logger.error(f"Error inserting paper: {e}")
             if self.conn:
@@ -88,6 +103,16 @@ class PaperDatabase:
             return None
 
 def load_json_files_from_folder(folder_path: str) -> List[Dict[str, Any]]:
+    """Load all JSON files from a folder"""
+    json_data_list = []
+
+    if not os.path.exists(folder_path):
+        logger.error(f"Folder not found: {folder_path}")
+        return json_data_list
+
+    json_files = [f for f in os.listdir(folder_path) if f.endswith('.json')]
+    logger.info(f"Found {len(json_files)} JSON files in {folder_path}")
+
     """Load all JSON files from a folder"""
     json_data_list = []
     

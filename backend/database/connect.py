@@ -27,6 +27,12 @@ def connect() -> Optional[psycopg2.extensions.connection]:
         logger.error(f"Error connecting to database: {e}")
         raise
 
+def close_connection(conn: psycopg2.extensions.connection):
+    """Close database connection"""
+    if conn:
+        conn.close()
+        logger.info("Database connection closed")
+
 def test_connection() -> bool:
     """Test database connection"""
     try:
