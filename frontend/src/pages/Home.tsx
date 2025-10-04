@@ -39,32 +39,25 @@ export default function Home() {
           </div>
 
           <div className="z-5">
-            <TestComponent></TestComponent>
+            <TestComponent />
           </div>
         </>
       ) : (
         <>
-          <div className="flex w-[100vw] max-w-7xl gap-4 mx-4 items-center overflow-hidden h-100">
-            {/* Left - 3 phần */}
-            <div className="flex-[3] h-full">
-              <PaperDetail />
-            </div>
-
-            {/* Middle - 1 phần */}
-            <div className="flex-[1] h-full">
-              <p>Hello Nhan Pham</p>
-            </div>
-
-            {/* Right - 2 phần */}
-            <div className="flex-[2] h-full">
-              <Chatbot />
-            </div>
+          <div className="fixed top-4 left-4 z-10">
+            <PaperDetail />
           </div>
+
+          <div className="fixed bottom-4 right-4 z-10">
+            <Chatbot />
+          </div>
+
           <div className="fixed bottom-4 left-4 z-10">
             <ESCButton />
           </div>
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
