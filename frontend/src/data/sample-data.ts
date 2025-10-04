@@ -7,7 +7,7 @@ export const samplePapers: Paper[] = [
     x: 0.5,
     y: 1.2,
     z: -0.3,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const samplePapers: Paper[] = [
     x: 0.8,
     y: -0.5,
     z: 1.0,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ export const samplePapers: Paper[] = [
     x: -1.2,
     y: -0.6,
     z: 1.1,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 7,
@@ -59,7 +59,7 @@ export const samplePapers: Paper[] = [
   },
   {
     id: 8,
-    title: "Protein Folding AI",
+    title: "Protein Folding Artificial Intelligence",
     x: -0.9,
     y: 0.2,
     z: -1.3,
@@ -71,7 +71,7 @@ export const samplePapers: Paper[] = [
     x: 1.2,
     y: -1.0,
     z: 0.4,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 10,
@@ -83,11 +83,11 @@ export const samplePapers: Paper[] = [
   },
   {
     id: 11,
-    title: "Explainable AI Techniques",
+    title: "Explainable Artificial Intelligence Techniques",
     x: 0.2,
     y: 0.6,
     z: -0.1,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 12,
@@ -95,7 +95,7 @@ export const samplePapers: Paper[] = [
     x: -0.4,
     y: 0.9,
     z: 0.6,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 13,
@@ -119,7 +119,7 @@ export const samplePapers: Paper[] = [
     x: 0.9,
     y: 0.1,
     z: 0.2,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 16,
@@ -135,7 +135,7 @@ export const samplePapers: Paper[] = [
     x: 0.7,
     y: -0.9,
     z: 0.3,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 18,
@@ -159,7 +159,7 @@ export const samplePapers: Paper[] = [
     x: 0.4,
     y: -0.3,
     z: 1.2,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 21,
@@ -175,7 +175,7 @@ export const samplePapers: Paper[] = [
     x: 1.1,
     y: -0.7,
     z: 0.9,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 23,
@@ -199,7 +199,7 @@ export const samplePapers: Paper[] = [
     x: 0.6,
     y: 0.2,
     z: 1.4,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 26,
@@ -207,7 +207,7 @@ export const samplePapers: Paper[] = [
     x: -0.3,
     y: 0.5,
     z: -0.9,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 27,
@@ -247,7 +247,7 @@ export const samplePapers: Paper[] = [
     x: 0.3,
     y: 0.0,
     z: 0.6,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 32,
@@ -255,7 +255,7 @@ export const samplePapers: Paper[] = [
     x: -0.2,
     y: 0.7,
     z: 1.0,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 33,
@@ -279,7 +279,7 @@ export const samplePapers: Paper[] = [
     x: 0.5,
     y: -0.8,
     z: 0.7,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 36,
@@ -303,7 +303,7 @@ export const samplePapers: Paper[] = [
     x: 0.1,
     y: -0.1,
     z: 1.1,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 39,
@@ -327,7 +327,7 @@ export const samplePapers: Paper[] = [
     x: 0.6,
     y: 0.9,
     z: 0.3,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 42,
@@ -335,7 +335,7 @@ export const samplePapers: Paper[] = [
     x: -0.6,
     y: 0.4,
     z: 1.2,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 43,
@@ -359,7 +359,7 @@ export const samplePapers: Paper[] = [
     x: 0.2,
     y: 1.0,
     z: 0.8,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 46,
@@ -367,7 +367,7 @@ export const samplePapers: Paper[] = [
     x: -0.3,
     y: 0.2,
     z: -0.6,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 47,
@@ -399,7 +399,7 @@ export const samplePapers: Paper[] = [
     x: 0.7,
     y: -0.4,
     z: 1.3,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 51,
@@ -407,7 +407,7 @@ export const samplePapers: Paper[] = [
     x: 0.4,
     y: 0.8,
     z: -0.2,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 52,
@@ -423,7 +423,7 @@ export const samplePapers: Paper[] = [
     x: 0.9,
     y: -0.6,
     z: 0.6,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 54,
@@ -439,7 +439,7 @@ export const samplePapers: Paper[] = [
     x: -0.2,
     y: 1.1,
     z: 0.5,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 56,
@@ -471,7 +471,7 @@ export const samplePapers: Paper[] = [
     x: 0.5,
     y: -0.2,
     z: 0.9,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 60,
@@ -495,7 +495,7 @@ export const samplePapers: Paper[] = [
     x: -0.1,
     y: 0.3,
     z: 1.4,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 63,
@@ -519,7 +519,7 @@ export const samplePapers: Paper[] = [
     x: 0.7,
     y: 1.3,
     z: 0.1,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 66,
@@ -535,7 +535,7 @@ export const samplePapers: Paper[] = [
     x: 0.2,
     y: -0.7,
     z: 1.0,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 68,
@@ -567,7 +567,7 @@ export const samplePapers: Paper[] = [
     x: 0.6,
     y: 0.0,
     z: 1.2,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 72,
@@ -575,7 +575,7 @@ export const samplePapers: Paper[] = [
     x: -0.5,
     y: 0.9,
     z: -0.2,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 73,
@@ -607,7 +607,7 @@ export const samplePapers: Paper[] = [
     x: 0.8,
     y: -0.5,
     z: 0.4,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 77,
@@ -615,7 +615,7 @@ export const samplePapers: Paper[] = [
     x: 0.0,
     y: 0.7,
     z: -0.8,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 78,
@@ -647,7 +647,7 @@ export const samplePapers: Paper[] = [
     x: 0.4,
     y: 0.2,
     z: 1.0,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 82,
@@ -655,7 +655,7 @@ export const samplePapers: Paper[] = [
     x: -0.3,
     y: 0.6,
     z: -0.9,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 83,
@@ -687,7 +687,7 @@ export const samplePapers: Paper[] = [
     x: 0.6,
     y: -0.9,
     z: 0.8,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 87,
@@ -695,7 +695,7 @@ export const samplePapers: Paper[] = [
     x: -0.1,
     y: 0.4,
     z: 1.3,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 88,
@@ -727,7 +727,7 @@ export const samplePapers: Paper[] = [
     x: 0.7,
     y: 0.3,
     z: 0.5,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 92,
@@ -735,7 +735,7 @@ export const samplePapers: Paper[] = [
     x: -0.4,
     y: 0.8,
     z: -0.1,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 93,
@@ -767,15 +767,15 @@ export const samplePapers: Paper[] = [
     x: 0.5,
     y: -0.5,
     z: 1.1,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 97,
-    title: "Edge AI for Wearables",
+    title: "Edge Artificial Intelligence for Wearables",
     x: 0.2,
     y: 0.6,
     z: -0.4,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 98,
@@ -807,7 +807,7 @@ export const samplePapers: Paper[] = [
     x: 0.3,
     y: 0.9,
     z: 0.9,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 102,
@@ -815,7 +815,7 @@ export const samplePapers: Paper[] = [
     x: -0.5,
     y: 0.2,
     z: 1.5,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 103,
@@ -847,7 +847,7 @@ export const samplePapers: Paper[] = [
     x: 0.6,
     y: -0.1,
     z: 1.0,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 107,
@@ -855,7 +855,7 @@ export const samplePapers: Paper[] = [
     x: -0.2,
     y: 0.5,
     z: -0.6,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 108,
@@ -887,7 +887,7 @@ export const samplePapers: Paper[] = [
     x: 0.7,
     y: 0.4,
     z: 0.2,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 112,
@@ -895,7 +895,7 @@ export const samplePapers: Paper[] = [
     x: -0.4,
     y: 0.9,
     z: 1.1,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 113,
@@ -927,7 +927,7 @@ export const samplePapers: Paper[] = [
     x: 0.5,
     y: -0.6,
     z: 1.3,
-    cluster: "AI",
+    cluster: "Artificial Intelligence",
   },
   {
     id: 117,
@@ -935,7 +935,7 @@ export const samplePapers: Paper[] = [
     x: -0.1,
     y: 0.3,
     z: -0.4,
-    cluster: "CS",
+    cluster: "Computer Science",
   },
   {
     id: 118,

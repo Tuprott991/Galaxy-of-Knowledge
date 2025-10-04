@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { searchModes } from "@/data/searchMode";
+import { searchModes } from "@/data/search-mode";
 
 type GlobalContextType = {
   query: string;
