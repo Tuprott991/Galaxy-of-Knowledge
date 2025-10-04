@@ -9,6 +9,7 @@ from fastapi import APIRouter, HTTPException, Query, Depends
 from pydantic import BaseModel, Field
 
 from database.connect import connect, close_connection
+from database.search import PaperSearch
 
 # Setup logging
 logger = logging.getLogger("api.v1.papers")
@@ -29,6 +30,22 @@ class PaperVisualization(BaseModel):
     y: float = Field(..., description="Y coordinate")
     z: float = Field(..., description="Z coordinate")
     cluster: Optional[str] = Field(None, description="Cluster UUID")
+
+
+class PaperHTMLContext(BaseModel):
+    """Paper HTML context data model"""
+    paper_id: str = Field(..., description="Paper ID (PMCID)")
+    title: Optional[str] = Field(None, description="Paper title")
+    html_context: Optional[str] = Field(None, description="HTML context content")
+    has_html_context: bool = Field(..., description="Whether paper has HTML context")
+    html_context_length: int = Field(..., description="Length of HTML context in characters")
+
+
+class HTMLContextResponse(BaseModel):
+    """HTML Context API response model"""
+    success: bool = Field(..., description="Request success status")
+    data: PaperHTMLContext = Field(..., description="Paper HTML context data")
+    message: str = Field(..., description="Response message")
 
 
 class PapersResponse(BaseModel):
@@ -243,53 +260,182 @@ async def get_papers_statistics(conn=Depends(get_db_connection)):
         close_connection(conn)
 
 
+@router.get(
+    "/papers/{paper_id}/html-context",
+    response_model=HTMLContextResponse,
+    responses={404: {"model": ErrorResponse}, 500: {"model": ErrorResponse}}
+)
+async def get_paper_html_context(
+    paper_id: str,
+    conn=Depends(get_db_connection)
+):
+    """
+    Get HTML context for a specific paper
+    
+    Returns the full HTML context content for a paper, if available.
+    This endpoint is separate from the main paper detail endpoint to optimize
+    performance when only HTML context is needed.
+    """
+    try:
+        cursor = conn.cursor()
+        
+        # Get paper's HTML context and basic info
+        cursor.execute("""
+            SELECT paper_id, title, html_context
+            FROM paper 
+            WHERE paper_id = %s
+        """, (paper_id,))
+        
+        result = cursor.fetchone()
+        
+        if not result:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Paper {paper_id} not found"
+            )
+        
+        paper_id_db, title, html_context = result
+        
+        # Process HTML context
+        has_html_context = bool(html_context and html_context.strip())
+        html_context_length = len(html_context) if html_context else 0
+        
+        paper_html_data = PaperHTMLContext(
+            paper_id=paper_id_db,
+            title=title,
+            html_context=html_context,
+            has_html_context=has_html_context,
+            html_context_length=html_context_length
+        )
+        
+        message = f"Successfully retrieved HTML context for paper {paper_id}"
+        if not has_html_context:
+            message += " (no HTML context available)"
+        
+        logger.info(f"Retrieved HTML context for paper {paper_id} (length: {html_context_length})")
+        
+        return HTMLContextResponse(
+            success=True,
+            data=paper_html_data,
+            message=message
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Error getting paper HTML context")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to retrieve HTML context: {str(e)}"
+        )
+    finally:
+        close_connection(conn)
+
+
 @router.get("/papers/search")
 async def search_papers(
     q: str = Query(..., min_length=1, description="Search query"),
     limit: Optional[int] = Query(50, ge=1, le=1000, description="Maximum results"),
+    search_type: str = Query("semantic", regex="^(semantic|text)$", description="Search type: semantic or text"),
+    distance_threshold: Optional[float] = Query(None, ge=0.0, le=2.0, description="Maximum distance threshold for semantic search"),
+    cluster: Optional[str] = Query(None, description="Filter by specific cluster"),
     conn=Depends(get_db_connection)
 ):
-    """Search papers by title, abstract, and authors"""
+    """
+    Search papers by query using semantic or text search
+    
+    - **semantic**: Uses embedding vectors for semantic similarity
+    - **text**: Traditional text matching on title, abstract, authors
+    """
     try:
-        cursor = conn.cursor()
-        search_query = f"%{q.lower()}%"
-        cursor.execute("""
-            SELECT 
-                paper_id, title, abstract, cluster, author_list,
-                CASE 
-                    WHEN LOWER(title) LIKE %s THEN 3
-                    WHEN LOWER(abstract) LIKE %s THEN 2
-                    WHEN LOWER(array_to_string(author_list, ' ')) LIKE %s THEN 1
-                    ELSE 0 END AS relevance_score
-            FROM paper 
-            WHERE LOWER(title) LIKE %s 
-               OR LOWER(abstract) LIKE %s
-               OR LOWER(array_to_string(author_list, ' ')) LIKE %s
-            ORDER BY relevance_score DESC, title
-            LIMIT %s
-        """, (search_query, search_query, search_query,
-              search_query, search_query, search_query, limit))
-
-        results = cursor.fetchall()
-        papers_data = []
-        for pid, title, abstract, cluster, authors, score in results:
-            if isinstance(authors, str):
-                try:
-                    authors = json.loads(authors)
-                except Exception:
-                    authors = [authors]
-            truncated = abstract[:300] + "..." if abstract and len(abstract) > 300 else abstract
-            papers_data.append({
-                "paper_id": pid, "title": title, "abstract": truncated,
-                "cluster": cluster, "authors": authors or [], "relevance_score": float(score)
-            })
+        if search_type == "semantic":
+            # Use semantic search
+            search_service = PaperSearch()
+            search_service.conn = conn  # Reuse existing connection
+            search_service.initialize()
+            
+            results = search_service.search(
+                query=q, 
+                top_k=limit,
+                distance_threshold=distance_threshold,
+                cluster=cluster
+            )
+            
+            # Transform results to match API format
+            papers_data = []
+            for paper in results:
+                papers_data.append({
+                    "paper_id": paper["paper_id"],
+                    "title": paper["title"],
+                    "abstract": paper["abstract"][:300] + "..." if paper["abstract"] and len(paper["abstract"]) > 300 else paper["abstract"],
+                    "cluster": paper["cluster"],
+                    "authors": paper["authors"] or [],
+                    "relevance_score": paper["similarity_score"],
+                    "distance": paper["distance"],
+                    "coordinates": paper["plot_coordinates"]
+                })
+                
+        else:
+            # Use traditional text search
+            cursor = conn.cursor()
+            search_query = f"%{q.lower()}%"
+            
+            # Build query with optional cluster filter
+            base_query = """
+                SELECT 
+                    paper_id, title, abstract, cluster, author_list,
+                    CASE 
+                        WHEN LOWER(title) LIKE %s THEN 3
+                        WHEN LOWER(abstract) LIKE %s THEN 2
+                        WHEN LOWER(array_to_string(author_list, ' ')) LIKE %s THEN 1
+                        ELSE 0 END AS relevance_score
+                FROM paper 
+                WHERE LOWER(title) LIKE %s 
+                   OR LOWER(abstract) LIKE %s
+                   OR LOWER(array_to_string(author_list, ' ')) LIKE %s
+            """
+            
+            params = [search_query, search_query, search_query, search_query, search_query, search_query]
+            
+            if cluster:
+                base_query += " AND cluster = %s"
+                params.append(cluster)
+                
+            base_query += " ORDER BY relevance_score DESC, title LIMIT %s"
+            params.append(limit)
+            
+            cursor.execute(base_query, tuple(params))
+            results = cursor.fetchall()
+            
+            papers_data = []
+            for pid, title, abstract, cluster_id, authors, score in results:
+                if isinstance(authors, str):
+                    try:
+                        authors = json.loads(authors)
+                    except Exception:
+                        authors = [authors]
+                        
+                truncated = abstract[:300] + "..." if abstract and len(abstract) > 300 else abstract
+                papers_data.append({
+                    "paper_id": pid, 
+                    "title": title, 
+                    "abstract": truncated,
+                    "cluster": cluster_id, 
+                    "authors": authors or [], 
+                    "relevance_score": float(score),
+                    "distance": None,  # Not applicable for text search
+                    "coordinates": None  # Not included in text search for performance
+                })
 
         return {
             "success": True,
             "data": papers_data,
             "count": len(papers_data),
             "query": q,
-            "message": f"Found {len(papers_data)} papers matching '{q}'"
+            "search_type": search_type,
+            "cluster_filter": cluster,
+            "distance_threshold": distance_threshold,
+            "message": f"Found {len(papers_data)} papers matching '{q}' using {search_type} search"
         }
 
     except Exception as e:
@@ -299,7 +445,105 @@ async def search_papers(
         close_connection(conn)
 
 
-@router.get("/papers/{paper_id}")
+@router.get("/papers/{paper_id}/similar")
+async def get_similar_papers(
+    paper_id: str,
+    limit: Optional[int] = Query(10, ge=1, le=100, description="Maximum number of similar papers"),
+    exclude_self: bool = Query(True, description="Exclude the reference paper from results"),
+    conn=Depends(get_db_connection)
+):
+    """
+    Find papers similar to a given paper using semantic embeddings
+    """
+    try:
+        search_service = PaperSearch()
+        search_service.conn = conn  # Reuse existing connection
+        search_service.initialize()
+        
+        results = search_service.search_similar_papers(
+            paper_id=paper_id,
+            top_k=limit,
+            exclude_self=exclude_self
+        )
+        
+        # Transform results
+        papers_data = []
+        for paper in results:
+            papers_data.append({
+                "paper_id": paper["paper_id"],
+                "title": paper["title"],
+                "abstract": paper["abstract"][:200] + "..." if paper["abstract"] and len(paper["abstract"]) > 200 else paper["abstract"],
+                "cluster": paper["cluster"],
+                "authors": paper["authors"] or [],
+                "similarity_score": paper["similarity_score"],
+                "distance": paper["distance"],
+                "coordinates": paper["plot_coordinates"]
+            })
+        
+        return {
+            "success": True,
+            "data": papers_data,
+            "count": len(papers_data),
+            "reference_paper_id": paper_id,
+            "exclude_self": exclude_self,
+            "message": f"Found {len(papers_data)} papers similar to {paper_id}"
+        }
+        
+    except Exception as e:
+        logger.exception("Error finding similar papers")
+        raise HTTPException(status_code=500, detail=f"Failed to find similar papers: {e}")
+    finally:
+        close_connection(conn)
+
+
+@router.get("/papers/search/batch")
+async def batch_search_papers(
+    queries: List[str] = Query(..., description="List of search queries"),
+    top_k: int = Query(10, ge=1, le=100, description="Number of results per query"),
+    conn=Depends(get_db_connection)
+):
+    """
+    Perform batch semantic search for multiple queries
+    """
+    try:
+        search_service = PaperSearch()
+        search_service.conn = conn  # Reuse existing connection
+        search_service.initialize()
+        
+        batch_results = search_service.batch_search(queries=queries, top_k=top_k)
+        
+        # Transform results
+        formatted_results = {}
+        for query, papers in batch_results.items():
+            formatted_results[query] = [
+                {
+                    "paper_id": paper["paper_id"],
+                    "title": paper["title"],
+                    "abstract": paper["abstract"][:200] + "..." if paper["abstract"] and len(paper["abstract"]) > 200 else paper["abstract"],
+                    "cluster": paper["cluster"],
+                    "similarity_score": paper["similarity_score"],
+                    "distance": paper["distance"]
+                }
+                for paper in papers
+            ]
+        
+        total_results = sum(len(papers) for papers in formatted_results.values())
+        
+        return {
+            "success": True,
+            "data": formatted_results,
+            "queries": queries,
+            "total_queries": len(queries),
+            "total_results": total_results,
+            "results_per_query": top_k,
+            "message": f"Completed batch search for {len(queries)} queries with {total_results} total results"
+        }
+        
+    except Exception as e:
+        logger.exception("Error in batch search")
+        raise HTTPException(status_code=500, detail=f"Failed to perform batch search: {e}")
+    finally:
+        close_connection(conn)
 async def get_paper_detail(paper_id: str, conn=Depends(get_db_connection)):
     """Get detailed information for a specific paper"""
     try:
