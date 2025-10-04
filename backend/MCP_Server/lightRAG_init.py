@@ -54,8 +54,6 @@ async def initialize_rag():
 
     return rag
 
-rag = None
-
 async def initialize_rag_instance():
     global rag
     if rag is None:
@@ -63,4 +61,6 @@ async def initialize_rag_instance():
         logging.info("RAG instance initialized.")
     else:
         logging.info("RAG instance already initialized.")
+
+    return rag
 
