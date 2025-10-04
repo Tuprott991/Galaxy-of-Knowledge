@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS paper (
     plot_visualize_z FLOAT,
     cluster TEXT, 
     -- relatedby: list of paper IDs (string) that write about this paper in their related works
-    cited_by TEXT[],
+    references TEXT[],
+    cited_by TEXT[], -- link of list of paper (string) that cite this paper
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -62,6 +63,18 @@ CREATE TABLE IF NOT EXISTS author (
 CREATE INDEX idx_author_name ON author(author_name);
 CREATE INDEX idx_author_corresponding ON author USING gin(corresponding_of);
 CREATE INDEX idx_author_writing ON author USING gin(writing_of);
+
+
+ -- References of a paper to other papers (e.g., related works, citations)
+
+
+CREATE INDEX idx_paper_reference_paper_id ON paper_reference(paper_id);
+CREATE INDEX idx_paper_reference_referenced_ids ON paper_reference USING gin(referenced_paper_ids);
+
+-- Index for links
+
+-- table for cited by
+
 
 -- ========================================
 -- Constraint: Ensure author_list references existing authors
