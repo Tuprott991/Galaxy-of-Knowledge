@@ -10,7 +10,3 @@ async def ingest_papers(paper: str, paper_id: str):
         rag = await initialize_rag()
 
     await rag.ainsert(paper, ids=paper_id)
-
-    
-if __name__ == "__main__":
-    sample_paper = ""

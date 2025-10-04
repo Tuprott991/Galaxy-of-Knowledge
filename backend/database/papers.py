@@ -243,6 +243,29 @@ def process_papers_from_folder(folder_path: str):
     finally:
         db.close()
 
+# get the html_context field from the database base on the paper_id
+def get_html_context_by_paper_id(paper_id: str) -> Optional[str]:
+    """Get the html_context field from the database based on the paper_id"""
+    try:
+        conn = connect()
+        cursor = conn.cursor()
+        
+        query = "SELECT html_context FROM paper WHERE paper_id = %s"
+        cursor.execute(query, (paper_id,))
+        
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        
+        if result and result[0]:
+            return result[0]
+        else:
+            logger.info(f"No html_context found for paper_id: {paper_id}")
+            return None
+    except Exception as e:
+        logger.error(f"Error retrieving html_context for paper_id {paper_id}: {e}")
+        return None
+
 def main():
     """Example usage"""
     # Example: process papers from a folder
