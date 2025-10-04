@@ -6,7 +6,7 @@ CREATE EXTENSION IF NOT EXISTS "vector";
 -- ========================================
 CREATE TABLE IF NOT EXISTS paper (
     id SERIAL PRIMARY KEY,
-    paper_id TEXT UNIQUE NOT NULL,
+    paper_id TEXT UNIQUE,
     full_text TEXT,
     author_list TEXT[],
     title TEXT,
