@@ -66,17 +66,6 @@ CREATE INDEX IF NOT EXISTS idx_author_corresponding ON author USING gin(correspo
 CREATE INDEX IF NOT EXISTS idx_author_writing ON author USING gin(writing_of);
 
 
- -- References of a paper to other papers (e.g., related works, citations)
-
-
-CREATE INDEX IF NOT EXISTS idx_paper_reference_paper_id ON paper_reference(paper_id);
-CREATE INDEX IF NOT EXISTS idx_paper_reference_referenced_ids ON paper_reference USING gin(referenced_paper_ids);
-
--- Index for links
-
--- table for cited by
-
-
 -- ========================================
 -- Constraint: Ensure author_list references existing authors
 -- ========================================
