@@ -3,11 +3,22 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
+import {
+  CustomAreaChart,
+  CustomPieChart,
+  CustomRadarChart,
+  CustomBarChart,
+} from "@/components/custom/charts";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 export function InsightButton() {
   return (
@@ -21,15 +32,28 @@ export function InsightButton() {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-xl bg-neutral-900/80 backdrop-blur-xl border border-neutral-700 text-neutral-100 rounded-2xl shadow-2xl">
-        <DialogHeader className="text-center space-y-1">
-          <DialogTitle className="text-lg font-semibold">Insight View</DialogTitle>
-          <Separator className="bg-neutral-700" />
-        </DialogHeader>
-        <DialogDescription className="mt-1 space-y-2 text-lg">
-
-        </DialogDescription>
+      <DialogContent className="min-w-[90vw] bg-neutral-900/80 backdrop-blur-xl border border-neutral-700 text-neutral-100 rounded-2xl shadow-2xl">
+        <DialogTitle></DialogTitle>
+        <DialogDescription></DialogDescription>
+        <Carousel>
+          <CarouselContent>
+            <CarouselItem>
+              <div className="text-lg grid grid-cols-2 gap-4">
+                <CustomAreaChart />
+                <CustomPieChart />
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className="text-lg grid grid-cols-2 gap-4">
+                <CustomRadarChart />
+                <CustomBarChart />
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </DialogContent>
-    </Dialog>
+    </Dialog >
   );
 }
