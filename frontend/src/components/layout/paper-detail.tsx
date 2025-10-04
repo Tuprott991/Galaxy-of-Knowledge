@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import DOMPurify from "dompurify";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { paperDetail } from "@/data/paper-detail";
+import { htmlContent } from "@/data/paper-detail";
 
 export const PaperDetail: React.FC = () => {
+    const [cleanHTML, setCleanHTML] = useState("");
+
+    useEffect(() => {
+        setCleanHTML(DOMPurify.sanitize(htmlContent));
+    }, []);
+
     return (
-        <Card className="w-full mx-0">
-            <CardContent>
+        <Card className="mx-0 max-w-xl w-full">
+            <CardContent className="overflow-auto max-h-[70vh]">
                 <div
-                    className="text-gray-700 max-h-110 overflow-y-auto"
-                    dangerouslySetInnerHTML={{ __html: paperDetail }}
+                    className="prose max-w-full text-justify"
+                    dangerouslySetInnerHTML={{ __html: cleanHTML }}
                 />
             </CardContent>
         </Card>
