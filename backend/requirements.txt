@@ -40,5 +40,4 @@ pytest-asyncio>=0.21.0
 black>=23.0.0
 flake8>=6.0.0
 
-mcp
-lightrag-hku
+mcp lightrag-hku
