@@ -19,16 +19,16 @@ CREATE TABLE IF NOT EXISTS paper (
     cluster TEXT, 
     -- relatedby: list of paper IDs (string) that write about this paper in their related works
     _references TEXT[],
-    cited_by TEXT[], -- link of list of paper (string) that cite this paper
     score FLOAT,
+    cited_by TEXT[], -- link of list of paper (string) that cite this paper
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
-CREATE INDEX idx_paper_embeddings ON paper USING ivfflat (embeddings vector_cosine_ops);
-CREATE INDEX idx_paper_json ON paper USING gin(json_data);
-CREATE INDEX idx_paper_cluster ON paper(cluster);
+CREATE INDEX IF NOT EXISTS idx_paper_embeddings ON paper USING ivfflat (embeddings vector_cosine_ops);
+CREATE INDEX IF NOT EXISTS idx_paper_json ON paper USING gin(json_data);
+CREATE INDEX IF NOT EXISTS idx_paper_cluster ON paper(cluster);
 
 
 -- ========================================
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS key_knowledge ( -- Single keyword
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_key_knowledge_paper_id ON key_knowledge(paper_id);
-CREATE INDEX idx_key_knowledge_embedding ON key_knowledge USING ivfflat (embedding vector_cosine_ops);
+CREATE INDEX IF NOT EXISTS idx_key_knowledge_paper_id ON key_knowledge(paper_id);
+CREATE INDEX IF NOT EXISTS idx_key_knowledge_embedding ON key_knowledge USING ivfflat (embedding vector_cosine_ops);
 
 
 -- ========================================
@@ -61,12 +61,16 @@ CREATE TABLE IF NOT EXISTS author (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_author_name ON author(author_name);
-CREATE INDEX idx_author_corresponding ON author USING gin(corresponding_of);
-CREATE INDEX idx_author_writing ON author USING gin(writing_of);
+CREATE INDEX IF NOT EXISTS idx_author_name ON author(author_name);
+CREATE INDEX IF NOT EXISTS idx_author_corresponding ON author USING gin(corresponding_of);
+CREATE INDEX IF NOT EXISTS idx_author_writing ON author USING gin(writing_of);
 
 
  -- References of a paper to other papers (e.g., related works, citations)
+
+
+CREATE INDEX IF NOT EXISTS idx_paper_reference_paper_id ON paper_reference(paper_id);
+CREATE INDEX IF NOT EXISTS idx_paper_reference_referenced_ids ON paper_reference USING gin(referenced_paper_ids);
 
 -- Index for links
 
