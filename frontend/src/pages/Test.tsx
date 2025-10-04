@@ -7,7 +7,7 @@ import { colorPalette } from "@/data/color-palette";
 import { randomClusterColor } from "@/utils/helper";
 import { axiosClient } from "@/api/axiosClient";
 import * as THREE from "three";
-import {Bloom, EffectComposer} from "@react-three/postprocessing";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useRef } from "react";
 
 
@@ -50,101 +50,100 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
   });
 
   return (
-      <group
-          position={[paper.x, paper.y, paper.z]}
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            setHovered(true);
-            onHover(paper);
-          }}
-          onPointerOut={(e) => {
-            e.stopPropagation();
-            setHovered(false);
-            onHover(null);
-          }}
-      >
-        {/* 🌟 Ngôi sao chính */}
+    <group
+      position={[paper.x, paper.y, paper.z]}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        setHovered(true);
+        onHover(paper);
+      }}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        setHovered(false);
+        onHover(null);
+      }}
+    >
+      {/* 🌟 Ngôi sao chính */}
+      <mesh>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={hovered || selected ? 3 : 1.2} // phát sáng mạnh khi chọn
+        />
+      </mesh>
+
+      {/* Vòng sáng khi hover */}
+      {(hovered || selected) && (
         <mesh>
-          <sphereGeometry args={[0.08, 16, 16]} />
-          <meshStandardMaterial
-              color={color}
-              emissive={color}
-              emissiveIntensity={hovered || selected ? 3 : 1.2} // phát sáng mạnh khi chọn
+
+          <sphereGeometry args={[0.15 + progress * 0.1, 32, 32]} />
+          <meshBasicMaterial
+            color={color}
+            transparent
+            opacity={0.3 + 0.2 * progress}
+            side={THREE.BackSide}
           />
         </mesh>
+      )}
 
-        {/* Vòng sáng khi hover */}
-        {(hovered || selected) && (
-            <mesh>
-              
-              <sphereGeometry args={[0.15 + progress * 0.1, 32, 32]} />
-              <meshBasicMaterial
-                  color={color}
-                  transparent
-                  opacity={0.3 + 0.2 * progress}
-                  side={THREE.BackSide}
-              />
-            </mesh>
-        )}
+      {/* 🪐 Solar System Planets */}
+      {progress > 0 && (
+        <group ref={orbitRef}>
+          {solarSystemPlanets.map((planet, i) => {
+            // Calculate orbital position (circular orbit)
+            const angle = (i / solarSystemPlanets.length) * Math.PI * 2;
+            const x = Math.cos(angle) * planet.distance * progress;
+            const y = Math.sin(angle) * planet.distance * progress * 0.3; // flatter orbit
+            const z = Math.sin(angle) * planet.distance * progress;
 
-        {/* 🪐 Solar System Planets */}
-        {progress > 0 && (
-            <group ref={orbitRef}>
-              {solarSystemPlanets.map((planet, i) => {
-                // Calculate orbital position (circular orbit)
-                const angle = (i / solarSystemPlanets.length) * Math.PI * 2;
-                const x = Math.cos(angle) * planet.distance * progress;
-                const y = Math.sin(angle) * planet.distance * progress * 0.3; // flatter orbit
-                const z = Math.sin(angle) * planet.distance * progress;
-                
-                return (
-                    <mesh
-                        key={planet.name}
-                        position={[x, y, z]}
-                        scale={[progress, progress, progress]}
-                    >
-                      <sphereGeometry args={[planet.size, 16, 16]} />
-                      <meshStandardMaterial
-                          color={planet.color}
-                          emissive={planet.emissive}
-                          emissiveIntensity={planet.emissiveIntensity * progress}
-                          metalness={planet.name === "Saturn" || planet.name === "Jupiter" ? 0.3 : 0.1}
-                          roughness={planet.name === "Venus" ? 0.1 : 0.4}
-                      />
-                      
-                      {/* Saturn's Rings */}
-                      {planet.name === "Saturn" && (
-                        <mesh rotation={[Math.PI / 2, 0, 0]}>
-                          <ringGeometry args={[planet.size * 1.5, planet.size * 2.2, 32]} />
-                          <meshBasicMaterial 
-                            color="#C4A484" 
-                            transparent 
-                            opacity={0.6 * progress}
-                            side={THREE.DoubleSide}
-                          />
-                        </mesh>
-                      )}
-                      
-                      {/* Subtle planet lighting */}
-                      <pointLight 
-                        intensity={0.2 * progress} 
-                        distance={1} 
-                        color={planet.color} 
-                      />
-                    </mesh>
-                );
-              })}
-            </group>
-        )}
-      </group>
+            return (
+              <mesh
+                key={planet.name}
+                position={[x, y, z]}
+                scale={[progress, progress, progress]}
+              >
+                <sphereGeometry args={[planet.size, 16, 16]} />
+                <meshStandardMaterial
+                  color={planet.color}
+                  emissive={planet.emissive}
+                  emissiveIntensity={planet.emissiveIntensity * progress}
+                  metalness={planet.name === "Saturn" || planet.name === "Jupiter" ? 0.3 : 0.1}
+                  roughness={planet.name === "Venus" ? 0.1 : 0.4}
+                />
+
+                {/* Saturn's Rings */}
+                {planet.name === "Saturn" && (
+                  <mesh rotation={[Math.PI / 2, 0, 0]}>
+                    <ringGeometry args={[planet.size * 1.5, planet.size * 2.2, 32]} />
+                    <meshBasicMaterial
+                      color="#C4A484"
+                      transparent
+                      opacity={0.6 * progress}
+                      side={THREE.DoubleSide}
+                    />
+                  </mesh>
+                )}
+
+                {/* Subtle planet lighting */}
+                <pointLight
+                  intensity={0.2 * progress}
+                  distance={1}
+                  color={planet.color}
+                />
+              </mesh>
+            );
+          })}
+        </group>
+      )}
+    </group>
   );
 };
 
-
 const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) => void }> = ({
-                                                                                              isActive,
-                                                                                              onHover,
-                                                                                            }) => {
+  isActive,
+  onHover,
+}) => {
   const { camera, scene } = useThree();
   const [keys, setKeys] = useState<{ [key: string]: boolean }>({});
   const [mouseButtons, setMouseButtons] = useState<{ left: boolean; right: boolean }>({
@@ -153,11 +152,10 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
   });
   const [papers, setPapers] = useState<Paper[]>([]);
   const [colorMap, setColorMap] = useState<Record<string, string>>({});
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const direction = new THREE.Vector3();
 
-  // fetch dữ liệu paper
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -183,12 +181,33 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handleSpace = async (e: KeyboardEvent) => {
+      if (e.code === "Space" && selectedId !== null) {
+        e.preventDefault();
+
+        const paper = papers.find((p) => p.paper_id === selectedId);
+        if (!paper) return;
+
+        try {
+          const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
+          console.log("Paper Info:", { ...paper, abstract: res.data.abstract, url: res.data.url });
+        } catch (err) {
+          console.error("Failed to fetch paper info:", err);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleSpace);
+    return () => window.removeEventListener("keydown", handleSpace);
+  }, [selectedId, papers]);
+
   // bắt phím WASD + Shift
   useEffect(() => {
     const downHandler = (e: KeyboardEvent) =>
-        setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
+      setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
     const upHandler = (e: KeyboardEvent) =>
-        setKeys((k) => ({ ...k, [e.key.toLowerCase()]: false }));
+      setKeys((k) => ({ ...k, [e.key.toLowerCase()]: false }));
 
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
@@ -219,26 +238,24 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     };
   }, []);
 
-  function findPaperId(obj: THREE.Object3D): number | null {
+  function findPaperId(obj: THREE.Object3D): string | null {
     let current: THREE.Object3D | null = obj;
     while (current) {
-      if (current.userData.paperId) return current.userData.paperId as number;
+      if (current.userData.paper_id) return current.userData.paper_id as string;
       current = current.parent;
     }
     return null;
   }
 
-  // di chuyển + raycaster chọn object
   useFrame(() => {
     if (!isActive) return;
 
-    // Raycaster từ crosshair
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
 
     const hit = intersects.find(
-        (i) => i.object instanceof THREE.Mesh && i.object.geometry.type === "SphereGeometry"
+      (i) => i.object instanceof THREE.Mesh && i.object.geometry.type === "SphereGeometry"
     );
 
     if (hit) {
@@ -248,7 +265,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
       setSelectedId(null);
     }
 
-    // Movement
     const speed = keys["shift"] ? 0.3 : 0.1;
 
     if (keys["w"]) {
@@ -282,34 +298,31 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
   // ✅ chỉ return 1 lần
   return (
-      <>
-        <ambientLight intensity={0.6} />
-        <pointLight position={[10, 10, 10]} />
-        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
+    <>
+      <ambientLight intensity={0.6} />
+      <pointLight position={[10, 10, 10]} />
+      <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
 
-        <Suspense fallback={null}>
-          {papers.map((paper) => (
-              <group key={paper.id} userData={{ paperId: paper.id }}>
-                <PaperPoint
-                    paper={paper}
-                    onHover={onHover}
-                    colorMap={colorMap}
-                    selected={selectedId === paper.id}
-                />
-              </group>
-          ))}
-        </Suspense>
+      <Suspense fallback={null}>
+        {papers.map((paper) => (
+          <group key={paper.paper_id} userData={{ paper_id: paper.paper_id }}>
+            <PaperPoint
+              paper={paper}
+              onHover={onHover}
+              colorMap={colorMap}
+              selected={selectedId === paper.paper_id}
+            />
+          </group>
+        ))}
+      </Suspense>
 
-        {isActive && <PointerLockControls />}
-        <EffectComposer>
-          <Bloom intensity={1.5} luminanceThreshold={0} luminanceSmoothing={0.9} />
-        </EffectComposer>
-      </>
+      {isActive && <PointerLockControls />}
+      <EffectComposer>
+        <Bloom intensity={1.5} luminanceThreshold={0} luminanceSmoothing={0.9} />
+      </EffectComposer>
+    </>
   );
 };
-
-
-
 
 const PaperScatter3D: React.FC = () => {
   const [isActive, setIsActive] = useState(false);

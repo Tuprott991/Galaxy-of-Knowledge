@@ -7,9 +7,9 @@ export function ShortDetail({ paper }: { paper: Paper }) {
             <p className="flex justify-center font-mono text-base text-[#808080] font-semibold">{paper.cluster}</p>
             <div className="flex justify-center gap-1 mt-1 items-center">
                 <span
-                    className="font-semibold flex items-center bg-neutral-800/40 backdrop-blur-md border border-neutral-700 hover:bg-neutral-700/50 px-2 rounded-md w-5 h-5 justify-center text-xs"
+                    className="font-semibold flex items-center bg-neutral-800/40 backdrop-blur-md border border-neutral-700 hover:bg-neutral-700/50 px-2 rounded-md w-5 h-5 justify-center text-xs font-mono"
                 >
-                    Q
+                    Space
                 </span>
                 <span className="text-sm font-semibold">Open</span>
             </div>
