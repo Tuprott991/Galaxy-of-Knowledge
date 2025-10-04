@@ -17,7 +17,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [query, setQuery] = useState("");
   const [searchMode, setSearchMode] = useState(searchModes[0].value);
-  const [chatView, setChatView] = useState(false);
+  const [chatView, setChatView] = useState(true);
 
   useEffect(() => {
     console.log("[GlobalContext] Updated:", { query, searchMode });
