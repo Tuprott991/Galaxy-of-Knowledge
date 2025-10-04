@@ -1,21 +1,2800 @@
 {
   "clustered_papers": [
     {
-      "paper_id": "PMC4136787",
+      "paper_id": "PMC10020673",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10025027",
       "cluster_uuid": -1,
-      "position": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      }
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10027818",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10030976",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10058394",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10063413",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10138634",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10142442",
+      "cluster_uuid": "d8bd31f7-75d0-4049-8707-3b91d3c50896",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10144393",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10233975",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10261121",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10264680",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10284894",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10308117",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10342025",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10370681",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10386755",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10390562",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10410709",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10414970",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10422843",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10432549",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10470837",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10487739",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10504369",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10528075",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10605753",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10628120",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10712242",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10715203",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10719374",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10751425",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10764921",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10772081",
+      "cluster_uuid": "5cfd7828-8f7c-47d7-978f-5e0da4345933",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10774393",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10780891",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10789781",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10793275",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10800490",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10813126",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10831389",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10846184",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10848226",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10889206",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10960378",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC10996920",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11022651",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11046949",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11053165",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11063234",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11088941",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11094041",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11096397",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11126634",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11127935",
+      "cluster_uuid": "112eb1be-2f46-4ae8-84d3-1fbba0c62ef8",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166646",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166648",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166655",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166662",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166909",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166911",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166937",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166943",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166944",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166946",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166948",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166952",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166967",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166968",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166969",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11166981",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11167039",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11167060",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11167063",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11222149",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11233762",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11263583",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11271499",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11302229",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11324864",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11339457",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11353732",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11357981",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11357997",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11362537",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11386075",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11403809",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11451251",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11470607",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11477029",
+      "cluster_uuid": "4dab9c65-f759-4bf3-acab-c576db26a3e2",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11487192",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11492218",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11500582",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11579474",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11593819",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11659408",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11673879",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11701653",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11747068",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11748630",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11833055",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11850895",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11869762",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11888247",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11892206",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11929063",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11930778",
+      "cluster_uuid": "112eb1be-2f46-4ae8-84d3-1fbba0c62ef8",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11940681",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11941215",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11942576",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11953390",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11969330",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11988870",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11988970",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11998595",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC11999716",
+      "cluster_uuid": "5bf7f4cf-96b8-466f-8dba-389e1e61fa04",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC12008199",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC12021249",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC12031868",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC12034070",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC12034939",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC12040010",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2824534",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2897429",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2910419",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2913424",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2915878",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2925951",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2991213",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC2998437",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3002170",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3005423",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3012082",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3040128",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3044105",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3066201",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3067220",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3092937",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3133089",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3166430",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3177255",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3187170",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3190158",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3242767",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3251573",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3258067",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3289768",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3329368",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3337602",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3350920",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3422896",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3430326",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3457586",
+      "cluster_uuid": "7ef924c8-d32d-469f-af8d-3a8f0404a645",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3502426",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3503204",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3508904",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3509447",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3545801",
+      "cluster_uuid": "a14e8daf-a436-4157-a567-d1a63257e60c",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3554398",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3558598",
+      "cluster_uuid": "7ef924c8-d32d-469f-af8d-3a8f0404a645",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3564669",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3570223",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3593973",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3603133",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3615599",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3630201",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3639165",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3647661",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3659353",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3665236",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3747666",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3748764",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3774184",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3818365",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3838407",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3851762",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3856860",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3868799",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3869332",
+      "cluster_uuid": "a14e8daf-a436-4157-a567-d1a63257e60c",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3890248",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3901686",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3911009",
+      "cluster_uuid": "11e1d929-5035-424f-b3ad-8c085e152c1e",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3936501",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3947616",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3962621",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3981873",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC3982735",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4012541",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4033213",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4035928",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4042434",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4050424",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4052902",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4064004",
+      "cluster_uuid": "160d4a87-bab8-42b1-9d43-1b775311f30a",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4085587",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4095884",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4096993",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4103452",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4110898",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4116675",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4118556",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4135744",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4136787",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4152162",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4161659",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4169763",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4187166",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4187989",
+      "cluster_uuid": "11e1d929-5035-424f-b3ad-8c085e152c1e",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4211383",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4228280",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4290804",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4309212",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4309301",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4321547",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4337661",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4340379",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4349987",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4378170",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4379453",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4385880",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4398884",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4405755",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4411111",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4427280",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4430214",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4453782",
+      "cluster_uuid": "160d4a87-bab8-42b1-9d43-1b775311f30a",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4462657",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4469364",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4490751",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4494396",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4507784",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4618186",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4624184",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4631774",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4642138",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4647464",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4653058",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4653813",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4682325",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4750446",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4776492",
+      "cluster_uuid": "d44bfefc-5845-4d84-888e-b11207a20b2d",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4826010",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4902601",
+      "cluster_uuid": "d44bfefc-5845-4d84-888e-b11207a20b2d",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4917201",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4923109",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4936552",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4945788",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4960141",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4964660",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC4985531",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5026642",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5026643",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5045078",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5047659",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5052530",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5114340",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5132293",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5181587",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5201052",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5219934",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5286820",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5288125",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5387210",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5389344",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5391430",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5397022",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5415411",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5421618",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5443495",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5454470",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5460135",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5460236",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5460239",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5460263",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5470433",
+      "cluster_uuid": "26d6b254-f589-4edd-85ff-7d96f48dbfc5",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5477841",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5485990",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5488280",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5491145",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5498037",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5504618",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5515506",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5515514",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5515519",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5515520",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5515531",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5523082",
+      "cluster_uuid": "f33a72cf-8470-467f-98f3-57e99d3cebf3",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5552977",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5568470",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5578834",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5587110",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5600826",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5614317",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5648920",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5666744",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5666799",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5666834",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5672023",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5677518",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5736159",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5748516",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5761896",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5771473",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5805884",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5810432",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5817088",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5821596",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5826609",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5864415",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5865701",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5866446",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5896955",
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5899691",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5910807",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5933128",
+      "cluster_uuid": "a053b872-81e2-47d8-9ba8-4ae0a1cd8ef2",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5955502",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5958250",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC5996828",
+      "cluster_uuid": "26d6b254-f589-4edd-85ff-7d96f48dbfc5",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6013642",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6036641",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6057834",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6062551",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6069985",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6081456",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6091969",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6124165",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6126739",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6130020",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6131065",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6137544",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6141014",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6143729",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6165321",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6201722",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6204554",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6204695",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6213004",
+      "cluster_uuid": "4dab9c65-f759-4bf3-acab-c576db26a3e2",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6222041",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6240453",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6251167",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6275019",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6289879",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6321533",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6337482",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6339989",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6343501",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6348315",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6359015",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6366624",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6371294",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6372189",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6379395",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6386654",
+      "cluster_uuid": "f1ac2308-e515-404c-bfff-f871b7aaab45",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6387434",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6426649",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6447593",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6452512",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6462350",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6529585",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6547757",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6548323",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6560652",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6590338",
+      "cluster_uuid": "f33a72cf-8470-467f-98f3-57e99d3cebf3",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6597714",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6599637",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6615562",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6638264",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6689164",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6706399",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6710492",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6746706",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6747492",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6753329",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6813909",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6865368",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6876156",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6889863",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6908503",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6915713",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6945029",
+      "cluster_uuid": "a4c99168-7048-46cd-b6da-7ee68647d926",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC6981245",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7000411",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7010715",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7012842",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7029147",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7055474",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7064724",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7067979",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7072278",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7076552",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7118179",
+      "cluster_uuid": "5bf7f4cf-96b8-466f-8dba-389e1e61fa04",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7138367",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7162976",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7171750",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7190111",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7235020",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7251690",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7261848",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7264257",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7285199",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7303416",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7314936",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7317102",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7324008",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7326050",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7339929",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7358545",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7382458",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7393961",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7414185",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7415877",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7467030",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7484075",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7503278",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7516158",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7530743",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7555395",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7555797",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7561690",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7595942",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7599661",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7610290",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7667275",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7677455",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7733933",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7778922",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7825584",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7828077",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7829349",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7907224",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7937622",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7940393",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7943786",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7954810",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7987364",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7996555",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC7998608",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8005752",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8012687",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8024390",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8067245",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8086211",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8099722",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8104057",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8113475",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8131644",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8133610",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8169688",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8185232",
+      "cluster_uuid": "a053b872-81e2-47d8-9ba8-4ae0a1cd8ef2",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8191917",
+      "cluster_uuid": "a4c99168-7048-46cd-b6da-7ee68647d926",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8211661",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8213760",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8217198",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8220224",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8234954",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8260663",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8274610",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8323809",
+      "cluster_uuid": "d8bd31f7-75d0-4049-8707-3b91d3c50896",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8364238",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8396460",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8400407",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8412175",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8421509",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8430797",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8444978",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8468678",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8475764",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8493566",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8509868",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8513672",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8537831",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8539686",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8671758",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8716943",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8739323",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8754149",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8816950",
+      "cluster_uuid": "112eb1be-2f46-4ae8-84d3-1fbba0c62ef8",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8875396",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8879990",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8886715",
+      "cluster_uuid": "d8bd31f7-75d0-4049-8707-3b91d3c50896",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8890767",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8896891",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8904044",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8932657",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC8953707",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9023564",
+      "cluster_uuid": "f1ac2308-e515-404c-bfff-f871b7aaab45",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9031868",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9098231",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9098553",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9105288",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9108708",
+      "cluster_uuid": "5cfd7828-8f7c-47d7-978f-5e0da4345933",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9111996",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9116463",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9139491",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9144607",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9146534",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9163032",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9241228",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9258157",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9267413",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9293686",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9365836",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9389742",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9400218",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9410522",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9445043",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9487896",
+      "cluster_uuid": "d8bd31f7-75d0-4049-8707-3b91d3c50896",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9502502",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9503880",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9547011",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9549344",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9582271",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9605285",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9617909",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9640571",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9693084",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9695138",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9695374",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9699585",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9706465",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9737020",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9743659",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9746133",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9784906",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9832585",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9856674",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9861679",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9862956",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9865768",
+      "cluster_uuid": -1,
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9953055",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9953463",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
+    },
+    {
+      "paper_id": "PMC9964234",
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "embedding_dimension": 768
     }
   ],
   "cluster_info": {
+    "f78259cc-8975-42ae-a9fe-daaaf3aaa756": {
+      "cluster_uuid": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+      "count": 398,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "d8bd31f7-75d0-4049-8707-3b91d3c50896": {
+      "cluster_uuid": "d8bd31f7-75d0-4049-8707-3b91d3c50896",
+      "count": 4,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "5cfd7828-8f7c-47d7-978f-5e0da4345933": {
+      "cluster_uuid": "5cfd7828-8f7c-47d7-978f-5e0da4345933",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "112eb1be-2f46-4ae8-84d3-1fbba0c62ef8": {
+      "cluster_uuid": "112eb1be-2f46-4ae8-84d3-1fbba0c62ef8",
+      "count": 3,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "4dab9c65-f759-4bf3-acab-c576db26a3e2": {
+      "cluster_uuid": "4dab9c65-f759-4bf3-acab-c576db26a3e2",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "5bf7f4cf-96b8-466f-8dba-389e1e61fa04": {
+      "cluster_uuid": "5bf7f4cf-96b8-466f-8dba-389e1e61fa04",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7": {
+      "cluster_uuid": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+      "count": 10,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "7ef924c8-d32d-469f-af8d-3a8f0404a645": {
+      "cluster_uuid": "7ef924c8-d32d-469f-af8d-3a8f0404a645",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "a14e8daf-a436-4157-a567-d1a63257e60c": {
+      "cluster_uuid": "a14e8daf-a436-4157-a567-d1a63257e60c",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "11e1d929-5035-424f-b3ad-8c085e152c1e": {
+      "cluster_uuid": "11e1d929-5035-424f-b3ad-8c085e152c1e",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "160d4a87-bab8-42b1-9d43-1b775311f30a": {
+      "cluster_uuid": "160d4a87-bab8-42b1-9d43-1b775311f30a",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "d44bfefc-5845-4d84-888e-b11207a20b2d": {
+      "cluster_uuid": "d44bfefc-5845-4d84-888e-b11207a20b2d",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "26d6b254-f589-4edd-85ff-7d96f48dbfc5": {
+      "cluster_uuid": "26d6b254-f589-4edd-85ff-7d96f48dbfc5",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "f33a72cf-8470-467f-98f3-57e99d3cebf3": {
+      "cluster_uuid": "f33a72cf-8470-467f-98f3-57e99d3cebf3",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "a053b872-81e2-47d8-9ba8-4ae0a1cd8ef2": {
+      "cluster_uuid": "a053b872-81e2-47d8-9ba8-4ae0a1cd8ef2",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "f1ac2308-e515-404c-bfff-f871b7aaab45": {
+      "cluster_uuid": "f1ac2308-e515-404c-bfff-f871b7aaab45",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
+    "a4c99168-7048-46cd-b6da-7ee68647d926": {
+      "cluster_uuid": "a4c99168-7048-46cd-b6da-7ee68647d926",
+      "count": 2,
+      "centroid_dimension": 768,
+      "type": "cluster"
+    },
     "-1": {
       "cluster_uuid": -1,
-      "count": 1,
+      "count": 91,
       "type": "noise"
     }
   },
   "cluster_uuid_map": {
-    
+    "0": "f78259cc-8975-42ae-a9fe-daaaf3aaa756",
+    "1": "d8bd31f7-75d0-4049-8707-3b91d3c50896",
+    "2": "5cfd7828-8f7c-47d7-978f-5e0da4345933",
+    "3": "112eb1be-2f46-4ae8-84d3-1fbba0c62ef8",
+    "4": "4dab9c65-f759-4bf3-acab-c576db26a3e2",
+    "5": "5bf7f4cf-96b8-466f-8dba-389e1e61fa04",
+    "6": "0f109d1f-dece-43db-99ce-8ed0ccbc0ea7",
+    "7": "7ef924c8-d32d-469f-af8d-3a8f0404a645",
+    "8": "a14e8daf-a436-4157-a567-d1a63257e60c",
+    "9": "11e1d929-5035-424f-b3ad-8c085e152c1e",
+    "10": "160d4a87-bab8-42b1-9d43-1b775311f30a",
+    "11": "d44bfefc-5845-4d84-888e-b11207a20b2d",
+    "12": "26d6b254-f589-4edd-85ff-7d96f48dbfc5",
+    "13": "f33a72cf-8470-467f-98f3-57e99d3cebf3",
+    "14": "a053b872-81e2-47d8-9ba8-4ae0a1cd8ef2",
+    "15": "f1ac2308-e515-404c-bfff-f871b7aaab45",
+    "16": "a4c99168-7048-46cd-b6da-7ee68647d926",
+    "-1": -1
+  },
+  "summary": {
+    "total_papers": 532,
+    "n_clusters": 17,
+    "n_noise": 91,
+    "clustering_ratio": 82.89473684210526,
+    "embedding_dimension": 768
+  }
+}

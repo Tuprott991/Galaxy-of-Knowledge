@@ -260,7 +260,7 @@ def main():
     """Main function - process all authors from JSON folder"""
     
     # Get folder path
-    folder_path = "/home/nghia-duong/Downloads/schema"  # Default folder
+    folder_path = "/home/nghia-duong/Downloads/PMC_articles_json (2)/PMC_articles_json"  # Default folder
     logger.info(f"Processing authors from folder: {folder_path}")
     
     if not os.path.exists(folder_path):
