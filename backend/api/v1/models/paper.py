@@ -13,6 +13,7 @@ class PaperVisualization(BaseModel):
     y: float = Field(..., description="Y coordinate")
     z: float = Field(..., description="Z coordinate")
     cluster: Optional[str] = Field(None, description="Cluster UUID")
+    topic: str = Field(..., description="Paper topic/category")
 
 
 class PaperHTMLContext(BaseModel):
@@ -20,6 +21,7 @@ class PaperHTMLContext(BaseModel):
     paper_id: str = Field(..., description="Paper ID (PMCID)")
     title: Optional[str] = Field(None, description="Paper title")
     html_context: Optional[str] = Field(None, description="HTML context content")
+    authors: Optional[List[str]] = Field(None, description="Paper authors")
     has_html_context: bool = Field(..., description="Whether paper has HTML context")
     html_context_length: int = Field(..., description="Length of HTML context in characters")
 

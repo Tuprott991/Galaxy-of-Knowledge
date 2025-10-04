@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 
 # Import routers and DB
 from api.v1.home import router as papers_router
+from api.v1.graph import router as graph_router
 from database.connect import connect
 
 
@@ -72,6 +73,7 @@ async def health_check():
 # ===== Routers ========
 # ======================
 app.include_router(papers_router, prefix="/api/v1", tags=["papers"])
+app.include_router(graph_router, prefix="/api/v1", tags=["graph"])
 
 # ======================
 # === Exception Handler
