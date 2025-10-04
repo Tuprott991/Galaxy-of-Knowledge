@@ -3,6 +3,7 @@ import { HelpButton } from "@/components/layout/help-button";
 import { SearchBar } from "@/components/layout/search-bar";
 import { PaperDetail } from "@/components/layout/paper-detail";
 import { Chatbot } from "@/components/layout/chatbot";
+import { ESCButton } from "@/components/layout/esc-button";
 import { useGlobal } from "@/context/GlobalContext";
 import TestComponent from "./Test"
 
@@ -43,21 +44,24 @@ export default function Home() {
         </>
       ) : (
         <>
-          <div className="flex flex-row w-full max-w-7xl gap-4 mx-4">
+          <div className="flex w-[100vw] max-w-7xl gap-4 mx-4 items-center overflow-hidden h-100">
             {/* Left - 3 phần */}
-            <div className="flex-[3]">
+            <div className="flex-[3] h-full">
               <PaperDetail />
             </div>
 
             {/* Middle - 1 phần */}
-            <div className="flex-[1]">
+            <div className="flex-[1] h-full">
               <p>Hello Nhan Pham</p>
             </div>
 
             {/* Right - 2 phần */}
-            <div className="flex-[2]">
+            <div className="flex-[2] h-full">
               <Chatbot />
             </div>
+          </div>
+          <div className="fixed bottom-4 left-4 z-10">
+            <ESCButton />
           </div>
         </>
       )}
