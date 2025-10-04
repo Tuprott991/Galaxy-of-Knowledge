@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { searchModes } from "@/data/searchMode";
+import { searchModes } from "@/data/search-mode";
 import { useGlobal } from "@/context/GlobalContext";
 
 export function SearchBar() {

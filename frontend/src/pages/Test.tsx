@@ -1,147 +1,159 @@
 import React, { Suspense, useState, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Stars } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Stars, PointerLockControls } from "@react-three/drei";
 import type { Paper } from "../types";
-import { samplePapers } from "../data/sampleData";
-import {Bloom, EffectComposer} from "@react-three/postprocessing";
+import { samplePapers } from "../data/sample-data";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
-import { PointerLockControls } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { ShortDetail } from "@/components/mainpage/short-detail";
+import { colorPalette } from "@/data/color-palette";
+import { cluster } from "@/data/cluster";
+import { randomClusterColor } from "@/utils/helper";
 
-
-
-type PaperPointProps = { paper: Paper; selected?: boolean };
-
-const PaperPoint: React.FC<PaperPointProps> = ({ paper }) => {
-  const [hovered, setHovered] = React.useState(false);
-
-  const colorMap: Record<string, string> = {
-    AI: "#ff9f1c",
-    Physics: "#d65db1",
-    Biology: "#39ff14",
-    Energy: "#08f7fe",
-    CS: "#ff073a",
-    Environment: "#00ffbf",
-  };
-
-  const color = colorMap[paper.cluster] || "gray";
-
-    return (
-        <group
-            position={[paper.x, paper.y, paper.z]}
-            onPointerOver={() => setHovered(true)}
-            onPointerOut={() => setHovered(false)}
-        >
-            {/* Quả cầu chính */}
-            <mesh>
-                <sphereGeometry args={[0.08, 16, 16]} />
-                <meshStandardMaterial
-                    color={color}
-                    emissive={color}
-                    emissiveIntensity={hovered ? 2.5 : 1.2}
-                />
-            </mesh>
-
-            {hovered && (
-                <mesh>
-                    <sphereGeometry args={[0.12, 32, 32]} />
-                    <meshBasicMaterial
-                        color={color}
-                        transparent={true}
-                        opacity={0.3}
-                        side={THREE.BackSide}
-                    />
-                </mesh>
-            )}
-        </group>
-    );
+type PaperPointProps = {
+  paper: Paper;
+  selected?: boolean;
+  onHover: (paper: Paper | null) => void;
+  colorMap?: Record<string, string>;
 };
 
-const MainScene: React.FC<{ isActive: boolean }> = ({ isActive }) => {
-    const { camera } = useThree();
-    const [keys, setKeys] = useState<{ [key: string]: boolean }>({});
+const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap }) => {
+  const [hovered, setHovered] = useState(false);
+  const color = colorMap?.[paper.cluster] || "gray";
 
-    // lắng nghe phím bấm
-    useEffect(() => {
-        const downHandler = (e: KeyboardEvent) => setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
-        const upHandler = (e: KeyboardEvent) => setKeys((k) => ({ ...k, [e.key.toLowerCase()]: false }));
+  return (
+    <group
+      position={[paper.x, paper.y, paper.z]}
+      onPointerOver={() => {
+        setHovered(true);
+        onHover(paper);
+      }}
+      onPointerOut={() => {
+        setHovered(false);
+        onHover(null);
+      }}
+    >
+      <mesh>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={hovered ? 2.5 : 1.2}
+        />
+      </mesh>
 
-        window.addEventListener("keydown", downHandler);
-        window.addEventListener("keyup", upHandler);
+      {hovered && (
+        <mesh>
+          <sphereGeometry args={[0.12, 32, 32]} />
+          <meshBasicMaterial
+            color={color}
+            transparent
+            opacity={0.3}
+            side={THREE.BackSide}
+          />
+        </mesh>
+      )}
+    </group>
+  );
+};
 
-        return () => {
-            window.removeEventListener("keydown", downHandler);
-            window.removeEventListener("keyup", upHandler);
-        };
-    }, []);
+const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) => void }> = ({
+  isActive,
+  onHover,
+}) => {
+  const { camera } = useThree();
+  const [keys, setKeys] = useState<{ [key: string]: boolean }>({});
+  const colorMap = React.useMemo(() => randomClusterColor(cluster, colorPalette), []);
 
-    // mỗi frame cập nhật vị trí camera
-    useFrame(() => {
-        const speed = 0.1; // tốc độ di chuyển
-        const direction = new THREE.Vector3();
+  useEffect(() => {
+    const downHandler = (e: KeyboardEvent) =>
+      setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
+    const upHandler = (e: KeyboardEvent) =>
+      setKeys((k) => ({ ...k, [e.key.toLowerCase()]: false }));
 
-        if (keys["w"]) {
-            camera.getWorldDirection(direction);
-            camera.position.addScaledVector(direction, speed);
-        }
-        if (keys["s"]) {
-            camera.getWorldDirection(direction);
-            camera.position.addScaledVector(direction, -speed);
-        }
-        if (keys["a"]) {
-            camera.getWorldDirection(direction);
-            direction.cross(camera.up); // sang trái
-            camera.position.addScaledVector(direction, -speed);
-        }
-        if (keys["d"]) {
-            camera.getWorldDirection(direction);
-            direction.cross(camera.up); // sang phải
-            camera.position.addScaledVector(direction, speed);
-        }
-    });
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
 
-    return (
-        <>
-            <ambientLight intensity={0.6} />
-            <pointLight position={[10, 10, 10]} />
+    return () => {
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
+    };
+  }, []);
 
-            <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
+  // Di chuyển camera
+  useFrame(() => {
+    if (!isActive) return;
 
-            <EffectComposer>
-                <Bloom intensity={1} luminanceThreshold={0} luminanceSmoothing={0.9} />
-            </EffectComposer>
+    const speed = 0.1;
+    const direction = new THREE.Vector3();
 
-            <Suspense fallback={null}>
-                {samplePapers.map((paper) => (
-                    <PaperPoint key={paper.id} paper={paper} />
-                ))}
-            </Suspense>
+    if (keys["w"]) {
+      camera.getWorldDirection(direction);
+      camera.position.addScaledVector(direction, speed);
+    }
+    if (keys["s"]) {
+      camera.getWorldDirection(direction);
+      camera.position.addScaledVector(direction, -speed);
+    }
+    if (keys["a"]) {
+      camera.getWorldDirection(direction);
+      direction.cross(camera.up);
+      camera.position.addScaledVector(direction, -speed);
+    }
+    if (keys["d"]) {
+      camera.getWorldDirection(direction);
+      direction.cross(camera.up);
+      camera.position.addScaledVector(direction, speed);
+    }
+  });
 
-            {isActive && <PointerLockControls />}
-        </>
-    );
+  return (
+    <>
+      <ambientLight intensity={0.6} />
+      <pointLight position={[10, 10, 10]} />
+
+      <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
+
+      <EffectComposer>
+        <Bloom intensity={1} luminanceThreshold={0} luminanceSmoothing={0.9} />
+      </EffectComposer>
+
+      <Suspense fallback={<></>}>
+        {samplePapers.map((paper) => (
+          <PaperPoint
+            key={paper.id}
+            paper={paper}
+            onHover={onHover}
+            colorMap={colorMap}
+          />
+        ))}
+      </Suspense>
+
+      {isActive && <PointerLockControls />}
+    </>
+  );
 };
 
 const PaperScatter3D: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
+  const [hoveredPaper, setHoveredPaper] = useState<Paper | null>(null);
 
-  // Khi click vào màn hình -> kích hoạt chế độ điều khiển
-    const handleClick = () => {
-        setIsActive(true);
-        const canvas = document.querySelector("canvas");
-        canvas?.requestPointerLock();
-    };
+  const handleClick = () => {
+    setIsActive(true);
+    const canvas = document.querySelector("canvas");
+    canvas?.requestPointerLock();
+  };
 
-
-    // Khi nhấn ESC -> thoát chế độ điều khiển
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+    const handlePointerLockChange = () => {
+      if (!document.pointerLockElement) {
         setIsActive(false);
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerlockchange", handlePointerLockChange);
+    return () => {
+      document.removeEventListener("pointerlockchange", handlePointerLockChange);
+    };
   }, []);
 
   return (
@@ -153,49 +165,23 @@ const PaperScatter3D: React.FC = () => {
       }}
       onClick={handleClick}
     >
-      <Canvas
-        style={{ background: "black" }}
-        camera={{ position: [0, 1.6, 5], fov: 75 }}
-      >
-        <MainScene isActive={isActive} />
+      <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
+        <MainScene isActive={isActive} onHover={setHoveredPaper} />
       </Canvas>
 
-        <div
-            style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                color: "white",
-                fontSize: "24px",
-                fontWeight: "bold",
-                pointerEvents: "none", // không chặn click
-                userSelect: "none",    // không cho bôi chọn
-            }}
-        >
-            +
-        </div>
-
-      {!isActive && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            color: "white",
-            fontSize: "18px",
-            background: "rgba(0,0,0,0.5)",
-            padding: "12px 24px",
-            borderRadius: "12px",
-          }}
-        >
+      {!isActive ? (
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
           Click the screen to start playing!
         </div>
+      ) : (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
+          +
+        </div>
       )}
+
+      {hoveredPaper && <ShortDetail paper={hoveredPaper} />}
     </div>
   );
 };
-
 
 export default PaperScatter3D;

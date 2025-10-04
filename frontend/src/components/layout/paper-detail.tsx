@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { paperDetail } from "@/data/paperDetail";
+import { paperDetail } from "@/data/paper-detail";
 
 export const PaperDetail: React.FC = () => {
     return (
