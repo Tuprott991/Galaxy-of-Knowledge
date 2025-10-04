@@ -47,8 +47,7 @@ import os
 # Add parent directory to path for database imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from database import get_list_of_documents, get_document_by_code, get_recent_chat_history, format_chat_history
-
+from database.papers import get_md_content_by_paper_id  # Example database function
 
 # --------------------------------------------------------------------------------------
 # STEP 1: Initialize FastMCP instance — this acts as your "tool server"
@@ -94,28 +93,26 @@ async def run_command(command: str) -> str:
 
 # Tool 2: get_documents_content - get the specific document content by paper code
 @mcp.tool()
-async def get_document_content(code: str) -> str:
+async def get_document_content(id: str) -> str:
     """
-    Get insurance product document content by product code.
+    Get full paper context in markdown.
     
-    This tool retrieves the full content of a specific paper on database
-    using its unique product code. Use list_documents first to see available codes.
+    This tool retrieves the full content of a specific paper on database in markdown
+    using its unique product code.
     
     Args:
-        code (str): Insurance product code (e.g., "pru-edu-saver", "prumax")
-        
+        id (str): (e.g., "PMC2824534")
     Returns:
         str: Full document content for the insurance product
     """
     try:
-        document = get_document_by_code(code)
+        document = get_md_content_by_paper_id(id)
         if document:
             return document['content']
         else:
-            return f"Insurance product document with code '{code}' not found. Use list_documents to see available codes."
+            return f"Paper with '{id}' not found."
     except Exception as e:
         return f"Error retrieving document: {str(e)}"
-
 
 # --------------------------------------------------------------------------------------
 # STEP 2: Create the Starlette app to expose the tools via HTTP (using SSE)

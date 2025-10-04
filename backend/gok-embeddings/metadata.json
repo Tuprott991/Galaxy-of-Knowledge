@@ -1,0 +1,1070 @@
+{
+  "PMC10020673_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** Spaceflight, Biofilms, Environmental microbiology, International space station, Pangenome\n\n## Abstract\n\nUrine, humidity condensate, and other sources of non-potable water are processed onboard the International Space Station (ISS) by the Water Recovery System (WRS) yielding potable water. While some means of microbial control are in place, including a phosphoric acid/hexavalent chromium urine pretreatment solution, many areas within the WRS are not available for ",
+    "length": 1000
+  },
+  "PMC10020673_chunk_1": {
+    "text": "ified them as B. contaminans, while the two Paraburkholderia isolates were identified as P. fungorum. Chromate-resistance gene clusters were identified through pangenomic analysis that differentiated these genomes from previously studied isolates recovered from the point-of-use potable water dispenser and/or current NCBI references, indicating that unique populations exist within distinct niches in the WRS. Beyond genomic analysis, fixed samples directly from the lines were imaged by environment",
+    "length": 1000
+  },
+  "PMC10020673_chunk_2": {
+    "text": "ds, and hemolysins. The potential production of these gene cluster metabolites was phenotypically evaluated through biofilm, bacterial-fungal interaction, and hemolytic assays. Collectively, these data identify the UPA flex lines as a unique ecological niche and novel area of biofilm growth within the WRS. Further investigation of these organisms and their resistance profiles will enable engineering controls directed toward biofilm prevention in future space station water systems.\n\n## Figures\n\n#",
+    "length": 1000
+  },
+  "PMC10020673_chunk_3": {
+    "text": " sequencing. Alignments were generated with minimap2 (-ax map-ont).*\n\n\n### Fig. 3.\n\n![Fig. 3.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/60a4/10020673/0fbf7008408e/gr3.jpg)\n\n*A) Pangenomic analysis of the five B. contaminans isolates sequenced in this study. 3.1, 3.2, 4.2, 4.3 and 4.5, which are noted by pink and purple, with the 78 available assemblies from NCBI, in black, while the red denotes the previous isolates from the ISS potable water dispenser [38]. Orange text represents gene clusters as",
+    "length": 1000
+  },
+  "PMC10020673_chunk_4": {
+    "text": "stance according to function. The details of the P. fungorium functional genes and gene clusters can be found in Table S2. (For interpretation of the references to color in this figure legend, the reader is referred to the Web version of this article.)*\n\n\n### Fig. 4.\n\n![Fig. 4.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/60a4/10020673/5919d8809e3b/gr4.jpg)\n\n*Environmental scanning electron microscopy images of water from the UPA flex lines. A \u2013 F) Samples resulting from flex line UPA95, in which hig",
+    "length": 1000
+  },
+  "PMC10020673_chunk_5": {
+    "text": "from the UPA95 flex lines (G and H low magnification), demonstrates the more favorable and growth promoting conditions and clear fungal-bacterial biofilm formation (as also noted in higher magnification J \u2013 L) within the UPA115 flex line. (For interpretation of the references to color in this figure legend, the reader is referred to the Web version of this article.)*\n\n\n### Fig. 5.\n\n![Fig. 5.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/60a4/10020673/6529795a8c80/gr5.jpg)\n\n*Biofilm formation of bacter",
+    "length": 1000
+  },
+  "PMC10020673_chunk_6": {
+    "text": "\n\n![Fig. 6.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/60a4/10020673/2f7efe1ad8b9/gr6.jpg)\n\n*Gene clusters associated with known secondary metabolites from genomes from the UPA flex lines isolates identified using antiSMASH. The secondary metabolites of interest pyoverdine, occidiofungin, pyrrolnitrin, pyochelin, and ornibactin are associated with biofilm production, quorum sensing, antifungal properties, and hemolytic activity. The intensity of the color represents the completeness of the gene clu",
+    "length": 1000
+  },
+  "PMC10020673_chunk_7": {
+    "text": "isplays distance. B) The interaction of A. flavus with UPA flex line bacterial isolates on PDA at 25 \u00b0C. All measurements were in triplicate for each isolate. The distance for antagonistic activity was measured between the fungal growth and bacterial deposit (red arrow). The fungal growth diameter was measured triplicate. For irregularly shaped fungal growth, the measurement was taken from three different growth directions, assuming it was a diameter (blue arrow). See Table S3 for statistical da",
+    "length": 1000
+  },
+  "PMC10020673_chunk_8": {
+    "text": " Analyte | Concentration (mg/L) | Analyte | Concentration (mg/L) |\n| --- | --- | --- | --- | --- | --- |\n\n### Table 3.\n\n| Sample Source | Sample | Genome size (bp) | Contigs | Total Genes | GC % | Best Match NCBI | ANI |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| NCBI | Burkholderia contaminans SK875 10922 | 8,596,045 | 3 | 7,784 | 66.1 | Burkholderia contaminans LMG 23361 | 100 |\n| UPA95 | 3.1. | 8,652,817 | 20 | 8,026 | 66.2 | Burkholderia contaminans SK875 10922 | 95.6 |\n| UPA95 | 3.",
+    "length": 1000
+  },
+  "PMC10020673_chunk_9": {
+    "text": ".3. | 9,564,261 | 5 | 8,799 | 61.6 | Burkholderia fungorum ATCC BAA-463 | 98.6 |\n| UPA115 | 4.1. | 9,745,290 | 6 | 8,950 | 61.6 | Burkholderia fungorum ATCC BAA-463 | 98.6 |\n| NCBI | Cellulomonas fimi ATCC 484 | 4,266,344 | 1 | 3,851 | 75.0 | Cellulomonas fimi ATCC 484 | 100 |\n| UPA115 | 4.4. | 3,862,723 | 9 | 3,608 | 73.2 | Cellulomonas fimi ATCC 484 | 80.1 |\n| NCBI | Leifsonia sp. PS1209 | 4,091,164 | 1 | 3,916 | 69.7 | Leifsonia aquatica ATCC 14665 | 84.0 |\n| UPA115 | 5.2. | 5,084,807 | 3 | 4",
+    "length": 1000
+  },
+  "PMC10020673_chunk_10": {
+    "text": "C free article] [PubMed] [Google Scholar]\n\n3. 3. Carter D., Wilson L., Orozco N. 41st international conference on environmental systems. 2011. Status of ISS water management and recovery. [DOI] [Google Scholar]\n\n4. 4. Williamson J., Carter L., Hill J., Jones D. L., Morris D., Graves R. E. Proceedings of 49th international conference on environmental systems. 2019. Upgrades to the international space station urine processor assembly. Boston, Massachusetts. [Google Scholar]\n\n5. 5. Kelsey L. K., Bo",
+    "length": 1000
+  },
+  "PMC10020673_chunk_11": {
+    "text": "s and future perspectives. Microb Environ. 2014;29:250\u2013260. doi: 10.1264/jsme2.me14031. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n7. 7. Zea L., Nisar Z., Rubin P., Cortes\u00e3o M., Luo J., McBride S. A., Moeller R., Klaus D., M\u00fcller D., Varanasi K. K., et al. Design of a spaceflight biofilm experiment. Acta Astronaut. 2018;148:294\u2013300. doi: 10.1016/j.actaastro.2018.04.039. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n8. 8. Castro-Wallace S. L., Chiu C. Y., John K. K., Stahl S. E., R",
+    "length": 1000
+  },
+  "PMC10020673_chunk_12": {
+    "text": "ational space station using nanopore sequencing. Genes. 2021;12:106. doi: 10.3390/genes12010106. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n10. 10. Burton A. S., Stahl S. E., John K. K., Jain M., Juul S., Turner D. J., Harrington E. D., Stoddart D., Paten B., Akeson M., et al. Off Earth identification of bacterial populations using 16S rDNA nanopore sequencing. Genes. 2020;11 doi: 10.3390/genes11010076. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n11. 11. De Coster W., D'Hert S.,",
+    "length": 1000
+  },
+  "PMC10020673_chunk_13": {
+    "text": "e] [PubMed] [Google Scholar]\n\n13. 13. Jain M., Fiddes I. T., Miga K. H., Olsen H. E., Paten B., Akeson M. Improved data analysis for the MinION nanopore sequencer. Nat Methods. 2015;12:351\u2013356. doi: 10.1038/nmeth.3290. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n14. 14. R Core Team. R Foundation for Statistical Computing, R Foundation for Statistical Computing; Vienna, Austria: 2021. R: A language and environment for statistical computing. [Google Scholar]\n\n15. 15. Epskamp S., Cramer A. ",
+    "length": 1000
+  },
+  "PMC10020673_chunk_14": {
+    "text": "k R. R., Judd L. M., Gorrie C. L., Holt K. E. Completing bacterial genome assemblies with multiplex MinION sequencing. Microb Genom. 2017;3 doi: 10.1099/mgen.0.000132. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n20. 20. Wick R., Menzel P. Filtlong. Github. 2017. https://github.com/rrwick/Filtlong\n\n21. 21. Wick R. R., Judd L. M., Gorrie C. L., Holt K. E. Unicycler: resolving bacterial genome assemblies from short and long sequencing reads. PLoS Comput Biol. 2017;13 doi: 10.1371/journal.pc",
+    "length": 1000
+  },
+  "PMC10020673_chunk_15": {
+    "text": " reveals clear species boundaries. Nat Commun. 2018;9:5114. doi: 10.1038/s41467-018-07641-9. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n24. 24. Tatusova T., DiCuccio M., Badretdin A., Chetvernin V., Nawrocki E. P., Zaslavsky L., Lomsadze A., Pruitt K. D., Borodovsky M., Ostell J. NCBI prokaryotic genome annotation pipeline. Nucleic Acids Res. 2016;44:6614\u20136624. doi: 10.1093/nar/gkw569. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n25. 25. Blin K., Shaw S., Kloosterman A. M., Charl",
+    "length": 1000
+  },
+  "PMC10020673_chunk_16": {
+    "text": "285\u2013294. [DOI] [PubMed] [Google Scholar]\n\n27. 27. Clark K., Karsch-Mizrachi I., Lipman D. J., Ostell J., Sayers E. W. GenBank. Nucleic Acids Res. 2015;44:D67\u2013D72. doi: 10.1093/nar/gkv1276. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n28. 28. Eren A. M., Kiefl E., Shaiber A., Veseli I., Miller S. E., Schechter M. S., Fink I., Pan J. N., Yousef M., Fogarty E. C., et al. Community-led, integrated, reproducible multi-omics with anvi'o. Nature microbiology. 2021;6:3\u20136. doi: 10.1038/s41564-020-",
+    "length": 1000
+  },
+  "PMC10020673_chunk_17": {
+    "text": "ternational space station water processor assembly external filter assembly S/N 01. In Proceedings of 42nd international conference on environmental systems; p. 3595..\n\n31. 31. Zea L., McLean R. J. C., Rook T. A., Angle G., Carter D. L., Delegard A., Denvir A., Gerlach R., Gorti S., McIlwaine D., et al. Potential biofilm control strategies for extended spaceflight missions. Biofilms. 2020;2 doi: 10.1016/j.bioflm.2020.100026. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n32. 32. Yang J., Ba",
+    "length": 1000
+  },
+  "PMC10020673_chunk_18": {
+    "text": "ations of uranium and nickel isolated from the Savannah River Site (SRS), USA. Genomics Data. 2017;12:62\u201368. doi: 10.1016/j.gdata.2017.02.011. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n34. 34. You L.-X., Zhang R.-R., Dai J.-X., Lin Z.-T., Li Y.-P., Herzberg M., Zhang J.-L., Al-Wathnani H., Zhang C.-K., Feng R.-W., et al. Potential of cadmium resistant Burkholderia contaminans strain ZCC in promoting growth of soy beans in the presence of cadmium. Ecotoxicol Environ Saf. 2021;211 doi: 1",
+    "length": 1000
+  },
+  "PMC10020673_chunk_19": {
+    "text": "mic analysis of the genus Burkholderia: proposal for division of this genus into the emended genus Burkholderia containing pathogenic organisms and a new genus Paraburkholderia gen. nov. harboring environmental species. Front Genet. 2014;5 doi: 10.3389/fgene.2014.00429. 429-429. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n37. 37. Lood C., Peeters C., Lamy-Besnier Q., Wagemans J., De Vos D., Proesmans M., Pirnay J.-P., Echahidi F., Pi\u00e9rard D., Thimmesch M., et al. Genomics of an endemic c",
+    "length": 1000
+  },
+  "PMC10020673_chunk_20": {
+    "text": "ree article] [PubMed] [Google Scholar]\n\n39. 39. Yu X., Ding Z., Ji Y., Zhao J., Liu X., Tian J., Wu N., Fan Y. An operon consisting of a P-type ATPase gene and a transcriptional regulator gene responsible for cadmium resistances in Bacillus vietamensis 151\u20136 and Bacillus marisflavi 151\u201325. BMC Microbiol. 2020;20:18. doi: 10.1186/s12866-020-1705-2. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n40. 40. Leplae R., Geeraerts D., Hallez R., Guglielmini J., Dr\u00e8ze P., Van Melderen L. Diversity of",
+    "length": 1000
+  },
+  "PMC10020673_chunk_21": {
+    "text": "6. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n42. 42. Elliott S. J., Srinivas S., Albert M. J., Alam K., Robins-Browne R. M., Gunzburg S. T., Mee B. J., Chang B. J. Characterization of the roles of hemolysin and other toxins in enteropathy caused by alpha-hemolytic Escherichia coli linked to human diarrhea. Infect Immun. 1998;66:2040\u20132051. doi: 10.1128/iai.66.5.2040-2051.1998. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n43. 43. O'Rourke A., Yee N., Nierman W. C., Beyhan S. Envir",
+    "length": 1000
+  },
+  "PMC10020673_chunk_22": {
+    "text": "garit I., Rappuoli R., Grandi G. Pili in gram-positive pathogens. Nat Rev Microbiol. 2006;4:509\u2013519. doi: 10.1038/nrmicro1443. [DOI] [PubMed] [Google Scholar]\n\n46. 46. Epler Barbercheck C. R., Bullitt E., Andersson M. In: Membrane protein complexes: structure and function. Harris J. R., Boekema E. J., editors. Springer Singapore; Singapore: 2018. Bacterial adhesion pili; pp. 1\u20138. [DOI] [Google Scholar]\n\n47. 47. Galdiero S., Falanga A., Cantisani M., Tarallo R., Della Pepa M. E., D'Oriano V., Gal",
+    "length": 1000
+  },
+  "PMC10020673_chunk_23": {
+    "text": "f arsenic uptake and efflux. Environ Int. 2019;126:585\u2013597. doi: 10.1016/j.envint.2019.02.058. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n50. 50. Steffan B. N., Venkatesh N., Keller N. P. Let\u2019s get physical: bacterial-fungal interactions and their consequences in agriculture and health. J Fungi. 2020;6:243. doi: 10.3390/jof6040243. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n51. 51. Ray R. C., Swain M. R. In: Bacteria in agrobiology: disease management. Maheshwari D. K., editor.",
+    "length": 1000
+  },
+  "PMC10020673_chunk_24": {
+    "text": " N., Wells J. M., Margolles A., Ruas-Madiedo P. Interactions of surface exopolysaccharides from bifidobacterium and lactobacillus within the intestinal environment. Front Microbiol. 2018;9 doi: 10.3389/fmicb.2018.02426. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n54. 54. Muhammad M. H., Idris A. L., Fan X., Guo Y., Yu Y., Jin X., Qiu J., Guan X., Huang T. Beyond risk: bacterial biofilms and their regulating approaches. Front Microbiol. 2020:11. doi: 10.3389/fmicb.2020.00928. [DOI] [PMC f",
+    "length": 1000
+  },
+  "PMC10020673_chunk_25": {
+    "text": "clic aromatic hydrocarbons. Can J Microbiol. 2016;62 doi: 10.1139/cjm-2016-0160. [DOI] [PubMed] [Google Scholar]\n\n57. 57. Kang D., Kirienko N. V. High-Throughput genetic screen reveals that early attachment and biofilm formation are necessary for full pyoverdine production by Pseudomonas aeruginosa. Front Microbiol. 2017;8 doi: 10.3389/fmicb.2017.01707. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n58. 58. Kang D., Turner K. E., Kirienko N. V. PqsA promotes pyoverdine production via biofil",
+    "length": 1000
+  },
+  "PMC10020673_chunk_26": {
+    "text": "rl L. Production of the antifungal compound pyrrolnitrin is quorum sensing-regulated in members of the Burkholderia cepacia complex. Environ Microbiol. 2009;11:1422\u20131437. doi: 10.1111/j.1462-2920.2009.01870.x. [DOI] [PubMed] [Google Scholar]\n\n61. 61. Nunvar J., Kalferstova L., Bloodworth R. A. M., Kolar M., Degrossi J., Lubovich S., Cardona S. T., Drevinek P. Understanding the pathogenicity of Burkholderia contaminans, an emerging pathogen in cystic fibrosis. PLoS One. 2016;11 doi: 10.1371/journ",
+    "length": 1000
+  },
+  "PMC10020673_chunk_27": {
+    "text": "Mol Biol Rev. 2011;75:583\u2013609. doi: 10.1128/MMBR.00020-11. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n64. 64. Gu G., Smith L., Liu A., Lu S.-E. Genetic and biochemical map for the biosynthesis of occidiofungin, an antifungal produced by Burkholderia contaminans strain MS14. Appl Environ Microbiol. 2011;77:6189\u20136198. doi: 10.1128/AEM.00377-11. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n65. 65. Thomson E. L. S., Dennis J. J. A Burkholderia cepacia complex non-ribosomal peptide-sy",
+    "length": 1000
+  },
+  "PMC10020673_chunk_28": {
+    "text": "O'Keeffe T. L., Abbas H. K. Isolation of maize soil and rhizosphere bacteria with antagonistic activity against Aspergillus flavus and Fusarium verticillioides. J Food Protect. 2007;70:1615\u20131621. doi: 10.4315/0362-028x-70.7.1615. [DOI] [PubMed] [Google Scholar]\n\n68. 68. Jia J., Ford E., Hobbs S. M., Baird S. M., Lu S.-E. Occidiofungin is the key metabolite for antifungal activity of the endophytic bacterium Burkholderia sp. MS455 against Aspergillus flavus. Phytopathology\u00ae. 2022;112:481\u2013491. doi",
+    "length": 1000
+  },
+  "PMC10020673_chunk_29": {
+    "text": "helin siderophore transport systems in Burkholderia cenocepacia lung infections. Infect Immun. 2004;72:2850\u20132857. doi: 10.1128/IAI.72.5.2850-2857.2004. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n71. 71. Depoorter E., De Canck E., Coenye T., Vandamme P. Burkholderia bacteria produce multiple potentially novel molecules that inhibit carbapenem-resistant gram-negative bacterial pathogens. Antibiotics. 2021;10:147. doi: 10.3390/antibiotics10020147. [DOI] [PMC free article] [PubMed] [Google ",
+    "length": 1000
+  },
+  "PMC10020673_chunk_30": {
+    "text": " free article] [PubMed] [Google Scholar]\n",
+    "length": 41
+  },
+  "PMC10025027_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** Brassica oleraceaL. var. botrytis, Priming agents, Seed priming, Salt stress responses, Germination emergence\n\n## Abstract\n\nThe significant horticultural crop, cauliflower (Brassica oleracea L. var. botrytis) is vulnerable to the excessive salt concentration in the soil, which contributes to its scaled-down growth and productivity, among other indices. The current study examines the efficacy of hydropriming, halopriming, and osmopriming on the physio-biochemical ",
+    "length": 1000
+  },
+  "PMC10025027_chunk_1": {
+    "text": "ochemical attributes like photosynthetic pigments, protein, and proline content while suppressing oxidative damage and MDA content in cauliflower seedlings in treatment- and dose-dependent manner. PCA revealed 61% (PC1) and 15% (PC2) of the total variance with substantial positive relationships and high loading conditions on all germination attributes on PC1 with greater PC1 scores for PEG treatments showing the increased germination indices in PEG-treated seeds among all the priming treatments ",
+    "length": 1000
+  },
+  "PMC10025027_chunk_2": {
+    "text": "before sowing in the salt-affected agro-ecosystems.\n\n## Figures\n\n### Fig. 1.\n\n![Fig. 1.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/36d2/10025027/5f9de31e6a42/gr1.jpg)\n\n*Schematic representation of seed priming.*\n\n\n### Fig. 2.\n\n![Fig. 2.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/36d2/10025027/8665be6548c3/gr2.jpg)\n\n*Effect of priming on phenotypic characteristics of the 10 days-old cauliflower seedlings under salinity stress for (A) Control (NPN) (B) Stress (NPS) (C) HP (D) NaCl 25 mM (E) NaCl 50 mM (",
+    "length": 1000
+  },
+  "PMC10025027_chunk_3": {
+    "text": " RSFW: relative shoot fresh weight; RRFW: relative root fresh weight; RSDW: relative shoot dry weight; RRDW: relative root dry weight. A darker red colour indicates a larger correlation coefficient, and a darker blue colour indicates a smaller correlation coefficient. * and ** indicate significant correlations at p < 0.05 and p < 0.01, respectively. (For interpretation of the references to colour in this figure legend, the reader is referred to the Web version of this article.)*\n\n\n### Fig. 4.\n\n!",
+    "length": 1000
+  },
+  "PMC10025027_chunk_4": {
+    "text": "## Fig. 5.\n\n![Fig. 5.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/36d2/10025027/13a76ae5aa73/gr5.jpg)\n\n*Dendrogram of seed priming treatments based on Y-values using Ward's method of systematic classification.*\n\n\n### Fig. 6.\n\n![Fig. 6.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/36d2/10025027/95e00703687c/gr6.jpg)\n\n*Effects of seed priming under salt stress in Cauliflower seedlings. At 10 days post-incubation, non-primed no stress (NPN), no priming with salt stress (NPS), and primed with different primi",
+    "length": 1000
+  },
+  "PMC10025027_chunk_5": {
+    "text": " under salt stress in Cauliflower seedlings. At 10 days post-incubation, non-primed no stress (NPN), no priming with salt stress (NPS), and primed with different priming agents under salt stress seedlings were harvested and analysed for chlorophyll and carotenoid content. (A) Effects of seed priming on Chl a content (B) Chl b content (C) total Chl content and (D) Carotenoid content. Each data presents the mean \u00b1 standard deviation. Different low case letters above the bars indicate significant s",
+    "length": 1000
+  },
+  "PMC10025027_chunk_6": {
+    "text": "a | 3.00a |\n| NPS | 56.67b | 60b | 4.29b | 0.05b | 1.56b | 1.64b | 88.23b | 11.01b | 13.93b | 1.47b |\n\n### Table 2.\n\n| Treatments | RGP | RGR | RGI | RVI | RSL | RRL | RSFW | RRFW | RSDW | RRDW |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| HP | 1.23a | 1.33a | 1.58a | 2.35ef | 1.03d | 2.29c | 1.48ab | 1.57c | 1.29e | 1.56b |\n| 25 mM NaCl | 1.00ab | 1.11ab | 1.59a | 3.47bcd | 1.06d | 2.24c | 1.61ab | 2.31bc | 1.72cde | 2.37ab |\n| 50 mM NaCl | 1.18a | 1.22ab | 1.67a | 3.5",
+    "length": 1000
+  },
+  "PMC10025027_chunk_7": {
+    "text": " 1.69a | 3.23bcde | 1.81a | 3.29ab | 1.63ab | 3.30a | 2.52ab | 2.90a |\n| 20% PEG | 1.29a | 1.22ab | 1.72a | 5.33a | 1.95a | 3.28ab | 2.07a | 2.97ab | 3.09a | 2.17ab |\n| 30% PEG | 1.35a | 1.28ab | 1.81a | 5.06a | 1.65abc | 2.86abc | 1.58ab | 2.02c | 1.83bcde | 1.60b |\n| 1 mM TU | 1.12a | 1.11ab | 1.44ab | 2.54de | 1.65abc | 2.39c | 1.60ab | 1.88c | 1.83bcde | 1.71b |\n| 3 mM TU | 1.29a | 1.33a | 1.77a | 3.91b | 1.77ab | 2.84abc | 1.85ab | 2.33bc | 2.17bcd | 2.58ab |\n| 5 mM TU | 1.23a | 1.33a | 1.6",
+    "length": 1000
+  },
+  "PMC10025027_chunk_8": {
+    "text": "l. 2008;59:651. doi: 10.1146/annurev.arplant.59.032607.092911. [DOI] [PubMed] [Google Scholar]\n\n2. 2. Khaliq A., Zia-ul-Haq M., Ali F., Aslam F., Matloob A., Navab A., Hussain S. Salinity tolerance in wheat cultivars is related to enhanced activities of enzymatic antioxidants and reduced lipid peroxidation. Clean: Soil, Air, Water. 2015;43:1248\u20131258. [Google Scholar]\n\n3. 3. Pessarakli M., Szabolcs I. Handbook of Plant and Crop Stress. fourth ed. CRC press; 2019. Soil salinity and sodicity as par",
+    "length": 1000
+  },
+  "PMC10025027_chunk_9": {
+    "text": "reshwater resources and reclamation of marginal soils\u2014a review. Environ. Sci. Pollut. Control Ser. 2020;27:28695\u201328729. doi: 10.1007/s11356-020-09111-6. [DOI] [PubMed] [Google Scholar]\n\n6. 6. Shabala S. Learning from halophytes: physiological basis and strategies to improve abiotic stress tolerance in crops. Ann. Bot. 2013;112:1209\u20131221. doi: 10.1093/aob/mct205. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n7. 7. Park H. J., Kim W.-Y., Yun D.-J. A new insight of salt stress signaling in pl",
+    "length": 1000
+  },
+  "PMC10025027_chunk_10": {
+    "text": ", Khan F., Ullah N. others, Phytohormones and plant responses to salinity stress: a review. Plant Growth Regul. 2015;75:391\u2013404. [Google Scholar]\n\n10. 10.el Boukhari M. E. M., Barakate M., Choumani N., Bouhia Y., Lyamlouli K. Ulva lactuca extract and fractions as seed priming agents mitigate salinity stress in tomato seedlings. Plants. 2021;10:1104. doi: 10.3390/plants10061104. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n11. 11. Miller G. A. D., Suzuki N., Ciftci-Yilmaz S., Mittler R. O.",
+    "length": 1000
+  },
+  "PMC10025027_chunk_11": {
+    "text": "illing tolerance in chickpea by modulating germination metabolism, trehalose accumulation and carbon assimilation. Plant Physiol. Biochem. 2017;111:274\u2013283. doi: 10.1016/j.plaphy.2016.12.012. [DOI] [PubMed] [Google Scholar]\n\n14. 14. Jafar M. Z., Farooq M., Cheema M. A., Afzal I., Basra S. M. A., Wahid M. A., Aziz T., Shahid M. Improving the performance of wheat by seed priming under saline conditions. J. Agron. Crop Sci. 2012;198:38\u201345. [Google Scholar]\n\n15. 15. Amooaghaie R., Tabatabaie F. Osmo",
+    "length": 1000
+  },
+  "PMC10025027_chunk_12": {
+    "text": "ee article] [PubMed] [Google Scholar]\n\n17. 17. Hussain S., Hussain S., Khaliq A., Ali S., Khan I. Priming and Pretreatment of Seeds and Seedlings. Springer; 2019. Physiological, biochemical, and molecular aspects of seed priming; pp. 43\u201362. [Google Scholar]\n\n18. 18. Karimi S., Karami H., Vahdati K., Mokhtassi-Bidgoli A. Antioxidative responses to short-term salinity stress induce drought tolerance in walnut. Sci. Hortic. 2020;267 [Google Scholar]\n\n19. 19. Yusefi-Tanha E., Fallah S., Pessarakli M",
+    "length": 1000
+  },
+  "PMC10025027_chunk_13": {
+    "text": "Scholar]\n\n21. 21. Ahmad M., Waraich E. A., Hussain S., Ayyub C. M., Ahmad Z., Zulfiqar U. Improving heat stress tolerance in Camelina sativa and Brassica napus through thiourea seed priming. J. Plant Growth Regul. 2021:1\u201317. [Google Scholar]\n\n22. 22. Salam A., Khan A. R., Liu L., Yang S., Azhar W., Ulhassan Z., Zeeshan M., Wu J., Fan X., Gan Y. Seed priming with zinc oxide nanoparticles downplayed ultrastructural damage and improved photosynthetic apparatus in maize under cobalt stress. J. Hazar",
+    "length": 1000
+  },
+  "PMC10025027_chunk_14": {
+    "text": " brassinosteroids increase lead stress tolerance in seed germination and seedling growth of Brassica juncea L. Ecotoxicol. Environ. Saf. 2020;193 doi: 10.1016/j.ecoenv.2020.110296. [DOI] [PubMed] [Google Scholar]\n\n25. 25. Ashraf M., Foolad M. R. Pre-sowing seed treatment\u2014a shotgun approach to improve germination, plant growth, and crop yield under saline and non-saline conditions. Adv. Agron. 2005;88:223\u2013271. [Google Scholar]\n\n26. 26. Eskandari H. others, Effects of priming technique on seed ger",
+    "length": 1000
+  },
+  "PMC10025027_chunk_15": {
+    "text": "15-1784-y. [DOI] [PubMed] [Google Scholar]\n\n29. 29. Sher A., Sarwar T., Nawaz A., Ijaz M., Sattar A., Ahmad S. Priming and Pretreatment of Seeds and Seedlings. Springer; 2019. Methods of seed priming; pp. 1\u201310. [Google Scholar]\n\n30. 30. Jeammuangpuk P., Promchote P., Duangpatra J., Chaisan T., Onwimol D., Kvien C. K. Enhancement of Tainan 9 peanut seed storability and germination under low temperature. Int. J. Agron. 2020:2020. [Google Scholar]\n\n31. 31. Biswas S., Biswas A. K., De B. Influence o",
+    "length": 1000
+  },
+  "PMC10025027_chunk_16": {
+    "text": "riming mitigates the effects of saline-alkali stress in soybean seedlings. Chil. J. Agric. Res. 2017;77:118\u2013125. [Google Scholar]\n\n34. 34. Farooq M., Rehman A., Al-Alawi A. K. M., Al-Busaidi W. M., Lee D.-J. Integrated use of seed priming and biochar improves salt tolerance in cowpea. Sci. Hortic. 2020;272 [Google Scholar]\n\n35. 35. I\\cseri \u00d6. D.\\., Sahin F. I., Haberal M. Sodium chloride priming improves salinity response of tomato at seedling stage. J. Plant Nutr. 2014;37:374\u2013392. [Google Schol",
+    "length": 1000
+  },
+  "PMC10025027_chunk_17": {
+    "text": "m-graecum) under salt stress. Plant Biosyst.-Int. J. Deal. Aspects Plant Biol. 2020;154:601\u2013614. [Google Scholar]\n\n38. 38. Riadi M., Sjahril R., Syam\u2019un E., Kasim N., Dewi S. IOP Conf Ser Earth Environ Sci. 2020. others, Growth and production of three rice varieties (Oryza sativa L.) in saline stress condition following halopriming and hydropriming treatment. [Google Scholar]\n\n39. 39. Gonz\u00e1lez-Grande P., Su\u00e1rez N., Mar\\\u2019\\in O. Effect of salinity and seed salt priming on the physiology of adult p",
+    "length": 1000
+  },
+  "PMC10025027_chunk_18": {
+    "text": "spray of proline sufficient for mitigation of salt stress in Brassica juncea cultivars? Environ. Sci. Pollut. Control Ser. 2016;23:13413\u201313423. doi: 10.1007/s11356-016-6533-4. [DOI] [PubMed] [Google Scholar]\n\n42. 42. Chen X., Zhang R., Xing Y., Jiang B., Li B., Xu X., Zhou Y. The efficacy of different seed priming agents for promoting sorghum germination under salt stress. PLoS One. 2021;16 doi: 10.1371/journal.pone.0245505. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n43. 43. Naglreiter ",
+    "length": 1000
+  },
+  "PMC10025027_chunk_19": {
+    "text": "ea. J. Agric. Food Chem. 1999;47:1576\u20131581. doi: 10.1021/jf9810158. [DOI] [PubMed] [Google Scholar]\n\n45. 45. Koss-Miko\u0142ajczyk I., Kusznierewicz B., Wiczkowski W., P\u0142atosz N., Bartoszek A. Phytochemical composition and biological activities of differently pigmented cabbage (Brassica oleracea var. capitata) and cauliflower (Brassica oleracea var. botrytis) varieties. J. Sci. Food Agric. 2019;99:5499\u20135507. doi: 10.1002/jsfa.9811. [DOI] [PubMed] [Google Scholar]\n\n46. 46. Zhang X., Shu X.-O., Xiang Y",
+    "length": 1000
+  },
+  "PMC10025027_chunk_20": {
+    "text": " stress. J. Plant Nutr. 2020;43:1862\u20131874. [Google Scholar]\n\n48. 48. Giacoppo S., Galuppo M., de Nicola G. R., Iori R., Bramanti P., Mazzon E. Tuscan black kale sprout extract bioactivated with myrosinase: a novel natural product for neuroprotection by inflammatory and oxidative response during cerebral ischemia/reperfusion injury in rat. BMC Compl. Alternative Med. 2015;15:1\u201315. doi: 10.1186/s12906-015-0929-4. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n49. 49. Mollica A., Stefanucci A.",
+    "length": 1000
+  },
+  "PMC10025027_chunk_21": {
+    "text": ".1166S. [DOI] [PubMed] [Google Scholar]\n\n51. 51. Llorach R., Esp\\\u2019\\in J. C., Tom\u00e1s-Barber\u00e1n F. A., Ferreres F. Valorization of cauliflower (Brassica oleracea L. var. botrytis) by-products as a source of antioxidant phenolics. J. Agric. Food Chem. 2003;51:2181\u20132187. doi: 10.1021/jf021056a. [DOI] [PubMed] [Google Scholar]\n\n52. 52. Bosetti C., Filomeno M., Riso P., Polesel J., Levi F., Talamini R., Montella M., Negri E., Franceschi S., la Vecchia C. Cruciferous vegetables and cancer risk in a netwo",
+    "length": 1000
+  },
+  "PMC10025027_chunk_22": {
+    "text": " cooking on the contents of glucosinolates and their degradation products in selected Brassica vegetables. J. Funct. Foods. 2016;23:412\u2013422. [Google Scholar]\n\n55. 55. Lim T. K. Edible Medicinal and Non-medicinal Plants. Springer; 2014. Brassica oleracea (Botrytis group) pp. 571\u2013593. [Google Scholar]\n\n56. 56. Bhatia R., Dey S. S., Sood S., Sharma K., Parkash C., Kumar R. Efficient microspore embryogenesis in cauliflower (Brassica oleracea var. botrytis L.) for development of plants with different",
+    "length": 1000
+  },
+  "PMC10025027_chunk_23": {
+    "text": " Appl. Sci. 2017;6:2646\u20132651. [Google Scholar]\n\n59. 59. Wu L., Huo W., Yao D., Li M. Effects of solid matrix priming (SMP) and salt stress on broccoli and cauliflower seed germination and early seedling growth. Sci. Hortic. 2019;255:161\u2013168. [Google Scholar]\n\n60. 60. Bouzidi A., Krouma A., Chaieb M. Chemical seed priming alleviates salinity stress and improves Sulla carnosa germination in the saline depression of Tunisia. Plant Direct. 2021;5:e357. doi: 10.1002/pld3.357. [DOI] [PMC free article]",
+    "length": 1000
+  },
+  "PMC10025027_chunk_24": {
+    "text": " quantitation of microgram quantities of protein utilizing the principle of protein-dye binding. Anal. Biochem. 1976;72:248\u2013254. doi: 10.1016/0003-2697(76)90527-3. [DOI] [PubMed] [Google Scholar]\n\n64. 64. Bates L. S., Waldren R. P., Teare I. D. Rapid determination of free proline for water-stress studies. Plant Soil. 1973;39:205\u2013207. [Google Scholar]\n\n65. 65. Heath R. L., Packer L. Photoperoxidation in isolated chloroplasts: I. Kinetics and stoichiometry of fatty acid peroxidation. Arch. Biochem",
+    "length": 1000
+  },
+  "PMC10025027_chunk_25": {
+    "text": "Dasgan H. Y., Altuntas O., Binzet R., Akhoundnejad Y. Effects of salinity stress on chlorophyll and carotenoid contents and stomata size of grafted and ungrafted galia C8 melon cultivar. Pak. J. Bot. 2017;49:421\u2013426. [Google Scholar]\n\n68. 68. Yi Z., Li S., Liang Y., Zhao H., Hou L., Yu S., Ahammed G. J. Effects of exogenous spermidine and elevated CO2 on physiological and biochemical changes in tomato plants under iso-osmotic salt stress. J. Plant Growth Regul. 2018;37:1222\u20131234. [Google Scholar",
+    "length": 1000
+  },
+  "PMC10025027_chunk_26": {
+    "text": " to confer salt stress tolerance in cabbage (Brassica oleracea L.) Hortic. Environ. Biotechnol. 2019;60:853\u2013869. [Google Scholar]\n\n71. 71. Hussain S., Khaliq A., Tanveer M., Matloob A., Hussain H. A. Aspirin priming circumvents the salinity-induced effects on wheat emergence and seedling growth by regulating starch metabolism and antioxidant enzyme activities. Acta Physiol. Plant. 2018;40:1\u201312. [Google Scholar]\n\n72. 72. Qu C., Liu C., Gong X., Li C., Hong M., Wang L., Hong F. Impairment of maize",
+    "length": 1000
+  },
+  "PMC10025027_chunk_27": {
+    "text": "m supplementation. Plant Physiol. Biochem. 2017;115:449\u2013460. doi: 10.1016/j.plaphy.2017.04.017. [DOI] [PubMed] [Google Scholar]\n\n75. 75. Zulfiqar F. Effect of seed priming on horticultural crops. Sci. Hortic. 2021;286 [Google Scholar]\n\n76. 76. Gour T., Lal R., Heikrujam M., Gupta A., Singh V., Vashishtha A., Agarwal L. K., Kumar R., Chetri S. P. K., Sharma K. Plant Stress: Challenges and Management in the New Decade. Springer; 2022. Halopriming: sustainable approach for abiotic stress management",
+    "length": 1000
+  },
+  "PMC10025027_chunk_28": {
+    "text": " abiotic stress tolerance potential in rice seedlings with a low dose of UV-B seed priming. Funct. Plant Biol. 2019;46:455\u2013466. doi: 10.1071/FP18258. [DOI] [PubMed] [Google Scholar]\n\n80. 80. Rhaman M. S., Imran S., Rauf F., Khatun M., Baskin C. C., Murata Y., Hasanuzzaman M. Seed priming with phytohormones: an effective approach for the mitigation of abiotic stress. Plants. 2020;10:37. doi: 10.3390/plants10010037. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n81. 81. MS A., Sridharan K., P",
+    "length": 1000
+  },
+  "PMC10025027_chunk_29": {
+    "text": "ier A., Vari A. K., Dadlani M. The subcellular basis of seed priming. Curr Sci. 2010:450\u2013456. [Google Scholar]\n\n84. 84. Hussain S., Khaliq A., Tanveer M., Matloob A., Hussain H. A. Aspirin priming circumvents the salinity-induced effects on wheat emergence and seedling growth by regulating starch metabolism and antioxidant enzyme activities. Acta Physiol. Plant. 2018;40:1\u201312. [Google Scholar]\n\n85. 85. Chen K., Arora R. Priming memory invokes seed stress-tolerance. Environ. Exp. Bot. 2013;94:33\u20134",
+    "length": 1000
+  },
+  "PMC10025027_chunk_30": {
+    "text": " M., Akram N. A., Arteca R. N., Foolad M. R. The physiological, biochemical and molecular roles of brassinosteroids and salicylic acid in plant processes and salt tolerance. CRC Crit. Rev. Plant Sci. 2010;29:162\u2013190. [Google Scholar]\n\n89. 89. Ali L. G., Nulit R., Ibrahim M. H., Yien C. Y. S. Efficacy of KNO3, SiO2 and SA priming for improving emergence, seedling growth and antioxidant enzymes of rice (Oryza sativa), under drought. Sci. Rep. 2021;11:1\u201311. doi: 10.1038/s41598-021-83434-3. [DOI] [P",
+    "length": 1000
+  },
+  "PMC10025027_chunk_31": {
+    "text": "015;22:10699\u201310712. doi: 10.1007/s11356-015-4269-1. [DOI] [PubMed] [Google Scholar]\n\n92. 92. Garcia-Caparros P., de Filippis L., Gul A., Hasanuzzaman M., Ozturk M., Altay V., Lao M. T. Oxidative stress and antioxidant metabolism under adverse environmental conditions: a review. Bot. Rev. 2021;87:421\u2013466. [Google Scholar]\n\n93. 93. Noreen Z., Ashraf M. Changes in antioxidant enzymes and some key metabolites in some genetically diverse cultivars of radish (Raphanus sativus L.) Environ. Exp. Bot. 20",
+    "length": 1000
+  },
+  "PMC10025027_chunk_32": {
+    "text": "n (Glycine max L.) seedlings. J. Sci. Food Agric. 2021;101:2027\u20132041. doi: 10.1002/jsfa.10822. [DOI] [PubMed] [Google Scholar]\n\n96. 96. AbdElgawad H., Zinta G., Hegab M. M., Pandey R., Asard H., Abuelsoud W. High salinity induces different oxidative stress and antioxidant responses in maize seedlings organs. Front. Plant Sci. 2016;7:276. doi: 10.3389/fpls.2016.00276. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n97. 97. Mosahebeh M., Khorshidi M., Faridnoure H. Investigation of physiologic",
+    "length": 1000
+  },
+  "PMC10025027_chunk_33": {
+    "text": "nzymatic activities and reducing the oxidative stress. J. Plant Growth Regul. 2019;38:449\u2013462. [Google Scholar]\n\n100. 100. Seleiman M. F., Semida W. M., Rady M. M., Mohamed G. F., Hemida K. A., Alhammad B. A., Hassan M. M., Shami A. Sequential application of antioxidants rectifies ion imbalance and strengthens antioxidant systems in salt-stressed cucumber. Plants. 2020;9:1783. doi: 10.3390/plants9121783. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n101. 101. Shafi A., Zahoor I., Mushtaq U",
+    "length": 1000
+  },
+  "PMC10025027_chunk_34": {
+    "text": "03. Ashraf M. Some important physiological selection criteria for salt tolerance in plants, Flora-Morphology, Distribution. Funct. Ecol. Plants. 2004;199:361\u2013376. [Google Scholar]\n\n104. 104. Shah T., Latif S., Saeed F., Ali I., Ullah S., Alsahli A. A., Jan S., Ahmad P. Seed priming with titanium dioxide nanoparticles enhances seed vigor, leaf water status, and antioxidant enzyme activities in maize (Zea mays L.) under salinity stress. J. King Saud Univ.-Sci. 2021;33 [Google Scholar]\n\n105. 105. A",
+    "length": 1000
+  },
+  "PMC10025027_chunk_35": {
+    "text": ", Koul S., Sarin N. Ameliorative effects of proline on salt stress-induced lipid peroxidation in cell lines of groundnut (Arachis hypogaea L.) Plant Cell Rep. 2001;20:463\u2013468. [Google Scholar]\n\n108. 108. Krasensky J., Jonak C. Drought, salt, and temperature stress-induced metabolic rearrangements and regulatory networks. J. Exp. Bot. 2012;63:1593\u20131608. doi: 10.1093/jxb/err460. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n109. 109. Nouman W., Basra S. M. A., Yasmeen A., Gull T., Hussain S.",
+    "length": 1000
+  },
+  "PMC10025027_chunk_36": {
+    "text": "DOI] [PMC free article] [PubMed] [Google Scholar]\n\n111. 111. Bajwa A. A., Farooq M., Nawaz A. Seed priming with sorghum extracts and benzyl aminopurine improves the tolerance against salt stress in wheat (Triticum aestivum L.) Physiol. Mol. Biol. Plants. 2018;24:239\u2013249. doi: 10.1007/s12298-018-0512-9. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n112. 112. Cao Q., Li G., Cui Z., Yang F., Jiang X., Diallo L., Kong F. Seed priming with melatonin improves the seed germination of waxy maize u",
+    "length": 1000
+  },
+  "PMC10025027_chunk_37": {
+    "text": "ination and emergence of wheat (Triticum aestivum L.) Agric. Water Manag. 2020;231 [Google Scholar]\n\n115. 115. Demirkaya M. Improvement in tolerance to salt stress during tomato cultivation. Turk. J. Biol. 2014;38:193\u2013199. [Google Scholar]\n\n116. 116. Gharbi F., Zribi L., ben Daly A., Rejeb S., Hanchi B. Photosynthetic responses of tomato leaves to salt and cadmium stresses: growth and chlorophyll a fluorescence kinetic analyses. Pol. J. Environ. Stud. 2018;27 [Google Scholar]\n\n117. 117. Ghogdi E",
+    "length": 925
+  },
+  "PMC10027818_chunk_0": {
+    "text": "# Introduction\n\n**Keywords:** Brassica oleraceaL. var. botrytis, Priming agents, Seed priming, Salt stress responses, Germination emergence\n\n## Abstract\n\nSpaceflight presents a multifaceted environment for plants, combining the effects on growth of many stressors and factors including altered gravity, the influence of experiment hardware, and increased radiation exposure. To help understand the plant response to this complex suite of factors this study compared transcriptomic analysis of 15 Arab",
+    "length": 1000
+  },
+  "PMC10027818_chunk_1": {
+    "text": "sive cross-referencing to a curated matrix of metadata associated with these experiments. Our study reveals that factors such as analysis type (i.e., microarray versus RNA-seq) or environmental and hardware conditions have important confounding effects on comparisons seeking to define plant reactions to spaceflight. The metadata matrix allows selection of studies with high similarity scores, i.e., that share multiple elements of experimental design, such as plant age or flight hardware. Comparis",
+    "length": 1000
+  },
+  "PMC10027818_chunk_2": {
+    "text": "HTML.jpg)\n\n*Normalized expression arrays are imported from NASA\u2019s GeneLab repository (https://genelab-data.ndc.nasa.gov/genelab/projects) and then parsed by the TOAST X-Species Transcriptional Explorer (https://astrobiology.botany.wisc.edu/x-species-astrobiology-genelab) for analysis of common features between experiments (cross experiment intersect analysis). The iDEP.92 R-shiny app59 is then used to generate expression heatmaps for clustering, and to perform Principal Component Analysis (PCA),",
+    "length": 1000
+  },
+  "PMC10027818_chunk_3": {
+    "text": "ipal component analysis (PCA) of the 15 plant datasets in the Matrix reveals clustering based on analystical approach (microarray versus RNA-seq) and by lighting conditions.\n\n![Fig. 2. Principal component analysis (PCA) of the 15 plant datasets in the Matrix reveals clustering based on analystical approach (microarray versus RNA-seq) and by lighting conditions.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b593/10027818/8227b15268b2/41526_2023_247_Fig2_HTML.jpg)\n\n*Principal components sperate datasets",
+    "length": 1000
+  },
+  "PMC10027818_chunk_4": {
+    "text": " mixed sample 80% Ws, and 20% Col ecotypes. Genotypes: WT wild-type, act2 actin 2, arg1 altered response to gravity 1, atm1 ataxia-telangiectasia mutated 1, hsfa2 heat shock transcription factor A2, phyD phytochrome D.*\n\n\n### Fig. 3. Pairwise factor correlation analysis creates a weighted network linking studies based on metadata similarity score.\n\n![Fig. 3. Pairwise factor correlation analysis creates a weighted network linking studies based on metadata similarity score.](https://cdn.ncbi.nlm.n",
+    "length": 1000
+  },
+  "PMC10027818_chunk_5": {
+    "text": " (mean connectivity score: 8) or e microarray (mean connectivity score: 7.6) and f BRIC experiments that have used cell cultures, all analyzed by microarray (mean connectivity score: 7.4). For a\u2013g size of circle for each study reflects the number of connected factors available for pairwise comparison. g Examples of connectivity of GLDS-7, GLDS-37, GLDS-38, and GLDS-120 by tissues sampled and ecotypes analyzed. Colored lines reflect factor connecting studies. Ecotypes: Col, Columbia; Ws, Wassilew",
+    "length": 1000
+  },
+  "PMC10027818_chunk_6": {
+    "text": "entary Data 1 and 2 for the Matrix driving this visualization. Note the hardware used to analyze plant response to spaceflight often defines the types of tissue that are available and so these two variables are often linked. Purple color circles represent RNAseq analysis of wild-type Col-0 plants, shades of blue represent other WT ecotypes, the pink circle represents RNA-seq analysis performed on mutants. The size of circles is a qualitative representation of the amount of differentially express",
+    "length": 1000
+  },
+  "PMC10027818_chunk_7": {
+    "text": "X incubator system, ABRS Advanced Biological Research System. An interactive version of this visualization is available at: https://gilroy-qlik.botany.wisc.edu/a/sense/app/20aa802b-6915-4b1a-87bd-c029a1812e2b/sheet/6241e71a-a3c5-4c63-9210-e05c743699d7/state/analysis.*\n\n\n### Fig. 5. Unguided Weighted Gene Correlation Network Analysis (WGCNA) clustering of the Arabidopsis datasets used in this study.\n\n![Fig. 5. Unguided Weighted Gene Correlation Network Analysis (WGCNA) clustering of the Arabidops",
+    "length": 1000
+  },
+  "PMC10027818_chunk_8": {
+    "text": " WGCNA RNA-seq and microarray analyses. Purple curves link identical genes and light blue curves link genes that, although not identical, belong to the same enriched Gene Ontology term found in each clade. The inner circle represents gene lists, where hits are arranged along the arc. Genes that hit multiple clusters are colored in dark orange, and genes unique to a single cluster are shown in light orange. d List of top 20 significantly enriched Gene Ontologies drawn from the clusters of DEGs de",
+    "length": 1000
+  },
+  "PMC10027818_chunk_9": {
+    "text": "ing. Analysis made using Metascape24.*\n\n\n### Fig. 6. Analysis of shared DEGs between the in-house and GeneLab pipeline analyses of plant experiments performed in spaceflight using the BRIC hardware.\n\n![Fig. 6. Analysis of shared DEGs between the in-house and GeneLab pipeline analyses of plant experiments performed in spaceflight using the BRIC hardware.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b593/10027818/4085ce984dd0/41526_2023_247_Fig6_HTML.jpg)\n\n*Overlap between gene lists for microarray stu",
+    "length": 1000
+  },
+  "PMC10027818_chunk_10": {
+    "text": "w the original authors\u2019 in-house analysis. c, d Significantly enriched GO terms from analysis of common genes found in the microarray (c) and RNA-seq (d) analyses identified in both the in-house and GeneLab pipelines. Analysis in c and d performed using Metascape.*\n\n\n### Fig. 7. Protein:protein interaction network inferred from the common DEGs identified using the GeneLab analysis pipeline of GLDS-37 and GLDS-38.\n\n![Fig. 7. Protein:protein interaction network inferred from the common DEGs identi",
+    "length": 1000
+  },
+  "PMC10027818_chunk_11": {
+    "text": "### Fig. 8. Network analysis of the 6 common spaceflight responsive genes identified from analysis of Arabidopsis seedlings flown in the BRIC hardware.\n\n![Fig. 8. Network analysis of the 6 common spaceflight responsive genes identified from analysis of Arabidopsis seedlings flown in the BRIC hardware.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b593/10027818/0fc4a71eaf8a/41526_2023_247_Fig8_HTML.jpg)\n\n*Query genes are highlighted in yellow. AT1G74310 (HOT1/HSP101; HEAT SHOCK PROTEIN 101), AT1G58340 ",
+    "length": 1000
+  },
+  "PMC10027818_chunk_12": {
+    "text": " Note links to plastid (green oval) for MAGl4, HSP101 and COR78. An interactive version of this analysis is available at: https://knetminer.com/beta/knetspace/network/970c571c-15da-4b93-87ad-ef1418ef9d29.*\n\n\n## Tables\n\n### Table 1.\n\n| GeneLab Accession | Assay | GeneLab count | Original count | Loci in both | Difference | In-house reference |\n| --- | --- | --- | --- | --- | --- | --- |\n| GLDS-17 | Microarray | 2459 | 499 | 34 | 1960 | 37 |\n| GLDS-44 | Microarray | 4031 | 3826 | 2597 | 205 | 41 |",
+    "length": 1000
+  },
+  "PMC10027818_chunk_13": {
+    "text": "bidopsis cultivar Columbia etiolated seedlings and undifferentiated tissue culture cells to the spaceflight environment | Microarray | 37 |\n| GLDS-37 | Comparison of the spaceflight transcriptome of four commonly used Arabidopsis thaliana ecotypes (Col, Ws, Ler and Cvi) | RNA-seq | 38 |\n| GLDS-38 | Proteomics and transcriptomics analysis of Arabidopsis seedlings in microgravity | RNA-seq | 39 |\n| GLDS-44 | Transcriptomics analysis of etiolated Arabidopsis thaliana seedlings in response to microg",
+    "length": 1000
+  },
+  "PMC10027818_chunk_14": {
+    "text": "e responses to the components of hypobaria in Arabidopsis | Microarray | 61 |\n| GLDS-147 | Arg1 functions in the physiological adaptation of undifferentiated plant cells to spaceflight | Microarray | 51 |\n| GLDS-205 | HSFA2 functions in the physiological adaptation of undifferentiated plant cells to spaceflight microgravity environment | Microarray | 62 |\n| GLDS-208 | Comparative gene expression analysis in the Arabidopsis thaliana root apex using RNA-seq and microarray transcriptome profiles | ",
+    "length": 1000
+  },
+  "PMC10027818_chunk_15": {
+    "text": " New aspects of gravity responses in plant cells. Int. Rev. Cytol. 2003;229:209\u2013244. doi: 10.1016/S0074-7696(03)29005-7. [DOI] [PubMed] [Google Scholar]\n\n2. 2. Morita MT. Directional gravity sensing in gravitropism. Annu. Rev. Plant Biol. 2010;61:705\u2013720. doi: 10.1146/annurev.arplant.043008.092042. [DOI] [PubMed] [Google Scholar]\n\n3. 3. Su S-H, Gibbs NM, Jancewicz AL, Masson PH. Molecular mechanisms of root gravitropism. Curr. Biol. 2017;27:R964\u2013R972. doi: 10.1016/j.cub.2017.07.015. [DOI] [PubMe",
+    "length": 1000
+  },
+  "PMC10027818_chunk_16": {
+    "text": "DM, Briarty LG, Kuang A, Musgrave ME. Evidence of root zone hypoxia in Brassica rapa l. Grown in microgravity. Int. J. Plant Sci. 2001;162:249\u2013255. doi: 10.1086/319585. [DOI] [PubMed] [Google Scholar]\n\n7. 7. Porterfield DM. The biophysical limitations in physiological transport and exchange in plants grown in microgravity. J. Plant Growth Regul. 2002;21:177\u2013190. doi: 10.1007/s003440010054. [DOI] [PubMed] [Google Scholar]\n\n8. 8. Hirai H, Kitaya Y. Effects of gravity on transpiration of plant leav",
+    "length": 1000
+  },
+  "PMC10027818_chunk_17": {
+    "text": ", Costes SV. NASA GeneLab: interfaces for the exploration of space omics data. Nucleic Acids Res. 2021;49:D1515\u2013D1522. doi: 10.1093/nar/gkaa887. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n12. 12. Fei T, Yu T. ScBatch: Batch-effect correction of RNA-seq data through sample distance matrix adjustment. Bioinformatics. 2020;36:3115\u20133123. doi: 10.1093/bioinformatics/btaa097. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n13. 13. Lai Polo, S.-H. et al. RNAseq analysis of rodent spaceflig",
+    "length": 1000
+  },
+  "PMC10027818_chunk_18": {
+    "text": " expression in RNA-seq studies. Brief. Bioinform. 2015;16:59\u201370. doi: 10.1093/bib/bbt086. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n16. 16. Papatheodorou I, et al. Expression Atlas: gene and protein expression across multiple studies and organisms. Nucleic Acids Res. 2018;46:D246\u2013D251. doi: 10.1093/nar/gkx1158. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n17. 17. Krishnamurthy A, Ferl RJ, Paul AL. Comparing RNA-Seq and microarray gene expression data in two zones of the Arabidop",
+    "length": 1000
+  },
+  "PMC10027818_chunk_19": {
+    "text": "es of oxidative stress in plant responses to spaceflight. Am. J. Bot. 2019;106:123\u2013136. doi: 10.1002/ajb2.1223. [DOI] [PubMed] [Google Scholar]\n\n20. 20. Kruse CPS, et al. Spaceflight induces novel regulatory responses in Arabidopsis seedling as revealed by combined proteomic and transcriptomic analyses. BMC Plant Biol. 2020;20:237. doi: 10.1186/s12870-020-02392-6. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n21. 21. Johnson CM, Subramanian A, Pattathil S, Correll MJ, Kiss JZ. Comparative ",
+    "length": 1000
+  },
+  "PMC10027818_chunk_20": {
+    "text": "ssani-Pak, K. et al. KnetMiner: a comprehensive approach for supporting evidence-based gene discovery and complex trait analysis across species. Plant Biotechnol. J. 10.1111/pbi.13583 (2021). [DOI] [PMC free article] [PubMed]\n\n24. 24. Zhou Y, et al. Metascape provides a biologist-oriented resource for the analysis of systems-level datasets. Nat. Commun. 2019;10:1523. doi: 10.1038/s41467-019-09234-6. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n25. 25. Sherman, B. T. et al. DAVID: a web se",
+    "length": 1000
+  },
+  "PMC10027818_chunk_21": {
+    "text": "ges heat shock protein and other molecular chaperone genes in tissue culture cells of Arabidopsis thaliana. Am. J. Bot. 2013;100:235\u2013248. doi: 10.3732/ajb.1200343. [DOI] [PubMed] [Google Scholar]\n\n28. 28. Bader GD, Hogue CWV. An automated method for finding molecular complexes in large protein interaction networks. BMC Bioinform. 2003;4:2. doi: 10.1186/1471-2105-4-2. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n29. 29. Szklarczyk D, et al. STRING v11: protein\u2013protein association networks ",
+    "length": 1000
+  },
+  "PMC10027818_chunk_22": {
+    "text": "re-curated signaling pathway resources. Nat. Methods. 2016;13:966\u2013967. doi: 10.1038/nmeth.4077. [DOI] [PubMed] [Google Scholar]\n\n32. 32. Li T, et al. A scored human protein-protein interaction network to catalyze genomic interpretation. Nat. Methods. 2017;14:61\u201364. doi: 10.1038/nmeth.4083. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n33. 33. Loreti E, Poggi A, Novi G, Alpi A, Perata P. A genome-wide analysis of the effects of sucrose on gene expression in arabidopsis seedlings under anoxi",
+    "length": 1000
+  },
+  "PMC10027818_chunk_23": {
+    "text": "tiated plant cells to spaceflight. Astrobiology. 2017;17:1077\u20131111. doi: 10.1089/ast.2016.1538. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n36. 36. Wang W, Vinocur B, Shoseyov O, Altman A. Role of plant heat-shock proteins and molecular chaperones in the abiotic stress response. Trends Plant Sci. 2004;9:244\u2013252. doi: 10.1016/j.tplants.2004.03.006. [DOI] [PubMed] [Google Scholar]\n\n37. 37. Swindell WR, Huebner M, Weber AP. Transcriptional profiling of Arabidopsis heat shock proteins and tr",
+    "length": 1000
+  },
+  "PMC10027818_chunk_24": {
+    "text": "inozaki K. Characterization of the expression of a desiccation-responsive rd29 gene of Arabidopsis thaliana and analysis of its promoter in transgenic plants. MGG Mol. Gen. Genet. 1993;236:331\u2013340. doi: 10.1007/BF00277130. [DOI] [PubMed] [Google Scholar]\n\n40. 40. Msanne J, Lin J, Stone JM, Awada T. Characterization of abiotic stress-responsive Arabidopsis thaliana RD29A and RD29B genes and evaluation of transgenes. Planta. 2011;234:97\u2013107. doi: 10.1007/s00425-011-1387-y. [DOI] [PubMed] [Google S",
+    "length": 1000
+  },
+  "PMC10027818_chunk_25": {
+    "text": " variation of cold deacclimation correlates with variation of cold-acclimation of the plastid antioxidant system in Arabidopsis thaliana accessions. Front. Plant Sci. 2016;7:305. doi: 10.3389/fpls.2016.00305. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n44. 44. Jalili V, et al. The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2020 update. Nucleic Acids Res. 2020;48:W395\u2013W402. doi: 10.1093/nar/gkaa434. [DOI] [PMC free article] [PubMed] [Google Scholar",
+    "length": 1000
+  },
+  "PMC10027818_chunk_26": {
+    "text": "ork for oligonucleotide microarray preprocessing. Bioinformatics. 2010;26:2363\u20132367. doi: 10.1093/bioinformatics/btq431. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n48. 48. Benjamini Y, Hochberg Y. Controlling the false discovery rate: a practical and powerful approach to multiple testing. J. R. Stat. Soc. Ser. B. 1995;57:289\u2013300. [Google Scholar]\n\n49. 49. Dobin A, et al. STAR: Ultrafast universal RNA-seq aligner. Bioinformatics. 2013;29:15\u201321. doi: 10.1093/bioinformatics/bts635. [DOI] [",
+    "length": 1000
+  },
+  "PMC10027818_chunk_27": {
+    "text": "oogle Scholar]\n\n52. 52. Kersey PJ, et al. Ensembl Genomes 2018: an integrated omics infrastructure for non-vertebrate species. Nucleic Acids Res. 2018;46:D802\u2013D808. doi: 10.1093/nar/gkx1011. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n53. 53. Howe KL, et al. Ensembl Genomes 2020\u2014enabling non-vertebrate genomic research. Nucleic Acids Res. 2020;48:D689\u2013D695. doi: 10.1093/nar/gkz890. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n54. 54. Love MI, Huber W, Anders S. Moderated estimatio",
+    "length": 1000
+  },
+  "PMC10027818_chunk_28": {
+    "text": "Morishima K. KEGG: new perspectives on genomes, pathways, diseases and drugs. Nucleic Acids Res. 2017;45:D353\u2013D361. doi: 10.1093/nar/gkw1092. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n57. 57. Mueller LA, Zhang P, Rhee SY. AraCyc: a biochemical pathway database for Arabidopsis. Plant Physiol. 2003;132:453\u2013460. doi: 10.1104/pp.102.017236. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n58. 58. Fabregat A, et al. The Reactome pathway knowledgebase. Nucleic Acids Res. 2018;46:D649\u2013D655",
+    "length": 823
+  },
+  "PMC10030976_chunk_0": {
+    "text": "# Introduction\n\n**Keywords:** Brassica oleraceaL. var. botrytis, Priming agents, Seed priming, Salt stress responses, Germination emergence\n\n## Abstract\n\nFinding sustainable approaches to achieve independence from terrestrial resources is of pivotal importance for the future of space exploration. This is relevant not only to establish viable space exploration beyond low Earth\u2013orbit, but also for ethical considerations associated with the generation of space waste and the preservation of extra-te",
+    "length": 1000
+  },
+  "PMC10030976_chunk_1": {
+    "text": " Element cycles\n\n## Figures\n\n### Fig. 1. Graphical rendering of a microbial biotechnology-based life-support system in an agnostic space environment.\n\n![Fig. 1. Graphical rendering of a microbial biotechnology-based life-support system in an agnostic space environment.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/95b1/10030976/69536b42e76c/41467_2023_37070_Fig1_HTML.jpg)\n\n*Microorganisms are included in all the functional compartments, including the \u2018Human habitats and laboratories\u2019 (i.e., human micr",
+    "length": 1000
+  },
+  "PMC10030976_chunk_2": {
+    "text": "mc/blobs/95b1/10030976/d89a5368ea73/41467_2023_37070_Fig2_HTML.jpg)\n\n*Arrows indicate the specific research and development needed to advance the TRL of each technology. TRL is defined as indicated by NASA.*\n\n\n## References\n\n1. 1. Secure World Foundation. Space Sustainability\u2014A Practical Guide (Secure World Foundation, 2018).\n\n2. 2. Williamson RA. Assuring the sustainability of space activities. Space Policy. 2012;28:154\u2013160. doi: 10.1016/j.spacepol.2012.06.010. [DOI] [Google Scholar]\n\n3. 3. New",
+    "length": 1000
+  },
+  "PMC10030976_chunk_3": {
+    "text": "gle Scholar]\n\n6. 6. Keller, R. J. et al. Biologically-based and physiochemical life support and in situ resource utilization for exploration of the solar system\u2014reviewing the current state and defining future development needs. Life11, 844 1\u201341 (2021). [DOI] [PMC free article] [PubMed]\n\n7. 7. Nangle SN, et al. The case for biotech on Mars. Nat. Biotechnol. 2020;38:401\u2013407. doi: 10.1038/s41587-020-0485-4. [DOI] [PubMed] [Google Scholar]\n\n8. 8. Lawrence A, et al. The case for space environmentalis",
+    "length": 1000
+  },
+  "PMC10030976_chunk_4": {
+    "text": "e for Outer Space Affairs. Guidelines for the Long-term Sustainability of Outer Space Activities Conference Room Paper by the Chair of the Working Group on the Long-term Sustainability of Outer Space Activities I. Context of the Guide, vol. V.18-04441 1\u201320 (Committee on the Peaceful Uses of Outer Space, 2018). This document highlights the roles of space activities in realizing the achievement of the United Nations Sustainable Development Goals.\n\n12. 12. United Nations. The 17 Goals|Sustainable D",
+    "length": 1000
+  },
+  "PMC10030976_chunk_5": {
+    "text": "5. 15. Berliner AJ, et al. Space bioprocess engineering on the horizon. Commun. Eng. 2022;1:13. doi: 10.1038/s44172-022-00012-9. [DOI] [Google Scholar]\n\n16. 16. Averesch, N. J. H. et al. Biomanufacturing for space-exploration\u2014what to take and when to make. Preprints. Org 1\u201313 10.20944/preprints202207.0329.v1 (2022). A brilliant outline of strategic approaches to integrate biomanufacturing into space missions.\n\n17. 17. Nickerson CA, Medina-Colorado AA, Barrila J, Poste G, Ott CM. A vision for spa",
+    "length": 1000
+  },
+  "PMC10030976_chunk_6": {
+    "text": "120 B:455\u2013471. doi: 10.1016/S0167-2991(99)80369-3. [DOI] [PubMed] [Google Scholar]\n\n20. 20. Vinayak, V. Chapter 20 - Algae as sustainable food in space missions. In Biomass, Biofuels, Biochemicals: Circular Bioeconomy: Technologies for Biofuels and Biochemicals (Eds. Varjani, S., Pandey, A., Bhaskar, T., Mohan, S. V. & Tsang, D. C. W.) 517\u2013540 (Elsevier, 2022).\n\n21. 21. International Energy Agency, I. Direct Air Capture A Key Technology for Net Zero, Vol. 76 (International Energy Agency, 2022).\n",
+    "length": 1000
+  },
+  "PMC10030976_chunk_7": {
+    "text": "habitation on Mars. Biotechnol. Adv. 2022;59:107946. doi: 10.1016/j.biotechadv.2022.107946. [DOI] [PubMed] [Google Scholar]\n\n25. 25. Detrell G. Chlorella vulgaris photobioreactor for oxygen and food production on a Moon base\u2014potential and challenges. Front. Astron. Space Sci. 2021;8:1\u201310. doi: 10.3389/fspas.2021.700579. [DOI] [Google Scholar]\n\n26. 26. Linne, D. L. et al. Waste management options for long-duration space missions: when to reject, reuse, or recycle. In Proc. American Institute of A",
+    "length": 1000
+  },
+  "PMC10030976_chunk_8": {
+    "text": "rial biomass. Life Sci. Space Res. 2017;15:32\u201342. doi: 10.1016/j.lssr.2017.07.006. [DOI] [PubMed] [Google Scholar]\n\n29. 29. Yadav AN, Kour D, Ahluwalia AS. Soil and phytomicrobiomes for plant growth and soil fertility. Plant Sci. Today. 2021;8:1\u20135. doi: 10.14719/pst.1523. [DOI] [Google Scholar]\n\n30. 30. Santos LF, Olivares FL. Plant microbiome structure and benefits for sustainable agriculture. Curr. Plant Biol. 2021;26:100198. doi: 10.1016/j.cpb.2021.100198. [DOI] [Google Scholar]\n\n31. 31. Lang",
+    "length": 1000
+  },
+  "PMC10030976_chunk_9": {
+    "text": "ida JJ. Rethinking crop nutrition in times of modern microbiology: innovative biofertilizer technologies. Front. Sustain. Food Syst. 2021;5:1\u201323. doi: 10.3389/fsufs.2021.606815. [DOI] [Google Scholar]\n\n34. 34. Porto de Souza Vandenberghe L, et al. Potential applications of plant probiotic microorganisms in agriculture and forestry. AIMS Microbiol. 2017;3:629\u2013648. doi: 10.3934/microbiol.2017.3.629. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n35. 35. Naseer, I. et al. Biofertilizers for Su",
+    "length": 1000
+  },
+  "PMC10030976_chunk_10": {
+    "text": "Improvement in the quality of hematopoietic prostaglandin D synthase crystals in a microgravity environment. J. Synchrotron Radiat. 2011;18:88\u201391. doi: 10.1107/S0909049510037076. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n39. 39. Pathak, Y. V., Araujo dos Santos, M. & Zea, L. Handbook of Space Pharmaceuticals (Springer, 2020).\n\n40. 40. Nickerson, C. A., Pellis, N. R. & Ott, C. M. Effect of Spaceflight on Human and Analogue Culture and Spaceflight Microbial Cells (Springer, 2016).\n\n41. 4",
+    "length": 1000
+  },
+  "PMC10030976_chunk_11": {
+    "text": "ion space exploration medical foundry. Front. Microbiol. 2021;12:1\u201318. doi: 10.3389/fmicb.2021.700863. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n44. 44. Menezes, A. A., Cumbers, J., Hogan, J. A. & Arkin, A. P. Towards synthetic biological approaches to resource utilization on space missions. J. R. Soc. Interface12, 20140715. -20 (2014). This paper reviews highlights the potential for synthetic biology in human space exploration and ISRU. [DOI] [PMC free article] [PubMed]\n\n45. 45. Chen ",
+    "length": 1000
+  },
+  "PMC10030976_chunk_12": {
+    "text": " al. Study of the impact of long-duration space missions at the International Space Station on the astronaut microbiome. Sci. Rep. 2019;9:1\u201317. doi: 10.1038/s41598-019-46303-8. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n48. 48. De Roy K, Marzorati M, Van den Abbeele P, Van de Wiele T, Boon N. Synthetic microbial ecosystems: an exciting tool to understand and apply microbial communities. Environ. Microbiol. 2014;16:1472\u20131481. doi: 10.1111/1462-2920.12343. [DOI] [PubMed] [Google Scholar]\n",
+    "length": 1000
+  },
+  "PMC10030976_chunk_13": {
+    "text": "2022;176:107288. doi: 10.1016/j.mineng.2021.107288. [DOI] [Google Scholar]\n\n52. 52. Schippers A, et al. Biomining: metal recovery from ores with microorganisms. Geobiotechnology. I. Adv. Biochem. Eng. 2013;141:1\u201347. doi: 10.1007/10_2013_216. [DOI] [PubMed] [Google Scholar]\n\n53. 53. Volger R, et al. Mining Moon & Mars with microbes: biological approaches to extract iron from Lunar and Martian regolith. Planet. Space Sci. 2020;184:104850. doi: 10.1016/j.pss.2020.104850. [DOI] [Google Scholar]\n\n54.",
+    "length": 1000
+  },
+  "PMC10030976_chunk_14": {
+    "text": "free article] [PubMed] [Google Scholar]\n\n56. 56. Cockell CS, et al. Space station biomining experiment demonstrates rare earth element extraction in microgravity and Mars gravity. Nat. Commun. 2020;11:1\u201312. doi: 10.1038/s41467-020-19276-w. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n57. 57. Roberto FF, Schippers A. Progress in bioleaching: part B, applications of microbial processes by the minerals industries. Appl. Microbiol. Biotechnol. 2022;106:5913\u20135928. doi: 10.1007/s00253-022-12085",
+    "length": 1000
+  },
+  "PMC10030976_chunk_15": {
+    "text": "oi: 10.3389/fmicb.2020.579156. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n60. 60. Castro-Alonso MJ, et al. Microbially induced calcium carbonate precipitation (MICP) and its potential in bioconcrete: microbiological and molecular concepts. Front. Mater. 2019;6:1\u201315. doi: 10.3389/fmats.2019.00126. [DOI] [Google Scholar]\n\n61. 61. Beruto DT, Barberis F, Botter R. Calcium carbonate binding mechanisms in the setting of calcium and calcium\u2013magnesium putty-limes. J. Cult. Herit. 2005;6:253\u2013260",
+    "length": 1000
+  },
+  "PMC10030976_chunk_16": {
+    "text": "s12010-013-0626-z. [DOI] [PubMed] [Google Scholar]\n\n64. 64. Huang Z, Jiang D, Lu L, Ren ZJ. Ambient CO2 capture and storage in bioelectrochemically mediated wastewater treatment. Bioresour. Technol. 2016;215:380\u2013385. doi: 10.1016/j.biortech.2016.03.084. [DOI] [PubMed] [Google Scholar]\n\n65. 65. Kahre MA, Murphy JR, Haberle RM. Modelling the Martian dust cycle and surface dust reservoirs with the NASA Ames general circulation model. J. Geophys. Res. Planets. 2006;111:1\u201325. doi: 10.1029/2005JE00258",
+    "length": 1000
+  },
+  "PMC10030976_chunk_17": {
+    "text": ": 10.1089/ast.2007.0122. [DOI] [PubMed] [Google Scholar]\n\n68. 68. Rajasekar, A., Moy, C. K. S. & Wilkinson, S. MICP and advances towards eco-friendly and economical applications. IOP Conf. Ser. Earth Environ. Sci. 78, 012016 (IOP Publishing, 2017).\n\n69. 69. Ganendra G, et al. Formate oxidation-driven calcium carbonate precipitation by Methylocystis parvus OBBP. Appl. Environ. Microbiol. 2014;80:4659\u20134667. doi: 10.1128/AEM.01349-14. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n70. 70. Atti",
+    "length": 1000
+  },
+  "PMC10030976_chunk_18": {
+    "text": "J. H. Growth of the radiotrophic fungus Cladosporium sphaerospermum aboard the International Space Station and effects of ionizing radiation. bioRxiv 2020.07.16.205534 (2022). [DOI] [PMC free article] [PubMed]\n\n73. 73. Lovley DR. Microbial energizers: fuel cells that keep on going. Microbe. 2006;1:323\u2013329. [Google Scholar]\n\n74. 74. Hallenbeck PC, Liu Y. Recent advances in hydrogen production by photosynthetic bacteria. Int. J. Hydrog. Energy. 2016;41:4446\u20134454. doi: 10.1016/j.ijhydene.2015.11.09",
+    "length": 1000
+  },
+  "PMC10030976_chunk_19": {
+    "text": ". L., Tomei-Torres, F. A., Xu, H. & Zocco, T. Chapter 7\u2014Nanoparticles formed by microbial metabolism of metals and minerals. In Nanomicrobiology\u2014Physiological and Environmental Characteristics (eds Barton, L. L., Bazylinski, D. A. & Xu, H.) 145\u2013176 (Springer, 2014).\n\n78. 78. Kruyer NS, Realff MJ, Sun W, Genzale CL, Peralta-Yahya P. Designing the bioproduction of Martian rocket resource utilization strategy. Nat. Commun. 2021;12:1\u201314. doi: 10.1038/s41467-021-26393-7. [DOI] [PMC free article] [Pub",
+    "length": 1000
+  },
+  "PMC10030976_chunk_20": {
+    "text": "ic waste: milestones and challenges. In Current Developments in Biotechnology and Bioengineering: Solid Waste Management (Eds. Wong, J. W. -C., Tyagi, R. D. & Pandey, A.) 407\u2013442 (Elsevier B. V., 2017).\n\n82. 82. Srichandan H, Mohapatra RK, Parhi PK, Mishra S. Bioleaching approach for extraction of metal values from secondary solid wastes: a critical review. Hydrometallurgy. 2019;189:105122. doi: 10.1016/j.hydromet.2019.105122. [DOI] [Google Scholar]\n\n83. 83. Shah AA, Hasan F, Hameed A, Ahmed S. ",
+    "length": 1000
+  },
+  "PMC10030976_chunk_21": {
+    "text": "een Chem. 23,4661 1\u20138 (2021). [DOI] [PMC free article] [PubMed]\n\n86. 86. Billi D, Gallego Fernandez B, Fagliarone C, Chiavarini S, Rothschild LJ. Exploiting a perchlorate-tolerant desert cyanobacterium to support bacterial growth for in situ resource utilization on Mars. Int. J. Astrobiol. 2021;20:29\u201335. doi: 10.1017/S1473550420000300. [DOI] [Google Scholar]\n\n87. 87. Duri LG, et al. The potential for Lunar and Martian Regolith simulants to sustain plant growth: a multidisciplinary overview. Fron",
+    "length": 1000
+  },
+  "PMC10030976_chunk_22": {
+    "text": "8/s42003-022-03334-8. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n90. 90. Leit\u00e3o AL. Potential of Penicillium species in the bioremediation field. Int. J. Environ. Res. Public Health. 2009;6:1393\u20131417. doi: 10.3390/ijerph6041393. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n91. 91. Matsumura Y, Akahira-Moriya A, Sasaki-Mori M. Bioremediation of bisphenol-a polluted soil by Sphingomonas bisphenolicum ao1 and the microbial community existing in the soil. Biocontrol Sci. 2015;20:35\u20134",
+    "length": 1000
+  },
+  "PMC10030976_chunk_23": {
+    "text": "e Scholar]\n\n94. 94. Zea L, et al. Experiment verification test of the Artemis I \u2018Deep Space Radiation Genomics\u2019 experiment. Acta Astronaut. 2022;198:702\u2013706. doi: 10.1016/j.actaastro.2022.06.018. [DOI] [Google Scholar]\n\n95. 95. NASA Interim Directive. Subject: Biological Planetary Protection for Human Missions to Mars 1\u20136 (NASA Interim Directive, 2020).\n\n96. 96. Fahrion J, Mastroleo F, Dussap CG, Leys N. Use of photobioreactors in regenerative life support systems for human space exploration. Fr",
+    "length": 1000
+  },
+  "PMC10030976_chunk_24": {
+    "text": "5 (Eds. Gurtler, V. & Trevors, J. T.) 3\u201326, (Elsevier Ltd., 2018).\n\n99. 99. Zea, L., Santa Maria, S. R. & Ricco, A. J. CubeSats for microbiology and astrobiology research. In Cubesat Handbook (Eds. Cappelleti, C. & Battistini, S.) 147\u2013162 (Elsevier Inc., 2021).\n\n100. 100. Zea, L. et al. Potential biofilm control strategies for extended spaceflight missions. Biofilm2, 100026 1\u201320 (2020). [DOI] [PMC free article] [PubMed]\n\n101. 101. I. S. E. C. G. Benefits Stemming from Space Exploration 1\u201322 (ESA",
+    "length": 972
+  },
+  "PMC10058394_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** Brachypodium distachyon, Bd21, Bd21-3, Gaz8, microgravity, International Space Station, APEX Growth Unit, VEGGIE, adaptation, seedling growth, transcriptomics\n\n## Abstract\n\nPlants have been recognized as key components of bioregenerative life support systems for space exploration, and many experiments have been carried out to evaluate their adaptability to spaceflight. Unfortunately, few of these experiments have involved monocot plants, which constitute most of ",
+    "length": 1000
+  },
+  "PMC10058394_chunk_1": {
+    "text": ". The roots of all three accessions grew more slowly and displayed longer root hairs under microgravity conditions relative to ground control. On the other hand, the shoots of Bd21-3 and Gaz-8 grew at similar rates between conditions, whereas those of Bd21 grew more slowly under microgravity. The three Brachypodium accessions displayed dramatically different transcriptomic responses to microgravity relative to ground controls, with the largest numbers of differentially expressed genes (DEGs) fou",
+    "length": 1000
+  },
+  "PMC10058394_chunk_2": {
+    "text": " environment. A comparative analysis of the Brachypodium oxidative-stress response DEGs with the Arabidopsis ROS wheel suggests a connection between retrograde signaling, light response, and decreased expression of photosynthesis-related genes in microgravity-exposed shoots. In Gaz8, DEGs were also found to preferentially associate with the \u201cPlant Hormonal Signaling\u201d and \u201cMAP Kinase Signaling\u201d KEGG pathways. Overall, these data indicate that Brachypodium distachyon seedlings exposed to the micro",
+    "length": 1000
+  },
+  "PMC10058394_chunk_3": {
+    "text": "results suggest a need to directly evaluate candidate-crop responses to microgravity to better understand their specific adaptability to this novel environment and develop cultivation strategies allowing them to strive during spaceflight.\n\n## Figures\n\n### Figure 1.\n\n![Figure 1.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d68a/10058394/fcef646070d1/life-13-00626-g001.jpg)\n\n*The APEX Growth Unit hardware. (A) The central Oasis Hortcube foam block (LC2, Oasis Grower Solutions) is used as a seed support",
+    "length": 1000
+  },
+  "PMC10058394_chunk_4": {
+    "text": "C) A growth-medium injection showerhead carries a central stick that serves as a support for a foam cube within the Magenta box. The injection showerhead is accessible for nutrient injection into the foam block through a port that crosses the Magenta box wall at its bottom. Black lines refer to 1 cm.*\n\n\n### Figure 2.\n\n![Figure 2.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d68a/10058394/c6787f892dce/life-13-00626-g002.jpg)\n\n*Brachypodium distachyon seedlings display accession-specific morphological ",
+    "length": 1000
+  },
+  "PMC10058394_chunk_5": {
+    "text": "day-old Gaz8 seedlings, showing differences in root-hair lengths between microgravity-exposed (left) and ground-control (right) seedlings. Representative root-hair length measurement is marked in the red line. (E) Quantitative measurement of root hair sizes between microgravity-grown and ground-control 5-day-old seedlings from the Bd21, Bd21-3, and Gaz8 accessions. Based on the resolution of the images, each root was measured once in the root mature zone from the root hair tip to the approximate",
+    "length": 1000
+  },
+  "PMC10058394_chunk_6": {
+    "text": "avity conditions and ground control for the three Brachypodium accessions analyzed here (Bd21, Bd21-3, and Gaz8). Genes showing statistically significant differences between these two conditions using two statistical packages (DESeq and EdgeR) are reported here. (C) Numbers of genes showing significant increases (red upward arrows), decreases (green downward arrows), or no change (horizontal black bar) in expression between microgravity and ground-control conditions in shoots and roots of Brachy",
+    "length": 1000
+  },
+  "PMC10058394_chunk_7": {
+    "text": "er microgravity relative to ground control (up/down): (A) root down-regulated DEGs, (B) root up-regulated DEGs, (C) shoot down-regulated DEGs, and (D) shoot up-regulated DEGs. Enrichment significance is represented by both FDR numbers and color shading, with darker red representing smaller FDR values. Blue bars represent expected values (total number of genes representing the GO group divided by the total number of genes in the genome), whereas yellow bars represent observed ratios (number of DE",
+    "length": 1000
+  },
+  "PMC10058394_chunk_8": {
+    "text": "s.*\n\n\n### Figure 5.\n\n![Figure 5.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d68a/10058394/edf7d1c0fca5/life-13-00626-g005.jpg)\n\n*Arabidopsis orthologs to Brachypodium root and shoot DEGs with ROS-signaling annotation preferentially associate with specific transcriptional response clusters from the ROS wheel (Willems et al. (2016)). Clusters I-VIII refer to the categories of ROS-related experiments used to establish clusters of transcriptional responses in the ROS wheel meta-analysis. Bars represent",
+    "length": 1000
+  },
+  "PMC10058394_chunk_9": {
+    "text": "is GO group in Bd21. Orthologs to down-regulated (A) and up-regulated (B) transcription factors are shown in this figure. Nodes refer to the transcription factors and arrows indicate the direction of transcription regulation. Green represents down-regulation under microgravity whereas pink refers to up-regulation. Genes that are also orthologous to Gaz8 DEGs are surrounded by a blue circle with the same expression pattern. A regulatory pathway involving the PIF1 gene is surrounded by a yellow ou",
+    "length": 1000
+  },
+  "PMC10058394_chunk_10": {
+    "text": "ravity on the International Space Station. Planta. 2012;236:635\u2013645. doi: 10.1007/s00425-012-1633-y. [DOI] [PubMed] [Google Scholar]\n\n3. 3. Porterfield D., Musgrave M. The tropic response of plant roots to oxygen: Oxytropism in Pisum sativum L. Planta. 1998;20:1\u20136. doi: 10.1007/s004250050367. [DOI] [PubMed] [Google Scholar]\n\n4. 4. Yoshioka R., Soga K., Wakabayashi K., Takeba G., Hoson T. Hypergravity-induced changes in gene expression in Arabidopsis hypocotyls. Adv. Space Res. 2003;31:2187\u20132193.",
+    "length": 1000
+  },
+  "PMC10058394_chunk_11": {
+    "text": "oxidative stress in plant responses to spaceflight. Am. J. Bot. 2019;106:123\u2013136. doi: 10.1002/ajb2.1223. [DOI] [PubMed] [Google Scholar]\n\n7. 7. Kiss J., Brinkmann E., Brillouet C. Development and growth of several strains of Arabidopsis seedlings in microgravity. Int. J. Plant Sci. 2000;161:55\u201362. doi: 10.1086/314223. [DOI] [PubMed] [Google Scholar]\n\n8. 8. Millar K., Johnson C., Edelmann R., Kiss J. An endogenous growth pattern of roots is revealed in seedlings grown in microgravity. Astrobiolo",
+    "length": 1000
+  },
+  "PMC10058394_chunk_12": {
+    "text": "] [PubMed] [Google Scholar]\n\n11. 11. Hilaire E., Paulsen A., Brown C., Guikema J. Plastid distribution in columella cells of a starchless Arabidopsis mutant grown in microgravity. Plant Cell Physiol. 1997;38:490\u2013494. doi: 10.1093/oxfordjournals.pcp.a029194. [DOI] [PubMed] [Google Scholar]\n\n12. 12. Paul A., Zupanska A., Schultz E., Ferl R. Organ-specific remodeling of the Arabidopsis transcriptome in response to spaceflight. BMC Plant Biol. 2013;13:112. doi: 10.1186/1471-2229-13-112. [DOI] [PMC f",
+    "length": 1000
+  },
+  "PMC10058394_chunk_13": {
+    "text": "g genes associated with root hair development. Am. J. Bot. 2015;102:21\u201335. doi: 10.3732/ajb.1400458. [DOI] [PubMed] [Google Scholar]\n\n15. 15. Paul A.-L., Zupanska A., Ostrow D., Zhang Y., Sun Y., Li J.-L., Shanker S., Farmerie W., Amalfitano C., Ferl R. Spaceflight transcriptomes: Unique responses to a novel environment. Astrobiology. 2012;12:40\u201356. doi: 10.1089/ast.2011.0696. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n16. 16. Paul A., Sng N., Zupanska A., Krishnamurthy A., Schultz E., ",
+    "length": 1000
+  },
+  "PMC10058394_chunk_14": {
+    "text": ": 10.1007/s00425-013-1909-x. [DOI] [PubMed] [Google Scholar]\n\n18. 18. Zupanska A., Denison F., Ferl R., Paul A.-L. Spaceflight engages heat shock protein and other molecular chaperone genes in tissue culture cells of Arabidopsis thaliana. Am. J. Bot. 2013;100:235\u2013248. doi: 10.3732/ajb.1200343. [DOI] [PubMed] [Google Scholar]\n\n19. 19. Basu P., Kruse C., Luesse D., Wyatt S. Growth in spaceflight hardware results in alterations to the transcriptome and proteome. Life Sci. Space Res. 2017;15:88\u201396. ",
+    "length": 1000
+  },
+  "PMC10058394_chunk_15": {
+    "text": "rogravity related spaceflight conditions for 5 days on board of Shenzhou 8. Biomed. Res. Int. 2015;2015:547495. doi: 10.1155/2015/547495. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n22. 22. Johnson C., Subramanian A., Pattathil S., Correll M., Kiss J. Comparative transcriptomics indicate changes in cell wall organization and stress response in seedlings during spaceflight. Am. J. Bot. 2017;104:1219\u20131231. doi: 10.3732/ajb.1700079. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n23. 23",
+    "length": 1000
+  },
+  "PMC10058394_chunk_16": {
+    "text": "I] [PMC free article] [PubMed] [Google Scholar]\n\n25. 25. Vandenbrink J., Kiss J. Space, the final frontier: A critical review of recent experiments performed in microgravity. Plant Sci. 2016;243:115\u2013119. doi: 10.1016/j.plantsci.2015.11.004. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n26. 26. Nakashima J., Liao F., Sparks J. A., Tang Y., Blancaflor E. B. The actin cytoskeleton is a suppressor of the endogenous skewing behaviour of Arabidopsis primary roots in microgravity. Plant Biol. 201",
+    "length": 1000
+  },
+  "PMC10058394_chunk_17": {
+    "text": "Adv. Space Res. 1981;1:89\u201394. doi: 10.1016/0273-1177(81)90248-9. [DOI] [PubMed] [Google Scholar]\n\n29. 29. Hoson T., Soga K., Wakabayashi K., Kamisaka S., Tanimoto E. Growth and cell wall changes in rice roots during spaceflight. Plant Soil. 2003;255:19\u201326. doi: 10.1023/A:1026105431505. [DOI] [PubMed] [Google Scholar]\n\n30. 30. Shagimardanova E., Gusev O., Sychev V., Levinskikh M., Sharipova M., Il\u2019inskaya O., Bingham G., Sugimoto M. Expression of stress response genes in barley Hordeum vulgare in",
+    "length": 1000
+  },
+  "PMC10058394_chunk_18": {
+    "text": "t al. Brachypodium as a model for the grasses: Today and the future. Plant Physiol. 2011;157:3\u201313. doi: 10.1104/pp.111.179531. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n33. 33. Fitzgerald C., Barker R., Choi W.-G., Swanson S., Stephens S., Huber C., Nimunkar A., Gilroy S. Development of equipment that uses far-red light to impose seed dormancy in Arabidopsis for spaceflight. Gravit. Space Res. 2016;4:8\u201319. doi: 10.2478/gsr-2016-0008. [DOI] [Google Scholar]\n\n34. 34. Barrero J. M., Jacob",
+    "length": 1000
+  },
+  "PMC10058394_chunk_19": {
+    "text": "ed] [Google Scholar]\n\n36. 36. Tripathy B. C., Brown C. S., Levine H. G., Krikorian A. D. Growth and photosynthetic responses of wheat plants grown in space. Plant Physiol. 1996;110:801\u2013806. doi: 10.1104/pp.110.3.801. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n37. 37. Hutchison S., Campana S. ISS Payloads Office Cold Stowage Overview. [(accessed on 4 June 2021)]; Available online: https://www.nasa.gov/pdf/360392main_P03_0915_JSC.pdf.\n\n38. 38. Massa G., Dufour N., Carver J., Hummerick M.,",
+    "length": 1000
+  },
+  "PMC10058394_chunk_20": {
+    "text": "ession of RNA-Seq Data at the Gene Level\u2014Te DESeq Package. Bioconductor. 2013. [(accessed on 4 June 2021)]. Available online: http://www.bioconductor.org/packages/devel/bioc/vignettes/DESeq/inst/doc/DESeq.pdf.\n\n41. 41. Robinson M., McCarthy D., Smyth G. edgeR: A Bioconductor package for differential expression analysis of digital gene expression data. Bioinformatics. 2010;26:139\u2013140. doi: 10.1093/bioinformatics/btp616. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n42. 42. Vogel J. P., Garv",
+    "length": 1000
+  },
+  "PMC10058394_chunk_21": {
+    "text": "] [PMC free article] [PubMed] [Google Scholar]\n\n44. 44. Du Z., Zhou X., Ling Y., Zhang Z., Su Z. agriGO: A GO analysis toolkit for the agricultural community. Nucleic Acids Res. 2010;38:W64\u2013W70. doi: 10.1093/nar/gkq310. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n45. 45. Tian T., Liu Y., Yan H., You Q., Yi X., Du Z., Xu W., Su Z. agriGO v2.0: A GO analysis toolkit for the agricultural community, 2017 update. Nucleic Acids Res. 2017;45:W122\u2013W129. doi: 10.1093/nar/gkx382. [DOI] [PMC free a",
+    "length": 1000
+  },
+  "PMC10058394_chunk_22": {
+    "text": "ting Regulatory DNA Elements (PLACE) Database. Volume 27. Oxford Academic; Oxford, UK: 1999. pp. 297\u2013300. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n48. 48. Tian F., Yang D.-C., Meng Y.-Q., Jin J., Gao G. PlantRegMap: Charting functional regulatory maps in plants. Nucleic Acids Res. 2019;48:D1104\u2013D1113. doi: 10.1093/nar/gkz1020. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n49. 49. Hong S. Y., Seo P. J., Yang M. S., Xiang F., Park C. M. Exploring valid reference genes for gene exp",
+    "length": 1000
+  },
+  "PMC10058394_chunk_23": {
+    "text": "\n\n51. 51. Soga K., Wakabayashi K., Kamisaka S., Hoson T. Stimulation of elongation growth and xyloglucan breakdown in Arabidopsis hypocotyls under microgravity conditions in space. Planta. 2002;215:1040\u20131046. doi: 10.1007/s00425-002-0838-x. [DOI] [PubMed] [Google Scholar]\n\n52. 52. Hoffmann N., Benske A., Betz H., Schuetz M., Samuels A. L. Laccases and Peroxidases Co-Localize in Lignified Secondary Cell Walls throughout Stem Development. Plant Physiol. 2020;184:806\u2013822. doi: 10.1104/pp.20.00473. ",
+    "length": 1000
+  },
+  "PMC10058394_chunk_24": {
+    "text": "xb/erx481. [DOI] [PubMed] [Google Scholar]\n\n55. 55. Chen B., Zhang A., Lu Q., Kuang T., Lu C., Wen X. Characterization of photosystem I in rice (Oryza sativa L.) seedlings upon exposure to random positioning machine. Photosynth. Res. 2013;116:93\u2013105. doi: 10.1007/s11120-013-9908-0. [DOI] [PubMed] [Google Scholar]\n\n56. 56. Castillon A., Shen H., Huq E. Phytochrome Interacting Factors: Central players in phytochrome-mediated light signaling networks. Trends Plant Sci. 2007;12:514\u2013521. doi: 10.1016",
+    "length": 1000
+  },
+  "PMC10058394_chunk_25": {
+    "text": "gle Scholar]\n\n59. 59. Sineshchekov V. A., Belyaeva O. B. Regulation of Chlorophyll Biogenesis by Phytochrome A. Volume 84. Pleiades Publishing; New York, NY, USA: 2019. pp. 491\u2013508. [DOI] [PubMed] [Google Scholar]\n\n60. 60. Zhang Y., Mayba O., Pfeiffer A., Shi H., Tepperman J. M., Speed T. P., Quail P. H. A Quartet of PIF bHLH Factors Provides a Transcriptionally Centered Signaling Hub That Regulates Seedling Morphogenesis through Differential Expression-Patterning of Shared Target Genes in Arabi",
+    "length": 1000
+  },
+  "PMC10058394_chunk_26": {
+    "text": ". Exp. Bot. 2013;64:445\u2013458. doi: 10.1093/jxb/ers354. [DOI] [PubMed] [Google Scholar]\n\n63. 63. Dievart A., Gottin C., P\u00e9rin C., Ranwez V., Chantret N. Origin and Diversity of Plant Receptor-Like Kinases. Annu. Rev. Plant Biol. 2020;71:131\u2013156. doi: 10.1146/annurev-arplant-073019-025927. [DOI] [PubMed] [Google Scholar]\n\n64. 64. Jost A.-I. K., Hoson T., Iversen T.-H. The Utilization of Plant Facilities on the International Space Station\u2014The Composition, Growth, and Development of Plant Cell Walls ",
+    "length": 1000
+  },
+  "PMC10058394_chunk_27": {
+    "text": "62-020-00596-3. [DOI] [Google Scholar]\n\n67. 67. Liu Y., He C. A review of redox signaling and the control of MAP kinase pathway in plants. Redox Biol. 2017;11:192\u2013204. doi: 10.1016/j.redox.2016.12.009. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n68. 68. Zhang T., Liu Y., Yang T., Zhang L., Xu S., Xue L., An L. Diverse signals converge at MAPK cascades in plant. Plant Physiol. Biochem. 2006;44:274\u2013283. doi: 10.1016/j.plaphy.2006.06.004. [DOI] [PubMed] [Google Scholar]\n\n69. 69. Kamal K. Y.",
+    "length": 1000
+  },
+  "PMC10058394_chunk_28": {
+    "text": "ons in spaceflight. J. Plant Physiol. 2010;167:184\u2013193. doi: 10.1016/j.jplph.2009.08.012. [DOI] [PubMed] [Google Scholar]\n\n71. 71. Lan P., Li W., Lin W. D., Santi S., Schmidt W. Mapping gene activity of Arabidopsis root hairs. Genome Biol. 2013;14:R67. doi: 10.1186/gb-2013-14-6-r67. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n72. 72. Moon S., Chandran A. K. N., An G., Lee C., Jung K. H. Genome-wide analysis of root hair-preferential genes in rice. Rice. 2018;11:48. doi: 10.1186/s12284-01",
+    "length": 1000
+  },
+  "PMC10058394_chunk_29": {
+    "text": "quired for Proper Auxin Distribution in the Hypocotyl. Plant Physiol. 2017;173:788\u2013800. doi: 10.1104/pp.16.01491. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n75. 75. Villa\u00e9cija-Aguilar J. A., K\u00f6r\u00f6sy C., Maisch L., Hamon-Josse M., Petrich A., Magosch S., Chapman P., Bennett T., Gutjahr C. KAI2 promotes Arabidopsis root hair elongation at low external phosphate by controlling local accumulation of AUX1 and PIN2. Curr. Biol. 2022;32:228\u2013236.e223. doi: 10.1016/j.cub.2021.10.044. [DOI] [PubMe",
+    "length": 1000
+  },
+  "PMC10058394_chunk_30": {
+    "text": "ulatory network for root hair development. J. Plant Res. 2019;132:301\u2013309. doi: 10.1007/s10265-019-01100-2. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n79. 79. Johnsson A., Karlsson C., Iversen T.-H., Chapman D. K. Random root movements in weightlessness. Physiol. Plant. 1996;96:169\u2013178. doi: 10.1111/j.1399-3054.1996.tb00198.x. [DOI] [PubMed] [Google Scholar]\n\n80. 80. Levine L. H., Heyenga A. G., Levine H. G., Choi J. W., Davin L. B., Krikorian A. D., Lewis N. G. Cell-wall architecture a",
+    "length": 1000
+  },
+  "PMC10058394_chunk_31": {
+    "text": "tion of flax in microgravity. Adv. Space Res. 2003;31:2261\u20132268. doi: 10.1016/S0273-1177(03)00253-9. [DOI] [PubMed] [Google Scholar]\n\n83. 83. Levine H. G., Krikorian A. D. Enhanced root production in Haplopappus gracilis grown under spaceflight conditions. J. Gravit. Physiol. 1996;3:17\u201327. [PubMed] [Google Scholar]\n\n84. 84. Levine H. G., Piastuch W. C. Growth patterns for etiolated soybeans germinated under spaceflight conditions. Adv. Space Res. 2005;36:1237\u20131243. doi: 10.1016/j.asr.2005.02.050",
+    "length": 1000
+  },
+  "PMC10058394_chunk_32": {
+    "text": "07/s00425-007-0591-2. [DOI] [PubMed] [Google Scholar]\n\n87. 87. Tyler L., Lee S. J., Young N. D., DeIulio G. A., Benavente E., Reagon M., Sysopha J., Baldini R. M., Tro\u00eca A., Hazen S. P., et al. Population Structure in the Model Grass Brachypodium distachyon Is Highly Correlated with Flowering Differences across Broad Geographic Areas. Plant Genome. 2016;9:74. doi: 10.3835/plantgenome2015.08.0074. [DOI] [PubMed] [Google Scholar]\n\n88. 88. Takemura K., Kamachi H., Kume A., Fujita T., Karahara I., H",
+    "length": 1000
+  },
+  "PMC10058394_chunk_33": {
+    "text": "pnas.2005871117. [DOI] [PMC free article] [PubMed] [Google Scholar]\n",
+    "length": 68
+  },
+  "PMC10063413_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** Cold stress, Premature bone loss, Ucp1 expression, Microgravity\n\n## Abstract\n\nMice are typically housed at temperatures well below their thermoneutral zone. When individually housed at room temperature (~22 \u00b0C) mice experience cold stress which results in cancellous bone loss and has the potential to alter the skeletal response to treatment. It is not clear if there is a threshold temperature for cold stress-induced bone loss. It is also not clear if alternative ",
+    "length": 1000
+  },
+  "PMC10063413_chunk_1": {
+    "text": "in the baseline group were sacrificed 1 week later, at 6 weeks of age. The other 3 groups of mice were maintained at their respective temperatures and housing conditions for 13 weeks until 18 weeks of age. Compared to baseline, mice single housed at room temperature had increased body weight and femur size, but dramatically decreased cancellous bone volume fraction in distal femur metaphysis. The cancellous bone loss was attenuated but not prevented in mice individually housed at 26 \u00b0C or group ",
+    "length": 1000
+  },
+  "PMC10063413_chunk_2": {
+    "text": " (6 weeks old) or housed under the following conditions (n = 10/group): 22 \u00b0C and single housed, 26 \u00b0C and single housed, or 22 \u00b0C and group housed (n = 5/cage) with nestlets until 18 weeks of age. Data are mean \u00b1 SE with individual data points for panels b and d-g. The vertical dotted line demarcates the baseline group from the experimental groups. aDifferent from baseline, p < 0.05. bDifferent from mice single housed at room temperature (22 \u00b0C), p < 0.05. b*Different from mice single housed at",
+    "length": 1000
+  },
+  "PMC10063413_chunk_3": {
+    "text": " dotted line demarcates the baseline group from the experimental groups. Data are mean \u00b1 SE with individual data points. aDifferent from baseline, p < 0.05.*\n\n\n### Fig. 3.\n\n![Fig. 3.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/de90/10063413/f58ce2df5e92/gr3.jpg)\n\n*Mid-femur diaphysis cortical thickness (a), cortical volume (b), marrow volume (c), cortical thickness (d), and polar moment of inertia (e) in female C57BL/6 J mice sacrificed at baseline (6 weeks old) or housed under the following conditi",
+    "length": 1000
+  },
+  "PMC10063413_chunk_4": {
+    "text": "y (b), trabecular number (c), trabecular thickness (d), and trabecular separation (e) in female C57BL/6 J mice sacrificed at baseline (6 weeks old) or housed under the following conditions (n = 10/group): 22 \u00b0C and single housed, 26 \u00b0C and single housed, and 22 \u00b0C and group housed (n = 5/cage) with nestlets until 18 weeks of age. The vertical dotted line demarcates the baseline group from the experimental groups. Data are mean \u00b1 SE with individual data points. aDifferent from baseline, p < 0.05.",
+    "length": 1000
+  },
+  "PMC10063413_chunk_5": {
+    "text": "following conditions (n = 10/group): 22 \u00b0C and single housed, 26 \u00b0C and single housed, and 22 \u00b0C and group housed (n = 5/cage) with nestlets until 18 weeks of age. The vertical dotted line demarcates the baseline group from the experimental groups. Data are mean \u00b1 SE with individual data points. aDifferent from baseline, p < 0.05. b\u204eDifferent from mice single housed at room temperature (22 \u00b0C), p < 0.1.*\n\n\n### Fig. 6.\n\n![Fig. 6.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/de90/10063413/dfb8088c6aca/",
+    "length": 1000
+  },
+  "PMC10063413_chunk_6": {
+    "text": "Data are mean \u00b1 SE with individual data points. aDifferent from baseline, p < 0.05. bDifferent from mice single housed at room temperature (22 \u00b0C), p < 0.05. b\u204eDifferent from mice single housed at room temperature (22 \u00b0C), p < 0.1.*\n\n\n### Fig. 7.\n\n![Fig. 7.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/de90/10063413/f602e7786aea/gr7.jpg)\n\n*Caudal vertebra cancellous bone volume fraction (a), connectivity density (b), trabecular number (c), trabecular thickness (d), and trabecular separation (e) in fem",
+    "length": 1000
+  },
+  "PMC10063413_chunk_7": {
+    "text": "\n1. Bal N. C., Periasamy M. Uncoupling of sarcoendoplasmic reticulum calcium ATPase pump activity by sarcolipin as the basis for muscle non-shivering thermogenesis. Philos. Trans. R. Soc., B. 2020;375 doi: 10.1098/rstb.2019.0135. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n2. Benjamini Y., Hochberg Y. Controlling the false discovery rate: a practical and powerful approach to multiple testing. J. R. Stat. Soc. Ser. B Methodol. 1995;57:289\u2013300. [Google Scholar]\n\n3. Choi S. Y., et al. Valid",
+    "length": 1000
+  },
+  "PMC10063413_chunk_8": {
+    "text": "e through improved nest building in laboratory mice. PLOS ONE. 2013;8 doi: 10.1371/journal.pone.0074153. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n6. Glatt V., Canalis E., Stadmeyer L., Bouxsein M. L. Age-related changes in trabecular architecture differ in female and male C57BL/6J mice. J. Bone Miner. Res. 2007;22:1197\u20131207. doi: 10.1359/jbmr.070507. [DOI] [PubMed] [Google Scholar]\n\n7. Grimm D., et al. The impact of microgravity on bone in humans. Bone. 2016;87:44\u201356. doi: 10.1016/j.b",
+    "length": 1000
+  },
+  "PMC10063413_chunk_9": {
+    "text": "unloading in adult male mice. Sci. Rep. 2019;9:9336. doi: 10.1038/s41598-019-45587-0. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n10. Klingenspor M. Cold-induced recruitment of brown adipose tissue thermogenesis. Exp. Physiol. 2003;88:141\u2013148. doi: 10.1113/eph8802508. [DOI] [PubMed] [Google Scholar]\n\n11. Kunst R. F., Langlais A. L., Barlow D., Houseknecht K. L., Motyl K. J. Housing temperature influences atypical antipsychotic drug-induced bone loss in female c57bl/6j mice. JBMR Plus. 20",
+    "length": 1000
+  },
+  "PMC10063413_chunk_10": {
+    "text": "male C57BL/6J mice. Am. J. Phys. Regul. Integr. Comp. Phys. 2015;308:R1070\u2013R1079. doi: 10.1152/ajpregu.00407.2014. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n14. Martin S. A., et al. Thermoneutral housing attenuates premature cancellous bone loss in male C57BL/6J mice. Endocr. Connect. 2019;8:1455\u20131467. doi: 10.1530/EC-19-0359. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n15. Morey-Holton E. R., Globus R. K. Hindlimb unloading rodent model: technical aspects. J. Appl. Physiol. (1",
+    "length": 1000
+  },
+  "PMC10063413_chunk_11": {
+    "text": "e Scholar]\n\n18. R Core Team. 2019. R: A Language Environment for Statistical Computing. [Google Scholar]\n\n19. Robbins A., et al. Low temperature decreases bone mass in mice: implications for humans. Am. J. Phys. Anthropol. 2018;167:557\u2013568. doi: 10.1002/ajpa.23684. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n20. \u0160kop V., et al. Mouse thermoregulation: introducing the concept of the thermoneutral point. Cell Rep. 2020;31 doi: 10.1016/j.celrep.2020.03.065. [DOI] [PMC free article] [PubMed]",
+    "length": 1000
+  },
+  "PMC10063413_chunk_12": {
+    "text": "al. Effects of propranolol on bone, white adipose tissue, and bone marrow adipose tissue in mice housed at room temperature or thermoneutral temperature. Front. Endocrinol. 2020;11 doi: 10.3389/fendo.2020.00117. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n24. Vialard F., Olivier M. Thermoneutrality and immunity: how does cold stress affect disease? Front. Immunol. 2020;11 doi: 10.3389/fimmu.2020.588387. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n25. Wong C. P., Iwaniec U. T., Tu",
+    "length": 942
+  },
+  "PMC10138634_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** spaceflight, retina, photoreceptor, oxidative stress, antioxidant\n\n## Abstract\n\nThe goal of the present study was to characterize acute oxidative damage in ocular structure and retinal function after exposure to spaceflight, and to evaluate the efficacy of an antioxidant in reducing spaceflight-induced changes in the retina. Ten-week-old adult C57BL/6 male mice were flown aboard the ISS on Space-X 24 over 35 days, and returned to Earth alive. The mice received a ",
+    "length": 1000
+  },
+  "PMC10138634_chunk_1": {
+    "text": "s. Within 20 h after splashdown, IOP and ERG assessments were repeated before euthanasia. There were significant increases in body weight for habitat control groups post-flight compared to pre-flight measurements. However, the body weights were similar among flight groups before launch and after splashdown. The IOP measurements were similar between pre- and post-flight groups with no significant differences between BuOE-treated and saline controls. Immunofluorescence evaluation showed increases ",
+    "length": 1000
+  },
+  "PMC10138634_chunk_2": {
+    "text": ".\n\n## Figures\n\n### Figure 1.\n\n![Figure 1.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bf9/10138634/91f06abc2516/ijms-24-07362-g001.jpg)\n\n*Pre- and post-flight body mass in the flight (FLT) and habitat ground control (GC) groups. Each bar represents the mean \u00b1 SEM for mice in each group. * Significantly higher than pre-flight measurements (p < 0.05).*\n\n\n### Figure 2.\n\n![Figure 2.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bf9/10138634/600c1ed14e9c/ijms-24-07362-g002.jpg)\n\n*Intraocular pressure (IOP) m",
+    "length": 1000
+  },
+  "PMC10138634_chunk_3": {
+    "text": "tained in response to the flash intensity of 2.5 log cd\u00b7s/m2. (a) FLT-saline vs. GC-saline. (b) FLT-saline vs. FLT-BuOE.*\n\n\n### Figure 4.\n\n![Figure 4.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bf9/10138634/0476dea574ec/ijms-24-07362-g004a.jpg)\n\n*Electroretinography (ERG) a-waves of (a) changes in the amplitudes of pre- and post-flight (FLT) groups, and (b) changes in the amplitudes of pre- and post-flight ground control (GC) groups in response to increasing flash intensities. (c) Changes in the i",
+    "length": 1000
+  },
+  "PMC10138634_chunk_4": {
+    "text": "nd post-flight flight (FLT) groups. (b) Changes in the amplitudes of pre- and post-flight ground control (GC) groups in response to increasing flash intensities. (c) Changes in the implicit time of post-flight FLT and GC groups. Each point represents the mean\u00b1 SEM (n = 8). Note that the response is lower with increased flash intensity in the post-flight group compared to the pre-flight response. The response is similar between pre- and post-GC measurements.*\n\n\n### Figure 6.\n\n![Figure 6.](https:/",
+    "length": 1000
+  },
+  "PMC10138634_chunk_5": {
+    "text": "significant difference among groups. (c) The b-wave FLT group. * Significantly different between pre- and post-flight in both saline and BuOE groups (p < 0.05). (d) The b-wave GC group. No significant difference among groups. Bars represent the mean+ SEM (n = 8).*\n\n\n### Figure 7.\n\n![Figure 7.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bf9/10138634/c5329df84d7b/ijms-24-07362-g007.jpg)\n\n*The post-flight comparison of the retina light sensitivity to the a-wave in saline or BuOE-treated flight (FLT) a",
+    "length": 1000
+  },
+  "PMC10138634_chunk_6": {
+    "text": "\u00b1 SEM (n = 8).*\n\n\n### Figure 9.\n\n![Figure 9.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bf9/10138634/a6701fa02bf4/ijms-24-07362-g009.jpg)\n\n*Quantification of apoptosis based on terminal deoxynucleotidyltransferase dUTP nick-end label (TUNEL) staining of flight (FLT) and ground control (GC) mouse retina. (a) TUNEL-positive cells were identified with green fluorescence and the endothelium was stained with lectin in red. TUNEL-positive cells that were laid within red lectin-labeled endothelium were i",
+    "length": 1000
+  },
+  "PMC10138634_chunk_7": {
+    "text": "itive cells/mm2. Measurements across five retinal sections per eye were used as a single experimental value. Strong trend differences between FLT saline vs. GC saline (p = 0.058), and FLT BuOE vs. GC BuOE (p = 0.056).*\n\n\n### Figure 10.\n\n![Figure 10.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bf9/10138634/15b637a7600a/ijms-24-07362-g010.jpg)\n\n*Oxidative damage in the retinal nuclear layer and photoreceptor layer. (a) Representative micro-graphs of ocular sections were evaluated in the flight (FLT) ",
+    "length": 1000
+  },
+  "PMC10138634_chunk_8": {
+    "text": " higher in fluorescence intensity of the FLT-saline group compared to all other groups (p < 0.05). (c) Cell density for PNA-positive cone photoreceptors. * Significance different between FLT-BuOE vs. GC-BuOE or FLT-saline vs. GC-BuOE (p < 0.05). # Strong trend difference between FLT-saline and GC-saline (p = 0.068).*\n\n\n## Tables\n\n### Table 1.\n\n| UV Flash Strength (log(cd/m2)) | UV Flash Strength (log cd s/m2) | Duration (ms) | Delay (s) | Number of Sweeps |\n| --- | --- | --- | --- | --- |\n| 1.3 ",
+    "length": 1000
+  },
+  "PMC10138634_chunk_9": {
+    "text": "tino M., Keough K., Kim I., Bucala R., Adamis A. P. Advanced glycation end products increase retinal vascular endothelial growth factor expression. J. Clin. Investig. 1998;101:1219\u20131224. doi: 10.1172/JCI1277. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n3. 3. Mao X. W., Stanbouly S., Chieu B., Sridharan V., Allen A. R., Boerma M. Low dose space radiation-induced effects on the mouse retina and blood-retinal barrier integrity. Acta Astronaut. 2022;199:412\u2013419. doi: 10.1016/j.actaastro.2022",
+    "length": 1000
+  },
+  "PMC10138634_chunk_10": {
+    "text": "harmacokinetics and Delivery of Bovine Superoxide Dismutase. Clin. Pharmacokinet. 1995;28:17\u201325. doi: 10.2165/00003088-199528010-00003. [DOI] [PubMed] [Google Scholar]\n\n6. 6. Day B. J. Catalytic antioxidants: A radical approach to new therapeutics. Drug Discov. Today. 2004;9:557\u2013566. doi: 10.1016/S1359-6446(04)03139-3. [DOI] [PubMed] [Google Scholar]\n\n7. 7. Vujaskovic Z., Batinic-Haberle I., Rabbani Z. N., Feng Q.-F., Kang S. K., Spasojevic I., Samulski T. V., Fridovich I., Dewhirst M. W., Ansch",
+    "length": 1000
+  },
+  "PMC10138634_chunk_11": {
+    "text": "holar]\n\n9. 9. Pearlstein R. D., Higuchi Y., Moldovan M., Johnson K., Fukuda S., Gridley D. S., Crapo J. D., Warner D. S., Slater J. M. Metalloporphyrin antioxidants ameliorate normal tissue radiation damage in rat brain. Int. J. Radiat. Biol. 2010;86:145\u2013163. doi: 10.3109/09553000903419965. [DOI] [PubMed] [Google Scholar]\n\n10. 10. Lee J. H., Lee Y. M., Park J.-W. Regulation of ionizing radiation-induced apoptosis by a manganese porphyrin complex. Biochem. Biophys. Res. Commun. 2005;334:298\u2013305. ",
+    "length": 1000
+  },
+  "PMC10138634_chunk_12": {
+    "text": ":118\u2013125. doi: 10.1667/RR2821.1. [DOI] [PubMed] [Google Scholar]\n\n13. 13. Leu D., Spasojevic I., Nguyen H., Deng B., Tovmasyan A., Weitner T., Sampaio R. S., Batinic-Haberle I., Huang T.-T. CNS bioavailability and radiation protection of normal hippocampal neurogenesis by a lipophilic Mn porphyrin-based superoxide dismutase mimic, MnTnBuOE-2-PyP5+ Redox Biol. 2017;12:864\u2013871. doi: 10.1016/j.redox.2017.04.027. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n14. 14. Weitzel D. H., Tovmasyan A.",
+    "length": 1000
+  },
+  "PMC10138634_chunk_13": {
+    "text": "ion: The Organization of the Retina and Visual System. University of Utah Health Sciences Center; Salt Lake City, UT, USA: 1995. [PubMed] [Google Scholar]\n\n16. 16. Jahns G., Meylor J., Fast T., Hawes N., Zarow G. Rodent Growth, Behavior, and Physiology Resulting from Flight on the Space Life Sciences-1 Mission; Proceedings of the 43rd Congress of the International Astronautical Federation; Washington, DC, USA. 28 August\u20135 September 1992; pp. 1\u20138. [Google Scholar]\n\n17. 17. Gridley D. S., Nelson G",
+    "length": 1000
+  },
+  "PMC10138634_chunk_14": {
+    "text": "cphy.cp040235. [DOI] [Google Scholar]\n\n19. 19. Wang Y., Zhao W., Shi J., Wang J., Hao J., Pang X., Huang X., Chen X., Li Y., Jin R., et al. Intestinal microbiota contributes to altered glucose metabolism in simulated microgravity mouse model. FASEB J. 2019;33:10140\u201310151. doi: 10.1096/fj.201900238RR. [DOI] [PubMed] [Google Scholar]\n\n20. 20. Ernest P. J., Schouten J. S., Beckers H. J., Hendrikse F., Prins M. H., Webers C. A. An Evidence-Based Review of Prognostic Factors for Glaucomatous Visual F",
+    "length": 1000
+  },
+  "PMC10138634_chunk_15": {
+    "text": "oor K. G., Godley B. F., Vizzeri G. The Effect of Microgravity on Ocular Structures and Visual Function: A Review. Surv. Ophthalmol. 2013;58:155\u2013163. doi: 10.1016/j.survophthal.2012.04.002. [DOI] [PubMed] [Google Scholar]\n\n23. 23. Caprioli J., Kim J. H. Intraocular pressure fluctuation: Is it important? J. Ophthalmic Vis. Res. 2018;13:170\u2013174. doi: 10.4103/jovr.jovr_35_18. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n24. 24. Brandli A., Stone J. Using the Electroretinogram to Assess Funct",
+    "length": 1000
+  },
+  "PMC10138634_chunk_16": {
+    "text": "., Zhou G., Dong L., Li W. True S-cones are concentrated in the ventral mouse retina and wired for color detection in the upper visual field. eLife. 2020;9:e56840. doi: 10.7554/eLife.56840. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n27. 27. Wang Y. V., Weick M., Demb J. B. Spectral and Temporal Sensitivity of Cone-Mediated Responses in Mouse Retinal Ganglion Cells. J. Neurosci. 2011;31:7670\u20137681. doi: 10.1523/JNEUROSCI.0629-11.2011. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n28",
+    "length": 1000
+  },
+  "PMC10138634_chunk_17": {
+    "text": "[PubMed] [Google Scholar]\n\n30. 30. Porciatti V., Saleh M., Nagaraju M. The Pattern Electroretinogram as a Tool to Monitor Progressive Retinal Ganglion Cell Dysfunction in the DBA/2J Mouse Model of Glaucoma. Investig. Opthalmol. Vis. Sci. 2007;48:745\u2013751. doi: 10.1167/iovs.06-0733. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n31. 31. Maya-Vetencourt J. F., Ghezzi D., Antognazza M. R., Colombo E., Mete M., Feyen P., Desii A., Buschiazzo A., Di Paolo M., Di Marco S., et al. A fully organic r",
+    "length": 1000
+  },
+  "PMC10138634_chunk_18": {
+    "text": "ive stress and apoptosis in proton-irradiated rat retina. In Vivo. 2010;24:425\u2013430. [PubMed] [Google Scholar]\n\n34. 34. Mao X. W., Pecaut M. J., Stodieck L. S., Ferguson V. L., Bateman T. A., Bouxsein M., Jones T. A., Moldovan M., Cunningham C. E., Chieu J., et al. Spaceflight Environment Induces Mitochondrial Oxidative Damage in Ocular Tissue. Radiat. Res. 2013;180:340\u2013350. doi: 10.1667/RR3309.1. [DOI] [PubMed] [Google Scholar]\n\n35. 35. Mao X. W., Nishiyama N. C., Byrum S. D., Stanbouly S., Jone",
+    "length": 1000
+  },
+  "PMC10138634_chunk_19": {
+    "text": "s. Nature. 2006;444:203\u2013207. doi: 10.1038/nature05161. [DOI] [PubMed] [Google Scholar]\n\n37. 37. LaVail M. M., Liss A. R., Hollyfield J. G. Inherited and Environment Induced Retinal Degeneration Series. Alan R Liss; New York, NY, USA: 1989. [Google Scholar]\n\n38. 38. Bravo-Nuevo A., Williams N., Geller S., Stone J. Retinal Degenerations: Mechanisms and Experimental Therapy. Volume 533. Springer; Boston, MA, USA: 2003. Mitochondrial deletions in normal and degenerating rat retina; pp. 241\u2013248. [DOI",
+    "length": 1000
+  },
+  "PMC10138634_chunk_20": {
+    "text": "ti M., Mantelli F., Brandolini L., Cocchiaro P., Cimini A., Varrassi G. Taurine and oxidative stress in retinal health and disease. CNS Neurosci. Ther. 2021;27:403\u2013412. doi: 10.1111/cns.13610. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n42. 42. Ward J. F. Some Biochemical Consequences of the Spatial Distribution of Ionizing Radiation-Produced Free Radicals. Radiat. Res. 1981;86:185\u2013195. doi: 10.2307/3575500. [DOI] [PubMed] [Google Scholar]\n\n43. 43. Spitz D. R., Azzam E. I., Li J. J., Giu",
+    "length": 1000
+  },
+  "PMC10138634_chunk_21": {
+    "text": "16;2:16014. doi: 10.1038/npjmgrav.2016.14. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n45. 45. Mao X. W., Archambeau J. O., Kubinova L., Boyle S., Petersen G., Grove R. Quantification of rat retinal growth and vascular population changes after single and split doses of proton irradiation: Translational study using stereology methods. Radiat. Res. 2003;160:5\u201313. doi: 10.1667/RR3007. [DOI] [PubMed] [Google Scholar]\n\n46. 46. Mao X. W., Boerma M., Rodriguez D., Campbell-Beachler M., Jones T.",
+    "length": 1000
+  },
+  "PMC10138634_chunk_22": {
+    "text": ". doi: 10.1155/2022/2233906. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n48. 48. Gad S. C., Sullivan J. D. W., Spasojevic I., Mujer C. V., Spainhour C. B., Crapo J. D. Nonclinical Safety and Toxicokinetics of MnTnBuOE-2-PyP5+ (BMX-001) Int. J. Toxicol. 2016;35:438\u2013453. doi: 10.1177/1091581816642766. [DOI] [PubMed] [Google Scholar]\n\n49. 49. Batinic-Haberle I., Rajic Z., Tovmasyan A., Reboucas J. S., Ye X., Leong K. W., Dewhirst M. W., Vujaskovic Z., Benov L., Spasojevic I. Diverse functio",
+    "length": 1000
+  },
+  "PMC10138634_chunk_23": {
+    "text": "10.1159/000341715. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n51. 51. Liang L.-P., Waldbaum S., Rowley S., Huang T.-T., Day B. J., Patel M. Mitochondrial oxidative stress and epilepsy in SOD2 deficient mice: Attenuation by a lipophilic metalloporphyrin. Neurobiol. Dis. 2012;45:1068\u20131076. doi: 10.1016/j.nbd.2011.12.025. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n52. 52. Mehrotra S., Pecaut M., Freeman T. L., Crapo J. D., Rizvi A., Luo-Owen X., Slater J. M., Gridley D. S. Analysi",
+    "length": 1000
+  },
+  "PMC10138634_chunk_24": {
+    "text": "] [Google Scholar]\n\n54. 54. McElroy T., Brown T., Kiffer F., Wang J., Byrum S. D., Oberley-Deegan R. E., Allen A. R. Assessing the Effects of Redox Modifier MnTnBuOE-2-PyP 5+ on Cognition and Hippocampal Physiology Following Doxorubicin, Cyclophosphamide, and Paclitaxel Treatment. Int. J. Mol. Sci. 2020;21:1867. doi: 10.3390/ijms21051867. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n55. 55. Hsueh Y. J., Chen Y. N., Tsao Y. T., Cheng C. M., Wu W. C., Chen H. C. The Pathomechanism, Antioxid",
+    "length": 942
+  },
+  "PMC10142442_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** herpesviruses, marine sulfated glycans, virus entry\n\n## Abstract\n\nMany viruses attach to host cells by first interacting with cell surface proteoglycans containing heparan sulfate (HS) glycosaminoglycan chains and then by engaging with specific receptor, resulting in virus entry. In this project, HS\u2013virus interactions were targeted by a new fucosylated chondroitin sulfate from the sea cucumber Pentacta pygmaea (PpFucCS) in order to block human cytomegalovirus (HC",
+    "length": 1000
+  },
+  "PMC10142442_chunk_1": {
+    "text": "hibitory activities of the LMW PpFucCS derivatives were proportional to their chain lengths. PpFucCS and the derived oligosaccharides did not exhibit any significant cytotoxicity; moreover, they protected the infected cells from virus-induced lytic cell death. In conclusion, PpFucCS inhibits the entry of HCMV into cells and the high MW of this carbohydrate is a key structural element to achieve the maximal anti-viral effect. This new marine sulfated glycan can be developed into a potential proph",
+    "length": 1000
+  },
+  "PMC10142442_chunk_2": {
+    "text": "ns of GlcN and C2 position of IdoA. (B) PpFucCS is constituted of a chondroitin sulfate backbone that alternates N-acetylgalactosamine (GalNAc) and glucuronic acid (GlcA) in repeating disaccharide units of [\u21923)-\u03b2-GalNAc-(1\u21924)-\u03b2-GlcA-(1\u2192], where the GalNAc units are primarily 4-sulfated (80%) and, to a very less degree, 4,6-disulfated (10%) or nonsulfated (10%). The GlcA units are replaced at the C3 position by three different forms of \u03b1-fucose (Fuc) branches: Fuc2,4S-(1\u2192(40%), Fuc2,4S-(1\u21924)-Fuc-",
+    "length": 1000
+  },
+  "PMC10142442_chunk_3": {
+    "text": "using the least squares method considering each repeated measure as an individual point. The plotted curve shows the percentage of HCMV inhibition in a (log) concentration-dependent manner. Curves in the plot represent the following: PpFucCS (red), HdPpFucCS (green), Fr1 (navy), Fr2 (purple), Fr3 (blue), Fr4 (brown), and UFH (black). (B) Using the normalized values from the same assay, we calculated the percentage inhibition at the maximum concentration used (Imax) and compared with the UFH at t",
+    "length": 1000
+  },
+  "PMC10142442_chunk_4": {
+    "text": " 3.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9a45/10142442/30b9deed551f/viruses-15-00859-g003.jpg)\n\n*Inhibition of HCMV entry into the HFF cells by native PpFucCS. The primary HFF were challenged by the unlabeled (a) or R18 labeled (b\u2013i) TowneBAC strain of HCMV at a MOI of 3.0. The HFFs were either mock treated (a\u2013c) or pretreated for one hour using PpFucCS (50 \u03bcg/mL) (d\u2013i). The number of fluorescent virus particles were enumerated at different time points post infection and plotted in Graphpad P",
+    "length": 1000
+  },
+  "PMC10142442_chunk_5": {
+    "text": "y the circle and arrows. (B) Bar plot represents the number of fluorescent virus particles per image field for treatment groups at different time points. The results are representative of four independent experiments and were analyzed by performing one-way ANOVA test with multiple comparisons (comparing the means of each test with mock-treated control at \u201860\u2032 min). The standard error of the mean was plotted as error bars. The ***, and ns indicate p-value < 0.001, and \u22650.05, respectively.*\n\n\n### ",
+    "length": 1000
+  },
+  "PMC10142442_chunk_6": {
+    "text": "pounds. Cells were harvested at 5 days post-infection and cell viability was assessed using a trypan blue exclusion assay. The results are representative of two independent experiments. The standard error of the mean was plotted as error bars. The **, *, and ns indicate p-value between 0.001 and 0.01, between 0.01 and 0.05, and \u22650.05, respectively.*\n\n\n## Tables\n\n### Table 1.\n\n| Compounds | IC50 (\u00b5g/mL) | SEM (\u00b5g/mL) | Lower 95% Conf. Limit (\u00b5g/mL) | Upper 95% Conf. Limit (\u00b5g/mL) |\n| --- | --- | ",
+    "length": 1000
+  },
+  "PMC10142442_chunk_7": {
+    "text": "unocompromised hosts: Perspectives in the treatment and prophylaxis of cytomegalovirus disease in solid-organ transplant recipients. Clin. Infect. Dis. 2008;47:702\u2013711. doi: 10.1086/590934. [DOI] [PubMed] [Google Scholar]\n\n3. 3. Britt W. J. Congenital Human Cytomegalovirus Infection and the Enigma of Maternal Immunity. J. Virol. 2017;91:e02392-16. doi: 10.1128/JVI.02392-16. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n4. 4. Griffiths P., Reeves M. Pathogenesis of human cytomegalovirus in ",
+    "length": 1000
+  },
+  "PMC10142442_chunk_8": {
+    "text": "omegalovirus Infection. Viruses. 2021;13:2277. doi: 10.3390/v13112277. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n7. 7. Hodowanec A. C., Pikis A., Singer M. E. The Development of Therapeutics for the Treatment and Prevention of CMV Disease in the Transplant Population: A Regulatory Perspective. J. Infect. Dis. 2020;221:S109\u2013S112. doi: 10.1093/infdis/jiz389. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n8. 8. Voelker R. A Treatment Advance for Patients with Posttransplant CMV. JAMA",
+    "length": 1000
+  },
+  "PMC10142442_chunk_9": {
+    "text": " Chaer F., Shah D. P., Chemaly R. F. How I treat resistant cytomegalovirus infection in hematopoietic cell transplantation recipients. Blood. 2016;128:2624\u20132636. doi: 10.1182/blood-2016-06-688432. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n12. 12. Tandon R., Sharp J. S., Zhang F., Pomin V. H., Ashpole N. M., Mitra D., McCandless M. G., Jin W., Liu H., Sharma P., et al. Effective Inhibition of SARS-CoV-2 Entry by Heparin and Enoxaparin Derivatives. J. Virol. 2021;95:e01987-20. doi: 10.11",
+    "length": 1000
+  },
+  "PMC10142442_chunk_10": {
+    "text": "le Scholar]\n\n15. 15. Mitra D., Hasan M. H., Bates J. T., Bierdeman M. A., Ederer D. R., Parmar R. C., Fassero L. A., Liang Q., Qiu H., Tiwari V., et al. The degree of polymerization and sulfation patterns in heparan sulfate are critical determinants of cytomegalovirus entry into host cells. PLoS Pathog. 2021;17:e1009803. doi: 10.1371/journal.ppat.1009803. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n16. 16. Stein K. R., Gardner T. J., Hernandez R. E., Kraus T. A., Duty J. A., Ubarretxena-",
+    "length": 1000
+  },
+  "PMC10142442_chunk_11": {
+    "text": ". J. Gen. Virol. 2019;100:545\u2013553. doi: 10.1099/jgv.0.001230. [DOI] [PubMed] [Google Scholar]\n\n19. 19. Vanarsdall A. L., Johnson D. C. Human cytomegalovirus entry into cells. Curr. Opin. Virol. 2012;2:37\u201342. doi: 10.1016/j.coviro.2012.01.001. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n20. 20. Compton T., Nowlin D. M., Cooper N. R. Initiation of human cytomegalovirus infection requires initial interaction with cell surface heparan sulfate. Virology. 1993;193:834\u2013841. doi: 10.1006/viro.19",
+    "length": 1000
+  },
+  "PMC10142442_chunk_12": {
+    "text": "on in human iris cells. J. Virol. 2015;89:5185\u20135192. doi: 10.1128/JVI.00109-15. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n23. 23. Nguyen C. C., Kamil J. P. Pathogen at the Gates: Human Cytomegalovirus Entry and Cell Tropism. Viruses. 2018;10:704. doi: 10.3390/v10120704. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n24. 24. Vanarsdall A. L., Pritchard S. R., Wisner T. W., Liu J., Jardetzky T. S., Johnson D. C. CD147 Promotes Entry of Pentamer-Expressing Human Cytomegalovirus into ",
+    "length": 1000
+  },
+  "PMC10142442_chunk_13": {
+    "text": "holar]\n\n26. 26. Xiaofei E., Meraner P., Lu P., Perreira J. M., Aker A. M., McDougall W. M., Zhuge R., Chan G. C., Gerstein R. M., Caposio P., et al. OR14I1 is a receptor for the human cytomegalovirus pentameric complex and defines viral epithelial cell tropism. Proc. Natl. Acad. Sci. USA. 2019;116:7043\u20137052. doi: 10.1073/pnas.1814850116. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n27. 27. Cagno V., Tseligka E. D., Jones S. T., Tapparel C. Heparan Sulfate Proteoglycans and Viral Attachmen",
+    "length": 1000
+  },
+  "PMC10142442_chunk_14": {
+    "text": "ogle Scholar]\n\n29. 29. Hirsh J., Anand S. S., Halperin J. L., Fuster V. Guide to anticoagulant therapy: Heparin: A statement for healthcare professionals from the American Heart Association. Circulation. 2001;103:2994\u20133018. doi: 10.1161/01. CIR.103.24.2994. [DOI] [PubMed] [Google Scholar]\n\n30. 30. Dwivedi R., Sharma P., Eilts F., Zhang F., Linhardt R. J., Tandon R., Pomin V. H. Anti-SARS-CoV-2 and anticoagulant properties of Pentacta pygmaea fucosylated chondroitin sulfate depend on high molecul",
+    "length": 1000
+  },
+  "PMC10142442_chunk_15": {
+    "text": "gle Scholar]\n\n32. 32. Oh J. H., Martinez A. D., Cao H., George G. W., Cobb J. S., Sharma P., Fassero L. A., Arole K., Carr M. A., Lovell K. M., et al. Radio Frequency Heating of Washable Conductive Textiles for Bacteria and Virus Inactivation. ACS Appl. Mater. Interfaces. 2022;14:43732\u201343740. doi: 10.1021/acsami.2c11493. [DOI] [PubMed] [Google Scholar]\n\n33. 33. Dunn W., Chou C., Li H., Hai R., Patterson D., Stolc V., Zhu H., Liu F. Functional profiling of a human cytomegalovirus genome. Proc. Na",
+    "length": 1000
+  },
+  "PMC10142442_chunk_16": {
+    "text": "ientific, editor. Molecular Probes Handbook. 11th ed. Invitrogen; Waltham, MA, USA: 2010. pp. 579\u2013585. [Google Scholar]\n\n36. 36. Gandhi N. S., Mancera R. L. The structure of glycosaminoglycans and their interactions with proteins. Chem. Biol. Drug Des. 2008;72:455\u2013482. doi: 10.1111/j.1747-0285.2008.00741.x. [DOI] [PubMed] [Google Scholar]\n\n37. 37. Aquino R. S., Park P. W. Glycosaminoglycans and infection. Front. Biosci. Landmark Ed. 2016;21:1260\u20131277. doi: 10.2741/4455. [DOI] [PMC free article] ",
+    "length": 1000
+  },
+  "PMC10142442_chunk_17": {
+    "text": "ike protein of SARS-CoV-2 virus. Carbohydr. Polym. 2021;260:117797. doi: 10.1016/j.carbpol.2021.117797. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n40. 40. Badani H., Garry R. F., Wimley W. C. Peptide entry inhibitors of enveloped viruses: The importance of interfacial hydrophobicity. Biochim. Biophys. Acta. 2014;1838:2180\u20132197. doi: 10.1016/j.bbamem.2014.04.015. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n41. 41. De Paiva R. E. F., Mar\u00e7al Neto A., Santos I. A., Jardim A. C. G., ",
+    "length": 1000
+  },
+  "PMC10142442_chunk_18": {
+    "text": "3. 43. Jin W., Zhang W., Mitra D., McCandless M. G., Sharma P., Tandon R., Zhang F., Linhardt R. J. The structure-activity relationship of the interactions of SARS-CoV-2 spike glycoproteins with glucuronomannan and sulfated galactofucan from Saccharina japonica. Int. J. Biol. Macromol. 2020;163:1649\u20131658. doi: 10.1016/j.ijbiomac.2020.09.184. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n44. 44. Xiao Y., Dong X., Chen Y. H. Neutralizing antibodies mechanism of neutralization and protective ",
+    "length": 805
+  },
+  "PMC10144393_chunk_0": {
+    "text": "# 1. Introduction\n\n**Keywords:** microgravity, Penicillium chrysogenum, fungal biofilm, International Space Station, microscopy, spacecraft\n\n## Abstract\n\nFungi biofilms have been found growing on spacecraft surfaces such as windows, piping, cables, etc. The contamination of these surfaces with fungi, although undesirable, is highly difficult to avoid. While several biofilm forming species, including Penicillium rubens, have been identified in spacecraft, the effect of microgravity on fungal biof",
+    "length": 1000
+  },
+  "PMC10144393_chunk_1": {
+    "text": "d surface area coverage. However, microgravity increased or decreased biofilm formation in some cases, and this was incubation-time- and material-dependent. Nanograss was the material with significantly less biofilm formation, both in microgravity and on Earth, and it could potentially be interfering with hyphal adhesion and/or spore germination. Additionally, a decrease in biofilm formation at 20 days, potentially due to nutrient depletion, was seen in some space and Earth samples and was mater",
+    "length": 1000
+  },
+  "PMC10144393_chunk_2": {
+    "text": "ver silicone risers, and with (c) silicone risers, samples, and membrane film.*\n\n\n![](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/cb02e31dee45/life-13-01001-g003.jpg)\n\n*BioServe Space Technologies\u2019 PHAB in Space Biofilms configuration. (a) Loaded PHAB. (b) Opened PHAB with four 24-well plates (stacked and inside a bag) being removed. (c) Inside view of the PHAB with water syringes, adsorbent mats, and HOBO in the bottom. Photo credit: BioServe and NASA.*\n\n\n### Figure 4.\n\n![Figure 4.](ht",
+    "length": 1000
+  },
+  "PMC10144393_chunk_3": {
+    "text": "xperiment activities labeled in blue.*\n\n\n### Figure 6.\n\n![Figure 6.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/789d9ae4096c/life-13-01001-g006.jpg)\n\n*Incubation time and gravity condition comparisons of biofilm surface area coverage when grown on carbon fiber. *: 0.01 < p \u2264 0.05.*\n\n\n### Figure 7.\n\n![Figure 7.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/65ba9738a524/life-13-01001-g007.jpg)\n\n*(a) Fungal biofilm surface area coverage on Stainless Steel 316. Images of fungal bio",
+    "length": 1000
+  },
+  "PMC10144393_chunk_4": {
+    "text": " on quartz. *: 0.01 < p \u2264 0.05.*\n\n\n### Figure 9.\n\n![Figure 9.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/eaac7694b002/life-13-01001-g009.jpg)\n\n*Incubation time and gravity condition comparisons of biofilm mass, surface area, and thickness when grown on Titanium Alloy. Graphs show fungal biofilm mass (a), surface area (b), and thickness (c) in space and Earth conditions after 10, 15, and 20 days. Images of both space and Earth samples after 10, 15, and 20 days demonstrate fungal biofil",
+    "length": 1000
+  },
+  "PMC10144393_chunk_5": {
+    "text": "*: 0.01 < p < 0.05.*\n\n\n![](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/3d88a47f3f4f/life-13-01001-g011.jpg)\n\n*Comparison of biofilm mass (a) and surface area (b) after 10 days of incubation in space conditions on seven different materials. The nomenclature for the significant values is as follows: *: 0.01 < p < 0.05, **: 0.001 < p < 0.01.*\n\n\n![](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/277a047fc4fb/life-13-01001-g012.jpg)\n\n*Comparison of biofilm mass (a) and surface area (b)",
+    "length": 1000
+  },
+  "PMC10144393_chunk_6": {
+    "text": "ows: *: 0.01 < p < 0.05, **: 0.001 < p < 0.01.*\n\n\n![](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/4b0e90997f63/life-13-01001-g013.jpg)\n\n*Comparison of biofilm thickness after 20 days of incubation in space conditions on seven different materials. The nomenclature for the significant values is as follows: *: 0.01 < p < 0.05.*\n\n\n### Figure A1.\n\n![Figure A1.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/18a6f563ea02/life-13-01001-g0A1.jpg)\n\n*Spore count per material after 6 h of in",
+    "length": 1000
+  },
+  "PMC10144393_chunk_7": {
+    "text": "stain in red binds to proteins of the biofilm\u2019s extracellular matrix. Confocal microscopy images of representative biofilms per condition.*\n\n\n### Figure A3.\n\n![Figure A3.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/853d4fd21fa5/life-13-01001-g0A3.jpg)\n\n*Biofilm growth on Carbon Fiber in space and on Earth after 10, 15, and 20 days. The Calcofluor White stain in blue binds to cellulose and chitin. The Biofilm Ruby stain in red binds to components of the biofilm\u2019s extracellular matrix. C",
+    "length": 1000
+  },
+  "PMC10144393_chunk_8": {
+    "text": "Figure A5.\n\n![Figure A5.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/81f33c202e6e/life-13-01001-g0A5.jpg)\n\n*Biofilm growth on Quartz in space and on Earth after 10, 15, and 20 days. The Calcofluor White stain in blue binds to cellulose and chitin. The Biofilm Ruby stain in red binds to components of the biofilm\u2019s extracellular matrix. Confocal microscopy images of representative biofilms per condition.*\n\n\n### Figure A6.\n\n![Figure A6.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/1014439",
+    "length": 1000
+  },
+  "PMC10144393_chunk_9": {
+    "text": "ce and on Earth after 10, 15, and 20 days. The Calcofluor White stain in blue binds to cellulose and chitin. The Biofilm Ruby stain in red binds to components of the biofilm\u2019s extracellular matrix. Confocal microscopy images of representative biofilms per condition.*\n\n\n### Figure A8.\n\n![Figure A8.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e465/10144393/67996bc0962a/life-13-01001-g0A8.jpg)\n\n*Biofilm growth on titanium in space and on Earth after 10, 15, and 20 days. The Calcofluor White stain in bl",
+    "length": 1000
+  },
+  "PMC10144393_chunk_10": {
+    "text": "84 | Bag washed |\n| Titanium Alloy Ti-6Al-4V | 4999 MPPR-311-3 | 84 | Ultrasonic |\n| MIT Nanograss | 2022 | 78 | Not washed, prepared in sterile conditions |\n| Carbon Fiber | 5012 MPPR-311-7 | 84 | Ultrasonic |\n\n### Table 2.\n\n| Material | Biomass (\u00b5m3/\u00b5m2) |\n| --- | --- |\n| Stainless Steel 316 | 0.0267 (0.0142) |\n| Carbon Fiber | 0.0205 (0.0155) |\n| Silicone | 0.0773 (0.0375) |\n| Quartz | 0.0133 (0.0074) |\n| Titanium Alloy | 0.0112 (0.0449) |\n| Aluminum Alloy | 0.0052 (0.0061) |\n| Nanograss | 0.",
+    "length": 1000
+  },
+  "PMC10144393_chunk_11": {
+    "text": "3. 3. Ramage G., Mowat E., Jones B., Williams C., Lopez-Ribot J. Our Current Understanding of Fungal Biofilms. Crit. Rev. Microbiol. 2009;35:340\u2013355. doi: 10.3109/10408410903241436. [DOI] [PubMed] [Google Scholar]\n\n4. 4. Ramage G., Rajendran R., Sherry L., Williams C. Fungal Biofilm Resistance. Int. J. Microbiol. 2012;2012:528521. doi: 10.1155/2012/528521. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n5. 5. Blankenship J., Mitchell A. P. How to build a biofilm: A fungal perspective. Curr. ",
+    "length": 1000
+  },
+  "PMC10144393_chunk_12": {
+    "text": "iofilm formation of non-Candida albicans Candida species. Trends Microbiol. 2011;19:241\u2013247. doi: 10.1016/j.tim.2011.02.003. [DOI] [PubMed] [Google Scholar]\n\n8. 8. Klintworth R., Reher H., Viktorov A., Bohle D. Biological induced corrosion of materials II: New test methods and experiences from mir station. Acta Astronaut. 1999;44:569\u2013578. doi: 10.1016/S0094-5765(99)00069-7. [DOI] [PubMed] [Google Scholar]\n\n9. 9. Zea L., Nisar Z., Rubin P., Cortes\u00e3o M., Luo J., McBride S. A., Moeller R., Klaus D.",
+    "length": 1000
+  },
+  "PMC10144393_chunk_13": {
+    "text": " 2004;47:127\u2013132. doi: 10.1007/s00248-003-1055-2. [DOI] [PubMed] [Google Scholar]\n\n12. 12. Costa-Orlandi C. B., Sardi J. C. O., Pitangui N. S., De Oliveira H. C., Scorzoni L., Galeane M. C., Medina-Alarc\u00f3n K. P., Melo W. C. M. A., Marcelino M. Y., Braz J. D., et al. Fungal Biofilms and Polymicrobial Diseases. J. Fungi. 2017;3:22. doi: 10.3390/jof3020022. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n13. 13. Brown G. D., Denning D. W., Gow N. A. R., Levitz S. M., Netea M. G., White T. C. Hi",
+    "length": 1000
+  },
+  "PMC10144393_chunk_14": {
+    "text": "15. Borchers A. T., Keen C. L., Gershwin M. Microgravity and immune responsiveness: Implications for space travel. Nutrition. 2002;18:889\u2013898. doi: 10.1016/S0899-9007(02)00913-9. [DOI] [PubMed] [Google Scholar]\n\n16. 16. CDC Reduce Your Exposure to Mold in Your Home | Mold | CDC. [(accessed on 17 January 2023)];2022 November 17; Available online: https://www.cdc.gov/mold/reduce-your-exposure-to-mold.html.\n\n17. 17. CDC Invasive Mold Infections in Immunocompromised People | Mold | CDC. [(accessed o",
+    "length": 1000
+  },
+  "PMC10144393_chunk_15": {
+    "text": " First reported case. A New Invasive Pathogen. Mycopathologia. 1981;74:125\u2013127. doi: 10.1007/BF01259468. [DOI] [PubMed] [Google Scholar]\n\n20. 20. Geltner C., Lass-Fl\u00f6rl C., Bonatti H., M\u00fcller L., Stelzm\u00fcller I. Invasive Pulmonary Mycosis Due to Penicillium chrysogenum. Transplantation. 2013;95:e21\u2013e23. doi: 10.1097/TP.0b013e31827ff214. [DOI] [PubMed] [Google Scholar]\n\n21. 21. Zea L., McLean R. J., Rook T. A., Angle G., Carter D. L., Delegard A., Denvir A., Gerlach R., Gorti S., McIlwaine D., et ",
+    "length": 1000
+  },
+  "PMC10144393_chunk_16": {
+    "text": "g Altered Bacterial Behavior in Space. PLoS ONE. 2016;11:e0164359. doi: 10.1371/journal.pone.0164359. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n24. 24. Zea L., Larsen M., Estante F., Qvortrup K., Moeller R., de Oliveira S. D., Stodieck L., Klaus D. Phenotypic Changes Exhibited by E. coli Cultured in Space. Front. Microbiol. 2017;8:1598. doi: 10.3389/fmicb.2017.01598. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n25. 25. Aunins T. R., Erickson K. E., Prasad N., Levy S. E., Jones A",
+    "length": 1000
+  },
+  "PMC10144393_chunk_17": {
+    "text": "10.1089/ast.2019.0625. [DOI] [PubMed] [Google Scholar]\n\n27. 27. Zhao X., Yu Y., Zhang X., Huang B., Bai P., Xu C., Li D., Zhang B., Liu C. Decreased biofilm formation ability of Acinetobacter baumannii after spaceflight on China\u2019s Shenzhou 11 spacecraft. Microbiol. Open. 2019;8:e00763. doi: 10.1002/mbo3.763. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n28. 28. Loudon C.-M., Nicholson N., Finster K., Leys N., Byloos B., Van Houdt R., Rettberg P., Moeller R., Fuchs F. M., Demets R., et al. ",
+    "length": 1000
+  },
+  "PMC10144393_chunk_18": {
+    "text": "2022.07.015. [DOI] [Google Scholar]\n\n30. 30. Flores P., Luo J., Mueller D., Muecklich F., Zea L. Space Biofilms\u2014An Overview of the Morphology of Pseudomonas aeruginosa Biofilms Grown on Silicone and Cellulose Membranes on board the International Space Station. Acta Astronautica. 2022;199:386\u2013400. doi: 10.1016/j.actaastro.2022.07.015. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n31. 31. Flores P., McBride S., Varanasi K., Galazka J., Zea L. Biofilms formation of Pseudomonas aeruginosa in s",
+    "length": 1000
+  },
+  "PMC10144393_chunk_19": {
+    "text": "rowth of Penicillium rubens after Desiccation. [DOI] [Google Scholar]\n\n34. 34. Schneider C. A., Rasband W. S., Eliceiri K. W. NIH Image to ImageJ: 25 Years of image analysis. Nat. Methods. 2012;9:671\u2013675. doi: 10.1038/nmeth.2089. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n35. 35. Rasband W. Slice Remover. 2009. [ImageJ] [(accessed on 1 June 2022)]; Available online: https://imagej.nih.gov/ij/plugins/slice-remover.html.\n\n36. 36. Heydorn A., Ersb\u00f8ll B. K., Vorregaard M. Comstat2. 1 July 2",
+    "length": 1000
+  },
+  "PMC10144393_chunk_20": {
+    "text": "ms. [Google Scholar]\n\n39. 39. Singh P., Chauhan M. Influence of Environmental Factors on The Growth of Building Deteriorating Fungi: Aspergillus Flavus and Penicillium Chrysogenum. Int. J. Pharm. Sci. Res. 2012;4:425\u2013429. [Google Scholar]\n\n40. 40. Ruijten P., Huinink H. P., Adan O. C. G. Hyphal growth of Penicillium rubens in changing relative humidity. Appl. Microbiol. Biotechnol. 2021;105:5159\u20135171. doi: 10.1007/s00253-021-11343-6. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n41. 41. Se",
+    "length": 1000
+  },
+  "PMC10144393_chunk_21": {
+    "text": "va L. N. Effect of water activity and relative air humidity on the growth of Penicillium chrysogenum thom, Aspergillus repens (Corda) Sacc., and Trichoderma viride Pers. isolated from living spaces. Microbiology. 2011;80:378\u2013385. doi: 10.1134/S0026261711030179. [DOI] [PubMed] [Google Scholar]\n\n43. 43. Nguyen T. A., Greig J., Khan A., Goh C., Jedd G. Evolutionary novelty in gravity sensing through horizontal gene transfer and high-order protein assembly. PLoS Biol. 2018;16:e2004920. doi: 10.1371/",
+    "length": 1000
+  },
+  "PMC10144393_chunk_22": {
+    "text": " doi: 10.1007/s11084-016-9502-5. [DOI] [PubMed] [Google Scholar]\n\n46. 46. Latg\u00e9 J.-P., editor. The Fungal Cell Wall: An Armour and a Weapon for Human Fungal Pathogens. Volume 425. Springer International Publishing; Cham, Switzerland: 2020. [DOI] [Google Scholar]\n\n47. 47. Tanaka T., Terauchi Y., Yoshimi A., Abe K. Aspergillus Hydrophobins: Physicochemical Properties, Biochemical Properties, and Functions in Solid Polymer Degradation. Microorganisms. 2022;10:1498. doi: 10.3390/microorganisms100814",
+    "length": 1000
+  },
+  "PMC10144393_chunk_23": {
+    "text": "ards D., Davies J. K., Figdor D. Starvation survival and recovery in serum of Candida albicans compared with Enterococcus faecalis. Oral Surg. Oral Med. Oral Pathol. Oral Radiol. Endodontol. 2010;110:125\u2013130. doi: 10.1016/j.tripleo.2010.03.007. [DOI] [PubMed] [Google Scholar]\n\n51. 51. Verstrepen K. J., Klis F. M. Flocculation, adhesion and biofilm formation in yeasts. Mol. Microbiol. 2006;60:5\u201315. doi: 10.1111/j.1365-2958.2006.05072.x. [DOI] [PubMed] [Google Scholar]\n",
+    "length": 472
+  },
+  "PMC10233975_chunk_0": {
+    "text": "# Abstract\n\n**Keywords:** Metagenome-assembled genomes, Genome-inferred phenotype, Microgravity, ISS\n\n## Abstract\n\nSeveral investigations on the microbial diversity and functional properties of the International Space Station (ISS) environment were carried out to understand the influence of spaceflight conditions on the microbial population. However, metagenome-assembled genomes (MAGs) of ISS samples are yet to be generated and subjected to various genomic analyses, including phylogenetic affili",
+    "length": 1000
+  },
+  "PMC10233975_chunk_1": {
+    "text": "fungal genomes were assembled from ISS metagenomes. Phylogenetic analyses of five bacterial species showed ISS-specific evolution. The genes pertaining to cell membranes, such as transmembrane transport, cell wall organization, and regulation of cell shape, were enriched. Variations in the antimicrobial-resistant (AMR) and virulence genes of the selected 20 MAGs were characterized to predict the ecology and evolution of biosafety level (BSL) 2 microorganisms in space. Since microbial virulence i",
+    "length": 1000
+  },
+  "PMC10233975_chunk_2": {
+    "text": "rative analyses of MAGs and whole-genome sequences of related ISS isolates and their type strains were characterized to understand the variation related to the microbial evolution under microgravity. The Pantoea/Kalamiella strains have the maximum single-nucleotide polymorphisms found within the ISS strains examined. This may suggest that Pantoea/Kalamiella strains are much more subjective to microgravity changes. The reconstructed genomes will enable researchers to study the evolution of genome",
+    "length": 1000
+  },
+  "PMC10233975_chunk_3": {
+    "text": " (class where members of the genus Naganishia in nested within). Position (in red) relative to its closest clade (in blue) is shown*\n\n\n### Fig. 2.\n\n![Fig. 2.](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/0f2a/10233975/9d61e78fb952/40168_2023_1545_Fig2_HTML.jpg)\n\n*Comparisons of genome assemblies from isolates (purple) and MAGs (blue) against their respective type strains using BRIG. Innermost rings correspond to the pseudo-coordinates of the concatenated reference assemblies and their respective slidi",
+    "length": 1000
+  },
+  "PMC10233975_chunk_4": {
+    "text": "//cdn.ncbi.nlm.nih.gov/pmc/blobs/0f2a/10233975/95881548b873/40168_2023_1545_Fig3_HTML.jpg)\n\n*Maximum likelihood phylogenetic trees of A S. aureus, B S. saprophyticus, and C Klebsiella quasipneumoniae. Clades in red contain only ISS genomes*\n\n\n## Tables\n\n### Table 1.\n\n| Samplea | Species identified | NCBI accession no. of type strain | Type strain | ANI with type strain (%) | CheckM completeness (%) | Identified pipeline (MetaSPAdes and metaWRAP) | Location | Temperature | Relative humidity | Rad",
+    "length": 1000
+  },
+  "PMC10233975_chunk_5": {
+    "text": "TCC 12600 | 98.25 | 90.81 | MetaSPAdes | Surface of the dining table | 22.9 | 40.20 | 268 | 3/4/15 |\n| F1-5P | Pantoea brenneri | MLFN00000000.1 | LMG 24534 | 99.13 | 100.00 | Yes | US node 1, zero-G stowage rack | 26.0 | 40.20 | 268 | 3/4/15 |\n| F1-7P | Methylobacterium ajmalii | GCF_016613415.1 | IF7SW-B2 | 99.98 | 100.00 | MetaWRAP | Overhead 3 panel surface of the Materials Science Research Rack 1 | 22.2 | 40.20 | 268 | 3/4/15 |\n| F1-8P | Microbacterium aurum | NZ_BCWI00000000.1 | NBRC 15708",
+    "length": 1000
+  },
+  "PMC10233975_chunk_6": {
+    "text": "es | Waste and hygiene compartment | 22.8 | 39.25 | 380 | 5/15/15 |\n| F2-5P | Paenibacillus polymyxa | NZ_CP049783.1 | DSM 36 | 98.34 | 99.56 | Yes | US node 1, zero-G stowage rack | 24.7 | 39.25 | 380 | 5/15/15 |\n| F2-5P | Pantoea brenneri | MLFN00000000.1 | LMG 24534 | 99.13 | 100.00 | Yes | US node 1, zero-G stowage rack | 24.7 | 39.25 | 380 | 5/15/15 |\n| F2-7P | Bacillus velezensis | LHCC00000000.1/ | KCTC 13012 | 98.05 | 90.39 | MetaWRAP | Overhead-3 panel surface of the Materials Science R",
+    "length": 1000
+  },
+  "PMC10233975_chunk_7": {
+    "text": "9 | MetaWRAP | Overhead-3 panel surface of the Materials Science Research Rack 1 | 21.8 | 39.25 | 380 | 5/15/15 |\n| F2-8P | Methylorubrum extorquens | NZ_LT962688.1 | TK 0001 | 96.57 | 98.28 | MetaWRAP | Crew quarters-2 bump-out exterior aft wall | 22.8 | 39.25 | 380 | 5/15/15 |\n| F2-8P | Paenibacillus polymyxa | NZ_CP049783.1 | DSM 36 | 98.30 | 99.85 | Yes | Crew quarters-2 bump-out exterior aft wall | 22.8 | 39.25 | 380 | 5/15/15 |\n| F2-8P | Staphylococcus aureus | NZ_CP035101.1 | ATCC 12600 |",
+    "length": 1000
+  },
+  "PMC10233975_chunk_8": {
+    "text": " compartment | 21.9 | 41.25 | 162 | 5/5/16 |\n| F3-3P | Klebsiella pneumoniae | JOOW00000000 | ATCC 13883 | 96.55 | 89.66 | MetaSPAdes | The foot platform of the Advanced Resistive Exercise Device | 21.9 | 41.25 | 162 | 5/5/16 |\n| F3-3P | Klebsiella quasipneumoniae | NZ_CP012252.1 | 01A030 | 96.59 | 98.47 | MetaWRAP | The foot platform of the Advanced Resistive Exercise Device | 21.9 | 41.25 | 162 | 5/5/16 |\n| F3-3P | Staphylococcus saprophyticus | NC_007350.1 | ATCC 15305 | 99.52 | 82.39 | MetaW",
+    "length": 1000
+  },
+  "PMC10233975_chunk_9": {
+    "text": "ck | 27.2 | 41.25 | 162 | 5/5/16 |\n| F3-7P | Kalamiella piersonii | NZ_RARB00000000.1 | IIIF1SW-P2 | 99.98 | 87.70 | Yes | Overhead-3 panel surface of the Materials Science Research Rack 1 | 21.4 | 41.25 | 162 | 5/5/16 |\n| F3-7P | Klebsiella aerogenes | NC_015663.1 | KCTC 2190 | 98.52 | 90.49 | MetaWRAP | Overhead-3 panel surface of the Materials Science Research Rack 1 | 21.4 | 41.25 | 162 | 5/5/16 |\n| F3-8P | Kalamiella piersonii | NZ_RARB00000000.1 | IIIF1SW-P2 | 99.98 | 89.38 | Yes | Crew qu",
+    "length": 1000
+  },
+  "PMC10233975_chunk_10": {
+    "text": "1000 |\n| Bin_7 | 22 | JAAZPV010000089.1_Naganishia_tulchinskyi_strain_IF6SW-B1_scaffold1018_cov224.fna | 0.00616116 | 0 | 775/1000 |\n| Bin_7 | 22 | JAAZPY010000044.1_Naganishia_tulchinskyi_strain_IIF5SW-F1_scaffold102_cov184.fna | 0.00616116 | 0 | 775/1000 |\n| Bin_7 | 22 | JAAZQA010000042.1_Naganishia_tulchinskyi_IF7SW-B1_scaffold100_cov213.fna | 0.00616116 | 0 | 775/1000 |\n| Bin_7 | 22 | JAAZPZ010000100.1_Naganishia_tulchinskyi_strain_IF1SW-F1_scaffold1012_cov89.fna | 0.00626056 | 0 | 772/1000 ",
+    "length": 1000
+  },
+  "PMC10233975_chunk_11": {
+    "text": "nplaced_genomic_scaffold_Nagvi1qcScaffold_1.fna | 0.282528 | 0.000492662 | 1/1000 |\n\n### Table 3.\n\n|  | The presence/absence of antimicrobial resistance genes that is as follows: | Sample | Species identified | Copper-translocating P-type ATPase | DNA gyrase subunit A | DNA gyrase subunit B | DNA-directed RNA polymerase beta subunit | Topoisomerase IV subunit A | Topoisomerase IV subunit B | LSU ribosomal protein L20p | LSU ribosomal protein L35p | SSU ribosomal protein S7p (S5e) | SSU ribosomal",
+    "length": 1000
+  },
+  "PMC10233975_chunk_12": {
+    "text": "yticus | Paenibacillus polymyxa | Pantoea conspicua | Methylobacterium ajmalii |  | F1-2P | F1-4P | F1-5P | F1-8P | F2-1P | F2-1P | F2-2P | F2-5P | F2-5P | F2-7P |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n\n### Table 5.\n\n| Gene name | Types of residue | Size (bp) | Number of variable residues in genes responsible for biofilm formation and quorum sensing in ISS Enterobacter bugandensis strains ",
+    "length": 1000
+  },
+  "PMC10233975_chunk_13": {
+    "text": "# References\n\n1. 1. Tyson GW, Chapman J, Hugenholtz P, Allen EE, Ram RJ, Richardson PM, Solovyev VV, Rubin EM, Rokhsar DS, Banfield JF. Community structure and metabolism through reconstruction of microbial genomes from the environment. Nature. 2004;428:37\u201343. doi: 10.1038/nature02340. [DOI] [PubMed] [Google Scholar]\n\n2. 2. Quince C, Walker AW, Simpson JT, Loman NJ, Segata N. Shotgun metagenomics, from sampling to analysis. Nat Biotechnol. 2017;35:833\u2013844. doi: 10.1038/nbt.3935. [DOI] [PubMed] [",
+    "length": 1000
+  },
+  "PMC10233975_chunk_14": {
+    "text": ";12:1568\u20131581. doi: 10.1038/s41396-018-0081-5. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n5. 5. Andersen MH, McIlroy SJ, Nierychlo M, Nielsen PH, Albertsen M. Genomic insights into Candidatus Amarolinea aalborgensis gen. nov., sp. nov., associated with settleability problems in wastewater treatment plants. Syst Appl Microbiol. 2019;42:77\u201384. doi: 10.1016/j.syapm.2018.08.001. [DOI] [PubMed] [Google Scholar]\n\n6. 6. Leon MJ, Fernandez AB, Ghai R, Sanchez-Porro C, Rodriguez-Valera F, Ventos",
+    "length": 1000
+  },
+  "PMC10233975_chunk_15": {
+    "text": "otechnol. 2019;103:4483\u20134497. doi: 10.1007/s00253-019-09813-z. [DOI] [PubMed] [Google Scholar]\n\n8. 8. Cuadrat RRC, Ionescu D, D\u00e1vila AMR, Grossart HP. Recovering genomics clusters of secondary metabolites from lakes using genome-resolved metagenomics. Front Microbiol. 2018;9:251. doi: 10.3389/fmicb.2018.00251. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n9. 9. Ward LM, Shih PM, Fischer WW. MetaPOAP: presence or absence of metabolic pathways in metagenome-assembled genomes. Bioinformatics.",
+    "length": 1000
+  },
+  "PMC10233975_chunk_16": {
+    "text": "t AJ, Saenz JS, Sattler T, Schirmack J, Sephton MA, Schloter M, Uhl J, Valenzuela B, Vestergaard G, Wormer L, Zamorano P. Transitory microbial habitat in the hyperarid atacama desert. Proc Natl Acad Sci U S A. 2018;115:2670\u20132675. doi: 10.1073/pnas.1714341115. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n11. 11. Stewart RD, Auffret MD, Warr A, Wiser AH, Press MO, Langford KW, Liachko I, Snelling TJ, Dewhurst RJ, Walker AW, Roehe R, Watson M. Assembly of 913 microbial genomes from metagenom",
+    "length": 1000
+  },
+  "PMC10233975_chunk_17": {
+    "text": "r GB, Tarkowska A, Lawley TD, Finn RD. A new genomic blueprint of the human gut microbiota. Nature. 2019;568:499\u2013504. doi: 10.1038/s41586-019-0965-1. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n14. 14. Singh NK, Wood JM, Karouia F, Venkateswaran K. Succession and persistence of microbial communities and antimicrobial resistance genes associated with International Space Station environmental surfaces. Microbiome. 2018;6:214. doi: 10.1186/s40168-018-0609-y. [DOI] [PMC free article] [PubMed",
+    "length": 1000
+  },
+  "PMC10233975_chunk_18": {
+    "text": " sequence data. Bioinformatics. 2014;30:2114\u20132120. doi: 10.1093/bioinformatics/btu170. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n17. 17. Nurk S, Meleshko D, Korobeynikov A, Pevzner PA. metaSPAdes: a new versatile metagenomic assembler. Genome Res. 2017;27:824\u2013834. doi: 10.1101/gr.213959.116. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n18. 18. Kang DD, Froula J, Egan R, Wang Z. MetaBAT, an efficient tool for accurately reconstructing single genomes from complex microbial communi",
+    "length": 1000
+  },
+  "PMC10233975_chunk_19": {
+    "text": "beek RA, McNeil LK, Paarmann D, Paczian T, Parrello B, Pusch GD, Reich C, Stevens R, Vassieva O, Vonstein V, Wilke A, Zagnitko O. The RAST server: rapid annotations using subsystems technology. BMC Genomics. 2008;9:75. doi: 10.1186/1471-2164-9-75. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n21. 21. Uritskiy GV, DiRuggiero J, Taylor J. MetaWRAP-a flexible pipeline for genome-resolved metagenomic data analysis. Microbiome. 2018;6:158. doi: 10.1186/s40168-018-0541-1. [DOI] [PMC free article",
+    "length": 1000
+  },
+  "PMC10233975_chunk_20": {
+    "text": ". 24. Edgar RC. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic Acids Res. 2004;32:1792\u20137. doi: 10.1093/nar/gkh340. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n25. 25. Nguyen LT, Schmidt HA, von Haeseler A, Minh BQ. IQ-TREE: a fast and effective stochastic algorithm for estimating maximum-likelihood phylogenies. Mol Biol Evol. 2015;32:268\u201374. doi: 10.1093/molbev/msu300. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n26. 26. Li D, Luo R, Liu CM, Le",
+    "length": 1000
+  },
+  "PMC10233975_chunk_21": {
+    "text": "ify genomes with the Genome Taxonomy Database. Bioinformatics. 2019 doi: 10.1093/bioinformatics/btz848. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n29. 29. Manni M, Berkeley MR, Seppey M, Zdobnov EM. BUSCO: assessing genomic data quality and beyond. Current Protocols. 2021;1:e323. doi: 10.1002/cpz1.323. [DOI] [PubMed] [Google Scholar]\n\n30. 30. Katoh K, Standley DM. MAFFT multiple sequence alignment software version 7: improvements in performance and usability. Mol Biol Evol. 2013;30(4):7",
+    "length": 1000
+  },
+  "PMC10233975_chunk_22": {
+    "text": "le] [PubMed] [Google Scholar]\n\n33. 33. Contreras-Moreira B, Vinuesa P. GET_HOMOLOGUES, a versatile software package for scalable and robust microbial pangenome analysis. Appl Environ Microbiol. 2013;79:7696\u2013701. doi: 10.1128/AEM.02411-13. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n34. 34. K\u00fcck P, Meusemann K. FASconCAT: convenient handling of data matrices. Mol Phylogenet Evol. 2010;56:1115\u20138. doi: 10.1016/j.ympev.2010.04.024. [DOI] [PubMed] [Google Scholar]\n\n35. 35. T\u00f6r\u00f6nen P, Holm L. ",
+    "length": 1000
+  },
+  "PMC10233975_chunk_23": {
+    "text": "-drug resistant Enterobacter bugandensis species isolated from the International Space Station and comparative genomic analyses with human pathogenic strains. BMC Microbiol. 2018;18:175. doi: 10.1186/s12866-018-1325-2. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n38. 38. Kumar S, Stecher G, Tamura K. MEGA7: Molecular Evolutionary Genetics Analysis Version 7.0 for bigger datasets. Mol Biol Evol. 2016;33:1870\u20134. doi: 10.1093/molbev/msw054. [DOI] [PMC free article] [PubMed] [Google Scholar]\n",
+    "length": 1000
+  },
+  "PMC10233975_chunk_24": {
+    "text": "s of Sphingomonas strains isolated from the International Space Station. Microbiol Spectr. 2022;10:e0199421. doi: 10.1128/spectrum.01994-21. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n41. 41. Bowers RM, Kyrpides NC, Stepanauskas R, Harmon-Smith M, Doud D, Reddy TBK, Schulz F, Jarett J, Rivers AR, Eloe-Fadrosh EA, Tringe SG, Ivanova NN, Copeland A, Clum A, Becraft ED, Malmstrom RR, Birren B, Podar M, Bork P, Weinstock GM, Garrity GM, Dodsworth JA, Yooseph S, Sutton G, Glockner FO, Gilber",
+    "length": 1000
+  },
+  "PMC10233975_chunk_25": {
+    "text": "e Scholar]\n\n42. 42. Bijlani S, Parker C, Singh NK, Sierra MA, Foox J, Wang CCC, Mason CE, Venkateswaran K. Genomic characterization of the titan-like cell producing Naganishia tulchinskyi, the first novel eukaryote isolated from the International Space Station. Journal of Fungi. 2022;8:165. doi: 10.3390/jof8020165. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n43. 43. Bradbury P, Wu H, Choi JU, Rowan AE, Zhang H, Poole K, Lauko J, Chou J. Modeling the impact of microgravity at the cellular",
+    "length": 1000
+  },
+  "PMC10233975_chunk_26": {
+    "text": "J, Buchanan K, Morici L, McCracken J, Allen P, Baker-Coleman C, Hammond T, Vogel J, Nelson R, Pierson DL, Stefanyshyn-Piper HM, Nickerson CA. Space flight alters bacterial gene expression and virulence and reveals a role for global regulator Hfq. Proc Natl Acad Sci U S A. 2007;104:16299\u2013304. doi: 10.1073/pnas.0707155104. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n45. 45. Mehta SK, Laudenslager ML, Stowe RP, Crucian BE, Sams CF, Pierson DL. Multiple latent viruses reactivate in astronaut",
+    "length": 1000
+  },
+  "PMC10233975_chunk_27": {
+    "text": "chowicz A, Palmer JM, Romsdahl J, Huttenlocher A, Wang CC, Keller NP, Venkateswaran K. Characterization of Aspergillus fumigatus isolates from air and surfaces of the International Space Station. mSphere. 2016;1(5):e00227\u201316. doi: 10.1128/mSphere.00227-16. [DOI] [PMC free article] [PubMed] [Google Scholar]\n\n48. 48. Rekha PD, Hameed A, Manzoor MAP, Suryavanshi MV, Ghate SD, Arun AB, Rao SS, Athmika Bajire SK, Mujeeburahiman M, Young C-C. First report of pathogenic bacterium Kalamiella piersonii i",
+    "length": 1000
+  },
+  "PMC10233975_chunk_28": {
+    "text": "e J-A, Shideler SM, Zhang K, Stewart FJ. Complete Genome Sequence of GD1108, a Moderate-Virulence Strain of Human-Associated ST398 Methicillin-Susceptible Staphylococcus aureus. Microbiol Resour Announc. 2019;8:e00687\u201300619. [DOI] [PMC free article] [PubMed]\n\n51. 51. He Z, Liang J, Tang Z, Ma R, Peng H, Huang Z. Role of the luxS gene in initial biofilm formation by Streptococcus mutans. Microb Physiol. 2015;25:60\u20138. [DOI] [PubMed]\n",
+    "length": 435
+  }
+}
