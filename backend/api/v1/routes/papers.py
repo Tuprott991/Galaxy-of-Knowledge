@@ -160,13 +160,13 @@ async def get_paper_html_context(
     try:
         cursor = conn.cursor()
         
-        # Query to get paper HTML context
+        # Query to get paper HTML context - fixed to use author_list instead of authors
         query = """
             SELECT 
                 paper_id,
                 title,
                 html_context,
-                authors
+                author_list
             FROM paper 
             WHERE paper_id = %s
         """
@@ -180,11 +180,14 @@ async def get_paper_html_context(
                 detail=f"Paper with ID '{paper_id}' not found"
             )
         
+        # author_list is already an array in PostgreSQL
+        authors_list = result[3] if result[3] else []
+        
         paper_data = PaperHTMLContext(
             paper_id=result[0],
             title=result[1],
             html_context=result[2],
-            authors=result[3].split(", ") if result[3] else [],
+            authors=authors_list,
             has_html_context=result[2] is not None,
             html_context_length=len(result[2]) if result[2] else 0
         )
