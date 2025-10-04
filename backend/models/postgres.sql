@@ -18,8 +18,9 @@ CREATE TABLE IF NOT EXISTS paper (
     plot_visualize_z FLOAT,
     cluster TEXT, 
     -- relatedby: list of paper IDs (string) that write about this paper in their related works
-    references TEXT[],
+    _references TEXT[],
     cited_by TEXT[], -- link of list of paper (string) that cite this paper
+    score FLOAT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
