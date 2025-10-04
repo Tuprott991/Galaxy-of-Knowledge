@@ -191,7 +191,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
-          console.log("Paper Info:", { ...paper, abstract: res.data.abstract, url: res.data.url });
+          console.log(res);
         } catch (err) {
           console.error("Failed to fetch paper info:", err);
         }
