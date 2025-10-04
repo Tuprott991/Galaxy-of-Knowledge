@@ -33,10 +33,10 @@ def fetch_coordinates_from_db():
     try:
         cursor = conn.cursor()
         
-        # Simple query - get paper_id and separate x,y,z coordinates
+        # Query from correct table name 'paper' (not 'papers')
         query = """
         SELECT paper_id, plot_visualize_x, plot_visualize_y, plot_visualize_z
-        FROM papers 
+        FROM paper 
         WHERE plot_visualize_x IS NOT NULL 
           AND plot_visualize_y IS NOT NULL 
           AND plot_visualize_z IS NOT NULL
@@ -46,18 +46,29 @@ def fetch_coordinates_from_db():
         cursor.execute(query)
         rows = cursor.fetchall()
         
+        print(f"Found {len(rows)} papers with 3D coordinates")
+        
         coordinates = []
         paper_ids = []
         
-        for row in rows:
+        for i, row in enumerate(rows):
             paper_id, x, y, z = row
-            coordinates.append([x, y, z])
+            coordinates.append([float(x), float(y), float(z)])
             paper_ids.append(paper_id)
+            
+            if (i + 1) % 100 == 0:
+                print(f"Processed {i + 1}/{len(rows)} coordinates...")
         
         cursor.close()
         conn.close()
         
-        return np.array(coordinates), paper_ids
+        if coordinates:
+            coordinates_array = np.array(coordinates)
+            print(f"Successfully loaded {len(coordinates)} 3D coordinates with shape {coordinates_array.shape}")
+            return coordinates_array, paper_ids
+        else:
+            print("No valid coordinates found")
+            return None, None
     
     except Exception as e:
         print(f"Error fetching coordinates: {e}")
@@ -101,6 +112,46 @@ def create_clustered_collection(coordinates, labels, paper_ids, cluster_uuid_map
     
     return clustered_papers
 
+def update_cluster_assignments(paper_ids, labels, cluster_uuid_map):
+    """Update cluster assignments in database"""
+    conn = get_db_connection()
+    if not conn:
+        return False
+    
+    try:
+        cursor = conn.cursor()
+        
+        print(f"Updating {len(paper_ids)} cluster assignments...")
+        
+        # Update cluster assignments in paper table
+        for i, (paper_id, label) in enumerate(zip(paper_ids, labels)):
+            cluster_uuid = cluster_uuid_map[label]
+            
+            update_query = """
+            UPDATE paper 
+            SET cluster = %s,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE paper_id = %s
+            """
+            cursor.execute(update_query, (str(cluster_uuid), paper_id))
+            
+            if (i + 1) % 100 == 0:
+                print(f"Updated {i + 1}/{len(paper_ids)} cluster assignments...")
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        print(f"Successfully updated {len(paper_ids)} cluster assignments in database")
+        return True
+    
+    except Exception as e:
+        print(f"Error updating cluster assignments: {e}")
+        if conn:
+            conn.rollback()
+            conn.close()
+        return False
+
 def analyze_clusters(coordinates, labels, cluster_uuid_map):
     """Analyze cluster statistics with UUIDs"""
     unique_labels = set(labels)
@@ -131,20 +182,33 @@ def analyze_clusters(coordinates, labels, cluster_uuid_map):
 
 def main():
     """Main function to run DBSCAN clustering and create collection with UUIDs"""
-    print("Fetching coordinates from database...")
+    print("Starting DBSCAN Clustering")
+    print("=" * 50)
+    
+    print("Fetching 3D coordinates from database...")
     coordinates, paper_ids = fetch_coordinates_from_db()
     
     if coordinates is None or len(coordinates) == 0:
-        print("No coordinates found in database. Please run UMAP first.")
+        print("No coordinates found in database")
+        print("Please run UMAP.py first to generate 3D coordinates")
         return None
     
-    print(f"Found {len(coordinates)} coordinate points")
+    print(f"Found {len(coordinates)} coordinate points with shape {coordinates.shape}")
+    
+    # Configure DBSCAN parameters based on data size
+    eps = 0.5 if len(coordinates) > 100 else 0.3
+    min_samples = min(5, max(2, len(coordinates) // 20))  # Adaptive min_samples
+    
+    print(f"DBSCAN Configuration:")
+    print(f"   - eps: {eps}")
+    print(f"   - min_samples: {min_samples}")
+    print(f"   - metric: euclidean")
     
     # Run DBSCAN clustering
-    print("Running DBSCAN clustering...")
+    print("\nRunning DBSCAN clustering...")
     clustering = DBSCAN(
-        eps=0.5,
-        min_samples=5,
+        eps=eps,
+        min_samples=min_samples,
         metric='euclidean'
     ).fit(coordinates)
     
@@ -158,8 +222,14 @@ def main():
     n_clusters = len(unique_labels) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
     
-    print(f"Number of clusters: {n_clusters}")
-    print(f"Number of noise points: {n_noise}")
+    print(f"DBSCAN completed!")
+    print(f"   - Number of clusters: {n_clusters}")
+    print(f"   - Number of noise points: {n_noise}")
+    print(f"   - Clustering ratio: {(len(coordinates) - n_noise)/len(coordinates)*100:.1f}%")
+    
+    # Update database with cluster assignments
+    print("\nUpdating cluster assignments in database...")
+    update_success = update_cluster_assignments(paper_ids, labels, cluster_uuid_map)
     
     # Create clustered collection with UUIDs
     clustered_papers = create_clustered_collection(coordinates, labels, paper_ids, cluster_uuid_map)
@@ -175,19 +245,35 @@ def main():
         'summary': {
             'total_papers': len(paper_ids),
             'n_clusters': n_clusters,
-            'n_noise': n_noise
+            'n_noise': n_noise,
+            'clustering_ratio': (len(coordinates) - n_noise)/len(coordinates)*100
         }
     }
     
-    print("DBSCAN clustering completed successfully!")
+    if update_success:
+        print("Database update completed successfully!")
+    else:
+        print("Database update failed, but clustering results are available")
     
     # Print cluster summary
     print("\nCluster Summary:")
     for cluster_uuid, stats in cluster_stats.items():
         if stats['type'] == 'cluster':
-            print(f"Cluster UUID {cluster_uuid[:8]}...: {stats['count']} papers")
+            print(f"   Cluster {cluster_uuid[:8]}...: {stats['count']} papers")
         else:
-            print(f"Noise points (cluster_uuid: -1): {stats['count']} papers")
+            print(f"   Noise points (cluster_uuid: -1): {stats['count']} papers")
+    
+    # Save results to JSON file
+    output_file = "/home/nghia-duong/workspace/Galaxy-of-Knowledge/backend/clustering_results.json"
+    try:
+        with open(output_file, 'w') as f:
+            json.dump(result, f, indent=2, default=str)
+        print(f"\nResults saved to: {output_file}")
+    except Exception as e:
+        print(f"Could not save results to file: {e}")
+    
+    print(f"\nDBSCAN clustering completed successfully!")
+    print("Ready for frontend visualization!")
     
     return result
 
