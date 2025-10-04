@@ -1,0 +1,75 @@
+from dotenv import load_dotenv
+import os
+from dataclasses import dataclass
+from google.auth import load_credentials_from_file
+import vertexai
+import os
+from google.oauth2.service_account import Credentials
+
+load_dotenv()
+
+PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT")
+REGION = "asia-southeast1"
+
+# Load environment variables from .env fil
+
+# Set up Vertex AI authentication
+def setup_vertex_ai_auth():
+    """Set up Vertex AI authentication using service account JSON.
+
+    Relies on Application Default Credentials (ADC). If a service account key
+    is configured via GOOGLE_APPLICATION_CREDENTIALS, we also propagate the
+    detected project ID into GOOGLE_CLOUD_PROJECT so downstream libraries that
+    rely on ADC can locate the project without manual wiring.
+    """
+    service_account_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    if not service_account_path:
+        print("GOOGLE_APPLICATION_CREDENTIALS environment variable not set.")
+        return None, None
+
+    print(f"Using service account from: {service_account_path}")
+    credentials, project = load_credentials_from_file(service_account_path)
+
+    # Ensure project is available to clients using ADC
+    if project and not os.getenv("GOOGLE_CLOUD_PROJECT"):
+        os.environ["GOOGLE_CLOUD_PROJECT"] = project
+        print(f"Set GOOGLE_CLOUD_PROJECT={project}")
+
+    # Ensure location is available for Vertex AI (required by google-genai when using Vertex backend)
+    # Priority: GOOGLE_CLOUD_LOCATION | VERTEX_LOCATION | VERTEX_AI_LOCATION | default "us-central1"
+    location = (
+        os.getenv("GOOGLE_CLOUD_LOCATION")
+        or os.getenv("VERTEX_LOCATION")
+        or os.getenv("VERTEX_AI_LOCATION")
+    )
+    if not location:
+        # Choose a widely available default for generative models
+        location = "us-central1"
+        print("GOOGLE_CLOUD_LOCATION not set. Defaulting to us-central1.")
+
+    # Normalize into GOOGLE_CLOUD_LOCATION for the google-genai client
+    os.environ["GOOGLE_CLOUD_LOCATION"] = location
+    print(f"Using GOOGLE_CLOUD_LOCATION={location}")
+
+    vertexai.init(project=project, location=location, credentials=credentials)
+
+    return credentials, project
+
+
+@dataclass
+class AgentConfiguration:
+    """Configuration settings for the ADK Agent."""
+    model: str = "gemini-2.5-flash"
+    agent_name = "ADK Agent"
+    
+    temperature: float = 0.2  # Lower temperature for more focused responses
+    max_output_tokens: int = 1024  # Limit response length
+    top_p: float = 0.95  # Nucleus sampling
+    top_k: int = 40  # Top-k sampling
+
+@dataclass
+class embedConfig:
+    model: str = "text-multilingual-embedding-002"
+    dimensions: int = 768  # Embedding dimensions for the chosen model
+
+config = AgentConfiguration()
