@@ -1,5 +1,5 @@
 export type Paper = {
-  id: number;
+  paper_id: string;
   title: string;
   x: number;
   y: number;

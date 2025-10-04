@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 import { Card, CardContent } from "@/components/ui/card";
-
-import { htmlContent } from "@/data/paper-detail";
+import { useGlobal } from "@/context/GlobalContext";
 
 export const PaperDetail: React.FC = () => {
     const [cleanHTML, setCleanHTML] = useState("");
+    const { htmlContent } = useGlobal();
 
     useEffect(() => {
-        setCleanHTML(DOMPurify.sanitize(htmlContent));
-    }, []);
+        setCleanHTML(DOMPurify.sanitize(htmlContent ?? ""));
+    }, [htmlContent]);
 
     return (
         <Card className="mx-0 max-w-xl w-full">

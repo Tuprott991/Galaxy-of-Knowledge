@@ -19,14 +19,28 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import {
+  axiosClient
+} from "@/api/axiosClient";
 
 export function InsightButton() {
+  const handleViewInsightClick = async () => {
+    try {
+      // Gọi API để ghi nhận sự kiện
+      const res = await axiosClient.get('/v1/clusters/treemap');
+      console.log(res);
+    } catch (error) {
+      console.error("Error recording insight click:", error);
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="secondary"
           className="flex items-center gap-2 bg-neutral-800/40 backdrop-blur-md border border-neutral-700 hover:bg-neutral-700/50"
+          onClick={handleViewInsightClick}
         >
           Insight
         </Button>
