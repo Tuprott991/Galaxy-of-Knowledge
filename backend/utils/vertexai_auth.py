@@ -67,5 +67,9 @@ class AgentConfiguration:
     top_p: float = 0.95  # Nucleus sampling
     top_k: int = 40  # Top-k sampling
 
+@dataclass
+class embedConfig:
+    model: str = "text-multilingual-embedding-002"
+    dimensions: int = 768  # Embedding dimensions for the chosen model
 
 config = AgentConfiguration()
