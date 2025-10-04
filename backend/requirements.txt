@@ -1,4 +1,4 @@
 vertexai
 fastapi
 uvicorn
-psycopg2[binary,pool]
+psycopg[binary, pool]

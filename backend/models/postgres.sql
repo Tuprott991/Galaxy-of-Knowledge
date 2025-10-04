@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS paper (
     paper_id SERIAL PRIMARY KEY,
     full_text TEXT,
     author_list TEXT[],
+    title TEXT,
+    abstract TEXT,
     json_data JSONB,
     embeddings vector(768), -- Adjust dimension as needed (e.g., 768 for BERT, 1536 for OpenAI)
     plot_visualize_x FLOAT,
