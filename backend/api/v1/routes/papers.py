@@ -33,7 +33,8 @@ async def get_papers_visualization(
                 plot_visualize_x AS x, 
                 plot_visualize_y AS y, 
                 plot_visualize_z AS z,
-                cluster
+                cluster,
+                topic
             FROM paper 
             WHERE plot_visualize_x IS NOT NULL 
               AND plot_visualize_y IS NOT NULL 
@@ -57,7 +58,8 @@ async def get_papers_visualization(
                 "x": float(paper[2]),
                 "y": float(paper[3]),
                 "z": float(paper[4]),
-                "cluster": paper[5]
+                "cluster": paper[5],
+                "topic": paper[6]
             }
             for paper in papers
         ]
@@ -163,7 +165,8 @@ async def get_paper_html_context(
             SELECT 
                 paper_id,
                 title,
-                html_context
+                html_context,
+                authors
             FROM paper 
             WHERE paper_id = %s
         """
@@ -181,6 +184,7 @@ async def get_paper_html_context(
             paper_id=result[0],
             title=result[1],
             html_context=result[2],
+            authors=result[3].split(", ") if result[3] else [],
             has_html_context=result[2] is not None,
             html_context_length=len(result[2]) if result[2] else 0
         )

@@ -8,6 +8,10 @@ from .paper import (
 )
 from .search import SearchPaper
 from .stats import StatsResponse
+from .treemap import ClusterTopic, TreemapNode, TreemapResponse
+from .graph import (
+    Node, Edge, GraphData, GraphRequest, GraphResponse
+)
 
 __all__ = [
     "ErrorResponse",
@@ -17,5 +21,13 @@ __all__ = [
     "PapersResponse", 
     "PaperDetail",
     "SearchPaper",
-    "StatsResponse"
+    "StatsResponse",
+    "ClusterTopic",
+    "TreemapNode", 
+    "TreemapResponse",
+    "Node",
+    "Edge", 
+    "GraphData",
+    "GraphRequest",
+    "GraphResponse"
 ]
