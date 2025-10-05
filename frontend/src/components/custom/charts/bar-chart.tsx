@@ -7,16 +7,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export const description = "A mixed bar chart"
-
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
-
 const chartConfig = {
   visitors: {
     label: "Visitors",
@@ -43,12 +33,16 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function CustomBarChart() {
+export function CustomBarChart({ title, description, chartData }: {
+  title?: string
+  description?: string
+  chartData?: any[]
+}) {
   return (
     <div className="w-full h-full flex flex-col p-4">
       <div className="flex flex-col gap-1 pb-4 mb-4 border-b">
-        <h3 className="text-lg font-semibold">Bar Chart - Mixed</h3>
-        <p className="text-sm text-muted-foreground">January - June 2024</p>
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
       <div className="flex-1 flex items-center justify-center min-h-0">
         <ChartContainer config={chartConfig} className="h-[250px] w-full">
@@ -61,7 +55,7 @@ export function CustomBarChart() {
             }}
           >
             <YAxis
-              dataKey="browser"
+              dataKey="topic"
               type="category"
               tickLine={false}
               tickMargin={10}
@@ -70,12 +64,12 @@ export function CustomBarChart() {
                 chartConfig[value as keyof typeof chartConfig]?.label
               }
             />
-            <XAxis dataKey="visitors" type="number" hide />
+            <XAxis dataKey="paper_count" type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="visitors" radius={5} />
+            <Bar dataKey="paper_count" radius={5} />
           </BarChart>
         </ChartContainer>
       </div>
