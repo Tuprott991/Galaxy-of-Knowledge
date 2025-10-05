@@ -15,6 +15,8 @@ import { agentModes } from "@/data/agent-modes";
 import { motion, AnimatePresence } from "framer-motion";
 import PaperGraph from "@/components/custom/PaperGraph";
 import { v4 as uuidv4 } from "uuid";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const API_BASE_URL = "http://localhost:8082";
 const USER_ID = "u_999";
@@ -80,6 +82,7 @@ export function Chatbot() {
         
         setLoading(true);
         let fullResponse = "";
+        let streamingMessageAdded = false;
         
         try {
             const response = await fetch(`${API_BASE_URL}/run_sse`, {
@@ -113,9 +116,6 @@ export function Chatbot() {
                 throw new Error("Response body is not readable");
             }
 
-            // Create a temporary message index for streaming updates
-            const tempMessageIndex = messages.length + 1;
-
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
@@ -137,16 +137,21 @@ export function Chatbot() {
                                         // Update the bot message in real-time
                                         setMessages(prev => {
                                             const newMessages = [...prev];
-                                            if (newMessages[tempMessageIndex]) {
-                                                newMessages[tempMessageIndex] = {
+                                            const lastMessage = newMessages[newMessages.length - 1];
+                                            
+                                            // If last message is from bot and is our streaming message, update it
+                                            if (lastMessage?.sender === "bot" && streamingMessageAdded) {
+                                                newMessages[newMessages.length - 1] = {
                                                     text: fullResponse,
                                                     sender: "bot"
                                                 };
                                             } else {
+                                                // Add new bot message
                                                 newMessages.push({
                                                     text: fullResponse,
                                                     sender: "bot"
                                                 });
+                                                streamingMessageAdded = true;
                                             }
                                             return newMessages;
                                         });
@@ -231,42 +236,60 @@ export function Chatbot() {
                             </DropdownMenu>
                         </CardHeader>
 
-                        <div className="flex-1 px-4 py-1 overflow-y-auto text-white flex flex-col gap-2 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-900">
+                        <div className="flex-1 px-4 py-3 overflow-y-auto text-white flex flex-col gap-3 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-900">
                             {messages.length === 0 && (
-                                <div className="text-gray-400 italic text-xs space-y-2">
-                                    <p>Welcome to the GoK Super Agent!</p>
+                                <div className="text-gray-400 italic text-sm space-y-2 p-4">
+                                    <p className="text-lg font-semibold">Welcome to the GoK Super Agent! 🚀</p>
+                                    <p>Start by creating a new session, then ask me anything about scientific research.</p>
                                 </div>
                             )}
                             {messages.map((msg, index) => (
                                 <div
                                     key={index}
-                                    className={`p-2 rounded-md max-w-[80%] text-xs ${msg.sender === "user"
+                                    className={`p-3 rounded-lg max-w-[85%] shadow-lg ${msg.sender === "user"
                                         ? "self-end bg-blue-600 text-white"
-                                        : "self-start bg-gray-700 text-white"
+                                        : "self-start bg-gray-800 text-white border border-gray-700"
                                         }`}
                                 >
-                                    {msg.text}
+                                    {msg.sender === "bot" ? (
+                                        <div className="prose-chatbot">
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                {msg.text}
+                                            </ReactMarkdown>
+                                        </div>
+                                    ) : (
+                                        <p className="text-base leading-relaxed">{msg.text}</p>
+                                    )}
                                 </div>
                             ))}
                             {loading && (
-                                <p className="self-start text-gray-400 italic text-xs">Bot is thinking...</p>
+                                <div className="self-start text-gray-400 italic text-sm flex items-center gap-2 p-3">
+                                    <div className="animate-pulse">●</div>
+                                    <span>Bot is thinking...</span>
+                                </div>
                             )}
                             {
                                 activeMode === "pro-agent" && (<PaperGraph />)
                             }
                         </div>
 
-                        <CardFooter className="border-t border-slate-600/50 p-3 flex gap-2">
+                        <CardFooter className="border-t border-slate-600/50 p-4 flex gap-2">
                             <Input
                                 type="text"
-                                placeholder="Welcome to the GoK! Ask me anything..."
+                                placeholder="Ask me anything about scientific research..."
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
-                                className="flex-1 rounded-md border border-gray-600 px-3 py-2 text-sm bg-black text-white placeholder-gray-400 focus:outline-none focus:border-gray-500"
+                                className="flex-1 rounded-lg border border-gray-600 px-4 py-3 text-base bg-black text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
                                 disabled={loading}
                             />
-                            <Button variant="secondary" size="sm" onClick={handleSend} disabled={loading}>
+                            <Button 
+                                variant="secondary" 
+                                size="default" 
+                                onClick={handleSend} 
+                                disabled={loading || !inputValue.trim()}
+                                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+                            >
                                 Send
                             </Button>
                         </CardFooter>
