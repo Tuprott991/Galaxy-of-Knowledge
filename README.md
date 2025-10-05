@@ -2,7 +2,7 @@
 
 > An interactive 3D universe of NASA research papers powered by AI and advanced visualization
 
-[![System Architecture](Gok.drawio.png)](Gok.drawio.png)
+[![Frontnend](Star.png)](Star.png)
 
 ## 🚀 Overview
 
