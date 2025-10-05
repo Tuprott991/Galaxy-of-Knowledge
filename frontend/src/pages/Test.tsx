@@ -37,10 +37,10 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     { name: "Neptune", color: "#4B70DD", size: 0.025, distance: 0.85, emissive: "#4B70DD", emissiveIntensity: 0.4 }
   ];
 
-  // 🔸 Lắng nghe phím Space để toggle quay / dừng
+  // 🔸 Lắng nghe phím Q để toggle quay / dừng
   useEffect(() => {
     const handleSpace = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
+      if (e.key === "q" || e.key === "Q") {
         e.preventDefault();
         e.stopPropagation();
         setPaused((prev) => !prev);
@@ -290,7 +290,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
   useEffect(() => {
     const handleSpace = async (e: KeyboardEvent) => {
-      if (e.code === "Space" && selectedId !== null) {
+      if ((e.key === "q" || e.key === "Q") && selectedId !== null) {
         e.preventDefault();
         e.stopPropagation();
         const paper = papers.find((p) => p.paper_id === selectedId);
@@ -309,7 +309,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     };
     window.addEventListener("keydown", handleSpace);
     return () => window.removeEventListener("keydown", handleSpace);
-  }, [selectedId, papers, setHtmlContent, setSelectedPaperId, setChatView]);
+  }, [selectedId, papers, setHtmlContent, setSelectedPaperId, setTopic, setChatView]);
 
   useEffect(() => {
     const downHandler = (e: KeyboardEvent) => setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));

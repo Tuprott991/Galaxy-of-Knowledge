@@ -13,7 +13,7 @@ export function ShortDetail({ paper }: { paper: Paper }) {
                 <span
                     className="font-semibold flex items-center bg-neutral-800/40 backdrop-blur-md border border-neutral-700 hover:bg-neutral-700/50 px-2 rounded-md justify-center text-xs font-mono"
                 >
-                    Space
+                    Q
                 </span>
                 <span className="text-sm font-semibold">Open</span>
             </div>
