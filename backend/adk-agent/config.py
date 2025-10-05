@@ -51,7 +51,7 @@ def setup_vertex_ai_auth():
 class AgentConfiguration:
     """Configuration settings for the ADK Agent."""
     model: str = "gemini-2.5-flash"
-    agent_name = "insurance_assistant"
+    agent_name = "SoftAI_Bot_for_NASA_Biology_Research"
     
     temperature: float = 0.2  # Lower temperature for more focused responses
     max_output_tokens: int = 1024  # Limit response length

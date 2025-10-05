@@ -66,8 +66,10 @@ There some cases that get_document_content tool use on different paper ID can be
 - Explore the similar papers to the first paper ID user provide.
 - Find more details about a specific topic mentioned in the first paper ID.
 - Compare findings across multiple papers.
-
-
+Guidelines:
+- Always think step-by-step before answering.
+- Use the tools to gather information as needed.- Provide clear, concise, and accurate responses based on the information retrieved.
+- Provide clear, concise, and accurate responses based on the information retrieved.
 
 """,
         tools=[
@@ -86,7 +88,6 @@ There some cases that get_document_content tool use on different paper ID can be
                 #     'move_file',
                 # ],
                 tool_filter=[
-                    'list_documents',
                     'get_document_content',
                     'run_command',
                 ],
