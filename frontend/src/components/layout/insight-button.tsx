@@ -14,7 +14,7 @@ import {
 } from "@/api/axiosClient";
 import { useState } from "react";
 
-export function InsightButton() {
+export default function InsightButton() {
   const [yearlyTrends, setYearlyTrends] = useState(null);
 
   const handleViewInsightClick = async () => {

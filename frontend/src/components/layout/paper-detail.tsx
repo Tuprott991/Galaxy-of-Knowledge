@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import DOMPurify from "dompurify";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useGlobal } from "@/context/GlobalContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { axiosClient } from "@/api/axiosClient.ts";
 
-export const PaperDetail: React.FC = () => {
+export default function PaperDetail() {
     const [cleanHTML, setCleanHTML] = useState("");
     const { selectedPaperId } = useGlobal();
     const [paperTitle, setPaperTitle] = useState<string>("");

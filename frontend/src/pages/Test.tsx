@@ -1,8 +1,8 @@
-import React, { Suspense, useState, useEffect, useRef } from "react";
+import React, { lazy, Suspense, useState, useEffect, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Stars, PointerLockControls } from "@react-three/drei";
 import type { Paper } from "../types";
-import { ShortDetail } from "@/components/mainpage/short-detail";
+const ShortDetail = lazy(() => import("@/components/mainpage/short-detail"));
 import { colorPalette } from "@/data/color-palette";
 import { randomClusterColor } from "@/utils/helper";
 import { axiosClient } from "@/api/axiosClient";
@@ -492,7 +492,11 @@ const PaperScatter3D: React.FC = () => {
         </div>
       )}
 
-      {hoveredPaper && !chatView && <ShortDetail paper={hoveredPaper} />}
+      {hoveredPaper && !chatView && (
+        <Suspense fallback={null}>
+          <ShortDetail paper={hoveredPaper} />
+        </Suspense>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import type { Paper } from "@/types";
 
-export function ShortDetail({ paper }: { paper: Paper }) {
+export default function ShortDetail({ paper }: { paper: Paper }) {
     return (
         <div className="fixed top-14 p-2 max-w-full left-1/2 text-white -translate-x-1/2 z-10">
             <div className="flex justify-center gap-1 mt-1 items-center">

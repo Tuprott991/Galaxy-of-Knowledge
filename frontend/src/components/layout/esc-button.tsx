@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useGlobal } from "@/context/GlobalContext";
 import { Button } from "@/components/ui/button";
 
-export function ESCButton() {
+export default function ESCButton() {
     const { setChatView } = useGlobal();
 
     const handleKeyDown = (event: KeyboardEvent) => {

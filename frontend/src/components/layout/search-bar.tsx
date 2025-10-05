@@ -13,7 +13,7 @@ import {
 import { searchModes } from "@/data/search-mode";
 import { useGlobal } from "@/context/GlobalContext";
 
-export function SearchBar() {
+export default function SearchBar() {
   const { query, setQuery, searchMode, setSearchMode } = useGlobal();
   const [localQuery, setLocalQuery] = useState(query);
 

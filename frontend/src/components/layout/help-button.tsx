@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { ControlItem } from "@/components/custom/list-item";
 import { BadgeQuestionMark } from "lucide-react";
 
-export function HelpButton() {
+export default function HelpButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>

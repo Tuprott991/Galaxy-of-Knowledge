@@ -21,7 +21,7 @@ import { useGlobal } from "@/context/GlobalContext";
 const API_BASE_URL = "http://localhost:8082";
 const USER_ID = "u_999";
 
-export function Chatbot() {
+export default function Chatbot() {
     const { selectedPaperId } = useGlobal();
     const [activeMode, setActiveMode] = useState("inquiry-agent");
     const [messages, setMessages] = useState<{ text: string; sender: "user" | "bot" }[]>([]);
@@ -61,11 +61,11 @@ export function Chatbot() {
             setLoading(true);
             const sessionData = await createSession();
             setSessionId(sessionData.sessionId);
-            
+
             if (selectedPaperId) {
-                setMessages([{ 
-                    text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nNew session created! You can now ask questions about this paper.`, 
-                    sender: "bot" 
+                setMessages([{
+                    text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nNew session created! You can now ask questions about this paper.`,
+                    sender: "bot"
                 }]);
             } else {
                 setMessages([{ text: `New session created! Session ID: ${sessionData.sessionId}`, sender: "bot" }]);
@@ -87,7 +87,7 @@ export function Chatbot() {
                 text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nCreating new session for this paper...`,
                 sender: "bot"
             }]);
-            
+
             // Auto-create session
             handleCreateNewSession();
         } else {
@@ -111,11 +111,11 @@ export function Chatbot() {
         if (!sessionId) {
             return "Please create a session first by clicking the 'New Session' button.";
         }
-        
+
         setLoading(true);
         let fullResponse = "";
         let streamingMessageAdded = false;
-        
+
         try {
             const response = await fetch(`${API_BASE_URL}/run_sse`, {
                 method: "POST",
@@ -159,18 +159,18 @@ export function Chatbot() {
                     if (line.startsWith('data: ')) {
                         try {
                             const jsonData = JSON.parse(line.substring(6));
-                            
+
                             // Extract text from the response
                             if (jsonData.content?.parts) {
                                 for (const part of jsonData.content.parts) {
                                     if (part.text) {
                                         fullResponse += part.text;
-                                        
+
                                         // Update the bot message in real-time
                                         setMessages(prev => {
                                             const newMessages = [...prev];
                                             const lastMessage = newMessages[newMessages.length - 1];
-                                            
+
                                             // If last message is from bot and is our streaming message, update it
                                             if (lastMessage?.sender === "bot" && streamingMessageAdded) {
                                                 newMessages[newMessages.length - 1] = {
@@ -208,21 +208,21 @@ export function Chatbot() {
 
     const handleSend = async () => {
         if (!inputValue.trim()) return;
-        
+
         // Check if this is the first user message (only bot messages exist)
         const isFirstUserMessage = messages.every(msg => msg.sender === "bot");
-        
+
         // If first message and we have a paper ID, prepend it to the message
         let userMessage = inputValue;
         if (isFirstUserMessage && selectedPaperId) {
             userMessage = `[Paper ID: ${selectedPaperId}]\n\n${inputValue}`;
         }
-        
+
         setMessages([...messages, { text: inputValue, sender: "user" }]); // Display original message
         setInputValue("");
 
         const botResponse = await callApi(userMessage); // Send message with Paper ID to API
-        
+
         // Only add bot message if streaming didn't already add it
         setMessages((prev) => {
             const lastMessage = prev[prev.length - 1];
@@ -247,9 +247,9 @@ export function Chatbot() {
                         <CardHeader className="flex justify-between items-center py-2 px-4 border-b border-slate-600/50">
                             <div className="flex items-center gap-2">
                                 <h2 className="text-sm font-semibold text-white">Choose the Agent Mode</h2>
-                                <Button 
-                                    variant="outline" 
-                                    size="sm" 
+                                <Button
+                                    variant="outline"
+                                    size="sm"
                                     onClick={handleCreateNewSession}
                                     disabled={loading}
                                     className="text-xs"
@@ -328,7 +328,7 @@ export function Chatbot() {
                                 }}
                                 disabled={loading}
                                 rows={1}
-                                style={{ 
+                                style={{
                                     overflowY: inputValue.split('\n').length > 3 ? 'auto' : 'hidden',
                                     height: 'auto'
                                 }}
@@ -338,10 +338,10 @@ export function Chatbot() {
                                     target.style.height = Math.min(target.scrollHeight, 200) + 'px';
                                 }}
                             />
-                            <Button 
-                                variant="secondary" 
-                                size="default" 
-                                onClick={handleSend} 
+                            <Button
+                                variant="secondary"
+                                size="default"
+                                onClick={handleSend}
                                 disabled={loading || !inputValue.trim()}
                                 className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
                             >
