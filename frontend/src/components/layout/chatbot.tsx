@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { agentModes } from "@/data/agent-modes";
 import { motion, AnimatePresence } from "framer-motion";
+import PaperGraph from "@/components/custom/PaperGraph";
 
 // Template responses for each mode
 const modeResponses = {
@@ -133,8 +134,7 @@ export function Chatbot() {
                         <div className="flex-1 px-4 py-1 overflow-y-auto text-white flex flex-col gap-2 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-900">
                             {messages.length === 0 && (
                                 <div className="text-gray-400 italic text-xs space-y-2">
-                                    <p className="font-semibold">Chào mừng đến với {agentModes.find(m => m.value === activeMode)?.label}!</p>
-                                    <p>{modeResponses[activeMode as keyof typeof modeResponses][0]}</p>
+                                    <p>Welcome to the GoK Super Agent!</p>
                                 </div>
                             )}
                             {messages.map((msg, index) => (
@@ -151,6 +151,9 @@ export function Chatbot() {
                             {loading && (
                                 <p className="self-start text-gray-400 italic text-xs">Bot is thinking...</p>
                             )}
+                            {
+                                activeMode === "pro-agent" && (<PaperGraph />)
+                            }
                         </div>
 
                         <CardFooter className="border-t border-slate-600/50 p-3 flex gap-2">

@@ -30,7 +30,7 @@ const PaperGraph: React.FC = () => {
         const fetchGraph = async () => {
             try {
                 const res = await fetch(
-                    "http://localhost:8000/api/v1/graph/2d?paper_id=PMC2910419&mode=citing"
+                    "http://localhost:8000/api/v1/graph/2d?paper_id=PMC2910419&mode=key_knowledge"
                 );
                 const data = await res.json();
 
@@ -61,7 +61,7 @@ const PaperGraph: React.FC = () => {
         <div
             style={{
                 width: "100%",
-                height: "700px",
+                height: "auto",
                 borderRadius: "12px",
                 overflow: "hidden",
                 boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
@@ -81,7 +81,7 @@ const PaperGraph: React.FC = () => {
                     ctx.shadowColor = "rgba(0,0,0,0.5)";
                     ctx.shadowBlur = 6;
                     ctx.fill();
-                    ctx.font = ${fontSize}px Sans-Serif;
+                    ctx.font = `${fontSize}px Sans-Serif`;
                     ctx.textAlign = "center";
                     ctx.fillStyle = "#ffffff";
                     ctx.fillText(node.label, node.x, node.y - node.size - 4);
