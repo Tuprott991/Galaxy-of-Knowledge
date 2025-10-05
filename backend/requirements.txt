@@ -46,5 +46,8 @@ bs4
 
 openai
 
-google-adk  
+google-adk==1.14.1
 rich
+google-genai==1.5.0
+
+google-auth==2.38.0

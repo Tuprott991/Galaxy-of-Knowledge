@@ -108,7 +108,7 @@ async def get_document_content(id: str) -> str:
     try:
         document = get_md_content_by_paper_id(id)
         if document:
-            return document['content']
+            return document
         else:
             return f"Paper with '{id}' not found."
     except Exception as e:
