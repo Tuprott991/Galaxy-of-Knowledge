@@ -253,17 +253,32 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
   useEffect(() => {
     if (!query) return;
 
+    // Tọa độ gốc của ngôi sao
     const target = new THREE.Vector3(64.70495128631592, 8.552704453468323, -32.50426769256592);
-    const duration = 1;
+
+    // Khoảng cách camera lùi ra
+    const distance = 3.5;
+
+    // Hướng nhìn từ ngôi sao về phía camera hiện tại
+    const direction = new THREE.Vector3().subVectors(camera.position, target).normalize();
+
+    // Nếu camera đang ở quá xa hoặc bị lệch hướng, chuẩn hóa hướng
+    if (direction.length() === 0) direction.set(0, 0, 1); // tránh NaN nếu camera == target
+
+    // Vị trí đích cách ngôi sao một đoạn về phía sau
+    const finalPos = target.clone().addScaledVector(direction, distance);
+
+    const duration = 1.2; // giây
     const start = camera.position.clone();
     const startTime = performance.now();
 
     const animate = (time: number) => {
       const t = Math.min((time - startTime) / (duration * 1000), 1);
-      camera.position.lerpVectors(start, target, t);
+      camera.position.lerpVectors(start, finalPos, t);
       camera.lookAt(target);
       if (t < 1) requestAnimationFrame(animate);
     };
+
     requestAnimationFrame(animate);
   }, [query, camera]);
 
