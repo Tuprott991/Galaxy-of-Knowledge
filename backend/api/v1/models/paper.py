@@ -14,6 +14,7 @@ class PaperVisualization(BaseModel):
     z: float = Field(..., description="Z coordinate")
     cluster: Optional[str] = Field(None, description="Cluster UUID")
     topic: str = Field(..., description="Paper topic/category")
+    score: Optional[float] = Field(None, description="Relevance score")
 
 
 class PaperHTMLContext(BaseModel):
