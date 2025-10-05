@@ -20,13 +20,12 @@ type PaperPointProps = {
 const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selected }) => {
   const [hovered, setHovered] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [paused, setPaused] = useState(false); // 🔹 toggle quay/dừng
-  const [networkPositions, setNetworkPositions] = useState<THREE.Vector3[]>([]); // 🔹 vị trí mạng
+  const [paused, setPaused] = useState(false);
+  const [networkPositions, setNetworkPositions] = useState<THREE.Vector3[]>([]);
   const orbitRef = useRef<THREE.Group>(null);
   const linesRef = useRef<(THREE.Line | null)[]>([]);
   const color = colorMap?.[paper.cluster] || "gray";
 
-  // Danh sách hành tinh
   const solarSystemPlanets = [
     { name: "Mercury", color: "#8C7853", size: 0.015, distance: 0.25, emissive: "#8C7853", emissiveIntensity: 0.3 },
     { name: "Venus", color: "#FFC649", size: 0.02, distance: 0.35, emissive: "#FFC649", emissiveIntensity: 0.5 },
@@ -37,7 +36,6 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     { name: "Neptune", color: "#4B70DD", size: 0.025, distance: 0.85, emissive: "#4B70DD", emissiveIntensity: 0.4 }
   ];
 
-  // 🔸 Lắng nghe phím Q để toggle quay / dừng
   useEffect(() => {
     const handleSpace = (e: KeyboardEvent) => {
       if (e.key === "q" || e.key === "Q") {
@@ -227,10 +225,19 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
   const direction = new THREE.Vector3();
 
+  const { query } = useGlobal();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/v1/papers/visualization");
+        let res = null;
+        if (query) {
+          res = await axiosClient.get("/v1/papers/search", {
+            params: { query, search_type: 'semantic', limit: 100 },
+          });
+        } else {
+          res = await axiosClient.get("/v1/papers/visualization");
+        }
         console.log(res.data)
         if (!res.data || res.data.length === 0) return;
 
@@ -251,8 +258,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     };
     fetchData();
   }, []);
-
-  const { query } = useGlobal();
 
   useEffect(() => {
     if (!query) return;
@@ -297,11 +302,11 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         e.stopPropagation();
         const paper = papers.find((p) => p.paper_id === selectedId);
         if (!paper) return;
-        
+
         // Open chatView immediately for faster response
         setChatView?.(true);
         setSelectedPaperId?.(selectedId);
-        
+
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
           console.log("Fetched HTML content:", res.data);
