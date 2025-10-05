@@ -72,7 +72,6 @@ class GraphService:
                 "topic": center_paper['topic'],
                 "score": center_paper['score'],
                 "citation_count": center_paper['citation_count'],
-                "reference_count": center_paper['reference_count'],
                 "author_count": center_paper['author_count'],
                 "knowledge_context_count": center_paper['knowledge_context_count'],
                 "coordinates": {
@@ -552,7 +551,6 @@ class GraphService:
                     p.score,
                     p.summarize,
                     p.cited_by,
-                    p._references,
                     p.plot_visualize_x,
                     p.plot_visualize_y,
                     p.plot_visualize_z,
@@ -560,7 +558,6 @@ class GraphService:
                     p.updated_at,
                     -- Calculate derived metrics
                     COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
-                    COALESCE(array_length(p._references, 1), 0) as reference_count,
                     COALESCE(array_length(p.author_list, 1), 0) as author_count,
                     -- Get key knowledge context count
                     (SELECT COUNT(*) FROM key_knowledge kk WHERE kk.paper_id = p.id) as knowledge_context_count
@@ -674,6 +671,7 @@ class GraphService:
                     p.abstract, 
                     p.author_list,
                     p.cluster,
+                    p.cited_by,
                     p.topic,
                     p.score,
                     COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
@@ -682,7 +680,7 @@ class GraphService:
                     -- Calculate citation context (how this paper cites the center paper)
                     'incoming' as citation_type
                 FROM paper p
-                WHERE %s = ANY(p._references)
+                WHERE %s = ANY(p.cited_by)
                 AND p.paper_id != %s
                 ORDER BY 
                     COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
@@ -710,10 +708,10 @@ class GraphService:
             
             query = """
                 WITH center_paper_refs AS (
-                    SELECT unnest(_references) as ref_paper_id
+                    SELECT unnest(cited_by) as ref_paper_id
                     FROM paper
                     WHERE paper_id = %s
-                    AND _references IS NOT NULL
+                    AND cited_by IS NOT NULL
                 )
                 SELECT 
                     p.paper_id, 
