@@ -55,7 +55,7 @@ export function CustomAreaChart({
                         />
                         <ChartTooltip
                             cursor={false}
-                            content={<ChartTooltipContent indicator="area" />}
+                            content={<ChartTooltipContent indicator="line" />}
                         />
                         <Area
                             dataKey="count"

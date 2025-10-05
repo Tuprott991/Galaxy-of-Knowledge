@@ -23,7 +23,7 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
   const [paused, setPaused] = useState(false); // 🔹 toggle quay/dừng
   const [networkPositions, setNetworkPositions] = useState<THREE.Vector3[]>([]); // 🔹 vị trí mạng
   const orbitRef = useRef<THREE.Group>(null);
-  const linesRef = useRef<THREE.Line[]>([]);
+  const linesRef = useRef<(THREE.Line | null)[]>([]);
   const color = colorMap?.[paper.cluster] || "gray";
 
   // Danh sách hành tinh
@@ -93,7 +93,9 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
           if (orbitRef.current?.children[i]) {
             const planetPos = orbitRef.current.children[i].position.clone();
             const points = [new THREE.Vector3(0, 0, 0), planetPos];
-            (line.geometry as THREE.BufferGeometry).setFromPoints(points);
+            if (line) {
+              (line.geometry as THREE.BufferGeometry).setFromPoints(points);
+            }
           }
         });
       }
@@ -185,7 +187,9 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
             solarSystemPlanets.map((_, i) => (
               <line
                 key={`line-${i}`}
-                ref={(ref) => (linesRef.current[i] = ref!)}
+                ref={(ref) => {
+                  linesRef.current[i] = ref as unknown as THREE.Line | null;
+                }}
               >
                 <bufferGeometry />
                 <lineBasicMaterial color={color} transparent opacity={0.5} />
