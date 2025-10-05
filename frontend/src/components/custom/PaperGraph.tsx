@@ -1,55 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import ForceGraph2D from "react-force-graph-2d";
+import type { ForceGraphMethods } from "react-force-graph-2d";
+import { forceLink } from "d3-force";
 
-// Kiểu dữ liệu graph
-type Node = {
+interface NodeType {
     id: string;
     label: string;
-    type?: string;
-    color?: string;
-};
+    color: string;
+    size: number;
+}
 
-type Edge = {
-    from: string;
-    to: string;
-};
+interface LinkType {
+    source: string;
+    target: string;
+    color: string;
+    label: string;
+}
 
-type GraphData = {
-    nodes: Node[];
-    edges: Edge[];
-};
-
-export default function GraphPage() {
-    const [graphData, setGraphData] = useState<GraphData>({ nodes: [], edges: [] });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+const PaperGraph: React.FC = () => {
+    const [graphData, setGraphData] = useState<{ nodes: NodeType[]; links: LinkType[] }>({
+        nodes: [],
+        links: [],
+    });
+    const fgRef = useRef<ForceGraphMethods>();
+    const [hoverNode, setHoverNode] = useState<NodeType | null>(null);
+    const [hoverLink, setHoverLink] = useState<LinkType | null>(null);
 
     useEffect(() => {
         const fetchGraph = async () => {
             try {
-                setLoading(true);
                 const res = await fetch(
-                    "http://localhost:8000/api/v1/graph/2d?paper_id=PMC2910419&mode=key_knowledge&max_nodes=10&depth=2"
+                    "http://localhost:8000/api/v1/graph/2d?paper_id=PMC2910419&mode=citing"
                 );
-
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-
                 const data = await res.json();
-                console.log("Fetched graph:", data);
 
-                // Nếu backend trả về { success: true, data: { nodes, edges } }
-                if (data.success && data.data) {
-                    setGraphData({
-                        nodes: data.data.nodes || [],
-                        edges: data.data.edges || [],
-                    });
-                } else {
-                    setGraphData({ nodes: [], edges: [] });
-                }
-            } catch (err: any) {
-                console.error(err);
-                setError(err.message || "Unknown error");
-            } finally {
-                setLoading(false);
+                const nodes: NodeType[] = (data.data.nodes || []).map((n: any) => ({
+                    id: n.id || Math.random().toString(),
+                    label: n.label || "",
+                    color: n.color || "#3498db",
+                    size: (n.size || 12) * 0.5,
+                }));
+
+                const links: LinkType[] = (data.data.edges || []).map((e: any) => ({
+                    source: e.source,
+                    target: e.target,
+                    color: e.color || "#888",
+                    label: e.label || "",
+                }));
+
+                setGraphData({ nodes, links });
+            } catch (err) {
+                console.error("Failed to fetch graph data:", err);
             }
         };
 
@@ -57,40 +58,53 @@ export default function GraphPage() {
     }, []);
 
     return (
-        <div style={{ padding: 20, fontFamily: "Arial" }}>
-            <h2>Graph Visualization</h2>
-            {loading && <p>Loading graph...</p>}
-            {error && <p style={{ color: "red" }}>Error: {error}</p>}
-
-            {!loading && !error && (
-                <>
-                    <h3>Nodes</h3>
-                    {graphData.nodes.length === 0 ? (
-                        <p>No nodes found</p>
-                    ) : (
-                        <ul>
-                            {graphData.nodes.map((node) => (
-                                <li key={node.id} style={{ color: node.color || "#000" }}>
-                                    {node.label} ({node.id})
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-
-                    <h3>Edges</h3>
-                    {graphData.edges.length === 0 ? (
-                        <p>No edges found</p>
-                    ) : (
-                        <ul>
-                            {graphData.edges.map((edge, index) => (
-                                <li key={index}>
-                                    {edge.from} → {edge.to}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </>
-            )}
+        <div
+            style={{
+                width: "100%",
+                height: "700px",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+                backgroundColor: "#1e1e1e",
+            }}
+        >
+            <ForceGraph2D
+                ref={fgRef}
+                graphData={graphData}
+                nodeAutoColorBy="color"
+                nodeLabel={(node: any) => `${node.label}`}
+                nodeCanvasObject={(node: any, ctx, globalScale) => {
+                    const fontSize = 12 / globalScale;
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.size, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = node === hoverNode ? "#ff7f50" : node.color;
+                    ctx.shadowColor = "rgba(0,0,0,0.5)";
+                    ctx.shadowBlur = 6;
+                    ctx.fill();
+                    ctx.font = ${fontSize}px Sans-Serif;
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillText(node.label, node.x, node.y - node.size - 4);
+                }}
+                onNodeHover={setHoverNode}
+                linkColor={(link: any) => (link === hoverLink ? "#ff4500" : link.color)}
+                linkWidth={(link: any) => (link === hoverLink ? 2.5 : 1)}
+                linkLabel={(link: any) => link.label}
+                onLinkHover={setHoverLink}
+                enableNodeDrag={true}
+                cooldownTicks={200}
+                backgroundColor="#1e1e1e"
+                linkDirectionalParticles={2}
+                linkDirectionalParticleWidth={(link: any) => (link === hoverLink ? 3 : 0)}
+                linkDirectionalParticleSpeed={0.005}
+                d3Force={(graph) =>
+                    forceLink(graph.links)
+                        .id((d: any) => d.id)
+                        .distance(200) // 🔹 tăng khoảng cách các cạnh
+                }
+            />
         </div>
     );
-}
+};
+
+export default PaperGraph;
