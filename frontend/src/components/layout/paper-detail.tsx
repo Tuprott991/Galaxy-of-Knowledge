@@ -39,11 +39,10 @@ export const PaperDetail: React.FC = () => {
         });
     }, [selectedPaperId]);
 
-    // 🧩 Xử lý kéo giãn khung
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             if (!isResizing.current) return;
-            setWidth(Math.min(Math.max(500, e.clientX - 20), 1200)); // Giới hạn từ 500px đến 1200px
+            setWidth(Math.min(Math.max(500, e.clientX - 20), 1200));
         };
 
         const handleMouseUp = () => {
@@ -72,7 +71,7 @@ export const PaperDetail: React.FC = () => {
                     initial={{ x: "-100%", opacity: 0 }}
                     animate={{ x: 30, y: -10, opacity: 1 }}
                     exit={{ x: "-100%", opacity: 0 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
                     className="fixed top-0 left-0 h-full z-50 flex items-center"
                 >
                     <div

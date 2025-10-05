@@ -21,7 +21,7 @@ type PaperPointProps = {
 
 const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selected }) => {
   const [hovered, setHovered] = useState(false);
-  const [progress, setProgress] = useState(0); // 0 → 1 bung ra
+  const [progress, setProgress] = useState(0);
   const orbitRef = useRef<THREE.Group>(null);
 
   const color = colorMap?.[paper.cluster] || "gray";

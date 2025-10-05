@@ -22,8 +22,7 @@ export function Chatbot() {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        // Khi component mount, tự động mở chatbot
-        const timer = setTimeout(() => setOpen(true), 0);
+        const timer = setTimeout(() => setOpen(true), 500);
         return () => clearTimeout(timer);
     }, []);
 
