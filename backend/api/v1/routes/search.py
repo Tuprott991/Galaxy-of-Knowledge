@@ -35,22 +35,30 @@ async def search_papers(
             results = semantic_search(query, limit)
             
             # Format results for API response
-            search_results = [
-                SearchPaper(
+            search_results = []
+            for result in results:
+                # Extract coordinates from nested structure if present
+                plot_coords = result.get('plot_coordinates', {})
+                x = plot_coords.get('x') if plot_coords else result.get('x')
+                y = plot_coords.get('y') if plot_coords else result.get('y')
+                z = plot_coords.get('z') if plot_coords else result.get('z')
+                
+                search_results.append(SearchPaper(
                     paper_id=result['paper_id'],
                     title=result['title'],
                     abstract=result.get('abstract', '')[:300] + "..." if result.get('abstract') and len(result.get('abstract', '')) > 300 else result.get('abstract'),
                     cluster=result.get('cluster'),
-                    relevance_score=result['similarity_score']
-                )
-                for result in results
-            ]
+                    relevance_score=result['similarity_score'],
+                    x=x,
+                    y=y,
+                    z=z
+                ))
             
         elif search_type == "title":
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT paper_id, title, abstract, cluster, 
-                       similarity(title, %s) as score
+                       similarity(title, %s) as score, x, y, z
                 FROM paper 
                 WHERE title ILIKE %s
                 ORDER BY score DESC, title
@@ -64,7 +72,10 @@ async def search_papers(
                     title=row[1],
                     abstract=row[2][:300] + "..." if row[2] and len(row[2]) > 300 else row[2],
                     cluster=row[3],
-                    relevance_score=float(row[4]) if row[4] else 0.0
+                    relevance_score=float(row[4]) if row[4] else 0.0,
+                    x=float(row[5]) if row[5] is not None else None,
+                    y=float(row[6]) if row[6] is not None else None,
+                    z=float(row[7]) if row[7] is not None else None
                 )
                 for row in results
             ]
@@ -73,7 +84,7 @@ async def search_papers(
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT paper_id, title, abstract, cluster,
-                       similarity(abstract, %s) as score
+                       similarity(abstract, %s) as score, x, y, z
                 FROM paper 
                 WHERE abstract ILIKE %s
                 ORDER BY score DESC, title
@@ -87,7 +98,10 @@ async def search_papers(
                     title=row[1],
                     abstract=row[2][:300] + "..." if row[2] and len(row[2]) > 300 else row[2],
                     cluster=row[3],
-                    relevance_score=float(row[4]) if row[4] else 0.0
+                    relevance_score=float(row[4]) if row[4] else 0.0,
+                    x=float(row[5]) if row[5] is not None else None,
+                    y=float(row[6]) if row[6] is not None else None,
+                    z=float(row[7]) if row[7] is not None else None
                 )
                 for row in results
             ]
@@ -102,7 +116,7 @@ async def search_papers(
                        GREATEST(
                            similarity(title, %s),
                            similarity(COALESCE(abstract, ''), %s)
-                       ) as score
+                       ) as score, x, y, z
                 FROM paper 
                 WHERE title ILIKE %s OR abstract ILIKE %s
                 ORDER BY score DESC, title
@@ -116,12 +130,21 @@ async def search_papers(
             
             # Add semantic results
             for result in semantic_results:
+                # Extract coordinates from nested structure if present
+                plot_coords = result.get('plot_coordinates', {})
+                x = plot_coords.get('x') if plot_coords else result.get('x')
+                y = plot_coords.get('y') if plot_coords else result.get('y')
+                z = plot_coords.get('z') if plot_coords else result.get('z')
+                
                 all_results[result['paper_id']] = SearchPaper(
                     paper_id=result['paper_id'],
                     title=result['title'],
                     abstract=result.get('abstract', '')[:300] + "..." if result.get('abstract') and len(result.get('abstract', '')) > 300 else result.get('abstract'),
                     cluster=result.get('cluster'),
-                    relevance_score=result['similarity_score']
+                    relevance_score=result['similarity_score'],
+                    x=x,
+                    y=y,
+                    z=z
                 )
             
             # Add text results (with slightly lower weight)
@@ -133,7 +156,10 @@ async def search_papers(
                         title=row[1],
                         abstract=row[2][:300] + "..." if row[2] and len(row[2]) > 300 else row[2],
                         cluster=row[3],
-                        relevance_score=float(row[4]) * 0.8 if row[4] else 0.0  # Slight penalty for text search
+                        relevance_score=float(row[4]) * 0.8 if row[4] else 0.0,  # Slight penalty for text search
+                        x=float(row[5]) if row[5] is not None else None,
+                        y=float(row[6]) if row[6] is not None else None,
+                        z=float(row[7]) if row[7] is not None else None
                     )
             
             # Sort by relevance score and limit
@@ -184,17 +210,26 @@ async def get_similar_papers(
         results = semantic_search(source_paper[0], limit + 1)  # +1 to exclude the source paper
         
         # Filter out the source paper itself
-        similar_papers = [
-            SearchPaper(
-                paper_id=result['paper_id'],
-                title=result['title'],
-                abstract=result.get('abstract', '')[:300] + "..." if result.get('abstract') and len(result.get('abstract', '')) > 300 else result.get('abstract'),
-                cluster=result.get('cluster'),
-                relevance_score=result['similarity_score']
-            )
-            for result in results 
-            if result['paper_id'] != paper_id
-        ][:limit]
+        similar_papers = []
+        for result in results:
+            if result['paper_id'] != paper_id:
+                # Extract coordinates from nested structure if present
+                plot_coords = result.get('plot_coordinates', {})
+                x = plot_coords.get('x') if plot_coords else result.get('x')
+                y = plot_coords.get('y') if plot_coords else result.get('y')
+                z = plot_coords.get('z') if plot_coords else result.get('z')
+                
+                similar_papers.append(SearchPaper(
+                    paper_id=result['paper_id'],
+                    title=result['title'],
+                    abstract=result.get('abstract', '')[:300] + "..." if result.get('abstract') and len(result.get('abstract', '')) > 300 else result.get('abstract'),
+                    cluster=result.get('cluster'),
+                    relevance_score=result['similarity_score'],
+                    x=x,
+                    y=y,
+                    z=z
+                ))
+        similar_papers = similar_papers[:limit]
         
         return {
             "success": True,
@@ -237,16 +272,24 @@ async def batch_search_papers(
         for query in query_list:
             if search_type == "semantic":
                 results = semantic_search(query, limit_per_query)
-                search_results = [
-                    SearchPaper(
+                search_results = []
+                for result in results:
+                    # Extract coordinates from nested structure if present
+                    plot_coords = result.get('plot_coordinates', {})
+                    x = plot_coords.get('x') if plot_coords else result.get('x')
+                    y = plot_coords.get('y') if plot_coords else result.get('y')
+                    z = plot_coords.get('z') if plot_coords else result.get('z')
+                    
+                    search_results.append(SearchPaper(
                         paper_id=result['paper_id'],
                         title=result['title'],
                         abstract=result.get('abstract', '')[:200] + "..." if result.get('abstract') and len(result.get('abstract', '')) > 200 else result.get('abstract'),
                         cluster=result.get('cluster'),
-                        relevance_score=result['similarity_score']
-                    )
-                    for result in results
-                ]
+                        relevance_score=result['similarity_score'],
+                        x=x,
+                        y=y,
+                        z=z
+                    ))
             else:
                 # For simplicity, only semantic search is implemented for batch
                 # Other search types would need connection management

@@ -309,11 +309,11 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
           setHtmlContent?.(res.data.html_context);
-          setSelectedPaperId?.(selectedId);
           setTopic?.(res.data.title);
-          setChatView?.(true);
         } catch (err) {
           console.error("Failed to fetch paper info:", err);
+          // Optionally close chatView if there's an error
+          setChatView?.(false);
         }
       }
     };

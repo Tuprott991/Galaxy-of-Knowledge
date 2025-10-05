@@ -140,3 +140,81 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom Markdown Prose Styles for Chatbot */
+.prose-chatbot {
+  @apply text-gray-100;
+}
+
+.prose-chatbot p {
+  @apply mb-3 leading-relaxed text-base;
+}
+
+.prose-chatbot h1,
+.prose-chatbot h2,
+.prose-chatbot h3,
+.prose-chatbot h4 {
+  @apply font-bold text-white mt-4 mb-2;
+}
+
+.prose-chatbot h1 {
+  @apply text-xl;
+}
+
+.prose-chatbot h2 {
+  @apply text-lg;
+}
+
+.prose-chatbot h3 {
+  @apply text-base;
+}
+
+.prose-chatbot ul,
+.prose-chatbot ol {
+  @apply ml-4 mb-3 space-y-1;
+}
+
+.prose-chatbot li {
+  @apply text-base leading-relaxed;
+}
+
+.prose-chatbot code {
+  @apply bg-gray-900 px-1.5 py-0.5 rounded text-sm text-blue-300 font-mono;
+}
+
+.prose-chatbot pre {
+  @apply bg-gray-900 p-3 rounded-lg overflow-x-auto mb-3 border border-gray-700;
+}
+
+.prose-chatbot pre code {
+  @apply bg-transparent p-0 text-sm text-gray-200;
+}
+
+.prose-chatbot a {
+  @apply text-blue-400 hover:text-blue-300 underline;
+}
+
+.prose-chatbot blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic text-gray-300 my-3;
+}
+
+.prose-chatbot strong {
+  @apply font-bold text-white;
+}
+
+.prose-chatbot table {
+  @apply w-full border-collapse my-3;
+}
+
+.prose-chatbot th,
+.prose-chatbot td {
+  @apply border border-gray-700 px-3 py-2 text-sm;
+}
+
+.prose-chatbot th {
+  @apply bg-gray-800 font-semibold text-white;
+}
+
+.prose-chatbot td {
+  @apply bg-gray-900;
+}
