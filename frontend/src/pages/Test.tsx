@@ -227,12 +227,18 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
   const direction = new THREE.Vector3();
 
+  const { query, setInitialPosition } = useGlobal();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosClient.get("/v1/papers/visualization");
-        console.log(res.data)
-        if (!res.data || res.data.length === 0) return;
+        let res = null;
+        if (!query)
+          res = await axiosClient.get("/v1/papers/visualization");
+        else
+          res = await axiosClient.get("/v1/papers/search", { params: { query, search_type: "semantic", limit: 50 } });
+
+        console.log("Fetched papers:", res.data);
 
         const scaled = res.data.map((p: Paper) => ({
           ...p,
@@ -241,6 +247,13 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
           z: p.z * 10,
         }));
 
+        const topPaper = scaled.reduce((prev: Paper, current: Paper) => {
+          return prev.relevance_score > current.relevance_score ? prev : current;
+        }, scaled[0]);
+
+        console.log("Top paper:", topPaper);
+
+        setInitialPosition?.(Object.values({ x: topPaper.x * 1.2 | 0, y: topPaper.y * 1.2 | 0, z: topPaper.z * 1.2 | 0 }) as [number, number, number]);
         setPapers(scaled);
         const clusters: string[] = Array.from(new Set(scaled.map((p: Paper) => p.cluster)));
         const map: Record<string, string> = randomClusterColor(clusters, colorPalette);
@@ -250,41 +263,39 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
       }
     };
     fetchData();
-  }, []);
+  }, [query, setInitialPosition]);
 
-  const { query } = useGlobal();
+  // useEffect(() => {
+  //   if (!query) return;
 
-  useEffect(() => {
-    if (!query) return;
+  //   // Tọa độ gốc của ngôi sao
+  //   const target = new THREE.Vector3(64.70495128631592, 8.552704453468323, -32.50426769256592);
 
-    // Tọa độ gốc của ngôi sao
-    const target = new THREE.Vector3(64.70495128631592, 8.552704453468323, -32.50426769256592);
+  //   // Khoảng cách camera lùi ra
+  //   const distance = 3.5;
 
-    // Khoảng cách camera lùi ra
-    const distance = 3.5;
+  //   // Hướng nhìn từ ngôi sao về phía camera hiện tại
+  //   const direction = new THREE.Vector3().subVectors(camera.position, target).normalize();
 
-    // Hướng nhìn từ ngôi sao về phía camera hiện tại
-    const direction = new THREE.Vector3().subVectors(camera.position, target).normalize();
+  //   // Nếu camera đang ở quá xa hoặc bị lệch hướng, chuẩn hóa hướng
+  //   if (direction.length() === 0) direction.set(0, 0, 1); // tránh NaN nếu camera == target
 
-    // Nếu camera đang ở quá xa hoặc bị lệch hướng, chuẩn hóa hướng
-    if (direction.length() === 0) direction.set(0, 0, 1); // tránh NaN nếu camera == target
+  //   // Vị trí đích cách ngôi sao một đoạn về phía sau
+  //   const finalPos = target.clone().addScaledVector(direction, distance);
 
-    // Vị trí đích cách ngôi sao một đoạn về phía sau
-    const finalPos = target.clone().addScaledVector(direction, distance);
+  //   const duration = 1.2; // giây
+  //   const start = camera.position.clone();
+  //   const startTime = performance.now();
 
-    const duration = 1.2; // giây
-    const start = camera.position.clone();
-    const startTime = performance.now();
+  //   const animate = (time: number) => {
+  //     const t = Math.min((time - startTime) / (duration * 1000), 1);
+  //     camera.position.lerpVectors(start, finalPos, t);
+  //     camera.lookAt(target);
+  //     if (t < 1) requestAnimationFrame(animate);
+  //   };
 
-    const animate = (time: number) => {
-      const t = Math.min((time - startTime) / (duration * 1000), 1);
-      camera.position.lerpVectors(start, finalPos, t);
-      camera.lookAt(target);
-      if (t < 1) requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  }, [query, camera]);
+  //   requestAnimationFrame(animate);
+  // }, [query, camera]);
 
   const { setHtmlContent, setSelectedPaperId, setChatView, setTopic } = useGlobal();
 
@@ -297,7 +308,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         if (!paper) return;
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
-          console.log("Fetched HTML content:", res.data);
           setHtmlContent?.(res.data.html_context);
           setSelectedPaperId?.(selectedId);
           setTopic?.(res.data.title);
@@ -459,12 +469,14 @@ const PaperScatter3D: React.FC = () => {
     return () => document.removeEventListener("pointerlockchange", handlePointerLockChange);
   }, []);
 
+  const { initialPosition } = useGlobal();
+
   return (
     <div
       style={{ width: "100vw", height: "100vh", cursor: isActive ? "none" : "pointer" }}
       onClick={() => !chatView && enablePointerLock()}
     >
-      <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
+      <Canvas style={{ background: "black" }} camera={{ position: initialPosition, fov: 75 }}>
         <MainScene isActive={isActive} onHover={setHoveredPaper} />
       </Canvas>
 

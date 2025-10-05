@@ -5,4 +5,6 @@ export type Paper = {
   y: number;
   z: number;
   cluster: string;
+  topic: string;
+  relevance_score: number;
 };

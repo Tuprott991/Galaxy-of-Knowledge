@@ -14,6 +14,8 @@ type GlobalContextType = {
   setHtmlContent?: (value: string | null) => void;
   topic?: string | null;
   setTopic?: (value: string | null) => void;
+  initialPosition?: [number, number, number];
+  setInitialPosition?: (value: [number, number, number]) => void;
 };
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -27,6 +29,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   const [selectedPaperId, setSelectedPaperId] = useState<string | null>(null);
   const [htmlContent, setHtmlContent] = useState<string | null>(null);
   const [topic, setTopic] = useState<string | null>(null);
+  const [initialPosition, setInitialPosition] = useState<[number, number, number] | undefined>(undefined);
 
   useEffect(() => {
     console.log("[GlobalContext] Updated:", { query, searchMode });
@@ -34,7 +37,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <GlobalContext.Provider
-      value={{ query, setQuery, searchMode, setSearchMode, chatView, setChatView, selectedPaperId, setSelectedPaperId, htmlContent, setHtmlContent, topic, setTopic }}
+      value={{ query, setQuery, searchMode, setSearchMode, chatView, setChatView, selectedPaperId, setSelectedPaperId, htmlContent, setHtmlContent, topic, setTopic, initialPosition, setInitialPosition }}
     >
       {children}
     </GlobalContext.Provider>
