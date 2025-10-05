@@ -272,15 +272,17 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     // Vị trí đích cách ngôi sao một đoạn về phía sau
     const finalPos = target.clone().addScaledVector(direction, distance);
 
-    const duration = 1.2; // giây
+    const duration = 0.5; // giây - FASTER: reduced from 1.2 to 0.5
     const start = camera.position.clone();
     const startTime = performance.now();
 
     const animate = (time: number) => {
-      const t = Math.min((time - startTime) / (duration * 1000), 1);
+      const elapsed = (time - startTime) / (duration * 1000);
+      // Use easeInOutQuad for smoother, faster animation
+      const t = Math.min(elapsed < 0.5 ? 2 * elapsed * elapsed : 1 - Math.pow(-2 * elapsed + 2, 2) / 2, 1);
       camera.position.lerpVectors(start, finalPos, t);
       camera.lookAt(target);
-      if (t < 1) requestAnimationFrame(animate);
+      if (elapsed < 1) requestAnimationFrame(animate);
     };
 
     requestAnimationFrame(animate);
@@ -295,15 +297,20 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         e.stopPropagation();
         const paper = papers.find((p) => p.paper_id === selectedId);
         if (!paper) return;
+        
+        // Open chatView immediately for faster response
+        setChatView?.(true);
+        setSelectedPaperId?.(selectedId);
+        
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
           console.log("Fetched HTML content:", res.data);
           setHtmlContent?.(res.data.html_context);
-          setSelectedPaperId?.(selectedId);
           setTopic?.(res.data.title);
-          setChatView?.(true);
         } catch (err) {
           console.error("Failed to fetch paper info:", err);
+          // Optionally close chatView if there's an error
+          setChatView?.(false);
         }
       }
     };

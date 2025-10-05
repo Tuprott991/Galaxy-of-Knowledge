@@ -12,3 +12,6 @@ class SearchPaper(BaseModel):
     abstract: Optional[str] = Field(None, description="Paper abstract (truncated)")
     cluster: Optional[str] = Field(None, description="Cluster UUID")
     relevance_score: float = Field(..., description="Search relevance score")
+    x: Optional[float] = Field(None, description="X coordinate for visualization")
+    y: Optional[float] = Field(None, description="Y coordinate for visualization")
+    z: Optional[float] = Field(None, description="Z coordinate for visualization")

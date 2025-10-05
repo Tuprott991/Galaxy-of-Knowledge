@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -17,11 +16,13 @@ import PaperGraph from "@/components/custom/PaperGraph";
 import { v4 as uuidv4 } from "uuid";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useGlobal } from "@/context/GlobalContext";
 
 const API_BASE_URL = "http://localhost:8082";
 const USER_ID = "u_999";
 
 export function Chatbot() {
+    const { selectedPaperId } = useGlobal();
     const [activeMode, setActiveMode] = useState("inquiry-agent");
     const [messages, setMessages] = useState<{ text: string; sender: "user" | "bot" }[]>([]);
     const [inputValue, setInputValue] = useState("");
@@ -33,11 +34,6 @@ export function Chatbot() {
         const timer = setTimeout(() => setOpen(true), 500);
         return () => clearTimeout(timer);
     }, []);
-
-    // Reset messages khi chuyển đổi mode
-    useEffect(() => {
-        setMessages([]);
-    }, [activeMode]);
 
     const createSession = async (): Promise<{ userId: string; sessionId: string; appName: string }> => {
         const generatedSessionId = uuidv4();
@@ -60,20 +56,56 @@ export function Chatbot() {
         };
     };
 
-    const handleCreateNewSession = async () => {
+    const handleCreateNewSession = useCallback(async () => {
         try {
             setLoading(true);
             const sessionData = await createSession();
             setSessionId(sessionData.sessionId);
-            setMessages([]);
-            setMessages([{ text: `New session created! Session ID: ${sessionData.sessionId}`, sender: "bot" }]);
+            
+            if (selectedPaperId) {
+                setMessages([{ 
+                    text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nNew session created! You can now ask questions about this paper.`, 
+                    sender: "bot" 
+                }]);
+            } else {
+                setMessages([{ text: `New session created! Session ID: ${sessionData.sessionId}`, sender: "bot" }]);
+            }
         } catch (error) {
             console.error("Failed to create session:", error);
             setMessages([{ text: `Error creating session: ${error instanceof Error ? error.message : "Unknown error"}`, sender: "bot" }]);
         } finally {
             setLoading(false);
         }
-    };
+    }, [selectedPaperId]);
+
+    // Automatically create session when paper is selected
+    useEffect(() => {
+        console.log("📄 Chatbot: selectedPaperId changed to:", selectedPaperId);
+        if (selectedPaperId) {
+            // Reset messages and create new session
+            setMessages([{
+                text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nCreating new session for this paper...`,
+                sender: "bot"
+            }]);
+            
+            // Auto-create session
+            handleCreateNewSession();
+        } else {
+            setMessages([]);
+        }
+    }, [selectedPaperId, handleCreateNewSession]);
+
+    // Reset messages when mode changes, preserving Paper ID if available
+    useEffect(() => {
+        if (selectedPaperId) {
+            setMessages([{
+                text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nI'm here to help you analyze this paper. Feel free to ask questions about its content, methodology, findings, or any other aspect!`,
+                sender: "bot"
+            }]);
+        } else {
+            setMessages([]);
+        }
+    }, [activeMode, selectedPaperId]);
 
     const callApi = async (prompt: string) => {
         if (!sessionId) {
@@ -176,11 +208,20 @@ export function Chatbot() {
 
     const handleSend = async () => {
         if (!inputValue.trim()) return;
-        const userMessage = inputValue;
-        setMessages([...messages, { text: userMessage, sender: "user" }]);
+        
+        // Check if this is the first user message (only bot messages exist)
+        const isFirstUserMessage = messages.every(msg => msg.sender === "bot");
+        
+        // If first message and we have a paper ID, prepend it to the message
+        let userMessage = inputValue;
+        if (isFirstUserMessage && selectedPaperId) {
+            userMessage = `[Paper ID: ${selectedPaperId}]\n\n${inputValue}`;
+        }
+        
+        setMessages([...messages, { text: inputValue, sender: "user" }]); // Display original message
         setInputValue("");
 
-        const botResponse = await callApi(userMessage);
+        const botResponse = await callApi(userMessage); // Send message with Paper ID to API
         
         // Only add bot message if streaming didn't already add it
         setMessages((prev) => {
@@ -273,15 +314,29 @@ export function Chatbot() {
                             }
                         </div>
 
-                        <CardFooter className="border-t border-slate-600/50 p-4 flex gap-2">
-                            <Input
-                                type="text"
-                                placeholder="Ask me anything about scientific research..."
+                        <CardFooter className="border-t border-slate-600/50 p-4 flex gap-2 items-end">
+                            <textarea
+                                placeholder="Ask me anything about scientific research... (Shift+Enter for new line)"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
-                                className="flex-1 rounded-lg border border-gray-600 px-4 py-3 text-base bg-black text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                                className="flex-1 rounded-lg border border-gray-600 px-4 py-3 text-base bg-black text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none min-h-[48px] max-h-[200px]"
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" && !e.shiftKey) {
+                                        e.preventDefault();
+                                        handleSend();
+                                    }
+                                }}
                                 disabled={loading}
+                                rows={1}
+                                style={{ 
+                                    overflowY: inputValue.split('\n').length > 3 ? 'auto' : 'hidden',
+                                    height: 'auto'
+                                }}
+                                onInput={(e) => {
+                                    const target = e.target as HTMLTextAreaElement;
+                                    target.style.height = 'auto';
+                                    target.style.height = Math.min(target.scrollHeight, 200) + 'px';
+                                }}
                             />
                             <Button 
                                 variant="secondary" 
