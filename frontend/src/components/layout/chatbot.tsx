@@ -14,6 +14,50 @@ import {
 import { agentModes } from "@/data/agent-modes";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Template responses for each mode
+const modeResponses = {
+    "inquiry-agent": [
+        "I can help you search for information from the scientific research database.",
+        "Feel free to ask questions about any scientific topic, and I'll find related papers for you.",
+        "I will analyze and synthesize information from research studies to answer your questions.",
+        "What research field would you like to explore? I can provide detailed information."
+    ],
+    "knowledge-graph": [
+        "I can create relationships between scientific concepts in the database.",
+        "Ask me about connections between authors, research topics, or publications.",
+        "I will display the network of studies and authors related to your topic of interest.",
+        "What topic would you like to explore through the knowledge network?"
+    ],
+    "hypo-agent": [
+        "Initiating deep research session on topic: antibody repertoire sequencing and immune modeling...",
+        "Searching PubMed Central and NASA Taskbook for related PMCID entries...",
+        "Found 3 relevant papers for topic 'antibody repertoire sequencing'.",
+        "Reading paper PMC5761896 — naive murine antibody repertoire using unamplified high-throughput sequencing...",
+        "Reading paper PMC8534217 — transfer learning for antibody structure prediction and generative design...",
+        "Reading paper PMC9982045 — AI-driven discovery of broadly neutralizing antibodies using protein language models...",
+        "Synthesizing insights across 3 papers... detecting link between legacy murine repertoire data and modern AI antibody generation frameworks...",
+        "Considering feasibility of integrating unamplified repertoire datasets with generative protein language models (ESM, ProtT5)...",
+        "Evaluating human impact potential through AI-accelerated vaccine and therapeutic antibody discovery...",
+        "Generating new hypothesis based on immunogenomic data revival and cross-domain AI reasoning...",
+        "New hypothesis formulated successfully based on multi-paper synthesis.",
+        "Deep research synthesis completed — new actionable hypothesis proposed from immunogenomic legacy data."
+    ],
+    "invent-agent": [
+        "Initiating deep research session on topic: antibody repertoire sequencing and immune modeling...",
+        "Searching PubMed Central and NASA Taskbook for related PMCID entries...",
+        "Found 3 relevant papers for topic 'antibody repertoire sequencing'.",
+        "Reading paper PMC5761896 — naive murine antibody repertoire using unamplified high-throughput sequencing...",
+        "Reading paper PMC8534217 — transfer learning for antibody structure prediction and generative design...",
+        "Reading paper PMC9982045 — AI-driven discovery of broadly neutralizing antibodies using protein language models...",
+        "Synthesizing insights across 3 papers... detecting link between legacy murine repertoire data and modern AI antibody generation frameworks...",
+        "Considering feasibility of integrating unamplified repertoire datasets with generative protein language models (ESM, ProtT5)...",
+        "Evaluating human impact potential through AI-accelerated vaccine and therapeutic antibody discovery...",
+        "Generating new hypothesis based on immunogenomic data revival and cross-domain AI reasoning...",
+        "New hypothesis formulated successfully based on multi-paper synthesis.",
+        "Deep research completed — AI-generated hypothesis successfully derived from immunogenomic legacy study PMC5761896."
+    ]
+};
+
 export function Chatbot() {
     const [activeMode, setActiveMode] = useState("inquiry-agent");
     const [messages, setMessages] = useState<{ text: string; sender: "user" | "bot" }[]>([]);
@@ -26,11 +70,19 @@ export function Chatbot() {
         return () => clearTimeout(timer);
     }, []);
 
+    // Reset messages khi chuyển đổi mode
+    useEffect(() => {
+        setMessages([]);
+    }, [activeMode]);
+
     const callApi = async (prompt: string) => {
         setLoading(true);
         return new Promise<string>((resolve) => {
             setTimeout(() => {
-                resolve(`Bot response to: "${prompt}"`);
+                // Lấy random response từ mode hiện tại
+                const responses = modeResponses[activeMode as keyof typeof modeResponses];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                resolve(`${randomResponse}\n\n[Phản hồi cho: "${prompt}"]`);
             }, 1000 + Math.random() * 1000);
         }).finally(() => setLoading(false));
     };
@@ -80,16 +132,18 @@ export function Chatbot() {
 
                         <div className="flex-1 px-4 py-1 overflow-y-auto text-white flex flex-col gap-2 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-900">
                             {messages.length === 0 && (
-                                <p className="text-gray-400 italic text-xs">Welcome to {activeMode}!</p>
+                                <div className="text-gray-400 italic text-xs space-y-2">
+                                    <p className="font-semibold">Chào mừng đến với {agentModes.find(m => m.value === activeMode)?.label}!</p>
+                                    <p>{modeResponses[activeMode as keyof typeof modeResponses][0]}</p>
+                                </div>
                             )}
                             {messages.map((msg, index) => (
                                 <div
                                     key={index}
-                                    className={`p-2 rounded-md max-w-[80%] text-xs ${
-                                        msg.sender === "user"
-                                            ? "self-end bg-blue-600 text-white"
-                                            : "self-start bg-gray-700 text-white"
-                                    }`}
+                                    className={`p-2 rounded-md max-w-[80%] text-xs ${msg.sender === "user"
+                                        ? "self-end bg-blue-600 text-white"
+                                        : "self-start bg-gray-700 text-white"
+                                        }`}
                                 >
                                     {msg.text}
                                 </div>
