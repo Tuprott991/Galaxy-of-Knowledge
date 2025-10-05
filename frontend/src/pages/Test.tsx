@@ -188,13 +188,13 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     const handleSpace = async (e: KeyboardEvent) => {
       if (e.code === "Space" && selectedId !== null) {
         e.preventDefault();
+        e.stopPropagation();
 
         const paper = papers.find((p) => p.paper_id === selectedId);
         if (!paper) return;
 
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
-          console.log(res);
           setHtmlContent?.(res.data.html_context);
           setSelectedPaperId?.(selectedId);
           setChatView?.(true);
@@ -334,42 +334,60 @@ const PaperScatter3D: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
   const [hoveredPaper, setHoveredPaper] = useState<Paper | null>(null);
   const { chatView } = useGlobal();
-  const handleClick = () => {
-    if (!isActive) {
-      setIsActive(true);
-      document.querySelector("canvas")?.requestPointerLock();
+
+  const enablePointerLock = () => {
+    const canvas = document.querySelector("canvas");
+    canvas?.requestPointerLock();
+  };
+
+  const disablePointerLock = () => {
+    if (document.pointerLockElement) {
+      document.exitPointerLock();
     }
   };
 
+  // When chatView changes → toggle pointer lock
   useEffect(() => {
-    const handlePointerLockChange = () => setIsActive(!!document.pointerLockElement);
+    if (chatView) {
+      disablePointerLock(); // show mouse for chat/paper
+      setIsActive(false);
+    } else {
+      enablePointerLock(); // back to 3D navigation
+      setIsActive(true);
+    }
+  }, [chatView]);
+
+  // Sync pointer lock state
+  useEffect(() => {
+    const handlePointerLockChange = () => {
+      setIsActive(!!document.pointerLockElement);
+    };
     document.addEventListener("pointerlockchange", handlePointerLockChange);
     return () => document.removeEventListener("pointerlockchange", handlePointerLockChange);
   }, []);
-
   return (
-    <div
-      style={{ width: "100vw", height: "100vh", cursor: isActive ? "none" : "pointer" }}
-      onClick={handleClick}
-    >
-      <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
-        <MainScene isActive={isActive} onHover={setHoveredPaper} />
-      </Canvas>
+      <div
+          style={{ width: "100vw", height: "100vh", cursor: isActive ? "none" : "pointer" }}
+          onClick={() => !chatView && enablePointerLock()} // only enable when not in chat
+      >
+        <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
+          <MainScene isActive={isActive} onHover={setHoveredPaper} />
+        </Canvas>
 
-      {!chatView && (
-        !isActive ? (
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
-            Click the screen to start!
-          </div>
-        ) : (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
-            +
-          </div>
-        )
-      )}
+        {!chatView && !isActive && (
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
+              Click the screen to start!
+            </div>
+        )}
 
-      {hoveredPaper && !chatView && <ShortDetail paper={hoveredPaper} />}
-    </div>
+        {!chatView && isActive && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
+              +
+            </div>
+        )}
+
+        {hoveredPaper && !chatView && <ShortDetail paper={hoveredPaper} />}
+      </div>
   );
 };
 
