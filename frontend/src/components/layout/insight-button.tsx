@@ -43,9 +43,9 @@ export function InsightButton() {
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
         <CustomAreaChart
-          title="Area Chart"
-          description="Showing total visitors for the last 6 months"
-          chartData={yearlyTrends || []}
+            title="Number of Papers by Year"
+            description="This chart shows the total number of published papers for each year"
+            chartData={yearlyTrends || []}
         />
       </DialogContent >
     </Dialog >

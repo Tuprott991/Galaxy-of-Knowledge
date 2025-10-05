@@ -20,13 +20,13 @@ type PaperPointProps = {
 const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selected }) => {
   const [hovered, setHovered] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [paused, setPaused] = useState(false); // 🔹 toggle quay/dừng
-  const [networkPositions, setNetworkPositions] = useState<THREE.Vector3[]>([]); // 🔹 vị trí mạng
+  const [paused, setPaused] = useState(false);
+  const [networkPositions, setNetworkPositions] = useState<THREE.Vector3[]>([]);
   const orbitRef = useRef<THREE.Group>(null);
   const linesRef = useRef<(THREE.Line | null)[]>([]);
   const color = colorMap?.[paper.cluster] || "gray";
 
-  // Danh sách hành tinh
+
   const solarSystemPlanets = [
     { name: "Mercury", color: "#8C7853", size: 0.015, distance: 0.25, emissive: "#8C7853", emissiveIntensity: 0.3 },
     { name: "Venus", color: "#FFC649", size: 0.02, distance: 0.35, emissive: "#FFC649", emissiveIntensity: 0.5 },
@@ -50,11 +50,10 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     return () => window.removeEventListener("keydown", handleSpace);
   }, []);
 
-  // 🔹 Khi pause, sắp xếp lại vị trí hành tinh thành network
   useEffect(() => {
     if (paused) {
       const positions: THREE.Vector3[] = [];
-      const radius = 0.8; // bán kính network
+      const radius = 0.8;
       solarSystemPlanets.forEach((_, i) => {
         const theta = (i / solarSystemPlanets.length) * Math.PI * 2;
         const phi = Math.acos(2 * Math.random() - 1);
@@ -69,7 +68,6 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     }
   }, [paused]);
 
-  // 🔹 Animation + quay hoặc sắp xếp network
   useFrame((_, delta) => {
     if (selected || hovered) {
       setProgress((p) => Math.min(1, p + delta * 2));
@@ -297,11 +295,11 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         e.stopPropagation();
         const paper = papers.find((p) => p.paper_id === selectedId);
         if (!paper) return;
-        
+
         // Open chatView immediately for faster response
         setChatView?.(true);
         setSelectedPaperId?.(selectedId);
-        
+
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
           console.log("Fetched HTML content:", res.data);
