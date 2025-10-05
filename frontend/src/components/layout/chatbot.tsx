@@ -14,50 +14,10 @@ import {
 import { agentModes } from "@/data/agent-modes";
 import { motion, AnimatePresence } from "framer-motion";
 import PaperGraph from "@/components/custom/PaperGraph";
+import { v4 as uuidv4 } from "uuid";
 
-// Template responses for each mode
-const modeResponses = {
-    "inquiry-agent": [
-        "I can help you search for information from the scientific research database.",
-        "Feel free to ask questions about any scientific topic, and I'll find related papers for you.",
-        "I will analyze and synthesize information from research studies to answer your questions.",
-        "What research field would you like to explore? I can provide detailed information."
-    ],
-    "knowledge-graph": [
-        "I can create relationships between scientific concepts in the database.",
-        "Ask me about connections between authors, research topics, or publications.",
-        "I will display the network of studies and authors related to your topic of interest.",
-        "What topic would you like to explore through the knowledge network?"
-    ],
-    "hypo-agent": [
-        "Initiating deep research session on topic: antibody repertoire sequencing and immune modeling...",
-        "Searching PubMed Central and NASA Taskbook for related PMCID entries...",
-        "Found 3 relevant papers for topic 'antibody repertoire sequencing'.",
-        "Reading paper PMC5761896 — naive murine antibody repertoire using unamplified high-throughput sequencing...",
-        "Reading paper PMC8534217 — transfer learning for antibody structure prediction and generative design...",
-        "Reading paper PMC9982045 — AI-driven discovery of broadly neutralizing antibodies using protein language models...",
-        "Synthesizing insights across 3 papers... detecting link between legacy murine repertoire data and modern AI antibody generation frameworks...",
-        "Considering feasibility of integrating unamplified repertoire datasets with generative protein language models (ESM, ProtT5)...",
-        "Evaluating human impact potential through AI-accelerated vaccine and therapeutic antibody discovery...",
-        "Generating new hypothesis based on immunogenomic data revival and cross-domain AI reasoning...",
-        "New hypothesis formulated successfully based on multi-paper synthesis.",
-        "Deep research synthesis completed — new actionable hypothesis proposed from immunogenomic legacy data."
-    ],
-    "invent-agent": [
-        "Initiating deep research session on topic: antibody repertoire sequencing and immune modeling...",
-        "Searching PubMed Central and NASA Taskbook for related PMCID entries...",
-        "Found 3 relevant papers for topic 'antibody repertoire sequencing'.",
-        "Reading paper PMC5761896 — naive murine antibody repertoire using unamplified high-throughput sequencing...",
-        "Reading paper PMC8534217 — transfer learning for antibody structure prediction and generative design...",
-        "Reading paper PMC9982045 — AI-driven discovery of broadly neutralizing antibodies using protein language models...",
-        "Synthesizing insights across 3 papers... detecting link between legacy murine repertoire data and modern AI antibody generation frameworks...",
-        "Considering feasibility of integrating unamplified repertoire datasets with generative protein language models (ESM, ProtT5)...",
-        "Evaluating human impact potential through AI-accelerated vaccine and therapeutic antibody discovery...",
-        "Generating new hypothesis based on immunogenomic data revival and cross-domain AI reasoning...",
-        "New hypothesis formulated successfully based on multi-paper synthesis.",
-        "Deep research completed — AI-generated hypothesis successfully derived from immunogenomic legacy study PMC5761896."
-    ]
-};
+const API_BASE_URL = "http://localhost:8082";
+const USER_ID = "u_999";
 
 export function Chatbot() {
     const [activeMode, setActiveMode] = useState("inquiry-agent");
@@ -65,6 +25,7 @@ export function Chatbot() {
     const [inputValue, setInputValue] = useState("");
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
+    const [sessionId, setSessionId] = useState<string | null>(null);
 
     useEffect(() => {
         const timer = setTimeout(() => setOpen(true), 500);
@@ -76,16 +37,136 @@ export function Chatbot() {
         setMessages([]);
     }, [activeMode]);
 
+    const createSession = async (): Promise<{ userId: string; sessionId: string; appName: string }> => {
+        const generatedSessionId = uuidv4();
+        const response = await fetch(`${API_BASE_URL}/apps/adk-agent/users/${USER_ID}/sessions/${generatedSessionId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to create session: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return {
+            userId: data.userId,
+            sessionId: data.id,
+            appName: data.appName
+        };
+    };
+
+    const handleCreateNewSession = async () => {
+        try {
+            setLoading(true);
+            const sessionData = await createSession();
+            setSessionId(sessionData.sessionId);
+            setMessages([]);
+            setMessages([{ text: `New session created! Session ID: ${sessionData.sessionId}`, sender: "bot" }]);
+        } catch (error) {
+            console.error("Failed to create session:", error);
+            setMessages([{ text: `Error creating session: ${error instanceof Error ? error.message : "Unknown error"}`, sender: "bot" }]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const callApi = async (prompt: string) => {
+        if (!sessionId) {
+            return "Please create a session first by clicking the 'New Session' button.";
+        }
+        
         setLoading(true);
-        return new Promise<string>((resolve) => {
-            setTimeout(() => {
-                // Lấy random response từ mode hiện tại
-                const responses = modeResponses[activeMode as keyof typeof modeResponses];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                resolve(`${randomResponse}\n\n[Phản hồi cho: "${prompt}"]`);
-            }, 1000 + Math.random() * 1000);
-        }).finally(() => setLoading(false));
+        let fullResponse = "";
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/run_sse`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    app_name: "adk-agent",
+                    user_id: USER_ID,
+                    session_id: sessionId,
+                    new_message: {
+                        role: "user",
+                        parts: [{
+                            text: prompt
+                        }]
+                    },
+                    streaming: true
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            // Handle SSE streaming response
+            const reader = response.body?.getReader();
+            const decoder = new TextDecoder();
+
+            if (!reader) {
+                throw new Error("Response body is not readable");
+            }
+
+            // Create a temporary message index for streaming updates
+            const tempMessageIndex = messages.length + 1;
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n');
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const jsonData = JSON.parse(line.substring(6));
+                            
+                            // Extract text from the response
+                            if (jsonData.content?.parts) {
+                                for (const part of jsonData.content.parts) {
+                                    if (part.text) {
+                                        fullResponse += part.text;
+                                        
+                                        // Update the bot message in real-time
+                                        setMessages(prev => {
+                                            const newMessages = [...prev];
+                                            if (newMessages[tempMessageIndex]) {
+                                                newMessages[tempMessageIndex] = {
+                                                    text: fullResponse,
+                                                    sender: "bot"
+                                                };
+                                            } else {
+                                                newMessages.push({
+                                                    text: fullResponse,
+                                                    sender: "bot"
+                                                });
+                                            }
+                                            return newMessages;
+                                        });
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            console.error("Failed to parse SSE data:", e);
+                        }
+                    }
+                }
+            }
+
+            return fullResponse || "No response received from agent.";
+        } catch (error) {
+            console.error("API call failed:", error);
+            return `Error: Unable to connect to the agent. ${error instanceof Error ? error.message : "Unknown error"}`;
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleSend = async () => {
@@ -95,7 +176,15 @@ export function Chatbot() {
         setInputValue("");
 
         const botResponse = await callApi(userMessage);
-        setMessages((prev) => [...prev, { text: botResponse, sender: "bot" }]);
+        
+        // Only add bot message if streaming didn't already add it
+        setMessages((prev) => {
+            const lastMessage = prev[prev.length - 1];
+            if (lastMessage?.sender === "bot" && lastMessage?.text === botResponse) {
+                return prev; // Message already added by streaming
+            }
+            return [...prev, { text: botResponse, sender: "bot" }];
+        });
     };
 
     return (
@@ -110,7 +199,18 @@ export function Chatbot() {
                 >
                     <Card className="w-[600px] h-full flex flex-col bg-black border-l border-slate-600/50 rounded-none overflow-hidden py-2 shadow-2xl">
                         <CardHeader className="flex justify-between items-center py-2 px-4 border-b border-slate-600/50">
-                            <h2 className="text-sm font-semibold text-white">Choose the Agent Mode</h2>
+                            <div className="flex items-center gap-2">
+                                <h2 className="text-sm font-semibold text-white">Choose the Agent Mode</h2>
+                                <Button 
+                                    variant="outline" 
+                                    size="sm" 
+                                    onClick={handleCreateNewSession}
+                                    disabled={loading}
+                                    className="text-xs"
+                                >
+                                    New Session
+                                </Button>
+                            </div>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button variant="secondary" size="sm">
