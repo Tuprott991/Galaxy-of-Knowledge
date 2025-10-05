@@ -3,6 +3,10 @@ import type { Paper } from "@/types";
 export function ShortDetail({ paper }: { paper: Paper }) {
     return (
         <div className="fixed top-14 p-[10px] max-w-100vw left-1/2 text-white -translate-x-1/2 z-10">
+            <div className="flex justify-center mb-1 gap-1">
+                <span>AI</span>
+                <span>Biology</span>
+            </div>
             <h3 className="font-bold text-xl text-center">{paper.title}</h3>
             <p className="flex justify-center font-mono text-base text-[#808080] font-semibold">{paper.cluster}</p>
             <div className="flex justify-center gap-1 mt-1 items-center">

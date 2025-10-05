@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Stars, PointerLockControls } from "@react-three/drei";
 import type { Paper } from "../types";
@@ -8,9 +8,7 @@ import { randomClusterColor } from "@/utils/helper";
 import { axiosClient } from "@/api/axiosClient";
 import * as THREE from "three";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { useRef } from "react";
 import { useGlobal } from "@/context/GlobalContext";
-
 
 type PaperPointProps = {
   paper: Paper;
@@ -22,11 +20,13 @@ type PaperPointProps = {
 const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selected }) => {
   const [hovered, setHovered] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [paused, setPaused] = useState(false); // 🔹 toggle quay/dừng
+  const [networkPositions, setNetworkPositions] = useState<THREE.Vector3[]>([]); // 🔹 vị trí mạng
   const orbitRef = useRef<THREE.Group>(null);
-
+  const linesRef = useRef<THREE.Line[]>([]);
   const color = colorMap?.[paper.cluster] || "gray";
 
-  // Solar System Planets Data (excluding Earth)
+  // Danh sách hành tinh
   const solarSystemPlanets = [
     { name: "Mercury", color: "#8C7853", size: 0.015, distance: 0.25, emissive: "#8C7853", emissiveIntensity: 0.3 },
     { name: "Venus", color: "#FFC649", size: 0.02, distance: 0.35, emissive: "#FFC649", emissiveIntensity: 0.5 },
@@ -37,16 +37,68 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     { name: "Neptune", color: "#4B70DD", size: 0.025, distance: 0.85, emissive: "#4B70DD", emissiveIntensity: 0.4 }
   ];
 
-  // Animation bung ra + quay quanh
+  // 🔸 Lắng nghe phím Space để toggle quay / dừng
+  useEffect(() => {
+    const handleSpace = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        e.stopPropagation();
+        setPaused((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleSpace);
+    return () => window.removeEventListener("keydown", handleSpace);
+  }, []);
+
+  // 🔹 Khi pause, sắp xếp lại vị trí hành tinh thành network
+  useEffect(() => {
+    if (paused) {
+      const positions: THREE.Vector3[] = [];
+      const radius = 0.8; // bán kính network
+      solarSystemPlanets.forEach((_, i) => {
+        const theta = (i / solarSystemPlanets.length) * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const x = radius * Math.sin(phi) * Math.cos(theta);
+        const y = radius * Math.sin(phi) * Math.sin(theta);
+        const z = radius * Math.cos(phi);
+        positions.push(new THREE.Vector3(x, y, z));
+      });
+      setNetworkPositions(positions);
+    } else {
+      setNetworkPositions([]);
+    }
+  }, [paused]);
+
+  // 🔹 Animation + quay hoặc sắp xếp network
   useFrame((_, delta) => {
     if (selected || hovered) {
-      setProgress((p) => Math.min(1, p + delta * 2)); // bung dần ra (faster on hover)
+      setProgress((p) => Math.min(1, p + delta * 2));
+
       if (orbitRef.current) {
-        orbitRef.current.rotation.y += delta * 0.5; // slower rotation for realism
-        orbitRef.current.rotation.x += delta * 0.2;
+        if (!paused) {
+          orbitRef.current.rotation.y += delta * 0.2;
+          orbitRef.current.rotation.x += delta * 0.05;
+        } else {
+          orbitRef.current.children.forEach((child, i) => {
+            const target = networkPositions[i];
+            if (!target) return;
+            child.position.lerp(target, delta * 1.5);
+          });
+        }
+      }
+
+      // Cập nhật vị trí đường nối
+      if (paused && orbitRef.current) {
+        linesRef.current.forEach((line, i) => {
+          if (orbitRef.current?.children[i]) {
+            const planetPos = orbitRef.current.children[i].position.clone();
+            const points = [new THREE.Vector3(0, 0, 0), planetPos];
+            (line.geometry as THREE.BufferGeometry).setFromPoints(points);
+          }
+        });
       }
     } else {
-      setProgress((p) => Math.max(0, p - delta * 2)); // thu lại (faster retreat)
+      setProgress((p) => Math.max(0, p - delta * 2));
     }
   });
 
@@ -70,14 +122,13 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={hovered || selected ? 3 : 1.2} // phát sáng mạnh khi chọn
+          emissiveIntensity={hovered || selected ? 3 : 1.2}
         />
       </mesh>
 
-      {/* Vòng sáng khi hover */}
+      {/* Hiệu ứng vòng sáng */}
       {(hovered || selected) && (
         <mesh>
-
           <sphereGeometry args={[0.15 + progress * 0.1, 32, 32]} />
           <meshBasicMaterial
             color={color}
@@ -92,16 +143,15 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
       {progress > 0 && (
         <group ref={orbitRef}>
           {solarSystemPlanets.map((planet, i) => {
-            // Calculate orbital position (circular orbit)
             const angle = (i / solarSystemPlanets.length) * Math.PI * 2;
-            const x = Math.cos(angle) * planet.distance * progress;
-            const y = Math.sin(angle) * planet.distance * progress * 0.3; // flatter orbit
-            const z = Math.sin(angle) * planet.distance * progress;
+            const baseX = Math.cos(angle) * planet.distance * progress;
+            const baseY = Math.sin(angle) * planet.distance * progress * 0.3;
+            const baseZ = Math.sin(angle) * planet.distance * progress;
 
             return (
               <mesh
                 key={planet.name}
-                position={[x, y, z]}
+                position={[baseX, baseY, baseZ]}
                 scale={[progress, progress, progress]}
               >
                 <sphereGeometry args={[planet.size, 16, 16]} />
@@ -113,7 +163,7 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
                   roughness={planet.name === "Venus" ? 0.1 : 0.4}
                 />
 
-                {/* Saturn's Rings */}
+                {/* Saturn Rings */}
                 {planet.name === "Saturn" && (
                   <mesh rotation={[Math.PI / 2, 0, 0]}>
                     <ringGeometry args={[planet.size * 1.5, planet.size * 2.2, 32]} />
@@ -126,26 +176,42 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
                   </mesh>
                 )}
 
-                {/* Subtle planet lighting */}
-                <pointLight
-                  intensity={0.2 * progress}
-                  distance={1}
-                  color={planet.color}
-                />
+                <pointLight intensity={0.2 * progress} distance={1} color={planet.color} />
               </mesh>
             );
           })}
+          {/* 🔹 Các đường nối network */}
+          {paused &&
+            solarSystemPlanets.map((_, i) => (
+              <line
+                key={`line-${i}`}
+                ref={(ref) => (linesRef.current[i] = ref!)}
+              >
+                <bufferGeometry />
+                <lineBasicMaterial color={color} transparent opacity={0.5} />
+              </line>
+            ))}
         </group>
       )}
     </group>
   );
 };
 
+// ========================== //
+//         MainScene          //
+// ========================== //
+
 const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) => void }> = ({
   isActive,
   onHover,
 }) => {
   const { camera, scene } = useThree();
+
+  useEffect(() => {
+    camera.position.set(75.366, 16.746, -33.750);
+    camera.lookAt(0, 0, 0);
+  }, [camera]);
+
   const [keys, setKeys] = useState<{ [key: string]: boolean }>({});
   const [mouseButtons, setMouseButtons] = useState<{ left: boolean; right: boolean }>({
     left: false,
@@ -161,6 +227,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     const fetchData = async () => {
       try {
         const res = await axiosClient.get("/v1/papers/visualization");
+        console.log(res.data)
         if (!res.data || res.data.length === 0) return;
 
         const scaled = res.data.map((p: Paper) => ({
@@ -171,50 +238,63 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
         }));
 
         setPapers(scaled);
-
         const clusters: string[] = Array.from(new Set(scaled.map((p: Paper) => p.cluster)));
         const map: Record<string, string> = randomClusterColor(clusters, colorPalette);
         setColorMap(map);
       } catch (error) {
-        console.error("Failed to fetch papers/colors:", error);
+        console.error("Failed to fetch papers:", error);
       }
     };
     fetchData();
   }, []);
 
-  const { setHtmlContent, setSelectedPaperId, setChatView } = useGlobal();
+  const { query } = useGlobal();
+
+  useEffect(() => {
+    if (!query) return;
+
+    const target = new THREE.Vector3(64.70495128631592, 8.552704453468323, -32.50426769256592);
+    const duration = 1;
+    const start = camera.position.clone();
+    const startTime = performance.now();
+
+    const animate = (time: number) => {
+      const t = Math.min((time - startTime) / (duration * 1000), 1);
+      camera.position.lerpVectors(start, target, t);
+      camera.lookAt(target);
+      if (t < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [query, camera]);
+
+  const { setHtmlContent, setSelectedPaperId, setChatView, setTopic } = useGlobal();
 
   useEffect(() => {
     const handleSpace = async (e: KeyboardEvent) => {
       if (e.code === "Space" && selectedId !== null) {
         e.preventDefault();
         e.stopPropagation();
-
         const paper = papers.find((p) => p.paper_id === selectedId);
         if (!paper) return;
-
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
+          console.log("Fetched HTML content:", res.data);
           setHtmlContent?.(res.data.html_context);
           setSelectedPaperId?.(selectedId);
+          setTopic?.(res.data.title);
           setChatView?.(true);
         } catch (err) {
           console.error("Failed to fetch paper info:", err);
         }
       }
     };
-
     window.addEventListener("keydown", handleSpace);
     return () => window.removeEventListener("keydown", handleSpace);
   }, [selectedId, papers, setHtmlContent, setSelectedPaperId, setChatView]);
 
-  // bắt phím WASD + Shift
   useEffect(() => {
-    const downHandler = (e: KeyboardEvent) =>
-      setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
-    const upHandler = (e: KeyboardEvent) =>
-      setKeys((k) => ({ ...k, [e.key.toLowerCase()]: false }));
-
+    const downHandler = (e: KeyboardEvent) => setKeys((k) => ({ ...k, [e.key.toLowerCase()]: true }));
+    const upHandler = (e: KeyboardEvent) => setKeys((k) => ({ ...k, [e.key.toLowerCase()]: false }));
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
     return () => {
@@ -223,7 +303,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     };
   }, []);
 
-  // bắt chuột trái/phải
   useEffect(() => {
     const downHandler = (e: MouseEvent) => {
       if (e.button === 0) setMouseButtons((m) => ({ ...m, left: true }));
@@ -233,11 +312,9 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
       if (e.button === 0) setMouseButtons((m) => ({ ...m, left: false }));
       if (e.button === 2) setMouseButtons((m) => ({ ...m, right: false }));
     };
-
     window.addEventListener("mousedown", downHandler);
     window.addEventListener("mouseup", upHandler);
     window.addEventListener("contextmenu", (e) => e.preventDefault());
-
     return () => {
       window.removeEventListener("mousedown", downHandler);
       window.removeEventListener("mouseup", upHandler);
@@ -259,11 +336,9 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
-
     const hit = intersects.find(
       (i) => i.object instanceof THREE.Mesh && i.object.geometry.type === "SphereGeometry"
     );
-
     if (hit) {
       const id = findPaperId(hit.object);
       setSelectedId(id);
@@ -272,7 +347,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     }
 
     const speed = keys["shift"] ? 0.3 : 0.1;
-
     if (keys["w"]) {
       camera.getWorldDirection(direction);
       camera.position.addScaledVector(direction, speed);
@@ -291,7 +365,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
       direction.cross(camera.up);
       camera.position.addScaledVector(direction, speed);
     }
-
     if (mouseButtons.left) {
       camera.getWorldDirection(direction);
       camera.position.addScaledVector(direction, speed);
@@ -302,7 +375,6 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
     }
   });
 
-  // ✅ chỉ return 1 lần
   return (
     <>
       <ambientLight intensity={0.6} />
@@ -330,6 +402,10 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
   );
 };
 
+// ========================== //
+//       PaperScatter3D       //
+// ========================== //
+
 const PaperScatter3D: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
   const [hoveredPaper, setHoveredPaper] = useState<Paper | null>(null);
@@ -346,18 +422,16 @@ const PaperScatter3D: React.FC = () => {
     }
   };
 
-  // When chatView changes → toggle pointer lock
   useEffect(() => {
     if (chatView) {
-      disablePointerLock(); // show mouse for chat/paper
+      disablePointerLock();
       setIsActive(false);
     } else {
-      enablePointerLock(); // back to 3D navigation
+      enablePointerLock();
       setIsActive(true);
     }
   }, [chatView]);
 
-  // Sync pointer lock state
   useEffect(() => {
     const handlePointerLockChange = () => {
       setIsActive(!!document.pointerLockElement);
@@ -365,32 +439,31 @@ const PaperScatter3D: React.FC = () => {
     document.addEventListener("pointerlockchange", handlePointerLockChange);
     return () => document.removeEventListener("pointerlockchange", handlePointerLockChange);
   }, []);
+
   return (
-      <div
-          style={{ width: "100vw", height: "100vh", cursor: isActive ? "none" : "pointer" }}
-          onClick={() => !chatView && enablePointerLock()} // only enable when not in chat
-      >
-        <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
-          <MainScene isActive={isActive} onHover={setHoveredPaper} />
-        </Canvas>
+    <div
+      style={{ width: "100vw", height: "100vh", cursor: isActive ? "none" : "pointer" }}
+      onClick={() => !chatView && enablePointerLock()}
+    >
+      <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
+        <MainScene isActive={isActive} onHover={setHoveredPaper} />
+      </Canvas>
 
-        {!chatView && !isActive && (
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
-              Click the screen to start!
-            </div>
-        )}
+      {!chatView && !isActive && (
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[18px] bg-black/50 px-6 py-3 rounded-lg">
+          Click the screen to start!
+        </div>
+      )}
 
-        {!chatView && isActive && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
-              +
-            </div>
-        )}
+      {!chatView && isActive && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-bold pointer-events-none select-none">
+          +
+        </div>
+      )}
 
-        {hoveredPaper && !chatView && <ShortDetail paper={hoveredPaper} />}
-      </div>
+      {hoveredPaper && !chatView && <ShortDetail paper={hoveredPaper} />}
+    </div>
   );
 };
-
-
 
 export default PaperScatter3D;
