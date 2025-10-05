@@ -26,6 +26,7 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
   const linesRef = useRef<(THREE.Line | null)[]>([]);
   const color = colorMap?.[paper.cluster] || "gray";
 
+  // Danh sách hành tinh
   const solarSystemPlanets = [
     { name: "Mercury", color: "#8C7853", size: 0.015, distance: 0.25, emissive: "#8C7853", emissiveIntensity: 0.3 },
     { name: "Venus", color: "#FFC649", size: 0.02, distance: 0.35, emissive: "#FFC649", emissiveIntensity: 0.5 },
@@ -48,11 +49,10 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     return () => window.removeEventListener("keydown", handleSpace);
   }, []);
 
-  // 🔹 Khi pause, sắp xếp lại vị trí hành tinh thành network
   useEffect(() => {
     if (paused) {
       const positions: THREE.Vector3[] = [];
-      const radius = 0.8; // bán kính network
+      const radius = 0.8;
       solarSystemPlanets.forEach((_, i) => {
         const theta = (i / solarSystemPlanets.length) * Math.PI * 2;
         const phi = Math.acos(2 * Math.random() - 1);
@@ -67,7 +67,6 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     }
   }, [paused]);
 
-  // 🔹 Animation + quay hoặc sắp xếp network
   useFrame((_, delta) => {
     if (selected || hovered) {
       setProgress((p) => Math.min(1, p + delta * 2));
