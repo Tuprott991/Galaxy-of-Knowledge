@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import {
   CustomAreaChart,
-  CustomBarChart,
 } from "@/components/custom/charts";
 import {
   axiosClient

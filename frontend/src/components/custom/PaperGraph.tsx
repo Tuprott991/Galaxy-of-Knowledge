@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import type { ForceGraphMethods } from "react-force-graph-2d";
-import { forceLink } from "d3-force";
 
 interface NodeType {
     id: string;
@@ -22,7 +21,7 @@ const PaperGraph: React.FC = () => {
         nodes: [],
         links: [],
     });
-    const fgRef = useRef<ForceGraphMethods>();
+    const fgRef = useRef<ForceGraphMethods<NodeType, LinkType> | undefined>(undefined);
     const [hoverNode, setHoverNode] = useState<NodeType | null>(null);
     const [hoverLink, setHoverLink] = useState<LinkType | null>(null);
 
@@ -57,11 +56,19 @@ const PaperGraph: React.FC = () => {
         fetchGraph();
     }, []);
 
+    // ✅ Cấu hình lực sau khi graph data được load
+    useEffect(() => {
+        if (fgRef.current) {
+            fgRef.current.d3Force("link")?.distance(200); // tăng khoảng cách giữa các node
+            fgRef.current.d3ReheatSimulation(); // chạy lại mô phỏng
+        }
+    }, [graphData]);
+
     return (
         <div
             style={{
                 width: "100%",
-                height: "auto",
+                height: "700px",
                 borderRadius: "12px",
                 overflow: "hidden",
                 boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
@@ -86,22 +93,17 @@ const PaperGraph: React.FC = () => {
                     ctx.fillStyle = "#ffffff";
                     ctx.fillText(node.label, node.x, node.y - node.size - 4);
                 }}
-                onNodeHover={setHoverNode}
+                onNodeHover={(node) => setHoverNode(node as NodeType | null)}
                 linkColor={(link: any) => (link === hoverLink ? "#ff4500" : link.color)}
                 linkWidth={(link: any) => (link === hoverLink ? 2.5 : 1)}
                 linkLabel={(link: any) => link.label}
-                onLinkHover={setHoverLink}
+                onLinkHover={(link) => setHoverLink(link as LinkType | null)}
                 enableNodeDrag={true}
                 cooldownTicks={200}
                 backgroundColor="#1e1e1e"
                 linkDirectionalParticles={2}
                 linkDirectionalParticleWidth={(link: any) => (link === hoverLink ? 3 : 0)}
                 linkDirectionalParticleSpeed={0.005}
-                d3Force={(graph) =>
-                    forceLink(graph.links)
-                        .id((d: any) => d.id)
-                        .distance(200) // 🔹 tăng khoảng cách các cạnh
-                }
             />
         </div>
     );
