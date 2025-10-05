@@ -51,7 +51,7 @@ class GraphService:
         edges = []
         visited_papers = set()
         
-        # Add center paper
+        # Add center paper with enhanced metadata
         center_paper = await self._get_paper_info(paper_id)
         if not center_paper:
             raise ValueError(f"Paper {paper_id} not found")
@@ -59,10 +59,30 @@ class GraphService:
         nodes[paper_id] = Node(
             id=paper_id,
             label=center_paper['title'][:50] + "..." if len(center_paper['title']) > 50 else center_paper['title'],
+            type="paper",
             level=0,
             size=20,
             color="#e74c3c",  # Red for center
-            metadata=center_paper
+            metadata={
+                "paper_id": center_paper['paper_id'],
+                "title": center_paper['title'],
+                "abstract": center_paper['abstract'][:500] + "..." if center_paper['abstract'] and len(center_paper['abstract']) > 500 else center_paper['abstract'],
+                "author_list": center_paper['author_list'],
+                "cluster": center_paper['cluster'],
+                "topic": center_paper['topic'],
+                "score": center_paper['score'],
+                "citation_count": center_paper['citation_count'],
+                "reference_count": center_paper['reference_count'],
+                "author_count": center_paper['author_count'],
+                "knowledge_context_count": center_paper['knowledge_context_count'],
+                "coordinates": {
+                    "x": center_paper['plot_visualize_x'],
+                    "y": center_paper['plot_visualize_y'],
+                    "z": center_paper['plot_visualize_z']
+                },
+                "created_at": center_paper['created_at'].isoformat() if center_paper['created_at'] else None,
+                "summary": center_paper['summarize']
+            }
         )
         visited_papers.add(paper_id)
         
@@ -70,34 +90,59 @@ class GraphService:
         level1_papers = await self._get_papers_by_same_authors(paper_id, max_nodes // 2)
         for paper in level1_papers:
             if paper['paper_id'] not in visited_papers and len(nodes) < max_nodes:
+                # Add related paper node with rich metadata
                 nodes[paper['paper_id']] = Node(
                     id=paper['paper_id'],
                     label=paper['title'][:40] + "..." if len(paper['title']) > 40 else paper['title'],
+                    type="paper",
                     level=1,
                     size=15,
                     color="#3498db",  # Blue for level 1
-                    metadata=paper
+                    metadata={
+                        "paper_id": paper['paper_id'],
+                        "title": paper['title'],
+                        "abstract": paper['abstract'][:300] + "..." if paper['abstract'] and len(paper['abstract']) > 300 else paper['abstract'],
+                        "cluster": paper['cluster'],
+                        "topic": paper['topic'],
+                        "score": paper['score'],
+                        "citation_count": paper['citation_count'],
+                        "author_count": paper['author_count'],
+                        "shared_authors_count": paper['shared_authors_count'],
+                        "shared_author_names": paper['shared_author_names'],
+                        "avg_author_productivity": paper.get('avg_author_productivity'),
+                        "same_cluster": paper.get('same_cluster', False),
+                        "created_at": paper['created_at'].isoformat() if paper['created_at'] else None
+                    }
                 )
                 visited_papers.add(paper['paper_id'])
                 
-                # Add edge
+                # Add edge with comprehensive metadata
                 shared_authors_names = paper.get('shared_author_names', [])
-                author_names_str = ", ".join(shared_authors_names[:3])  # Lấy tối đa 3 tên đầu
+                author_names_str = ", ".join(shared_authors_names[:3])  # Take max 3 names
                 if len(shared_authors_names) > 3:
-                    author_names_str += f" và {len(shared_authors_names) - 3} tác giả khác"
+                    author_names_str += f" and {len(shared_authors_names) - 3} other authors"
+                
+                # Determine collaboration strength
+                collaboration_strength = "strong" if paper.get('shared_authors_count', 1) >= 3 else \
+                                       "medium" if paper.get('shared_authors_count', 1) == 2 else "weak"
                 
                 edges.append(Edge(
                     source=paper_id,
                     target=paper['paper_id'],
                     type="author",
-                    label="same author",
+                    label="shared authors",
                     color="#f39c12",
-                    relation=f"{author_names_str} co-authored this paper",
+                    weight=min(paper.get('shared_authors_count', 1) / 5.0, 1.0),  # Normalize weight
+                    relation=f"Shared authors: {author_names_str}",
                     metadata={
                         "shared_authors_count": paper.get('shared_authors_count', 1),
                         "shared_author_names": shared_authors_names,
+                        "collaboration_strength": collaboration_strength,
+                        "same_cluster": paper.get('same_cluster', False),
+                        "author_productivity_score": paper.get('avg_author_productivity'),
+                        "target_citation_count": paper['citation_count'],
                         "level": 1,
-                        "relationship_strength": "strong" if paper.get('shared_authors_count', 1) > 2 else "medium"
+                        "relationship_type": "co_authorship"
                     }
                 ))
         
@@ -119,9 +164,9 @@ class GraphService:
                         
                         # Add edge
                         shared_authors_names = paper.get('shared_author_names', [])
-                        author_names_str = ", ".join(shared_authors_names[:2])  # Level 2 chỉ lấy 2 tên
+                        author_names_str = ", ".join(shared_authors_names[:2])  # Level 2 only take 2 names
                         if len(shared_authors_names) > 2:
-                            author_names_str += f" và {len(shared_authors_names) - 2} tác giả khác"
+                            author_names_str += f" and {len(shared_authors_names) - 2} other authors"
                         
                         edges.append(Edge(
                             source=level1_paper_id,
@@ -196,7 +241,6 @@ class GraphService:
                     relation=f"Paper '{paper['title'][:30]}...' cites the center paper",
                     metadata={
                         "citation_type": "incoming",
-                        "paper_year": paper.get('published_date', '').split('-')[0] if paper.get('published_date') else None,
                         "level": 1,
                         "relationship_strength": "medium"
                     }
@@ -224,7 +268,6 @@ class GraphService:
                     relation=f"Center paper cites '{paper['title'][:30]}...'",
                     metadata={
                         "citation_type": "outgoing",
-                        "paper_year": paper.get('published_date', '').split('-')[0] if paper.get('published_date') else None,
                         "level": 1,
                         "relationship_strength": "medium"
                     }
@@ -339,7 +382,6 @@ class GraphService:
                     metadata={
                         "knowledge_count": paper.get('knowledge_count', 1),
                         "similarity_score": paper.get('similarity_score', 0.0),
-                        "confidence_score": paper.get('avg_confidence', 0.5),
                         "level": 1,
                         "relationship_strength": "strong" if paper.get('similarity_score', 0) > 0.8 else 
                                                "medium" if paper.get('similarity_score', 0) > 0.6 else "weak",
@@ -378,7 +420,6 @@ class GraphService:
                             metadata={
                                 "knowledge_count": paper.get('knowledge_count', 1),
                                 "similarity_score": paper.get('similarity_score', 0.0),
-                                "confidence_score": paper.get('avg_confidence', 0.3),
                                 "level": 2,
                                 "relationship_strength": "weak",
                                 "similarity_type": "indirect_embedding"
@@ -495,18 +536,36 @@ class GraphService:
     # Database query methods
     
     async def _get_paper_info(self, paper_id: str) -> Optional[Dict[str, Any]]:
-        """Get basic paper information"""
+        """Get comprehensive paper information with rich metadata"""
         try:
             conn = self.get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
             
             query = """
-                SELECT p.paper_id, p.title, p.abstract, p.published_date, p.doi,
-                       array_agg(DISTINCT a.name) as authors
+                SELECT 
+                    p.paper_id, 
+                    p.title, 
+                    p.abstract, 
+                    p.author_list,
+                    p.cluster,
+                    p.topic,
+                    p.score,
+                    p.summarize,
+                    p.cited_by,
+                    p._references,
+                    p.plot_visualize_x,
+                    p.plot_visualize_y,
+                    p.plot_visualize_z,
+                    p.created_at,
+                    p.updated_at,
+                    -- Calculate derived metrics
+                    COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                    COALESCE(array_length(p._references, 1), 0) as reference_count,
+                    COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                    -- Get key knowledge context count
+                    (SELECT COUNT(*) FROM key_knowledge kk WHERE kk.paper_id = p.id) as knowledge_context_count
                 FROM paper p
-                LEFT JOIN authors a ON p.paper_id = a.paper_id
                 WHERE p.paper_id = %s
-                GROUP BY p.paper_id, p.title, p.abstract, p.published_date, p.doi
             """
             
             cursor.execute(query, (paper_id,))
@@ -522,34 +581,75 @@ class GraphService:
             return None
     
     async def _get_papers_by_same_authors(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
-        """Get papers by same authors"""
+        """Get papers by same authors with comprehensive metadata"""
         try:
             conn = self.get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
             
             query = """
                 WITH paper_authors AS (
-                    SELECT DISTINCT a.name
-                    FROM authors a
-                    WHERE a.paper_id = %s
+                    SELECT DISTINCT author_name
+                    FROM paper p, unnest(p.author_list) as author_name
+                    WHERE p.paper_id = %s
+                ),
+                author_productivity AS (
+                    SELECT 
+                        author_name,
+                        COUNT(DISTINCT p.paper_id) as total_papers,
+                        AVG(COALESCE(array_length(p.cited_by, 1), 0)) as avg_citations
+                    FROM paper p, unnest(p.author_list) as author_name
+                    WHERE author_name IN (SELECT author_name FROM paper_authors)
+                    GROUP BY author_name
                 ),
                 related_papers AS (
-                    SELECT DISTINCT p.paper_id, p.title, p.abstract, p.published_date,
-                           COUNT(DISTINCT a.name) as shared_authors_count,
-                           array_agg(DISTINCT a.name) as shared_author_names
+                    SELECT DISTINCT 
+                        p.paper_id, 
+                        p.title, 
+                        p.abstract,
+                        p.cluster,
+                        p.topic,
+                        p.score,
+                        COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                        COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                        p.created_at,
+                        (
+                            SELECT COUNT(*)
+                            FROM unnest(p.author_list) as author_name
+                            WHERE author_name IN (SELECT author_name FROM paper_authors)
+                        ) as shared_authors_count,
+                        (
+                            SELECT COALESCE(array_agg(author_name), ARRAY[]::text[])
+                            FROM unnest(p.author_list) as author_name
+                            WHERE author_name IN (SELECT author_name FROM paper_authors)
+                        ) as shared_author_names,
+                        -- Calculate collaboration strength
+                        (
+                            SELECT AVG(ap.total_papers)
+                            FROM unnest(p.author_list) as author_name
+                            JOIN author_productivity ap ON ap.author_name = author_name
+                            WHERE author_name IN (SELECT author_name FROM paper_authors)
+                        ) as avg_author_productivity,
+                        -- Check if same cluster (topical similarity)
+                        CASE 
+                            WHEN p.cluster = (SELECT cluster FROM paper WHERE paper_id = %s) 
+                            THEN true 
+                            ELSE false 
+                        END as same_cluster
                     FROM paper p
-                    JOIN authors a ON p.paper_id = a.paper_id
-                    JOIN paper_authors pa ON a.name = pa.name
                     WHERE p.paper_id != %s
-                    GROUP BY p.paper_id, p.title, p.abstract, p.published_date
-                    HAVING COUNT(DISTINCT a.name) > 0
+                    AND p.author_list && (SELECT array_agg(author_name) FROM paper_authors)
                 )
                 SELECT * FROM related_papers
-                ORDER BY shared_authors_count DESC
+                WHERE shared_authors_count > 0
+                ORDER BY 
+                    shared_authors_count DESC,
+                    same_cluster DESC,
+                    citation_count DESC,
+                    avg_author_productivity DESC
                 LIMIT %s
             """
             
-            cursor.execute(query, (paper_id, paper_id, limit))
+            cursor.execute(query, (paper_id, paper_id, paper_id, limit))
             results = cursor.fetchall()
             
             cursor.close()
@@ -562,21 +662,35 @@ class GraphService:
             return []
     
     async def _get_citing_papers(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
-        """Get papers that cite this paper"""
+        """Get papers that cite this paper using actual citation data"""
         try:
             conn = self.get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
             
-            # For now, we'll use a simple query. This can be enhanced with actual citation data
             query = """
-                SELECT p.paper_id, p.title, p.abstract, p.published_date
+                SELECT 
+                    p.paper_id, 
+                    p.title, 
+                    p.abstract, 
+                    p.author_list,
+                    p.cluster,
+                    p.topic,
+                    p.score,
+                    COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                    COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                    p.created_at,
+                    -- Calculate citation context (how this paper cites the center paper)
+                    'incoming' as citation_type
                 FROM paper p
-                WHERE p.paper_id != %s
-                ORDER BY RANDOM()
+                WHERE %s = ANY(p._references)
+                AND p.paper_id != %s
+                ORDER BY 
+                    COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
+                    p.created_at DESC  -- Recent papers first
                 LIMIT %s
             """
             
-            cursor.execute(query, (paper_id, limit))
+            cursor.execute(query, (paper_id, paper_id, limit))
             results = cursor.fetchall()
             
             cursor.close()
@@ -589,21 +703,40 @@ class GraphService:
             return []
     
     async def _get_cited_papers(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
-        """Get papers cited by this paper"""
+        """Get papers cited by this paper using actual citation data"""
         try:
             conn = self.get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
             
-            # For now, we'll use a simple query. This can be enhanced with actual citation data
             query = """
-                SELECT p.paper_id, p.title, p.abstract, p.published_date
+                WITH center_paper_refs AS (
+                    SELECT unnest(_references) as ref_paper_id
+                    FROM paper
+                    WHERE paper_id = %s
+                    AND _references IS NOT NULL
+                )
+                SELECT 
+                    p.paper_id, 
+                    p.title, 
+                    p.abstract, 
+                    p.author_list,
+                    p.cluster,
+                    p.topic,
+                    p.score,
+                    COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                    COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                    p.created_at,
+                    'outgoing' as citation_type
                 FROM paper p
+                JOIN center_paper_refs cpr ON p.paper_id = cpr.ref_paper_id
                 WHERE p.paper_id != %s
-                ORDER BY RANDOM()
+                ORDER BY 
+                    COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
+                    p.created_at DESC
                 LIMIT %s
             """
             
-            cursor.execute(query, (paper_id, limit))
+            cursor.execute(query, (paper_id, paper_id, limit))
             results = cursor.fetchall()
             
             cursor.close()
@@ -625,20 +758,20 @@ class GraphService:
                 WITH center_paper_embedding AS (
                     SELECT AVG(kk.embedding) as avg_embedding
                     FROM key_knowledge kk
-                    WHERE kk.paper_id = %s
+                    JOIN paper p ON kk.paper_id = p.id
+                    WHERE p.paper_id = %s
                     AND kk.embedding IS NOT NULL
                 ),
                 related_papers AS (
-                    SELECT DISTINCT p.paper_id, p.title, p.abstract, p.published_date,
+                    SELECT DISTINCT p.paper_id, p.title, p.abstract,
                            AVG(kk.embedding) as paper_avg_embedding,
-                           COUNT(kk.knowledge_text) as knowledge_count,
-                           AVG(kk.confidence_score) as avg_confidence
+                           COUNT(kk.context) as knowledge_count
                     FROM paper p
-                    JOIN key_knowledge kk ON p.paper_id = kk.paper_id
+                    JOIN key_knowledge kk ON kk.paper_id = p.id
                     WHERE p.paper_id != %s
                     AND kk.embedding IS NOT NULL
-                    GROUP BY p.paper_id, p.title, p.abstract, p.published_date
-                    HAVING COUNT(kk.knowledge_text) > 0
+                    GROUP BY p.paper_id, p.title, p.abstract
+                    HAVING COUNT(kk.context) > 0
                 ),
                 similarity_papers AS (
                     SELECT rp.*,
@@ -666,33 +799,92 @@ class GraphService:
             return []
     
     async def _get_similar_papers(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
-        """Get similar papers based on embeddings or other similarity metrics"""
+        """Get similar papers based on embeddings and cluster analysis"""
         try:
             conn = self.get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
             
-            # Get papers from the same cluster as a proxy for similarity
             query = """
-                WITH paper_cluster AS (
-                    SELECT cluster
+                WITH center_paper AS (
+                    SELECT embeddings, cluster, topic
                     FROM paper
                     WHERE paper_id = %s
+                    AND embeddings IS NOT NULL
                 ),
                 similar_papers AS (
-                    SELECT p.paper_id, p.title, p.abstract, p.published_date,
-                           RANDOM() as similarity_score  -- Placeholder for actual similarity calculation
+                    SELECT 
+                        p.paper_id, 
+                        p.title, 
+                        p.abstract,
+                        p.cluster,
+                        p.topic,
+                        p.score,
+                        COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                        COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                        p.created_at,
+                        -- Calculate embedding similarity if available
+                        CASE 
+                            WHEN p.embeddings IS NOT NULL AND cp.embeddings IS NOT NULL 
+                            THEN 1 - (p.embeddings <=> cp.embeddings)
+                            ELSE NULL
+                        END as embedding_similarity,
+                        -- Check cluster similarity
+                        CASE 
+                            WHEN p.cluster = cp.cluster AND p.cluster IS NOT NULL
+                            THEN true 
+                            ELSE false 
+                        END as same_cluster,
+                        -- Check topic similarity
+                        CASE 
+                            WHEN p.topic = cp.topic AND p.topic IS NOT NULL
+                            THEN true 
+                            ELSE false 
+                        END as same_topic,
+                        -- Calculate coordinate distance if available
+                        CASE 
+                            WHEN p.plot_visualize_x IS NOT NULL AND p.plot_visualize_y IS NOT NULL 
+                                 AND p.plot_visualize_z IS NOT NULL
+                            THEN sqrt(
+                                power(p.plot_visualize_x - COALESCE((SELECT plot_visualize_x FROM paper WHERE paper_id = %s), 0), 2) +
+                                power(p.plot_visualize_y - COALESCE((SELECT plot_visualize_y FROM paper WHERE paper_id = %s), 0), 2) +
+                                power(p.plot_visualize_z - COALESCE((SELECT plot_visualize_z FROM paper WHERE paper_id = %s), 0), 2)
+                            )
+                            ELSE NULL
+                        END as spatial_distance
                     FROM paper p
-                    CROSS JOIN paper_cluster pc
-                    WHERE p.cluster = pc.cluster
-                    AND p.paper_id != %s
-                    AND p.cluster IS NOT NULL
+                    CROSS JOIN center_paper cp
+                    WHERE p.paper_id != %s
+                    AND (
+                        p.embeddings IS NOT NULL OR 
+                        p.cluster = cp.cluster OR
+                        p.topic = cp.topic
+                    )
+                ),
+                ranked_similar AS (
+                    SELECT *,
+                        -- Calculate composite similarity score
+                        COALESCE(embedding_similarity, 0) * 0.5 +
+                        CASE WHEN same_cluster THEN 0.3 ELSE 0 END +
+                        CASE WHEN same_topic THEN 0.2 ELSE 0 END +
+                        CASE 
+                            WHEN spatial_distance IS NOT NULL 
+                            THEN GREATEST(0, (100 - spatial_distance) / 100) * 0.1
+                            ELSE 0 
+                        END as composite_similarity
+                    FROM similar_papers
                 )
-                SELECT * FROM similar_papers
-                ORDER BY similarity_score DESC
+                SELECT *,
+                    composite_similarity as similarity_score
+                FROM ranked_similar
+                WHERE composite_similarity > 0.1  -- Minimum similarity threshold
+                ORDER BY 
+                    composite_similarity DESC,
+                    citation_count DESC,
+                    created_at DESC
                 LIMIT %s
             """
             
-            cursor.execute(query, (paper_id, paper_id, limit))
+            cursor.execute(query, (paper_id, paper_id, paper_id, paper_id, paper_id, limit))
             results = cursor.fetchall()
             
             cursor.close()

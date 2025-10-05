@@ -2,8 +2,8 @@
 Graph API endpoints for 2D network visualization
 """
 
-from fastapi import APIRouter, HTTPException, Depends
-from typing import Dict, Any
+from fastapi import APIRouter, HTTPException, Depends, Query
+from typing import Dict, Any, Optional
 
 from .models.graph import GraphRequest, GraphResponse, GraphData
 from .services.graph_service import GraphService
@@ -12,6 +12,54 @@ router = APIRouter(prefix="/graph", tags=["graph"])
 
 # Create a singleton instance of GraphService
 graph_service = GraphService()
+
+
+@router.get("/2d")
+async def get_graph_2d(
+    paper_id: str = Query(..., description="Paper ID to generate graph for"),
+    mode: str = Query(..., description="Graph mode: author, citing, key_knowledge, or similar"),
+    max_nodes: int = Query(10, description="Maximum number of nodes", ge=1, le=100),
+    depth: int = Query(2, description="Graph depth", ge=1, le=3)
+) -> GraphResponse:
+    """
+    Generate 2D graph data via GET request
+    
+    Args:
+        paper_id: Paper ID to generate graph for
+        mode: Graph mode (author, citing, key_knowledge, similar)
+        max_nodes: Maximum number of nodes (1-100)
+        depth: Graph depth (1-3)
+        
+    Returns:
+        Graph data with nodes and edges for visualization
+    """
+    try:
+        # Validate mode
+        valid_modes = ["author", "citing", "key_knowledge", "similar"]
+        if mode not in valid_modes:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid mode '{mode}'. Must be one of: {', '.join(valid_modes)}"
+            )
+        
+        # Generate graph data
+        graph_data = await graph_service.generate_graph(
+            paper_id=paper_id,
+            mode=mode,
+            depth=depth,
+            max_nodes=max_nodes
+        )
+        
+        return GraphResponse(
+            success=True,
+            data=graph_data,
+            message=f"Graph generated successfully with {graph_data.total_nodes} nodes and {graph_data.total_edges} edges"
+        )
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 
 @router.post("/generate", response_model=GraphResponse)
