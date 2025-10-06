@@ -1,6 +1,7 @@
-import { Suspense, lazy } from "react";
+import {Suspense, lazy, useState} from "react";
 import { useGlobal } from "@/context/GlobalContext";
 import TestComponent from "./Test";
+import FilterSlider from "@/components/layout/Filter-Slider.tsx";
 
 const InsightButton = lazy(() => import("@/components/layout/insight-button").then(m => ({ default: m.InsightButton })));
 const HelpButton = lazy(() => import("@/components/layout/help-button").then(m => ({ default: m.HelpButton })));
@@ -11,8 +12,10 @@ const ESCButton = lazy(() => import("@/components/layout/esc-button").then(m => 
 
 export default function Home() {
   const { chatView } = useGlobal();
+    const [scoreThreshold, setScoreThreshold] = useState(0);
 
-  return (
+
+    return (
     <div className="relative min-h-screen min-w-screen flex items-center justify-center bg-neutral-950 text-neutral-100">
       <Suspense fallback={null}>
         {!chatView ? (
@@ -35,6 +38,8 @@ export default function Home() {
             <div className="fixed bottom-4 right-4 z-10">
               <HelpButton />
             </div>
+              <FilterSlider value={scoreThreshold} onChange={setScoreThreshold} />
+
           </>
         ) : (
           <>
@@ -53,9 +58,9 @@ export default function Home() {
         )}
       </Suspense>
 
-      <div className="z-5">
-        <TestComponent />
-      </div>
+        <div className="z-5">
+            <TestComponent scoreThreshold={scoreThreshold} />  {/* 👈 thêm dòng này */}
+        </div>
     </div>
   );
 }

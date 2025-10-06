@@ -84,7 +84,6 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
         }
       }
 
-      // Cập nhật vị trí đường nối
       if (paused && orbitRef.current) {
         linesRef.current.forEach((line, i) => {
           if (orbitRef.current?.children[i]) {
@@ -202,10 +201,11 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
 //         MainScene          //
 // ========================== //
 
-const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) => void }> = ({
-  isActive,
-  onHover,
-}) => {
+const MainScene: React.FC<{
+  isActive: boolean;
+  onHover: (paper: Paper | null) => void;
+  scoreThreshold: number;
+}> = ({ isActive, onHover, scoreThreshold }) => {
   const { camera, scene } = useThree();
 
   useEffect(() => {
@@ -308,6 +308,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 
         try {
           const res = await axiosClient.get(`/v1/papers/${selectedId}/html-context`);
+          console.log(res);
           console.log("Fetched HTML content:", res.data);
           setHtmlContent?.(res.data.html_context);
           setTopic?.(res.data.title);
@@ -412,16 +413,18 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
       <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
 
       <Suspense fallback={null}>
-        {papers.map((paper) => (
-          <group key={paper.paper_id} userData={{ paper_id: paper.paper_id }}>
-            <PaperPoint
-              paper={paper}
-              onHover={onHover}
-              colorMap={colorMap}
-              selected={selectedId === paper.paper_id}
-            />
-          </group>
-        ))}
+        {papers
+            .filter((p) => p.score >= scoreThreshold)
+            .map((paper) => (
+                <group key={paper.paper_id} userData={{ paper_id: paper.paper_id }}>
+                  <PaperPoint
+                      paper={paper}
+                      onHover={onHover}
+                      colorMap={colorMap}
+                      selected={selectedId === paper.paper_id}
+                  />
+                </group>
+            ))}
       </Suspense>
 
       {isActive && <PointerLockControls />}
@@ -436,7 +439,7 @@ const MainScene: React.FC<{ isActive: boolean; onHover: (paper: Paper | null) =>
 //       PaperScatter3D       //
 // ========================== //
 
-const PaperScatter3D: React.FC = () => {
+const PaperScatter3D: React.FC<{ scoreThreshold: number }> = ({ scoreThreshold }) => {
   const [isActive, setIsActive] = useState(false);
   const [hoveredPaper, setHoveredPaper] = useState<Paper | null>(null);
   const { chatView } = useGlobal();
@@ -476,7 +479,7 @@ const PaperScatter3D: React.FC = () => {
       onClick={() => !chatView && enablePointerLock()}
     >
       <Canvas style={{ background: "black" }} camera={{ position: [0, 1.6, 5], fov: 75 }}>
-        <MainScene isActive={isActive} onHover={setHoveredPaper} />
+        <MainScene isActive={isActive} onHover={setHoveredPaper} scoreThreshold={scoreThreshold} />
       </Canvas>
 
       {!chatView && !isActive && (

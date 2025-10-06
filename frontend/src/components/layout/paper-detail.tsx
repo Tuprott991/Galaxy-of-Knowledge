@@ -11,7 +11,7 @@ export const PaperDetail: React.FC = () => {
     const [paperTitle, setPaperTitle] = useState<string>("");
     const [paperAuthors, setPaperAuthors] = useState<string>("");
 
-    const [width, setWidth] = useState(750); // 👉 mặc định 750px
+    const [width, setWidth] = useState(750);
     const isResizing = useRef(false);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export const PaperDetail: React.FC = () => {
                 Array.isArray(authorsArray) && authorsArray.length > 0
                     ? authorsArray.join(", ")
                     : "";
-
+            console.log(res.data);
             let html = res.data?.data?.html_context ?? res.data?.html_context ?? "";
 
             // In đậm các phần chính
