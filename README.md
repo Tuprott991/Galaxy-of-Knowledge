@@ -24,6 +24,10 @@ Galaxy of Knowledge is an innovative research discovery platform that transforms
 
 The main interface presents research papers as celestial bodies in an interactive 3D space. Users can "fly through" the galaxy of knowledge, with paper clustering based on semantic similarity creating natural research neighborhoods.
 
+![Similarity Star](Similarity_star.png)
+
+Nearby star (paper) share similar semantic context, which help user to focus on their reading interest and easy to compare paper have similar research direction
+
 ### System Architecture
 ![System Architecture Diagram](Gok.drawio.png)
 
