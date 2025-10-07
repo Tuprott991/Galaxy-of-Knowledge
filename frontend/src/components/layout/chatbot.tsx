@@ -30,17 +30,6 @@ export function Chatbot() {
     const [open, setOpen] = useState(false);
     const [sessionId, setSessionId] = useState<string | null>(null);
 
-    const hypoContent = `**New Hypothesis
-Title:
-AI-Augmented Antibody Repertoire Mining for Next-Generation Vaccine and Therapeutic Discovery
-Core Idea:
-Combine naive murine antibody repertoire datasets (PMC5761896) with transformer-based protein language models (PMC8534217, PMC9982045) to generate novel antibody scaffolds exhibiting enhanced binding affinity and cross-pathogen coverage — thus accelerating biologics discovery and global pandemic preparedness.
-**Reasoning Summary
-PMC5761896 — Supplies raw, unbiased murine repertoire sequences, a diverse immunogenomic substrate rarely used in AI pipelines.
-PMC8534217 — Shows that transfer learning improves antibody structure–function inference from existing repertoires.
-PMC9982045 — Demonstrates generative AI in designing functional antibodies and vaccines.
-→ Together, they form a pipeline for reviving legacy immunogenomic datasets and coupling them with modern foundation models.`;
-
     useEffect(() => {
         const timer = setTimeout(() => setOpen(true), 500);
         return () => clearTimeout(timer);
@@ -72,11 +61,11 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
             setLoading(true);
             const sessionData = await createSession();
             setSessionId(sessionData.sessionId);
-
+            
             if (selectedPaperId) {
-                setMessages([{
-                    text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nNew session created! You can now ask questions about this paper.`,
-                    sender: "bot"
+                setMessages([{ 
+                    text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nNew session created! You can now ask questions about this paper.`, 
+                    sender: "bot" 
                 }]);
             } else {
                 setMessages([{ text: `New session created! Session ID: ${sessionData.sessionId}`, sender: "bot" }]);
@@ -89,80 +78,159 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
         }
     }, [selectedPaperId]);
 
+    // Automatically create session when paper is selected
     useEffect(() => {
+        console.log("📄 Chatbot: selectedPaperId changed to:", selectedPaperId);
         if (selectedPaperId) {
+            // Reset messages and create new session
             setMessages([{
                 text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nCreating new session for this paper...`,
                 sender: "bot"
             }]);
+            
+            // Auto-create session
             handleCreateNewSession();
         } else {
             setMessages([]);
         }
     }, [selectedPaperId, handleCreateNewSession]);
 
+    // Reset messages when mode changes, preserving Paper ID if available
     useEffect(() => {
         if (selectedPaperId) {
             setMessages([{
-                text: activeMode === "hypo-agent" ? hypoContent : `📄 **Paper ID:** \`${selectedPaperId}\`\n\nI'm here to help you analyze this paper. Feel free to ask questions about its content, methodology, findings, or any other aspect!`,
+                text: `📄 **Paper ID:** \`${selectedPaperId}\`\n\nI'm here to help you analyze this paper. Feel free to ask questions about its content, methodology, findings, or any other aspect!`,
                 sender: "bot"
             }]);
         } else {
             setMessages([]);
         }
-    }, [activeMode, selectedPaperId, hypoContent]);
+    }, [activeMode, selectedPaperId]);
+
+    const callApi = async (prompt: string) => {
+        if (!sessionId) {
+            return "Please create a session first by clicking the 'New Session' button.";
+        }
+        
+        setLoading(true);
+        let fullResponse = "";
+        let streamingMessageAdded = false;
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/run_sse`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    app_name: "adk-agent",
+                    user_id: USER_ID,
+                    session_id: sessionId,
+                    new_message: {
+                        role: "user",
+                        parts: [{
+                            text: prompt
+                        }]
+                    },
+                    streaming: true
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            // Handle SSE streaming response
+            const reader = response.body?.getReader();
+            const decoder = new TextDecoder();
+
+            if (!reader) {
+                throw new Error("Response body is not readable");
+            }
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n');
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const jsonData = JSON.parse(line.substring(6));
+                            
+                            // Extract text from the response
+                            if (jsonData.content?.parts) {
+                                for (const part of jsonData.content.parts) {
+                                    if (part.text) {
+                                        fullResponse += part.text;
+                                        
+                                        // Update the bot message in real-time
+                                        setMessages(prev => {
+                                            const newMessages = [...prev];
+                                            const lastMessage = newMessages[newMessages.length - 1];
+                                            
+                                            // If last message is from bot and is our streaming message, update it
+                                            if (lastMessage?.sender === "bot" && streamingMessageAdded) {
+                                                newMessages[newMessages.length - 1] = {
+                                                    text: fullResponse,
+                                                    sender: "bot"
+                                                };
+                                            } else {
+                                                // Add new bot message
+                                                newMessages.push({
+                                                    text: fullResponse,
+                                                    sender: "bot"
+                                                });
+                                                streamingMessageAdded = true;
+                                            }
+                                            return newMessages;
+                                        });
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            console.error("Failed to parse SSE data:", e);
+                        }
+                    }
+                }
+            }
+
+            return fullResponse || "No response received from agent.";
+        } catch (error) {
+            console.error("API call failed:", error);
+            return `Error: Unable to connect to the agent. ${error instanceof Error ? error.message : "Unknown error"}`;
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleSend = async () => {
         if (!inputValue.trim()) return;
-
+        
+        // Check if this is the first user message (only bot messages exist)
         const isFirstUserMessage = messages.every(msg => msg.sender === "bot");
-
-        if (isFirstUserMessage && activeMode === "hypo-agent") {
-            setMessages([...messages, { text: inputValue, sender: "user" }]);
-        } else {
-            setMessages([...messages, { text: inputValue, sender: "user" }]);
+        
+        // If first message and we have a paper ID, prepend it to the message
+        let userMessage = inputValue;
+        if (isFirstUserMessage && selectedPaperId) {
+            userMessage = `[Paper ID: ${selectedPaperId}]\n\n${inputValue}`;
         }
+        
+        setMessages([...messages, { text: inputValue, sender: "user" }]); // Display original message
         setInputValue("");
 
-        // Add thinking message
-        setMessages(prev => [...prev, { text: "Thinking...", sender: "bot" }]);
-
-        // Simulate response delay
-        setTimeout(() => {
-            const fixedResponse = hypoContent;
-            setMessages(prev => {
-                const newMessages = [...prev];
-                const lastMessage = newMessages[newMessages.length - 1];
-                if (lastMessage?.sender === "bot") {
-                    newMessages[newMessages.length - 1] = { text: fixedResponse, sender: "bot" };
-                }
-                return newMessages;
-            });
-        }, 1000); // 1 second delay to simulate thinking
-    };
-
-    const getDisplayMessages = (msgs: { text: string; sender: "user" | "bot" }[]) => {
-        let lastBotIndex = -1;
-        for (let i = msgs.length - 1; i >= 0; i--) {
-            if (msgs[i].sender === "bot") {
-                lastBotIndex = i;
-                break;
+        const botResponse = await callApi(userMessage); // Send message with Paper ID to API
+        
+        // Only add bot message if streaming didn't already add it
+        setMessages((prev) => {
+            const lastMessage = prev[prev.length - 1];
+            if (lastMessage?.sender === "bot" && lastMessage?.text === botResponse) {
+                return prev; // Message already added by streaming
             }
-        }
-        if (lastBotIndex === -1) {
-            return msgs.slice(-1); // last message, probably user
-        }
-        let userIndex = -1;
-        for (let i = lastBotIndex - 1; i >= 0; i--) {
-            if (msgs[i].sender === "user") {
-                userIndex = i;
-                break;
-            }
-        }
-        if (userIndex === -1) {
-            return [msgs[lastBotIndex]];
-        }
-        return [msgs[userIndex], msgs[lastBotIndex]];
+            return [...prev, { text: botResponse, sender: "bot" }];
+        });
     };
 
     return (
@@ -179,15 +247,15 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
                         <CardHeader className="flex justify-between items-center py-2 px-4 border-b border-slate-600/50">
                             <div className="flex items-center gap-2">
                                 <h2 className="text-sm font-semibold text-white">Choose the Agent Mode</h2>
-                                {/* <Button
-                                    variant="outline"
-                                    size="sm"
+                                <Button 
+                                    variant="outline" 
+                                    size="sm" 
                                     onClick={handleCreateNewSession}
                                     disabled={loading}
                                     className="text-xs"
                                 >
                                     New Session
-                                </Button> */}
+                                </Button>
                             </div>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
@@ -216,7 +284,7 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
                                     <p>Start by creating a new session, then ask me anything about scientific research.</p>
                                 </div>
                             )}
-                            {getDisplayMessages(messages).map((msg, index) => (
+                            {messages.map((msg, index) => (
                                 <div
                                     key={index}
                                     className={`p-3 rounded-lg max-w-[85%] shadow-lg ${msg.sender === "user"
@@ -235,8 +303,14 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
                                     )}
                                 </div>
                             ))}
+                            {loading && (
+                                <div className="self-start text-gray-400 italic text-sm flex items-center gap-2 p-3">
+                                    <div className="animate-pulse">●</div>
+                                    <span>Bot is thinking...</span>
+                                </div>
+                            )}
                             {
-                                activeMode === "knowledge-graph" && (<PaperGraph />)
+                                activeMode === "pro-agent" && (<PaperGraph />)
                             }
                         </div>
 
@@ -254,7 +328,7 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
                                 }}
                                 disabled={loading}
                                 rows={1}
-                                style={{
+                                style={{ 
                                     overflowY: inputValue.split('\n').length > 3 ? 'auto' : 'hidden',
                                     height: 'auto'
                                 }}
@@ -264,10 +338,10 @@ PMC9982045 — Demonstrates generative AI in designing functional antibodies and
                                     target.style.height = Math.min(target.scrollHeight, 200) + 'px';
                                 }}
                             />
-                            <Button
-                                variant="secondary"
-                                size="default"
-                                onClick={handleSend}
+                            <Button 
+                                variant="secondary" 
+                                size="default" 
+                                onClick={handleSend} 
                                 disabled={loading || !inputValue.trim()}
                                 className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
                             >
