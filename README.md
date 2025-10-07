@@ -233,14 +233,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🏆 Hackathon Project
 
-This project was developed during a 24-hour NASA hackathon, demonstrating the power of rapid prototyping with modern AI and visualization technologies.
+This project was developed during a 48-hour NASA hackathon, demonstrating the power of rapid prototyping with modern AI and visualization technologies.
 
 ## 📞 Support
 
 For questions and support:
-- 📧 Email: your-email@example.com
-- 🐛 Issues: [GitHub Issues](https://github.com/your-username/Galaxy-of-Knowledge/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/your-username/Galaxy-of-Knowledge/discussions)
+- 📧 Email: nvtu2305@gmail.com.com
+- 🐛 Issues: [GitHub Issues](https://github.com/tuprott991/Galaxy-of-Knowledge/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/tuprott991/Galaxy-of-Knowledge/discussions)
 
 ---
 
