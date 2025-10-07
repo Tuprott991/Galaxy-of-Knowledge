@@ -414,7 +414,7 @@ const MainScene: React.FC<{
 
       <Suspense fallback={null}>
         {papers
-            .filter((p) => p.score >= scoreThreshold)
+            .filter((p) => (p.score ?? 100) >= scoreThreshold)
             .map((paper) => (
                 <group key={paper.paper_id} userData={{ paper_id: paper.paper_id }}>
                   <PaperPoint

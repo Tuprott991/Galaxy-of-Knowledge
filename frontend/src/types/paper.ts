@@ -6,4 +6,5 @@ export type Paper = {
   z: number;
   cluster: string;
   topic: string;
+  score?: number;
 };
