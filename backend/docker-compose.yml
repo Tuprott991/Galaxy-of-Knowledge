@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: galaxy-backend
+    ports:
+      - "8080:8080"  # FastAPI
+      - "8081:8081"  # MCP Server
+      - "8082:8082"  # ADK Agent
+    environment:
+      - PORT=8080
+      - MCP_PORT=8081
+      - ADK_PORT=8082
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/service_account.json
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./service_account.json:/app/service_account.json:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - galaxy-network
+
+  # Optional: PostgreSQL for local development
+  postgres:
+    image: postgres:15-alpine
+    container_name: galaxy-postgres
+    environment:
+      - POSTGRES_DB=galaxy_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - galaxy-network
+
+volumes:
+  postgres-data:
+
+networks:
+  galaxy-network:
+    driver: bridge

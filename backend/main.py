@@ -40,7 +40,11 @@ app = FastAPI(
 # ======================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # TODO: restrict in production
+    allow_origins=[
+        "https://galaxy-of-knowledge-eta.vercel.app",  # Production frontend
+        "http://localhost:5173",  # Local Vite dev server
+        "http://localhost:3000",  # Alternative local dev port
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

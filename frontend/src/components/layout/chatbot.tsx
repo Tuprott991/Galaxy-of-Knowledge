@@ -17,8 +17,8 @@ import { v4 as uuidv4 } from "uuid";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useGlobal } from "@/context/GlobalContext";
+import { ADK_ENDPOINTS } from "@/config/api";
 
-const API_BASE_URL = "http://localhost:8082";
 const USER_ID = "u_999";
 
 export function Chatbot() {
@@ -37,7 +37,7 @@ export function Chatbot() {
 
     const createSession = async (): Promise<{ userId: string; sessionId: string; appName: string }> => {
         const generatedSessionId = uuidv4();
-        const response = await fetch(`${API_BASE_URL}/apps/adk-agent/users/${USER_ID}/sessions/${generatedSessionId}`, {
+        const response = await fetch(ADK_ENDPOINTS.createSession(USER_ID, generatedSessionId), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -117,7 +117,7 @@ export function Chatbot() {
         let streamingMessageAdded = false;
         
         try {
-            const response = await fetch(`${API_BASE_URL}/run_sse`, {
+            const response = await fetch(ADK_ENDPOINTS.runSSE, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

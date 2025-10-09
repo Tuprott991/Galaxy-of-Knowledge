@@ -1,0 +1,78 @@
+# Alternative Dockerfile using Supervisor for better process management
+# This is more robust for production
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies including supervisor
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    libpq-dev \
+    curl \
+    supervisor \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create log directories
+RUN mkdir -p /var/log/supervisor /var/log/galaxy
+
+# Create supervisor configuration
+RUN echo '[supervisord]\n\
+nodaemon=true\n\
+logfile=/var/log/supervisor/supervisord.log\n\
+pidfile=/var/run/supervisord.pid\n\
+\n\
+[program:mcp_server]\n\
+command=python -m MCP_Server.sse_server --host 0.0.0.0 --port %(ENV_MCP_PORT)s\n\
+directory=/app\n\
+autostart=true\n\
+autorestart=true\n\
+stderr_logfile=/var/log/galaxy/mcp_server.err.log\n\
+stdout_logfile=/var/log/galaxy/mcp_server.out.log\n\
+priority=100\n\
+\n\
+[program:adk_agent]\n\
+command=bash -c "cd adk-agent && adk api_server --host 0.0.0.0 --port %(ENV_ADK_PORT)s --allow-origins=https://galaxy-of-knowledge-eta.vercel.app"\n\
+directory=/app\n\
+autostart=true\n\
+autorestart=true\n\
+stderr_logfile=/var/log/galaxy/adk_agent.err.log\n\
+stdout_logfile=/var/log/galaxy/adk_agent.out.log\n\
+priority=200\n\
+\n\
+[program:fastapi]\n\
+command=uvicorn main:app --host 0.0.0.0 --port %(ENV_PORT)s\n\
+directory=/app\n\
+autostart=true\n\
+autorestart=true\n\
+stderr_logfile=/var/log/galaxy/fastapi.err.log\n\
+stdout_logfile=/var/log/galaxy/fastapi.out.log\n\
+priority=300\n\
+' > /etc/supervisor/conf.d/galaxy.conf
+
+# Environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PORT=8080
+ENV MCP_PORT=8081
+ENV ADK_PORT=8082
+
+# Expose ports
+EXPOSE 8080 8081 8082
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+# Start supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/galaxy.conf"]
