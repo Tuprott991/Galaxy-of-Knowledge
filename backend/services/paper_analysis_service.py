@@ -39,7 +39,7 @@ class PaperAnalysisService:
         self.input_cost_per_1k_tokens = 0.00015  # $0.15 per 1M tokens
         self.output_cost_per_1k_tokens = 0.0006   # $0.60 per 1M tokens
     
-    def analyze_paper(
+    async def analyze_paper(
         self, 
         paper_text: str, 
         paper_id: Optional[str] = None,
@@ -64,12 +64,12 @@ class PaperAnalysisService:
         try:
             # Check cache first
             if use_cache:
-                cached_result = self.db.get_cached_analysis(paper_text)
+                cached_result = await self.db.get_cached_analysis(paper_text)
                 if cached_result:
                     logger.info(f"Cache hit for paper analysis")
                     
                     # Log cache hit
-                    self.db.log_cost(
+                    await self.db.log_cost(
                         operation_type='similarity_search',
                         cache_hit=True,
                         response_time_ms=int((time.time() - start_time) * 1000),
@@ -87,7 +87,7 @@ class PaperAnalysisService:
                     }
             
             # Step 1: Generate embedding for the paper
-            paper_embedding = self._embed_paper_text(paper_text, request_id, paper_id)
+            paper_embedding = await self._embed_paper_text(paper_text, request_id, paper_id)
             if not paper_embedding:
                 return {
                     'success': False,
@@ -96,7 +96,7 @@ class PaperAnalysisService:
                 }
             
             # Step 2: Find similar projects
-            similar_projects = self._find_similar_projects(paper_embedding, top_k, request_id, paper_id)
+            similar_projects = await self._find_similar_projects(paper_embedding, top_k, request_id, paper_id)
             if not similar_projects:
                 return {
                     'success': False,
@@ -108,7 +108,7 @@ class PaperAnalysisService:
             context_summary = self._build_context_summary(similar_projects)
             
             # Step 4: Generate LLM analysis
-            analysis_result = self._generate_investment_analysis(
+            analysis_result = await self._generate_investment_analysis(
                 paper_text, 
                 context_summary, 
                 similar_projects,
@@ -125,7 +125,7 @@ class PaperAnalysisService:
             
             # Step 5: Cache the result
             if use_cache:
-                self.db.cache_analysis_result(paper_text, similar_projects, analysis_result)
+                await self.db.cache_analysis_result(paper_text, similar_projects, analysis_result)
             
             return {
                 'success': True,
@@ -144,9 +144,9 @@ class PaperAnalysisService:
                 'request_id': request_id
             }
         finally:
-            self.db.close_connection()
+            await self.db.close_connection()
     
-    def _embed_paper_text(self, paper_text: str, request_id: str, paper_id: Optional[str]) -> Optional[List[float]]:
+    async def _embed_paper_text(self, paper_text: str, request_id: str, paper_id: Optional[str]) -> Optional[List[float]]:
         """Generate embedding for paper text"""
         try:
             start_time = time.time()
@@ -159,7 +159,7 @@ class PaperAnalysisService:
                 cost_usd = (estimated_tokens / 1000) * self.embedding_generator.cost_per_1k_tokens
                 
                 # Log cost
-                self.db.log_cost(
+                await self.db.log_cost(
                     operation_type='embedding',
                     tokens_input=estimated_tokens,
                     cost_usd=cost_usd,
@@ -177,7 +177,7 @@ class PaperAnalysisService:
             logger.error(f"Error embedding paper text: {e}")
             return None
     
-    def _find_similar_projects(
+    async def _find_similar_projects(
         self, 
         paper_embedding: List[float], 
         top_k: int,
@@ -187,11 +187,11 @@ class PaperAnalysisService:
         """Find similar projects using vector similarity"""
         try:
             start_time = time.time()
-            similar_projects = self.db.find_similar_projects(paper_embedding, top_k)
+            similar_projects = await self.db.find_similar_projects(paper_embedding, top_k)
             response_time_ms = int((time.time() - start_time) * 1000)
             
             # Log the similarity search
-            self.db.log_cost(
+            await self.db.log_cost(
                 operation_type='similarity_search',
                 top_k_used=len(similar_projects),
                 response_time_ms=response_time_ms,
@@ -262,7 +262,7 @@ class PaperAnalysisService:
             logger.error(f"Error building context summary: {e}")
             return "Context unavailable due to processing error."
     
-    def _generate_investment_analysis(
+    async def _generate_investment_analysis(
         self,
         paper_text: str,
         context_summary: str,
@@ -313,7 +313,7 @@ class PaperAnalysisService:
                 )
                 
                 # Log cost
-                self.db.log_cost(
+                await self.db.log_cost(
                     operation_type='llm_analysis',
                     tokens_input=estimated_input_tokens,
                     tokens_output=estimated_output_tokens,
@@ -510,7 +510,7 @@ JSON Response:"""
             return analysis
 
 
-def analyze_paper_against_projects(
+async def analyze_paper_against_projects(
     paper_text: str,
     paper_id: Optional[str] = None,
     top_k: int = 4,
@@ -529,7 +529,7 @@ def analyze_paper_against_projects(
         Analysis result dictionary
     """
     service = PaperAnalysisService()
-    return service.analyze_paper(paper_text, paper_id, top_k, use_cache)
+    return await service.analyze_paper(paper_text, paper_id, top_k, use_cache)
 
 
 if __name__ == "__main__":

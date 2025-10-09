@@ -1,14 +1,14 @@
 """
-Papers-related API routes
+Papers-related API routes (Async)
 """
 from typing import Optional, List
 from fastapi import APIRouter, Depends, Query, HTTPException
+import asyncpg
 
 from ..models.paper import PapersResponse, HTMLContextResponse, PaperHTMLContext
 from ..models.base import ErrorResponse
 from ..models.stats import StatsResponse
-from ..dependencies.database import get_db_connection
-from database.connect import close_connection
+from ..dependencies.database import get_db
 from services.recommendation_engine import get_recommendation_engine
 from services.score_calculator import get_score_calculator
 
@@ -21,64 +21,62 @@ papers_router = APIRouter(prefix="/papers", tags=["papers"])
     responses={500: {"model": ErrorResponse}}
 )
 async def get_papers_visualization(
-    limit: Optional[int] = Query(None, ge=1, le=10000, description="Maximum number of papers to return"),
-    conn=Depends(get_db_connection)
+    limit: Optional[int] = Query(None, ge=1, le=10000, description="Maximum number of papers to return")
 ):
     """
     Get papers data for 3D visualization
     """
     try:
-        cursor = conn.cursor()
-        query = """
-            SELECT 
-                paper_id, title,
-                plot_visualize_x AS x, 
-                plot_visualize_y AS y, 
-                plot_visualize_z AS z,
-                cluster,
-                topic,
-                score
-            FROM paper 
-            WHERE plot_visualize_x IS NOT NULL 
-              AND plot_visualize_y IS NOT NULL 
-              AND plot_visualize_z IS NOT NULL
-              AND title IS NOT NULL
-            ORDER BY paper_id
-        """
-        params = []
+        from database.connect import get_db_pool
+        pool = await get_db_pool()
         
-        if limit:
-            query += " LIMIT %s"
-            params.append(limit)
-        
-        cursor.execute(query, params)
-        papers = cursor.fetchall()
-        
-        paper_data = [
-            {
-                "paper_id": paper[0],
-                "title": paper[1],
-                "x": float(paper[2]),
-                "y": float(paper[3]),
-                "z": float(paper[4]),
-                "cluster": paper[5],
-                "topic": paper[6],
-                "score": paper[7] if paper[7] is not None else 0
-            }
-            for paper in papers
-        ]
-        
-        return PapersResponse(
-            success=True,
-            data=paper_data,
-            count=len(paper_data),
-            message=f"Retrieved {len(paper_data)} papers successfully"
-        )
+        async with pool.acquire() as conn:
+            query = """
+                SELECT 
+                    paper_id, title,
+                    plot_visualize_x AS x, 
+                    plot_visualize_y AS y, 
+                    plot_visualize_z AS z,
+                    cluster,
+                    topic,
+                    score
+                FROM paper 
+                WHERE plot_visualize_x IS NOT NULL 
+                  AND plot_visualize_y IS NOT NULL 
+                  AND plot_visualize_z IS NOT NULL
+                  AND title IS NOT NULL
+                ORDER BY paper_id
+            """
+            
+            if limit:
+                query += " LIMIT $1"
+                papers = await conn.fetch(query, limit)
+            else:
+                papers = await conn.fetch(query)
+            
+            paper_data = [
+                {
+                    "paper_id": paper['paper_id'],
+                    "title": paper['title'],
+                    "x": float(paper['x']),
+                    "y": float(paper['y']),
+                    "z": float(paper['z']),
+                    "cluster": paper['cluster'],
+                    "topic": paper['topic'],
+                    "score": paper['score'] if paper['score'] is not None else 0
+                }
+                for paper in papers
+            ]
+            
+            return PapersResponse(
+                success=True,
+                data=paper_data,
+                count=len(paper_data),
+                message=f"Retrieved {len(paper_data)} papers successfully"
+            )
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to retrieve papers: {str(e)}")
-    finally:
-        close_connection(conn)
 
 
 @papers_router.get(
@@ -86,67 +84,66 @@ async def get_papers_visualization(
     response_model=StatsResponse,
     responses={500: {"model": ErrorResponse}}
 )
-async def get_papers_statistics(conn=Depends(get_db_connection)):
+async def get_papers_statistics():
     """Get comprehensive papers statistics"""
     try:
-        cursor = conn.cursor()
+        from database.connect import get_db_pool
+        pool = await get_db_pool()
         
-        # Total papers count
-        cursor.execute("SELECT COUNT(*) FROM paper")
-        total_papers = cursor.fetchone()[0]
-        
-        # Papers with coordinates
-        cursor.execute("""
-            SELECT COUNT(*) FROM paper 
-            WHERE plot_visualize_x IS NOT NULL 
-              AND plot_visualize_y IS NOT NULL 
-              AND plot_visualize_z IS NOT NULL
-        """)
-        papers_with_coords = cursor.fetchone()[0]
-        
-        # Papers with clusters
-        cursor.execute("SELECT COUNT(*) FROM paper WHERE cluster IS NOT NULL")
-        papers_with_clusters = cursor.fetchone()[0]
-        
-        # Cluster distribution
-        cursor.execute("""
-            SELECT cluster, COUNT(*) as count 
-            FROM paper 
-            WHERE cluster IS NOT NULL 
-            GROUP BY cluster 
-            ORDER BY count DESC
-        """)
-        cluster_dist = cursor.fetchall()
-        
-        # Papers with HTML context
-        cursor.execute("SELECT COUNT(*) FROM paper WHERE html_context IS NOT NULL")
-        papers_with_html = cursor.fetchone()[0]
-        
-        stats_data = {
-            "total_papers": total_papers,
-            "papers_with_coordinates": papers_with_coords,
-            "papers_with_clusters": papers_with_clusters,
-            "papers_with_html_context": papers_with_html,
-            "cluster_distribution": [
-                {"cluster": row[0], "count": row[1]} for row in cluster_dist
-            ],
-            "coverage": {
-                "coordinates": round((papers_with_coords / total_papers) * 100, 2) if total_papers > 0 else 0,
-                "clusters": round((papers_with_clusters / total_papers) * 100, 2) if total_papers > 0 else 0,
-                "html_context": round((papers_with_html / total_papers) * 100, 2) if total_papers > 0 else 0
+        async with pool.acquire() as conn:
+            # Total papers count
+            total_papers = await conn.fetchval("SELECT COUNT(*) FROM paper")
+            
+            # Papers with coordinates
+            papers_with_coords = await conn.fetchval("""
+                SELECT COUNT(*) FROM paper 
+                WHERE plot_visualize_x IS NOT NULL 
+                  AND plot_visualize_y IS NOT NULL 
+                  AND plot_visualize_z IS NOT NULL
+            """)
+            
+            # Papers with clusters
+            papers_with_clusters = await conn.fetchval(
+                "SELECT COUNT(*) FROM paper WHERE cluster IS NOT NULL"
+            )
+            
+            # Cluster distribution
+            cluster_dist = await conn.fetch("""
+                SELECT cluster, COUNT(*) as count 
+                FROM paper 
+                WHERE cluster IS NOT NULL 
+                GROUP BY cluster 
+                ORDER BY count DESC
+            """)
+            
+            # Papers with HTML context
+            papers_with_html = await conn.fetchval(
+                "SELECT COUNT(*) FROM paper WHERE html_context IS NOT NULL"
+            )
+            
+            stats_data = {
+                "total_papers": total_papers,
+                "papers_with_coordinates": papers_with_coords,
+                "papers_with_clusters": papers_with_clusters,
+                "papers_with_html_context": papers_with_html,
+                "cluster_distribution": [
+                    {"cluster": row['cluster'], "count": row['count']} for row in cluster_dist
+                ],
+                "coverage": {
+                    "coordinates": round((papers_with_coords / total_papers) * 100, 2) if total_papers > 0 else 0,
+                    "clusters": round((papers_with_clusters / total_papers) * 100, 2) if total_papers > 0 else 0,
+                    "html_context": round((papers_with_html / total_papers) * 100, 2) if total_papers > 0 else 0
+                }
             }
-        }
-        
-        return StatsResponse(
-            success=True,
-            data=stats_data,
-            message="Statistics retrieved successfully"
-        )
+            
+            return StatsResponse(
+                success=True,
+                data=stats_data,
+                message="Statistics retrieved successfully"
+            )
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to retrieve statistics: {str(e)}")
-    finally:
-        close_connection(conn)
 
 
 @papers_router.get(
@@ -154,53 +151,51 @@ async def get_papers_statistics(conn=Depends(get_db_connection)):
     response_model=HTMLContextResponse,
     responses={404: {"model": ErrorResponse}, 500: {"model": ErrorResponse}}
 )
-async def get_paper_html_context(
-    paper_id: str,
-    conn=Depends(get_db_connection)
-):
+async def get_paper_html_context(paper_id: str):
     """
     Get HTML context for a specific paper by paper_id
     """
     try:
-        cursor = conn.cursor()
+        from database.connect import get_db_pool
+        pool = await get_db_pool()
         
-        # Query to get paper HTML context - fixed to use author_list instead of authors
-        query = """
-            SELECT 
-                paper_id,
-                title,
-                html_context,
-                author_list
-            FROM paper 
-            WHERE paper_id = %s
-        """
-        
-        cursor.execute(query, (paper_id,))
-        result = cursor.fetchone()
-        
-        if not result:
-            raise HTTPException(
-                status_code=404, 
-                detail=f"Paper with ID '{paper_id}' not found"
+        async with pool.acquire() as conn:
+            # Query to get paper HTML context - fixed to use author_list instead of authors
+            query = """
+                SELECT 
+                    paper_id,
+                    title,
+                    html_context,
+                    author_list
+                FROM paper 
+                WHERE paper_id = $1
+            """
+            
+            result = await conn.fetchrow(query, paper_id)
+            
+            if not result:
+                raise HTTPException(
+                    status_code=404, 
+                    detail=f"Paper with ID '{paper_id}' not found"
+                )
+            
+            # author_list is already an array in PostgreSQL
+            authors_list = result['author_list'] if result['author_list'] else []
+            
+            paper_data = PaperHTMLContext(
+                paper_id=result['paper_id'],
+                title=result['title'],
+                html_context=result['html_context'],
+                authors=authors_list,
+                has_html_context=result['html_context'] is not None,
+                html_context_length=len(result['html_context']) if result['html_context'] else 0
             )
-        
-        # author_list is already an array in PostgreSQL
-        authors_list = result[3] if result[3] else []
-        
-        paper_data = PaperHTMLContext(
-            paper_id=result[0],
-            title=result[1],
-            html_context=result[2],
-            authors=authors_list,
-            has_html_context=result[2] is not None,
-            html_context_length=len(result[2]) if result[2] else 0
-        )
-        
-        return HTMLContextResponse(
-            success=True,
-            data=paper_data,
-            message=f"HTML context for paper '{paper_id}' retrieved successfully"
-        )
+            
+            return HTMLContextResponse(
+                success=True,
+                data=paper_data,
+                message=f"HTML context for paper '{paper_id}' retrieved successfully"
+            )
         
     except HTTPException:
         raise
@@ -209,8 +204,6 @@ async def get_paper_html_context(
             status_code=500, 
             detail=f"Failed to retrieve HTML context: {str(e)}"
         )
-    finally:
-        close_connection(conn)
 
 
 @papers_router.get("/recommendations")
@@ -429,88 +422,85 @@ async def batch_calculate_scores(
 
 
 @papers_router.get("/{paper_id}/score")
-async def get_paper_score(
-    paper_id: str,
-    conn=Depends(get_db_connection)
-):
+async def get_paper_score(paper_id: str):
     """
     Get current score and scoring details for a specific paper
     """
     try:
-        cursor = conn.cursor()
+        from database.connect import get_db_pool
+        pool = await get_db_pool()
         
-        cursor.execute("""
-            SELECT 
-                paper_id,
-                title,
-                COALESCE(score, 0) as score,
-                COALESCE(array_length(cited_by, 1), 0) as citation_count,
-                COALESCE(array_length(_references, 1), 0) as reference_count,
-                cluster,
-                COALESCE(
-                    CASE 
-                        WHEN json_data->>'published_date' ~ '^[0-9]{4}' 
-                        THEN substring(json_data->>'published_date' from '^([0-9]{4})')::int
-                    END,
-                    CASE 
-                        WHEN json_data->>'year' ~ '^[0-9]{4}$' 
-                        THEN (json_data->>'year')::int
-                    END,
-                    LEAST(EXTRACT(YEAR FROM created_at)::int, 2025)
-                ) as publication_year,
-                updated_at
-            FROM paper 
-            WHERE paper_id = %s
-        """, (paper_id,))
-        
-        result = cursor.fetchone()
-        
-        if not result:
-            raise HTTPException(
-                status_code=404,
-                detail=f"Paper with ID '{paper_id}' not found"
-            )
-        
-        # Calculate component scores for breakdown
-        calculator = get_score_calculator()
-        
-        paper_data = {
-            'citation_count': result[3],
-            'reference_count': result[4],
-            'cluster': result[5],
-            'publication_year': result[6]
-        }
-        
-        # Get component scores
-        citation_score = calculator.calculate_citation_score(paper_data['citation_count'])
-        reference_score = calculator.calculate_reference_score(paper_data['reference_count'])
-        recency_score = calculator.calculate_recency_score(paper_data['publication_year'])
-        
-        return {
-            "success": True,
-            "paper_id": result[0],
-            "title": result[1],
-            "current_score": result[2],
-            "score_breakdown": {
-                "citation_score": round(citation_score, 2),
-                "reference_score": round(reference_score, 2),
-                "recency_score": round(recency_score, 2),
-                "components_weighted": {
-                    "citations": round(citation_score * 0.40, 2),
-                    "references": round(reference_score * 0.25, 2),
-                    "recency": round(recency_score * 0.20, 2),
-                    "cluster": round(result[2] - (citation_score * 0.40 + reference_score * 0.25 + recency_score * 0.20), 2)
-                }
-            },
-            "metadata": {
-                "citation_count": result[3],
-                "reference_count": result[4],
-                "cluster": result[5],
-                "publication_year": result[6],
-                "last_updated": result[7].isoformat() if result[7] else None
-            },
-            "message": f"Score details for paper {paper_id}"
-        }
+        async with pool.acquire() as conn:
+            result = await conn.fetchrow("""
+                SELECT 
+                    paper_id,
+                    title,
+                    COALESCE(score, 0) as score,
+                    COALESCE(array_length(cited_by, 1), 0) as citation_count,
+                    COALESCE(array_length(_references, 1), 0) as reference_count,
+                    cluster,
+                    COALESCE(
+                        CASE 
+                            WHEN json_data->>'published_date' ~ '^[0-9]{4}' 
+                            THEN substring(json_data->>'published_date' from '^([0-9]{4})')::int
+                        END,
+                        CASE 
+                            WHEN json_data->>'year' ~ '^[0-9]{4}$' 
+                            THEN (json_data->>'year')::int
+                        END,
+                        LEAST(EXTRACT(YEAR FROM created_at)::int, 2025)
+                    ) as publication_year,
+                    updated_at
+                FROM paper 
+                WHERE paper_id = $1
+            """, paper_id)
+            
+            if not result:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Paper with ID '{paper_id}' not found"
+                )
+            
+            # Calculate component scores for breakdown
+            calculator = get_score_calculator()
+            
+            paper_data = {
+                'citation_count': result['citation_count'],
+                'reference_count': result['reference_count'],
+                'cluster': result['cluster'],
+                'publication_year': result['publication_year']
+            }
+            
+            # Get component scores
+            citation_score = calculator.calculate_citation_score(paper_data['citation_count'])
+            reference_score = calculator.calculate_reference_score(paper_data['reference_count'])
+            recency_score = calculator.calculate_recency_score(paper_data['publication_year'])
+            
+            return {
+                "success": True,
+                "paper_id": result['paper_id'],
+                "title": result['title'],
+                "current_score": result['score'],
+                "score_breakdown": {
+                    "citation_score": round(citation_score, 2),
+                    "reference_score": round(reference_score, 2),
+                    "recency_score": round(recency_score, 2),
+                    "components_weighted": {
+                        "citations": round(citation_score * 0.40, 2),
+                        "references": round(reference_score * 0.25, 2),
+                        "recency": round(recency_score * 0.20, 2),
+                        "cluster": round(result['score'] - (citation_score * 0.40 + reference_score * 0.25 + recency_score * 0.20), 2)
+                    }
+                },
+                "metadata": {
+                    "citation_count": result['citation_count'],
+                    "reference_count": result['reference_count'],
+                    "cluster": result['cluster'],
+                    "publication_year": result['publication_year'],
+                    "last_updated": result['updated_at'].isoformat() if result['updated_at'] else None
+                },
+                "message": f"Score details for paper {paper_id}"
+            }
         
     except HTTPException:
         raise
@@ -519,5 +509,3 @@ async def get_paper_score(
             status_code=500,
             detail=f"Failed to retrieve paper score: {str(e)}"
         )
-    finally:
-        close_connection(conn)

@@ -9,6 +9,7 @@ flask-cors>=4.0.0
 # Database
 psycopg[binary,pool]>=3.1.0
 psycopg2-binary>=2.9.0
+asyncpg>=0.29.0  # Async PostgreSQL driver for production
 
 # Environment & Config
 python-dotenv>=1.0.0

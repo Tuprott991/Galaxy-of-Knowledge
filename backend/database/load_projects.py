@@ -12,7 +12,7 @@ import logging
 from pathlib import Path
 
 # Add parent directories to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(    os.path.abspath(__file__))))
 from utils.project_loader import load_projects_from_excel
 from database.project_database import ProjectDatabase
 
@@ -24,7 +24,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def main():
+async def main():
     """Main function to load projects from Excel file"""
     if len(sys.argv) != 2:
         print("Usage: python step1_load_projects.py <excel_file_path>")
@@ -61,7 +61,7 @@ def main():
         db = ProjectDatabase()
         
         try:
-            inserted, updated = db.insert_projects(projects)
+            inserted, updated = await db.insert_projects(projects)
             
             logger.info(f"✅ Database operation completed:")
             logger.info(f"   - New projects inserted: {inserted}")
@@ -69,14 +69,14 @@ def main():
             logger.info(f"   - Total projects processed: {len(projects)}")
             
             # Show statistics
-            stats = db.get_project_statistics()
+            stats = await db.get_project_statistics()
             logger.info(f"📈 Current database status:")
             logger.info(f"   - Total projects in database: {stats.get('total_projects', 0)}")
             logger.info(f"   - Projects with summaries: {stats.get('projects_with_summaries', 0)}")
             logger.info(f"   - Projects with embeddings: {stats.get('projects_with_embeddings', 0)}")
             
         finally:
-            db.close_connection()
+            await db.close_connection()
         
         logger.info("🎉 Step 1 completed successfully!")
         print(f"\n✅ SUCCESS: Loaded {len(projects)} projects")
@@ -90,4 +90,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())

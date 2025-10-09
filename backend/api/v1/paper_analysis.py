@@ -109,7 +109,7 @@ async def analyze_paper_with_similarity(paper_id: str, fallback_text: str = "", 
     """
     try:
         # Step 1: Get paper from database with embedding
-        paper_data = db.get_paper_by_id(paper_id)
+        paper_data = await db.get_paper_by_id(paper_id)
         
         if not paper_data:
             raise HTTPException(
@@ -132,7 +132,7 @@ async def analyze_paper_with_similarity(paper_id: str, fallback_text: str = "", 
             return await analyze_paper_text_fallback(paper_id, paper_title, paper_summarize, user_query)
         
         # Step 2: Find top 4 similar projects
-        similar_projects = db.find_similar_projects(paper_embedding, limit=4)
+        similar_projects = await db.find_similar_projects(paper_embedding, limit=4)
         
         # Step 3: Prepare analysis prompt with or without similar projects
         if similar_projects:
@@ -556,7 +556,7 @@ async def upload_projects(file: UploadFile = File(...)):
             )
         
         # Insert projects into database
-        inserted, updated = db.insert_projects(projects)
+        inserted, updated = await db.insert_projects(projects)
         
         return {
             "success": True,

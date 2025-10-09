@@ -12,8 +12,9 @@ async def ingest_papers(paper: str, paper_id: str):
 
     await rag.ainsert(paper, ids=paper_id)
 
-if __name__ == "__main__":
-    paper_ids = get_all_paper_ids()
+async def main():
+    """Main ingestion function with async database calls"""
+    paper_ids = await get_all_paper_ids()
     print(f"Total papers to ingest: {len(paper_ids)}")
     
     # Limit to 10 papers per run
@@ -21,17 +22,19 @@ if __name__ == "__main__":
     paper_ids_batch = paper_ids[:BATCH_SIZE]
     print(f"Processing batch of {len(paper_ids_batch)} papers")
 
-    loop = asyncio.get_event_loop()
     tasks = []
 
     for pid in paper_ids_batch:
-        md_content = get_md_content_by_paper_id(pid)
+        md_content = await get_md_content_by_paper_id(pid)
         if md_content:
             tasks.append(ingest_papers(md_content, pid))
             print(f"Ingesting paper ID: {pid}")
         else:
             print(f"Warning: No markdown content found for paper ID {pid}")
 
-    loop.run_until_complete(asyncio.gather(*tasks))
+    await asyncio.gather(*tasks)
     print(f"Ingestion completed. Processed {len(tasks)} papers out of {len(paper_ids)} total.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
 

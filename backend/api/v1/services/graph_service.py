@@ -1,24 +1,25 @@
 """
-Graph service for generating 2D network visualization data
+Graph service for generating 2D network visualization data (Async)
 """
 
 import asyncio
 from typing import List, Dict, Set, Tuple, Optional, Any
-from psycopg2.extras import RealDictCursor
+import asyncpg
 
 from ..models.graph import Node, Edge, GraphData
-from database.connect import connect
+from database.connect import get_db_pool
 
 
 class GraphService:
-    """Service for generating graph data for 2D visualization"""
+    """Async service for generating graph data for 2D visualization"""
     
     def __init__(self):
         pass
     
-    def get_db_connection(self):
-        """Create database connection"""
-        return connect()
+    async def get_db_connection(self) -> asyncpg.Connection:
+        """Get async database connection from pool"""
+        pool = await get_db_pool()
+        return await pool.acquire()
     
     async def generate_graph(self, paper_id: str, mode: str, depth: int = 2, max_nodes: int = 50) -> GraphData:
         """
@@ -537,42 +538,36 @@ class GraphService:
     async def _get_paper_info(self, paper_id: str) -> Optional[Dict[str, Any]]:
         """Get comprehensive paper information with rich metadata"""
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            
-            query = """
-                SELECT 
-                    p.paper_id, 
-                    p.title, 
-                    p.abstract, 
-                    p.author_list,
-                    p.cluster,
-                    p.topic,
-                    p.score,
-                    p.summarize,
-                    p.cited_by,
-                    p.plot_visualize_x,
-                    p.plot_visualize_y,
-                    p.plot_visualize_z,
-                    p.created_at,
-                    p.updated_at,
-                    -- Calculate derived metrics
-                    COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
-                    COALESCE(array_length(p.author_list, 1), 0) as author_count,
-                    -- Get key knowledge context count
-                    (SELECT COUNT(*) FROM key_knowledge kk WHERE kk.paper_id = p.id) as knowledge_context_count
-                FROM paper p
-                WHERE p.paper_id = %s
-            """
-            
-            cursor.execute(query, (paper_id,))
-            result = cursor.fetchone()
-            
-            cursor.close()
-            conn.close()
-            
-            return dict(result) if result else None
-            
+            pool = await get_db_pool()
+            async with pool.acquire() as conn:
+                query = """
+                    SELECT 
+                        p.paper_id, 
+                        p.title, 
+                        p.abstract, 
+                        p.author_list,
+                        p.cluster,
+                        p.topic,
+                        p.score,
+                        p.summarize,
+                        p.cited_by,
+                        p.plot_visualize_x,
+                        p.plot_visualize_y,
+                        p.plot_visualize_z,
+                        p.created_at,
+                        p.updated_at,
+                        -- Calculate derived metrics
+                        COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                        COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                        -- Get key knowledge context count
+                        (SELECT COUNT(*) FROM key_knowledge kk WHERE kk.paper_id = p.id) as knowledge_context_count
+                    FROM paper p
+                    WHERE p.paper_id = $1
+                """
+                
+                result = await conn.fetchrow(query, paper_id)
+                return dict(result) if result else None
+                
         except Exception as e:
             print(f"Error getting paper info: {e}")
             return None
@@ -580,10 +575,9 @@ class GraphService:
     async def _get_papers_by_same_authors(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Get papers by same authors with comprehensive metadata"""
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            
-            query = """
+            pool = await get_db_pool()
+            async with pool.acquire() as conn:
+                query = """
                 WITH paper_authors AS (
                     SELECT DISTINCT author_name
                     FROM paper p, unnest(p.author_list) as author_name
@@ -643,16 +637,11 @@ class GraphService:
                     same_cluster DESC,
                     citation_count DESC,
                     avg_author_productivity DESC
-                LIMIT %s
-            """
-            
-            cursor.execute(query, (paper_id, paper_id, paper_id, limit))
-            results = cursor.fetchall()
-            
-            cursor.close()
-            conn.close()
-            
-            return [dict(row) for row in results]
+                LIMIT $4
+                """
+                
+                results = await conn.fetch(query, paper_id, paper_id, paper_id, limit)
+                return [dict(row) for row in results]
             
         except Exception as e:
             print(f"Error getting papers by same authors: {e}")
@@ -661,40 +650,34 @@ class GraphService:
     async def _get_citing_papers(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Get papers that cite this paper using actual citation data"""
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            
-            query = """
-                SELECT 
-                    p.paper_id, 
-                    p.title, 
-                    p.abstract, 
-                    p.author_list,
-                    p.cluster,
-                    p.cited_by,
-                    p.topic,
-                    p.score,
-                    COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
-                    COALESCE(array_length(p.author_list, 1), 0) as author_count,
-                    p.created_at,
-                    -- Calculate citation context (how this paper cites the center paper)
-                    'incoming' as citation_type
-                FROM paper p
-                WHERE %s = ANY(p.cited_by)
-                AND p.paper_id != %s
-                ORDER BY 
-                    COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
-                    p.created_at DESC  -- Recent papers first
-                LIMIT %s
-            """
-            
-            cursor.execute(query, (paper_id, paper_id, limit))
-            results = cursor.fetchall()
-            
-            cursor.close()
-            conn.close()
-            
-            return [dict(row) for row in results]
+            pool = await get_db_pool()
+            async with pool.acquire() as conn:
+                query = """
+                    SELECT 
+                        p.paper_id, 
+                        p.title, 
+                        p.abstract, 
+                        p.author_list,
+                        p.cluster,
+                        p.cited_by,
+                        p.topic,
+                        p.score,
+                        COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                        COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                        p.created_at,
+                        -- Calculate citation context (how this paper cites the center paper)
+                        'incoming' as citation_type
+                    FROM paper p
+                    WHERE $1 = ANY(p.cited_by)
+                    AND p.paper_id != $2
+                    ORDER BY 
+                        COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
+                        p.created_at DESC  -- Recent papers first
+                    LIMIT $3
+                """
+                
+                results = await conn.fetch(query, paper_id, paper_id, limit)
+                return [dict(row) for row in results]
             
         except Exception as e:
             print(f"Error getting citing papers: {e}")
@@ -703,44 +686,38 @@ class GraphService:
     async def _get_cited_papers(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Get papers cited by this paper using actual citation data"""
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            
-            query = """
-                WITH center_paper_refs AS (
-                    SELECT unnest(cited_by) as ref_paper_id
-                    FROM paper
-                    WHERE paper_id = %s
-                    AND cited_by IS NOT NULL
-                )
-                SELECT 
-                    p.paper_id, 
-                    p.title, 
-                    p.abstract, 
-                    p.author_list,
-                    p.cluster,
-                    p.topic,
-                    p.score,
-                    COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
-                    COALESCE(array_length(p.author_list, 1), 0) as author_count,
-                    p.created_at,
-                    'outgoing' as citation_type
-                FROM paper p
-                JOIN center_paper_refs cpr ON p.paper_id = cpr.ref_paper_id
-                WHERE p.paper_id != %s
-                ORDER BY 
-                    COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
-                    p.created_at DESC
-                LIMIT %s
-            """
-            
-            cursor.execute(query, (paper_id, paper_id, limit))
-            results = cursor.fetchall()
-            
-            cursor.close()
-            conn.close()
-            
-            return [dict(row) for row in results]
+            pool = await get_db_pool()
+            async with pool.acquire() as conn:
+                query = """
+                    WITH center_paper_refs AS (
+                        SELECT unnest(cited_by) as ref_paper_id
+                        FROM paper
+                        WHERE paper_id = $1
+                        AND cited_by IS NOT NULL
+                    )
+                    SELECT 
+                        p.paper_id, 
+                        p.title, 
+                        p.abstract, 
+                        p.author_list,
+                        p.cluster,
+                        p.topic,
+                        p.score,
+                        COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                        COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                        p.created_at,
+                        'outgoing' as citation_type
+                    FROM paper p
+                    JOIN center_paper_refs cpr ON p.paper_id = cpr.ref_paper_id
+                    WHERE p.paper_id != $2
+                    ORDER BY 
+                        COALESCE(array_length(p.cited_by, 1), 0) DESC,  -- More cited papers first
+                        p.created_at DESC
+                    LIMIT $3
+                """
+                
+                results = await conn.fetch(query, paper_id, paper_id, limit)
+                return [dict(row) for row in results]
             
         except Exception as e:
             print(f"Error getting cited papers: {e}")
@@ -749,48 +726,42 @@ class GraphService:
     async def _get_papers_by_key_knowledge(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Get papers related by key knowledge similarity using embeddings"""
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            
-            query = """
-                WITH center_paper_embedding AS (
-                    SELECT AVG(kk.embedding) as avg_embedding
-                    FROM key_knowledge kk
-                    JOIN paper p ON kk.paper_id = p.id
-                    WHERE p.paper_id = %s
-                    AND kk.embedding IS NOT NULL
-                ),
-                related_papers AS (
-                    SELECT DISTINCT p.paper_id, p.title, p.abstract,
-                           AVG(kk.embedding) as paper_avg_embedding,
-                           COUNT(kk.context) as knowledge_count
-                    FROM paper p
-                    JOIN key_knowledge kk ON kk.paper_id = p.id
-                    WHERE p.paper_id != %s
-                    AND kk.embedding IS NOT NULL
-                    GROUP BY p.paper_id, p.title, p.abstract
-                    HAVING COUNT(kk.context) > 0
-                ),
-                similarity_papers AS (
-                    SELECT rp.*,
-                           1 - (rp.paper_avg_embedding <=> cpe.avg_embedding) as similarity_score
-                    FROM related_papers rp
-                    CROSS JOIN center_paper_embedding cpe
-                    WHERE cpe.avg_embedding IS NOT NULL
-                )
-                SELECT * FROM similarity_papers
-                WHERE similarity_score > 0.3  -- Minimum similarity threshold
-                ORDER BY similarity_score DESC
-                LIMIT %s
-            """
-            
-            cursor.execute(query, (paper_id, paper_id, limit))
-            results = cursor.fetchall()
-            
-            cursor.close()
-            conn.close()
-            
-            return [dict(row) for row in results]
+            pool = await get_db_pool()
+            async with pool.acquire() as conn:
+                query = """
+                    WITH center_paper_embedding AS (
+                        SELECT AVG(kk.embedding) as avg_embedding
+                        FROM key_knowledge kk
+                        JOIN paper p ON kk.paper_id = p.id
+                        WHERE p.paper_id = $1
+                        AND kk.embedding IS NOT NULL
+                    ),
+                    related_papers AS (
+                        SELECT DISTINCT p.paper_id, p.title, p.abstract,
+                               AVG(kk.embedding) as paper_avg_embedding,
+                               COUNT(kk.context) as knowledge_count
+                        FROM paper p
+                        JOIN key_knowledge kk ON kk.paper_id = p.id
+                        WHERE p.paper_id != $2
+                        AND kk.embedding IS NOT NULL
+                        GROUP BY p.paper_id, p.title, p.abstract
+                        HAVING COUNT(kk.context) > 0
+                    ),
+                    similarity_papers AS (
+                        SELECT rp.*,
+                               1 - (rp.paper_avg_embedding <=> cpe.avg_embedding) as similarity_score
+                        FROM related_papers rp
+                        CROSS JOIN center_paper_embedding cpe
+                        WHERE cpe.avg_embedding IS NOT NULL
+                    )
+                    SELECT * FROM similarity_papers
+                    WHERE similarity_score > 0.3  -- Minimum similarity threshold
+                    ORDER BY similarity_score DESC
+                    LIMIT $3
+                """
+                
+                results = await conn.fetch(query, paper_id, paper_id, limit)
+                return [dict(row) for row in results]
             
         except Exception as e:
             print(f"Error getting papers by key knowledge: {e}")
@@ -799,96 +770,90 @@ class GraphService:
     async def _get_similar_papers(self, paper_id: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Get similar papers based on embeddings and cluster analysis"""
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            
-            query = """
-                WITH center_paper AS (
-                    SELECT embeddings, cluster, topic
-                    FROM paper
-                    WHERE paper_id = %s
-                    AND embeddings IS NOT NULL
-                ),
-                similar_papers AS (
-                    SELECT 
-                        p.paper_id, 
-                        p.title, 
-                        p.abstract,
-                        p.cluster,
-                        p.topic,
-                        p.score,
-                        COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
-                        COALESCE(array_length(p.author_list, 1), 0) as author_count,
-                        p.created_at,
-                        -- Calculate embedding similarity if available
-                        CASE 
-                            WHEN p.embeddings IS NOT NULL AND cp.embeddings IS NOT NULL 
-                            THEN 1 - (p.embeddings <=> cp.embeddings)
-                            ELSE NULL
-                        END as embedding_similarity,
-                        -- Check cluster similarity
-                        CASE 
-                            WHEN p.cluster = cp.cluster AND p.cluster IS NOT NULL
-                            THEN true 
-                            ELSE false 
-                        END as same_cluster,
-                        -- Check topic similarity
-                        CASE 
-                            WHEN p.topic = cp.topic AND p.topic IS NOT NULL
-                            THEN true 
-                            ELSE false 
-                        END as same_topic,
-                        -- Calculate coordinate distance if available
-                        CASE 
-                            WHEN p.plot_visualize_x IS NOT NULL AND p.plot_visualize_y IS NOT NULL 
-                                 AND p.plot_visualize_z IS NOT NULL
-                            THEN sqrt(
-                                power(p.plot_visualize_x - COALESCE((SELECT plot_visualize_x FROM paper WHERE paper_id = %s), 0), 2) +
-                                power(p.plot_visualize_y - COALESCE((SELECT plot_visualize_y FROM paper WHERE paper_id = %s), 0), 2) +
-                                power(p.plot_visualize_z - COALESCE((SELECT plot_visualize_z FROM paper WHERE paper_id = %s), 0), 2)
-                            )
-                            ELSE NULL
-                        END as spatial_distance
-                    FROM paper p
-                    CROSS JOIN center_paper cp
-                    WHERE p.paper_id != %s
-                    AND (
-                        p.embeddings IS NOT NULL OR 
-                        p.cluster = cp.cluster OR
-                        p.topic = cp.topic
+            pool = await get_db_pool()
+            async with pool.acquire() as conn:
+                query = """
+                    WITH center_paper AS (
+                        SELECT embeddings, cluster, topic
+                        FROM paper
+                        WHERE paper_id = $1
+                        AND embeddings IS NOT NULL
+                    ),
+                    similar_papers AS (
+                        SELECT 
+                            p.paper_id, 
+                            p.title, 
+                            p.abstract,
+                            p.cluster,
+                            p.topic,
+                            p.score,
+                            COALESCE(array_length(p.cited_by, 1), 0) as citation_count,
+                            COALESCE(array_length(p.author_list, 1), 0) as author_count,
+                            p.created_at,
+                            -- Calculate embedding similarity if available
+                            CASE 
+                                WHEN p.embeddings IS NOT NULL AND cp.embeddings IS NOT NULL 
+                                THEN 1 - (p.embeddings <=> cp.embeddings)
+                                ELSE NULL
+                            END as embedding_similarity,
+                            -- Check cluster similarity
+                            CASE 
+                                WHEN p.cluster = cp.cluster AND p.cluster IS NOT NULL
+                                THEN true 
+                                ELSE false 
+                            END as same_cluster,
+                            -- Check topic similarity
+                            CASE 
+                                WHEN p.topic = cp.topic AND p.topic IS NOT NULL
+                                THEN true 
+                                ELSE false 
+                            END as same_topic,
+                            -- Calculate coordinate distance if available
+                            CASE 
+                                WHEN p.plot_visualize_x IS NOT NULL AND p.plot_visualize_y IS NOT NULL 
+                                     AND p.plot_visualize_z IS NOT NULL
+                                THEN sqrt(
+                                    power(p.plot_visualize_x - COALESCE((SELECT plot_visualize_x FROM paper WHERE paper_id = $2), 0), 2) +
+                                    power(p.plot_visualize_y - COALESCE((SELECT plot_visualize_y FROM paper WHERE paper_id = $3), 0), 2) +
+                                    power(p.plot_visualize_z - COALESCE((SELECT plot_visualize_z FROM paper WHERE paper_id = $4), 0), 2)
+                                )
+                                ELSE NULL
+                            END as spatial_distance
+                        FROM paper p
+                        CROSS JOIN center_paper cp
+                        WHERE p.paper_id != $5
+                        AND (
+                            p.embeddings IS NOT NULL OR 
+                            p.cluster = cp.cluster OR
+                            p.topic = cp.topic
+                        )
+                    ),
+                    ranked_similar AS (
+                        SELECT *,
+                            -- Calculate composite similarity score
+                            COALESCE(embedding_similarity, 0) * 0.5 +
+                            CASE WHEN same_cluster THEN 0.3 ELSE 0 END +
+                            CASE WHEN same_topic THEN 0.2 ELSE 0 END +
+                            CASE 
+                                WHEN spatial_distance IS NOT NULL 
+                                THEN GREATEST(0, (100 - spatial_distance) / 100) * 0.1
+                                ELSE 0 
+                            END as composite_similarity
+                        FROM similar_papers
                     )
-                ),
-                ranked_similar AS (
                     SELECT *,
-                        -- Calculate composite similarity score
-                        COALESCE(embedding_similarity, 0) * 0.5 +
-                        CASE WHEN same_cluster THEN 0.3 ELSE 0 END +
-                        CASE WHEN same_topic THEN 0.2 ELSE 0 END +
-                        CASE 
-                            WHEN spatial_distance IS NOT NULL 
-                            THEN GREATEST(0, (100 - spatial_distance) / 100) * 0.1
-                            ELSE 0 
-                        END as composite_similarity
-                    FROM similar_papers
-                )
-                SELECT *,
-                    composite_similarity as similarity_score
-                FROM ranked_similar
-                WHERE composite_similarity > 0.1  -- Minimum similarity threshold
-                ORDER BY 
-                    composite_similarity DESC,
-                    citation_count DESC,
-                    created_at DESC
-                LIMIT %s
-            """
-            
-            cursor.execute(query, (paper_id, paper_id, paper_id, paper_id, paper_id, limit))
-            results = cursor.fetchall()
-            
-            cursor.close()
-            conn.close()
-            
-            return [dict(row) for row in results]
+                        composite_similarity as similarity_score
+                    FROM ranked_similar
+                    WHERE composite_similarity > 0.1  -- Minimum similarity threshold
+                    ORDER BY 
+                        composite_similarity DESC,
+                        citation_count DESC,
+                        created_at DESC
+                    LIMIT $6
+                """
+                
+                results = await conn.fetch(query, paper_id, paper_id, paper_id, paper_id, paper_id, limit)
+                return [dict(row) for row in results]
             
         except Exception as e:
             print(f"Error getting similar papers: {e}")

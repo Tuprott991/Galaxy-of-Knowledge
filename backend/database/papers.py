@@ -1,27 +1,30 @@
 import os
 import json
-from psycopg2.extras import Json
 from typing import List, Dict, Any, Optional
 import logging
-from database.connect import connect, close_connection
+import asyncpg
+from database.connect import get_db_pool
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class PaperDatabase:
-    def __init__(self):
-        self.conn = connect()
+    """Async Paper Database Operations"""
     
-    def close(self):
-        """Close database connection"""
-        close_connection(self.conn)
+    def __init__(self):
+        """Initialize PaperDatabase - pool should be initialized separately"""
+        pass
+    
+    async def close(self):
+        """Close database connection - now handled by pool"""
+        pass
 
-    def insert_paper(self, paper_data: Dict[str, Any]) -> Optional[int]:
+    async def insert_paper(self, paper_data: Dict[str, Any]) -> Optional[int]:
         """Insert a paper into the database - only json_data, other fields will be filled later"""
+        pool = await get_db_pool()
+        
         try:
-            cursor = self.conn.cursor()
-            
             # Extract basic info
             title = paper_data.get("title", "")
             paper_id = paper_data.get("PMCID", "")
@@ -106,6 +109,7 @@ class PaperDatabase:
             full_text = title + "\n\n" + "\n\n".join(section_contents)
 
             # Insert or update paper using UPSERT (ON CONFLICT DO UPDATE) for duplicates
+            # Note: asyncpg uses $1, $2, etc. instead of %s
             upsert_query = """
             INSERT INTO paper (
                 author_list,
@@ -117,7 +121,7 @@ class PaperDatabase:
                 full_text,
                 json_data,
                 updated_at
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP)
             ON CONFLICT (paper_id) 
             DO UPDATE SET 
                 author_list = EXCLUDED.author_list,
@@ -131,24 +135,23 @@ class PaperDatabase:
             RETURNING paper_id, (xmax = 0) AS inserted
             """
             
-            cursor.execute(upsert_query, (
-                author_list,    # author_list column
-                title,          # title column  
-                abstract,       # abstract column
-                paper_id,       # paper_id column
-                cited_by_final, # cited_by column - None if empty
-                references_final, # references column - None if empty  
-                full_text,      # full_text column
-                Json(paper_data)  # json_data column
-            ))
+            # asyncpg handles JSON natively, no need for Json() wrapper
+            async with pool.acquire() as conn:
+                result = await conn.fetchrow(
+                    upsert_query,
+                    author_list,     # $1
+                    title,           # $2
+                    abstract,        # $3
+                    paper_id,        # $4
+                    cited_by_final,  # $5
+                    references_final,# $6
+                    full_text,       # $7
+                    json.dumps(paper_data)  # $8 - convert to JSON string
+                )
 
             # Get the result and check if it was insert or update
-            result = cursor.fetchone()
-            returned_paper_id = result[0]
-            was_inserted = result[1]  # True if inserted, False if updated
-            
-            self.conn.commit()
-            cursor.close()
+            returned_paper_id = result['paper_id']
+            was_inserted = result['inserted']  # True if inserted, False if updated
 
             # Safe title display
             title_display = title[:50] + "..." if len(title) > 50 else title
@@ -158,8 +161,6 @@ class PaperDatabase:
 
         except Exception as e:
             logger.error(f"Error inserting paper: {e}")
-            if self.conn:
-                self.conn.rollback()
             return None
 
 def load_json_files_from_folder(folder_path: str) -> List[Dict[str, Any]]:
@@ -197,7 +198,7 @@ def load_json_files_from_folder(folder_path: str) -> List[Dict[str, Any]]:
     
     return json_data_list
 
-def process_papers_from_folder(folder_path: str):
+async def process_papers_from_folder(folder_path: str):
     """Main function to process all JSON files in a folder and insert into database"""
     # Load all JSON files
     papers_data = load_json_files_from_folder(folder_path)
@@ -222,7 +223,7 @@ def process_papers_from_folder(folder_path: str):
             logger.info(f"Processing paper {i}/{len(papers_data)}: {filename} | {pmcid} - {title[:50]}...")
             
             # Insert paper (only json_data for now)
-            paper_id = db.insert_paper(paper_data)
+            paper_id = await db.insert_paper(paper_data)
             
             if paper_id:
                 successful_inserts += 1
@@ -241,84 +242,77 @@ def process_papers_from_folder(folder_path: str):
     except Exception as e:
         logger.error(f"Error during processing: {e}")
     finally:
-        db.close()
+        await db.close()
 
 # get the html_context field from the database base on the paper_id
-def get_html_context_by_paper_id(paper_id: str) -> Optional[str]:
+async def get_html_context_by_paper_id(paper_id: str) -> Optional[str]:
     """Get the html_context field from the database based on the paper_id"""
     try:
-        conn = connect()
-        cursor = conn.cursor()
-        
-        query = "SELECT html_context FROM paper WHERE paper_id = %s"
-        cursor.execute(query, (paper_id,))
-        
-        result = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        
-        if result and result[0]:
-            return result[0]
-        else:
-            logger.info(f"No html_context found for paper_id: {paper_id}")
-            return None
+        pool = await get_db_pool()
+        async with pool.acquire() as conn:
+            query = "SELECT html_context FROM paper WHERE paper_id = $1"
+            result = await conn.fetchval(query, paper_id)
+            
+            if result:
+                return result
+            else:
+                logger.info(f"No html_context found for paper_id: {paper_id}")
+                return None
     except Exception as e:
         logger.error(f"Error retrieving html_context for paper_id {paper_id}: {e}")
         return None
     
-def get_md_content_by_paper_id(paper_id: str) -> Optional[str]:
+async def get_md_content_by_paper_id(paper_id: str) -> Optional[str]:
     """Get the md_context field from the database based on the paper_id"""
     try:
-        conn = connect()
-        cursor = conn.cursor()
-        
-        query = "SELECT md_context FROM paper WHERE paper_id = %s"
-        cursor.execute(query, (paper_id,))
-        
-        result = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        
-        if result and result[0]:
-            return result[0]
-        else:
-            logger.info(f"No md_context found for paper_id: {paper_id}")
-            return None
+        pool = await get_db_pool()
+        async with pool.acquire() as conn:
+            query = "SELECT md_context FROM paper WHERE paper_id = $1"
+            result = await conn.fetchval(query, paper_id)
+            
+            if result:
+                return result
+            else:
+                logger.info(f"No md_context found for paper_id: {paper_id}")
+                return None
     except Exception as e:
         logger.error(f"Error retrieving md_context for paper_id {paper_id}: {e}")
         return None
 
-def get_all_paper_ids() -> List[str]:
+async def get_all_paper_ids() -> List[str]:
     """Get all paper_ids from the database"""
     paper_ids = []
     try:
-        conn = connect()
-        cursor = conn.cursor()
-        
-        query = "SELECT paper_id FROM paper"
-        cursor.execute(query)
-        
-        results = cursor.fetchall()
-        paper_ids = [row[0] for row in results if row[0]]
-        
-        cursor.close()
-        conn.close()
-        
-        logger.info(f"Retrieved {len(paper_ids)} paper_ids from database")
-        return paper_ids
+        pool = await get_db_pool()
+        async with pool.acquire() as conn:
+            query = "SELECT paper_id FROM paper"
+            results = await conn.fetch(query)
+            paper_ids = [row['paper_id'] for row in results if row['paper_id']]
+            
+            logger.info(f"Retrieved {len(paper_ids)} paper_ids from database")
+            return paper_ids
     except Exception as e:
         logger.error(f"Error retrieving paper_ids: {e}")
         return paper_ids
     
 
 
-def main():
+async def main():
     """Example usage"""
-    # Example: process papers from a folder
-    folder_path = "/home/nghia-duong/Downloads/PMC_articles_json (2)/PMC_articles_json"  # Default folder
-    logger.info(f"Using default folder: {folder_path}")
+    from database.connect import init_db_pool, close_db_pool
     
-    process_papers_from_folder(folder_path)
+    # Initialize database pool
+    await init_db_pool()
+    
+    try:
+        # Example: process papers from a folder
+        folder_path = "/home/nghia-duong/Downloads/PMC_articles_json (2)/PMC_articles_json"  # Default folder
+        logger.info(f"Using default folder: {folder_path}")
+        
+        await process_papers_from_folder(folder_path)
+    finally:
+        await close_db_pool()
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())

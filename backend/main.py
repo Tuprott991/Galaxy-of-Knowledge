@@ -8,11 +8,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-# Import routers and DB
+# Import routers and async DB
 from api.v1.home import router as papers_router
 from api.v1.graph import router as graph_router
 from api.v1.paper_analysis import router as paper_analysis_router
-from database.connect import connect
+from database.connect import init_db_pool, close_db_pool, test_connection
 
 
 # ======================
@@ -53,9 +53,7 @@ app.add_middleware(
 async def health_check():
     """Health check endpoint"""
     try:
-        conn = connect()
-        if conn:
-            conn.close()
+        if await test_connection():
             db_status = "connected"
         else:
             db_status = "failed"
@@ -97,23 +95,32 @@ async def global_exception_handler(request, exc):
 # ======================
 @app.on_event("startup")
 async def startup_event():
-    """Application startup"""
+    """Application startup - Initialize async database pool"""
     logger.info("Galaxy of Knowledge API starting up...")
     try:
-        conn = connect()
-        if conn:
-            conn.close()
-            logger.info("✅ Database connection successful")
+        # Initialize async connection pool
+        await init_db_pool(min_size=10, max_size=20)
+        logger.info("✅ Database connection pool initialized")
+        
+        # Test connection
+        if await test_connection():
+            logger.info("✅ Database connection test successful")
         else:
-            logger.error("❌ Database connection failed")
+            logger.error("❌ Database connection test failed")
     except Exception as e:
-        logger.error(f"Database startup check failed: {e}")
+        logger.error(f"Database startup failed: {e}")
+        raise
 
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Application shutdown"""
+    """Application shutdown - Close async database pool"""
     logger.info("Galaxy of Knowledge API shutting down...")
+    try:
+        await close_db_pool()
+        logger.info("✅ Database connection pool closed")
+    except Exception as e:
+        logger.error(f"Error closing database pool: {e}")
 
 # ======================
 # ===== Entry point ====

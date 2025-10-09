@@ -48,6 +48,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from database.papers import get_md_content_by_paper_id  # Example database function
+from database.connect import init_db_pool, close_db_pool  # Database pool management
 
 # --------------------------------------------------------------------------------------
 # STEP 1: Initialize FastMCP instance — this acts as your "tool server"
@@ -106,7 +107,8 @@ async def get_document_content(id: str) -> str:
         str: Full document content for the insurance product
     """
     try:
-        document = get_md_content_by_paper_id(id)
+        # Use await since get_md_content_by_paper_id is now async
+        document = await get_md_content_by_paper_id(id)
         if document:
             return document
         else:
@@ -165,6 +167,18 @@ def create_starlette_app(mcp_server: Server, *, debug: bool = False) -> Starlett
 # STEP 3: Start the server using Uvicorn if this file is run directly
 # --------------------------------------------------------------------------------------
 if __name__ == "__main__":
+    import asyncio
+    
+    async def startup():
+        """Initialize database pool on startup"""
+        await init_db_pool()
+        print("✅ Database pool initialized")
+    
+    async def shutdown():
+        """Close database pool on shutdown"""
+        await close_db_pool()
+        print("✅ Database pool closed")
+    
     # Get the underlying MCP server instance from FastMCP
     mcp_server = mcp._mcp_server  # Accessing private member (acceptable here)
 
@@ -178,6 +192,10 @@ if __name__ == "__main__":
 
     # Build the Starlette app with debug mode enabled
     starlette_app = create_starlette_app(mcp_server, debug=True)
+    
+    # Add startup and shutdown event handlers
+    starlette_app.add_event_handler("startup", startup)
+    starlette_app.add_event_handler("shutdown", shutdown)
 
     # Launch the server using Uvicorn
     uvicorn.run(starlette_app, host=args.host, port=args.port)

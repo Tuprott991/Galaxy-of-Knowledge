@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useRef } from "react";
+import React, { Suspense, useState, useEffect, useRef, useMemo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Stars, PointerLockControls } from "@react-three/drei";
 import type { Paper } from "../types";
@@ -26,8 +26,8 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
   const linesRef = useRef<(THREE.Line | null)[]>([]);
   const color = colorMap?.[paper.cluster] || "gray";
 
-  // Danh sách hành tinh
-  const solarSystemPlanets = [
+  // Danh sách hành tinh - memoized to prevent recreation on every render
+  const solarSystemPlanets = useMemo(() => [
     { name: "Mercury", color: "#8C7853", size: 0.015, distance: 0.25, emissive: "#8C7853", emissiveIntensity: 0.3 },
     { name: "Venus", color: "#FFC649", size: 0.02, distance: 0.35, emissive: "#FFC649", emissiveIntensity: 0.5 },
     { name: "Mars", color: "#CD5C5C", size: 0.018, distance: 0.45, emissive: "#CD5C5C", emissiveIntensity: 0.4 },
@@ -35,7 +35,7 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     { name: "Saturn", color: "#FAD5A5", size: 0.035, distance: 0.65, emissive: "#FAD5A5", emissiveIntensity: 0.3 },
     { name: "Uranus", color: "#4FD0E7", size: 0.025, distance: 0.75, emissive: "#4FD0E7", emissiveIntensity: 0.4 },
     { name: "Neptune", color: "#4B70DD", size: 0.025, distance: 0.85, emissive: "#4B70DD", emissiveIntensity: 0.4 }
-  ];
+  ], []);
 
   useEffect(() => {
     const handleSpace = (e: KeyboardEvent) => {
@@ -65,7 +65,7 @@ const PaperPoint: React.FC<PaperPointProps> = ({ paper, onHover, colorMap, selec
     } else {
       setNetworkPositions([]);
     }
-  }, [paused]);
+  }, [paused, solarSystemPlanets]);
 
   useFrame((_, delta) => {
     if (selected || hovered) {
@@ -256,6 +256,7 @@ const MainScene: React.FC<{
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -60,8 +60,8 @@ async def main():
     rag = await initialize_rag()
     print("✅ LightRAG initialized")
     
-    # Get papers
-    paper_ids = get_all_paper_ids()
+    # Get papers (use await for async database calls)
+    paper_ids = await get_all_paper_ids()
     paper_ids_batch = paper_ids[:BATCH_SIZE]
     
     print(f"\n📊 Total papers: {len(paper_ids)}")
@@ -70,7 +70,7 @@ async def main():
     # Process papers
     success_count = 0
     for paper_id in paper_ids_batch:
-        md_content = get_md_content_by_paper_id(paper_id)
+        md_content = await get_md_content_by_paper_id(paper_id)
         
         if not md_content:
             print(f"⚠️  No content for {paper_id}")

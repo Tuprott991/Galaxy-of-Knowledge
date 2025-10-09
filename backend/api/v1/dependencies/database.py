@@ -1,33 +1,23 @@
 """
-Database dependency for FastAPI
+Database dependency for FastAPI (Async)
 """
-from functools import lru_cache
 from typing import AsyncGenerator
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import asyncpg
 
-from database.connect import connect
+from database.connect import get_db_pool
 
 
-def get_db():
-    """Get database connection dependency"""
-    connection = connect()
-    try:
+async def get_db() -> AsyncGenerator[asyncpg.Connection, None]:
+    """Get async database connection dependency"""
+    pool = await get_db_pool()
+    async with pool.acquire() as connection:
         yield connection
-    finally:
-        connection.close()
 
 
-def get_db_cursor():
-    """Get database cursor dependency"""
-    connection = connect()
-    try:
-        cursor = connection.cursor(cursor_factory=RealDictCursor)
-        yield cursor
-    finally:
-        connection.close()
-
-
-def get_db_connection():
-    """Get database connection (alias for connect)"""
-    return connect()
+async def get_db_connection() -> asyncpg.Connection:
+    """
+    Get async database connection from pool
+    Note: Caller is responsible for releasing connection
+    """
+    pool = await get_db_pool()
+    return await pool.acquire()
