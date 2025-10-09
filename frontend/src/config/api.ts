@@ -6,8 +6,9 @@
 // Backend API URL (FastAPI)
 export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-// ADK Agent URL
-export const ADK_URL = import.meta.env.VITE_ADK_URL || "http://localhost:8082";
+// ADK Agent URL - Now proxied through FastAPI (same as API_URL)
+// In production, ADK runs on port 8082 internally but is proxied through FastAPI on port 8080
+export const ADK_URL = import.meta.env.VITE_ADK_URL || API_URL;
 
 // API Endpoints
 export const API_ENDPOINTS = {
@@ -28,11 +29,11 @@ export const API_ENDPOINTS = {
   health: `${API_URL}/health`,
 };
 
-// ADK Endpoints
+// ADK Endpoints - Now proxied through FastAPI
 export const ADK_ENDPOINTS = {
   createSession: (userId: string, sessionId: string) => 
     `${ADK_URL}/apps/adk-agent/users/${userId}/sessions/${sessionId}`,
-  runSSE: `${ADK_URL}/run_sse`,
+  runSSE: `${ADK_URL}/run_sse`,  // Proxied through FastAPI
 };
 
 // Environment info (for debugging)

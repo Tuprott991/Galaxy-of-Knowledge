@@ -4,9 +4,11 @@ Main entry point for the FastAPI application
 """
 import os
 import logging
-from fastapi import FastAPI
+import httpx
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.exceptions import HTTPException
 
 # Import routers and async DB
 from api.v1.home import router as papers_router
@@ -78,6 +80,100 @@ async def health_check():
 app.include_router(papers_router, prefix="/api/v1", tags=["papers"])
 app.include_router(graph_router, prefix="/api/v1", tags=["graph"])
 app.include_router(paper_analysis_router, prefix="/api/v1", tags=["paper-analysis"])
+
+# ======================
+# === ADK Agent Proxy ==
+# ======================
+ADK_AGENT_URL = os.getenv("ADK_AGENT_URL", "http://localhost:8082")
+
+@app.api_route("/apps/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"])
+async def proxy_to_adk(path: str, request: Request):
+    """Proxy requests to ADK Agent running on port 8082"""
+    try:
+        # Build target URL
+        target_url = f"{ADK_AGENT_URL}/apps/{path}"
+        logger.info(f"Proxying {request.method} request to: {target_url}")
+        
+        # Get request body if present
+        body = await request.body()
+        
+        # Forward the request to ADK Agent
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.request(
+                method=request.method,
+                url=target_url,
+                headers={k: v for k, v in request.headers.items() if k.lower() not in ['host', 'content-length']},
+                content=body,
+                params=request.query_params
+            )
+            
+            logger.info(f"ADK Agent response status: {response.status_code}")
+            
+            # Return the response
+            return JSONResponse(
+                content=response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text,
+                status_code=response.status_code,
+                headers=dict(response.headers)
+            )
+    except httpx.ConnectError as e:
+        logger.error(f"Cannot connect to ADK Agent at {ADK_AGENT_URL}: {e}")
+        raise HTTPException(status_code=503, detail=f"ADK Agent is not running at {ADK_AGENT_URL}")
+    except httpx.RequestError as e:
+        logger.error(f"Error proxying to ADK Agent: {e}")
+        raise HTTPException(status_code=502, detail=f"Failed to connect to ADK Agent: {str(e)}")
+    except Exception as e:
+        logger.error(f"Unexpected error in ADK proxy: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/run_sse")
+async def proxy_run_sse(request: Request):
+    """Proxy SSE streaming requests to ADK Agent"""
+    logger.info(f"Starting SSE proxy to {ADK_AGENT_URL}/run_sse")
+    
+    try:
+        body = await request.body()
+        logger.info(f"Received SSE request body length: {len(body)}")
+        
+        async def stream_proxy():
+            """Generator to proxy SSE events"""
+            try:
+                async with httpx.AsyncClient(timeout=None) as client:
+                    logger.info("Opening SSE stream to ADK Agent...")
+                    async with client.stream(
+                        method="POST",
+                        url=f"{ADK_AGENT_URL}/run_sse",
+                        headers={
+                            "Content-Type": request.headers.get("content-type", "application/json"),
+                            "Accept": "text/event-stream",
+                        },
+                        content=body
+                    ) as response:
+                        logger.info(f"SSE stream opened, status: {response.status_code}")
+                        # Stream the response line by line
+                        async for chunk in response.aiter_text():
+                            logger.debug(f"SSE chunk: {chunk[:100]}...")  # Log first 100 chars
+                            yield chunk
+                logger.info("SSE stream completed")
+            except httpx.ConnectError as e:
+                logger.error(f"Cannot connect to ADK Agent for SSE: {e}")
+                yield f"data: {{\"error\": \"ADK Agent not running at {ADK_AGENT_URL}\"}}\n\n"
+            except Exception as e:
+                logger.error(f"Error in SSE stream: {e}")
+                yield f"data: {{\"error\": \"{str(e)}\"}}\n\n"
+        
+        # Return streaming response with proper SSE headers
+        return StreamingResponse(
+            stream_proxy(),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",  # Disable nginx buffering
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error proxying SSE to ADK Agent: {e}")
+        raise HTTPException(status_code=502, detail=f"Failed to connect to ADK Agent: {str(e)}")
 
 # ======================
 # === Exception Handler

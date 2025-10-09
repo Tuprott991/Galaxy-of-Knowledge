@@ -100,17 +100,17 @@ sleep 3\n\
 \n\
 # Start ADK Agent\n\
 echo "🚀 Starting ADK Agent on port ${ADK_PORT}..."\n\
-cd adk-agent && adk api_server --host 0.0.0.0 --port ${ADK_PORT} --allow-origins=https://galaxy-of-knowledge-eta.vercel.app > /tmp/adk_agent.log 2>&1 &\n\
+cd adk-agent && adk api_server --host 0.0.0.0 --port ${ADK_PORT} --allow_origins=https://galaxy-of-knowledge-eta.vercel.app > /tmp/adk_agent.log 2>&1 &\n\
 adk_pid=$!\n\
-cd ..\n\
 echo "✅ ADK Agent started (PID: $adk_pid)"\n\
+cd ..\n\
 \n\
 # Wait for ADK to be ready\n\
 sleep 3\n\
 \n\
-# Start FastAPI Server\n\
+# Start FastAPI Server (from /app directory where main.py is)\n\
 echo "🚀 Starting FastAPI Server on port ${PORT}..."\n\
-uvicorn main:app --host 0.0.0.0 --port ${PORT} > /tmp/fastapi.log 2>&1 &\n\
+cd /app && uvicorn main:app --host 0.0.0.0 --port ${PORT} > /tmp/fastapi.log 2>&1 &\n\
 fastapi_pid=$!\n\
 echo "✅ FastAPI Server started (PID: $fastapi_pid)"\n\
 \n\

@@ -42,7 +42,7 @@ stdout_logfile=/var/log/galaxy/mcp_server.out.log\n\
 priority=100\n\
 \n\
 [program:adk_agent]\n\
-command=bash -c "cd adk-agent && adk api_server --host 0.0.0.0 --port %(ENV_ADK_PORT)s --allow-origins=https://galaxy-of-knowledge-eta.vercel.app"\n\
+command=bash -c "cd adk-agent && adk api_server --host 0.0.0.0 --port %(ENV_ADK_PORT)s --allow_origins=https://galaxy-of-knowledge-eta.vercel.app"\n\
 directory=/app\n\
 autostart=true\n\
 autorestart=true\n\
@@ -51,7 +51,7 @@ stdout_logfile=/var/log/galaxy/adk_agent.out.log\n\
 priority=200\n\
 \n\
 [program:fastapi]\n\
-command=uvicorn main:app --host 0.0.0.0 --port %(ENV_PORT)s\n\
+command=bash -c "cd /app && uvicorn main:app --host 0.0.0.0 --port %(ENV_PORT)s"\n\
 directory=/app\n\
 autostart=true\n\
 autorestart=true\n\

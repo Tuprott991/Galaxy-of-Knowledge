@@ -1,6 +1,7 @@
 # Core Backend Dependencies
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
+httpx>=0.25.0  # For ADK Agent proxy
 
 # Web Framework (Alternative)
 flask>=2.3.0

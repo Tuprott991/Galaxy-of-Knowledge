@@ -39,6 +39,7 @@ from mcp.server.sse import SseServerTransport  # The SSE transport layer
 from starlette.applications import Starlette  # Web framework to define routes
 from starlette.routing import Route, Mount  # Routing for HTTP and message endpoints
 from starlette.requests import Request  # HTTP request objects
+from starlette.middleware.cors import CORSMiddleware  # CORS support
 
 import uvicorn  # ASGI server to run the Starlette app
 import sys
@@ -154,13 +155,24 @@ def create_starlette_app(mcp_server: Server, *, debug: bool = False) -> Starlett
         return Response()
 
     # Return the Starlette app with configured endpoints
-    return Starlette(
+    app = Starlette(
         debug=debug,
         routes=[
             Route("/sse", endpoint=handle_sse, methods=["GET"]),  # For initiating SSE connection
             Mount("/messages/", app=sse.handle_post_message),    # For POST-based communication
         ],
     )
+    
+    # Add CORS middleware to allow connections from ADK Agent
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],  # Allow all origins for development
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    
+    return app
 
 
 # --------------------------------------------------------------------------------------

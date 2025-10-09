@@ -1,0 +1,26 @@
+﻿Deployment Information
+=====================
+Date: 10/09/2025 12:41:15
+Service Name: galaxy-backend
+Service ARN: arn:aws:apprunner:ap-southeast-1:133593202536:service/galaxy-backend/64e3c984f5b74b50ab11042092bee53d
+Service URL: https://szmiufhvvs.ap-southeast-1.awsapprunner.com
+Region: ap-southeast-1
+ECR Repository: 133593202536.dkr.ecr.ap-southeast-1.amazonaws.com/galaxy-backend
+Database Endpoint: 
+
+Quick Commands:
+--------------
+# View logs
+aws logs tail /aws/apprunner/galaxy-backend --follow
+
+# Redeploy
+docker build -t galaxy-backend:latest . && docker tag galaxy-backend:latest 133593202536.dkr.ecr.ap-southeast-1.amazonaws.com/galaxy-backend:latest && docker push 133593202536.dkr.ecr.ap-southeast-1.amazonaws.com/galaxy-backend:latest && aws apprunner start-deployment --service-arn arn:aws:apprunner:ap-southeast-1:133593202536:service/galaxy-backend/64e3c984f5b74b50ab11042092bee53d
+
+# Pause service
+aws apprunner pause-service --service-arn arn:aws:apprunner:ap-southeast-1:133593202536:service/galaxy-backend/64e3c984f5b74b50ab11042092bee53d
+
+# Resume service
+aws apprunner resume-service --service-arn arn:aws:apprunner:ap-southeast-1:133593202536:service/galaxy-backend/64e3c984f5b74b50ab11042092bee53d
+
+# Delete service
+aws apprunner delete-service --service-arn arn:aws:apprunner:ap-southeast-1:133593202536:service/galaxy-backend/64e3c984f5b74b50ab11042092bee53d
